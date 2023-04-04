@@ -1,0 +1,15 @@
+{
+    "editor.language.colorizedBracketPairs": [
+
+    ],
+    "workbench.preferredHighContrastColorTheme": "Default Dark+",
+    "workbench.sideBar.location": "left",
+    "workbench.preferredLightColorTheme": "Visual Studio Dark",
+    "workbench.preferredHighContrastLightColorTheme": "Default Dark+",
+    "workbench.tree.renderIndentGuides": "always",
+    "html.format.indentHandlebars": true,
+    "emmet.preferences": {
+      
+
+    }
+}

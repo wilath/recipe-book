@@ -1,0 +1,43 @@
+
+<div class="navbar_flexbox">
+       
+    
+             
+            <div 
+                *ngIf="isAuth"
+                routerLink="/recipes"
+                routerLinkActive="active-class"
+                class="navbar_item_wrap shine"><img src="../assets/images/logo.png" alt="recipes" class="navbar_items_item"> Recipes</div>
+            <div *ngIf="isAuth" class="navbar_pause"></div>
+            <div
+                *ngIf="isAuth"
+                routerLink="/shopping-list"
+                routerLinkActive="active-class"
+                class="navbar_item_wrap shine"><img src="../assets/images/shoppinglist.png" alt="shoplist" class="navbar_items_item"> Shop List</div>
+           
+            <div 
+                *ngIf="!isAuth"
+                 routerLink="/auth"
+                routerLinkActive="active-class"
+                class="navbar_item_wrap last shine"
+                id="login">Login</div>
+            
+            <div (mouseleave)="onManage()" (mouseenter)="onManage()" *ngIf="isAuth" class="navbar_manage navbar_item_wrap shine">
+                <div *ngIf="!isManage">
+                <img   src="../assets/images/manage.png" alt="manage" class="navbar_items_item"> Manage
+                </div>
+                <div *ngIf="isManage"  class="manage_dropdown">
+                    <div class="navbar_item_wrap manage_hover" (click)="onFetchData()">Fetch</div>                    
+                    <div class="manage_break"></div>
+                    <div class="navbar_item_wrap manage_hover" (click)="onSavedata()">Save</div>                   
+                </div>
+                
+            </div>
+
+            <div 
+                *ngIf="isAuth"
+                (click)="onLogout()"
+                class="navbar_item_wrap shine">Logout</div>
+</div>
+            
+

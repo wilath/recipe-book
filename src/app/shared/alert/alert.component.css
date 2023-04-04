@@ -1,0 +1,34 @@
+.backdrop{
+    position: fixed;
+    top:0;
+    left:0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(72, 40, 40, 0);
+    z-index: 50;
+}
+.alert-box{
+    position: fixed;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30vw;
+    padding: 16px;
+    z-index: 100;
+    background: rgba(48, 12, 12, 0.699);
+    box-shadow: 0px 2px 15px rgba(2, 2, 2, 0.582);
+    color: white;
+    border-radius: 8px;
+   
+    
+}
+.alert-box-actions{
+    text-align: right;
+}
+.btn-mybutton{
+    background: rgb(44, 20, 20);
+    color: white;
+}
+.btn-mybutton:hover{
+    background: rgb(97, 44, 44);
+}

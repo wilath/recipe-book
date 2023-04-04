@@ -1,0 +1,94 @@
+<div class="wraper">
+        <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+          
+                    <div class="navbar_recipes">
+                    <button 
+                    type="submit" 
+                    class="navbar_item_wrap shine"
+                    [disabled]="!recipeForm.valid">
+                    Save</button>
+                    <button 
+                    type="button" 
+                    class="navbar_item_wrap shine"
+                    (click)="onCancel()">
+                    Cancel</button>
+                    <button 
+                    type="button" 
+                    class="navbar_item_wrap shine" 
+                    (click)="onAddIngredient()">Add Ingredient</button>
+                    </div>
+
+
+                    <div class="form_wraper">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input 
+                        type="text" 
+                        id="name"
+                        formControlName="name"
+                        class="form-control">
+                    </div>
+            
+         
+                    <div class="form-group">
+                        <label for="imagePath">Image URL</label>
+                        <input 
+                        type="text" 
+                        id="imagePath"
+                        formControlName="imagePath"
+                        class="form-control"
+                        #imagePath>
+                    </div>
+            
+           
+                    <!-- <img [src]="imagePath.value" alt="" class="img-responsive"> -->
+           
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea 
+                        type="text" 
+                        id="description"
+                        formControlName="description"
+                        class="form-control"
+                        rows="6"></textarea>
+                    </div>
+            
+                    <label for="ingredients">Ingredients</label>
+                
+                    <div 
+                formArrayName="ingredients">
+                   <div
+                   class="ingredients_wraper"
+                   *ngFor="let ingredientCtrl of controls; let i = index "
+                   [formGroupName]="i"
+                   style="margin-top: 10px">
+                   
+                        <input 
+                        type="text" 
+                        id="form-text"
+                        class="form-control "
+                        formControlName="name">
+                   
+                        <input 
+                        type="number" 
+                        id="form-number"
+                        class="form-control"
+                        formControlName="amount">
+                    
+                        <button 
+                        type="button" 
+                        class="navbar_item_wrap shine"
+                        id="form-button"
+                        (click)="onDeleteIng(i)">X</button>
+                    </div>
+                </div>
+                
+                    
+                        
+                     
+
+                        
+                    
+           </div>
+        </form>
+    </div>

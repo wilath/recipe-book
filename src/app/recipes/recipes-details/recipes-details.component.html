@@ -1,0 +1,31 @@
+<div class="navbar_recipes">
+  <div *ngIf="!isMobile" (mouseleave)="hideMenu()" (mouseenter)="showMenu()" class="shine dropdown"><span>Manage
+      Recipe</span></div>
+  <div (mouseleave)="hideMenu()" (mouseenter)="showMenu()" [@dropdown]="state" class="dropdown-content">
+    <div (click)="onEditRecipe()" class="navbar_item_wrap shine"> <span>Edit</span></div>
+    <div (click)="onDeleteRecipe()" class="navbar_item_wrap shine"> <span>Delete</span></div>
+    <div (click)="onToShopList()" class="navbar_item_wrap shine"> <span>To shopping list</span></div>
+  </div>
+</div>
+
+
+
+
+<div class="details-header">
+  <div class="title-wraper">
+    <h1 id="title">{{flyIn.name}}</h1>
+  </div>
+  <img src={{flyIn.imagePath}} alt={{flyIn.name}} class="details-img">
+</div>
+<div class="scroll-window">
+  <div class="details-ings">
+    <h5>Ingredients:</h5>
+    <div class="details-ings-flex">
+      <p *ngFor="let ing of flyIn.ingredients">- {{ing.name}} {{ing.amount}}</p>
+    </div>
+  </div>
+  <div class="details-description">
+    <h5>Description:</h5>
+    <div class="description">{{flyIn.description}}</div>
+  </div>
+</div>

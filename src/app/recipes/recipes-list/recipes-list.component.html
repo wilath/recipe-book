@@ -1,0 +1,20 @@
+
+<div class="work_area_grid">
+<div class="navbar_recipes">
+        <div (click)="onNewRecipe()" class="navbar_item_wrap shine"><span>New Recipe</span></div>
+
+</div>
+
+        <div class="app_recipes_wraper">
+                        <app-recipes-item
+                        *ngFor="let reps of recipes;
+                        let i = index"
+                        [recipe]="reps"
+                        [index]="i"></app-recipes-item>
+        </div>
+
+        <div class="router_wraper">
+                <router-outlet></router-outlet>
+        </div>
+
+</div>

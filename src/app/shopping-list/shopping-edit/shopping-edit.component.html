@@ -1,0 +1,25 @@
+<form (ngSubmit)="onAddItem(f)" #f="ngForm">
+
+    <div class="buttons-wrap">
+        
+        <button style="border-left:none" class="shine" type="submit" [disabled]="!f.valid">
+            {{editMode? 'Update' : 'Add'}}</button>
+        <button class="shine" type="button" (click)="onDelete()" *ngIf="editMode">
+            Delete</button>
+        <button class="shine" type="button" 
+            (click)="onClear()">
+            Clear</button>
+        <button class="shine" type="button"  style="border-right: 1px solid rgba(240, 248, 255, 0.075);" (click)="onDeleteAll()">Erase this List</button>
+    </div>
+
+    <div class="inputs-wrap">
+
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" ngModel required>
+
+        <label for="amount">Amount</label>
+        <input type="number" id="amount" name="amount" ngModel required pattern='^[1-9]+[0-9]*$'>
+
+    </div>
+
+</form>

@@ -1,0 +1,116 @@
+input.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched{
+    border: 1px solid red;
+}
+label{
+    margin-left: 10px;
+}
+.navbar_recipes{
+    height:4vh;
+    width:100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: flex-start;
+    padding-right: 5px;
+    border-bottom: 1px solid rgba(240, 248, 255, 0.075);
+
+}
+.navbar_item_wrap{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0px;
+
+    height: 100%;
+    cursor: pointer;
+    padding: 0px 10px 0px 10px;
+
+    border: 1px solid rgba(240, 248, 255, 0.075);
+    border-left: none;
+    border-bottom: none;
+    background-color: rgba(240, 248, 255, 0);
+    color: white;
+}
+button{
+    overflow: hidden;
+    white-space: nowrap;
+}
+button:hover{
+    background-color: rgba(248, 248, 248, 0.056);
+}
+.wraper{
+    width: 100%;
+    height: calc(696px - 4vh);
+    overflow: auto;
+    padding-bottom: 45px;
+}
+.form_wraper{
+    margin-top: 5px;
+    border-top: 1px solid rgba(240, 248, 255, 0.075);
+}
+input, textarea{
+
+    background-color: rgba(255, 255, 255, 0);
+    border-radius: 0px;
+    color: white;
+    box-sizing: border-box;
+    border: 1px solid rgba(240, 248, 255, 0.075);
+    border-left: none;
+    border-right: none;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
+}
+textarea:focus,
+input:focus,
+input:focus{
+    background-color: rgba(255, 255, 255, 0.205);
+    outline: none;
+    color: white;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+.form-group{
+    width: 100%
+}
+#form-text{
+    width: 20%;
+    margin: 0;
+    border: none;
+    border-right: 1px solid rgba(240, 248, 255, 0.075);
+}
+#form-number{
+    width: 10%;
+    border: none;
+    border-right: 1px solid rgba(240, 248, 255, 0.075);
+}
+#form-button{
+    height: 35px;
+    width: 35px;
+    background-color: rgba(255, 0, 0, 0.062);
+    color: brown;
+}
+.ingredients_wraper{
+    border-top: 1px solid rgba(240, 248, 255, 0.075);
+    border-bottom: 1px solid rgba(240, 248, 255, 0.075);
+    display: flex;
+    flex-direction: row;
+
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+
+  }
+
+#description{
+  height: 250px
+
+}
