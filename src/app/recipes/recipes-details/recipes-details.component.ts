@@ -9,7 +9,7 @@ import { RecipesService } from '../recipes.service';
 @Component({
   selector: 'app-recipes-details',
   templateUrl: './recipes-details.component.html',
-  styleUrls: ['./recipes-details.component.css'],
+  styleUrls: ['./recipes-details.component.scss'],
   animations: [
     trigger('dropdown', [
       state('start', style({
