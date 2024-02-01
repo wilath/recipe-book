@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from "@angular/router";
+import { ActivatedRouteSnapshot, RouterStateSnapshot } from "@angular/router";
 import { Observable } from "rxjs";
 import { dataStoragaService } from "../shared/data-storage.service";
 
@@ -7,7 +7,7 @@ import { Recipe } from "./recipe.model";
 import { RecipesService } from "./recipes.service";
 
 @Injectable({providedIn: 'root'})
-export class RecipeResolverService implements Resolve<Recipe[]> {
+export class RecipeResolverService  {
     constructor(private dataStorageService: dataStoragaService,
         private recipeService: RecipesService) {}
 
