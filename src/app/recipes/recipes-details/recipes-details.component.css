@@ -45,7 +45,10 @@ overflow: auto;
 padding-right: 0;
 }
 
-@media screen and (max-width: 660px) {
+@media screen and (max-width: 800px) {
+    .scroll-window{
+        max-height: none;
+    }
   }
 
 .navbar_recipes{

@@ -37,11 +37,11 @@
 body{
     background: linear-gradient(45deg,var(--dark), var(--purple));
     width: 100vw;
-    min-height: 100vh;
     margin: 0;
     overflow:hidden;
     background-repeat: no-repeat;
     background-attachment: fixed;
+    
 }
 
 
@@ -52,35 +52,34 @@ body{
     height: auto;
     background: linear-gradient(45deg,rgb(0,0,0,0.76),rgb(0,0,0,0.25));
     border-radius: 20px;
-    position: absolute;
+    
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    left:50%;
-    transform: translate(-50%);
+    
     overflow: hidden;
     margin-top: 4vh;
+
 
 }
 @media screen and (max-width: 600px) {
     .container {
-
       min-height: 92vh;
       width: 92vw;
       max-height: fit-content;
       margin-top: 4vw;
       margin-bottom: 4vw;
+      overflow-y: auto;
     }
     body{
       align-items: flex-start;
       overflow: auto;
       overflow-x: hidden;
-
     }
   }
 
 
 .back__img{
-    position: absolute;
+    position: fixed;
 
 }
 .hr_line{
@@ -90,7 +89,6 @@ body{
 }
 
 .container_flexbox{
-
     border-left: 1px solid rgba(240, 248, 255, 0.075);
     border-right: 1px solid rgba(240, 248, 255, 0.075);
 }

@@ -56,31 +56,33 @@
                     <label for="ingredients">Ingredients</label>
                 
                     <div 
-                formArrayName="ingredients">
-                   <div
-                   class="ingredients_wraper"
-                   *ngFor="let ingredientCtrl of controls; let i = index "
-                   [formGroupName]="i"
-                   style="margin-top: 10px">
-                   
-                        <input 
-                        type="text" 
-                        id="form-text"
-                        class="form-control "
-                        formControlName="name">
-                   
-                        <input 
-                        type="number" 
-                        id="form-number"
-                        class="form-control"
-                        formControlName="amount">
+                    formArrayName="ingredients">
+
                     
-                        <button 
-                        type="button" 
-                        class="navbar_item_wrap shine"
-                        id="form-button"
-                        (click)="onDeleteIng(i)">X</button>
-                    </div>
+                        <div
+                        class="ingredients_wraper"
+                        *ngFor="let control of controls; let i = index "
+                        [formGroupName]="i"
+                        style="margin-top: 10px">
+                    
+                            <input 
+                            type="text" 
+                            id="form-text"
+                            class="form-control "
+                            formControlName="name">
+                    
+                            <input 
+                            type="number" 
+                            id="form-number"
+                            class="form-control"
+                            formControlName="amount">
+                        
+                            <button 
+                            type="button" 
+                            class="navbar_item_wrap shine"
+                            id="form-button"
+                            (click)="onDeleteIng(i)">X</button>
+                        </div>
                 </div>
                 
                     

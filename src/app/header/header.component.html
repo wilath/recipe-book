@@ -27,9 +27,9 @@
                 <img   src="../assets/images/manage.png" alt="manage" class="navbar_items_item"> Manage
                 </div>
                 <div *ngIf="isManage"  class="manage_dropdown">
-                    <div class="navbar_item_wrap manage_hover" (click)="onFetchData()">Fetch</div>                    
+                    <button class="navbar_item_wrap manage_hover" (click)="onFetchData()">Fetch</button>                    
                     <div class="manage_break"></div>
-                    <div class="navbar_item_wrap manage_hover" (click)="onSavedata()">Save</div>                   
+                    <button class="navbar_item_wrap manage_hover" [disabled]="true" (click)="onSavedata()">Save</button>                   
                 </div>
                 
             </div>

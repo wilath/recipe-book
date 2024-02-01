@@ -187,10 +187,8 @@ export class AppComponent implements OnInit {
 
   animationDone(event){
     if(event.toState == 'stop'){
-
-      setTimeout(()=>{
-        this.onAnimate(event.triggerName)
-    }, Math.random()*8000);
+      this.onAnimate(event.triggerName)
+     
 
     switch(event.triggerName){
       case 'test':

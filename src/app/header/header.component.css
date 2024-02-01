@@ -8,6 +8,14 @@
     }
   }
 
+button{
+    background-color: none;
+    border: none;
+    margin:0;
+    padding:0;
+    background: none;
+}
+
 #logo_img{
     height: 5vh;
 }
@@ -111,4 +119,9 @@
 #login{
     font-size: 150%;
     min-width: 80px;
+} 
+button:disabled{
+    color: rgba(255, 255, 255, 0.171);
+    pointer-events: none;
+    cursor: default;
 }
