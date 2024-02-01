@@ -1,0 +1,64 @@
+@import '../styles/variables';
+
+header{
+    position: sticky;
+    top: 0;
+    z-index: 3;
+    padding: 0 3rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: $rich-black;
+    height: 6rem;
+    letter-spacing: 1rem;
+   
+    &:has(>.header-buttons>.auth-buttons>.button-manage:hover) ~ .manage-options{
+        top: 6rem;
+    }
+
+    .header-title{
+        color: white;
+        text-wrap: nowrap;
+        letter-spacing: 0.3rem
+    }
+    .search{
+        margin-left: auto;
+        height: 2.4rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+        input{
+            background-color: $powder-blue;
+            border-radius: 150px;
+            padding: 5px 10px;
+            border: none;   
+            height: 2.4rem;
+            color: $rich-black  ;   
+            &::placeholder{
+               color: $rich-black  ;   
+            }
+                      
+        }
+    }
+    .header-buttons{
+      
+        display: flex;
+
+    }
+   
+}
+.manage-options{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    transition: top 0.3s linear;
+    z-index: 2;
+    margin-right: 3rem;
+    top: -6rem;
+    right: 0;
+    &:hover{
+        top: 6rem;
+    }
+}

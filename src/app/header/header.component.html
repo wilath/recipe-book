@@ -1,43 +1,24 @@
+<header>
+    <h1 class="header-title">Recipe Book</h1>
 
-<div class="navbar_flexbox">
-       
-    
-             
-            <div 
-                *ngIf="isAuth"
-                routerLink="/recipes"
-                routerLinkActive="active-class"
-                class="navbar_item_wrap shine"><img src="../assets/images/logo.png" alt="recipes" class="navbar_items_item"> Recipes</div>
-            <div *ngIf="isAuth" class="navbar_pause"></div>
-            <div
-                *ngIf="isAuth"
-                routerLink="/shopping-list"
-                routerLinkActive="active-class"
-                class="navbar_item_wrap shine"><img src="../assets/images/shoppinglist.png" alt="shoplist" class="navbar_items_item"> Shop List</div>
-           
-            <div 
-                *ngIf="!isAuth"
-                 routerLink="/auth"
-                routerLinkActive="active-class"
-                class="navbar_item_wrap last shine"
-                id="login">Login</div>
-            
-            <div (mouseleave)="onManage()" (mouseenter)="onManage()" *ngIf="isAuth" class="navbar_manage navbar_item_wrap shine">
-                <div *ngIf="!isManage">
-                <img   src="../assets/images/manage.png" alt="manage" class="navbar_items_item"> Manage
-                </div>
-                <div *ngIf="isManage"  class="manage_dropdown">
-                    <button class="navbar_item_wrap manage_hover" (click)="onFetchData()">Fetch</button>                    
-                    <div class="manage_break"></div>
-                    <button class="navbar_item_wrap manage_hover" [disabled]="true" (click)="onSavedata()">Save</button>                   
-                </div>
-                
-            </div>
+    <div class="search">
+        <input placeholder="Search..." type="text">
+    </div>
 
-            <div 
-                *ngIf="isAuth"
-                (click)="onLogout()"
-                class="navbar_item_wrap shine">Logout</div>
+    <div class="header-buttons">
+        <button class="button-alpha button-recipes" *ngIf="isAuth" routerLink="/recipes" routerLinkActive="active-class">Recipes</button>
+        <button class="button-alpha button-shoppingList" *ngIf="isAuth" routerLink="/shopping-list" routerLinkActive="active-class">Shopping List</button>
+        <div class="auth-buttons">
+            <button class="button-alpha button-manage" *ngIf="isAuth">Manage</button>
+            <button class="button-alpha button-login" *ngIf="!isAuth" routerLink="/auth" routerLinkActive="active-class">Login</button>
+            <button class="button-alpha button-logout" *ngIf="isAuth" (click)="onLogout()">Logout</button>
+        </div>    
+    </div>
+
+
+  
+</header>
+<div class="manage-options">
+    <button class="button-alpha" (click)="onFetchData()">Fetch</button>
+    <button class="button-alpha" [disabled]="true" (click)="onSavedata()">Save</button>
 </div>
-            
-
