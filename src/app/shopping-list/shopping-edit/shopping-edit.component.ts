@@ -1,20 +1,20 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { Ingredient } from 'src/app/shared/ingredient.model';
+import { Ingredient } from '../../shared/ingredient.model';
 import { ShoppingListService } from '../shopping-list.service';
 
 @Component({
   selector: 'app-shopping-edit',
   templateUrl: './shopping-edit.component.html',
-  styleUrls: ['./shopping-edit.component.css'],
+  styleUrls: ['./shopping-edit.component.scss'],
 })
 export class ShoppingEditComponent implements OnInit, OnDestroy{
-  @ViewChild('f') slForm: NgForm;
-   subscription: Subscription;
+  @ViewChild('f') slForm!: NgForm;
+   subscription: Subscription = new Subscription
    editMode = false;
-   editedItemIndex:  number;
-   editedItem: Ingredient;
+   editedItemIndex:  number = 0
+   editedItem: Ingredient =  {name: '', amount: 0}
   
   constructor(private slService: ShoppingListService) { }
 

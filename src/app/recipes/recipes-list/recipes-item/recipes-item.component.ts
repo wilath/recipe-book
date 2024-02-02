@@ -1,23 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Recipe } from '../../recipe.model';
 
-
 @Component({
   selector: 'app-recipes-item',
   templateUrl: './recipes-item.component.html',
-  styleUrls: ['./recipes-item.component.css']
-
+  styleUrls: ['./recipes-item.component.scss'],
 })
 export class RecipesItemComponent implements OnInit {
-@Input() recipe: Recipe;
-@Input() index: number;
+  @Input() recipe!: Recipe;
+  @Input() index: number = 0;
 
-
-
-  ngOnInit(){
-    if (window.innerWidth < 960) {
-      this.onMobile = true
-    }
-  }
- onMobile = false
+  ngOnInit() {}
 }

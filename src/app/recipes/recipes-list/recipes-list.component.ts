@@ -16,7 +16,7 @@ import { RecipesService } from '../recipes.service';
 
 export class RecipesListComponent implements OnInit, OnDestroy {
   recipes:Array<Recipe> =[];
-  subscription: Subscription;
+  subscription!: Subscription;
   animationStatus: boolean = true
 
   constructor(

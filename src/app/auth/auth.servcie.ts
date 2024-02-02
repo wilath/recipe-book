@@ -4,7 +4,7 @@ import { catchError, tap } from "rxjs/operators";
 import { BehaviorSubject, throwError } from 'rxjs'
 import { User } from "./user.model";
 import { Router } from "@angular/router";
-import { environment } from "src/environments/environment";
+import { environment } from "../../environments/environment";
 
 export interface AuthResponseData {
     kind: string;
@@ -18,7 +18,7 @@ export interface AuthResponseData {
 
 @Injectable({providedIn: 'root'})
 export class AuthServcie {
-    user = new BehaviorSubject<User>(null);
+    user = new BehaviorSubject<User | null>(null);
     private tokenExpirationTimer: any;
     
 
@@ -43,11 +43,11 @@ export class AuthServcie {
 
     autoLogin(){
         const userData: {
-            email: string;
-            id: string;
-            _token: string;
-            _tokenExpirationDate
-        } = JSON.parse(localStorage.getItem('userData'));
+            email: string,
+            id: string,
+            _token: string,
+            _tokenExpirationDate: string
+        } = JSON.parse(localStorage.getItem('userData') || '');
         if(!userData){
             return;
         } else {

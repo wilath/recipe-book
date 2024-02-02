@@ -15,7 +15,7 @@ import { AuthResponseData, AuthServcie } from "./auth.servcie";
 export class AuthComponent {
     isLoginMode = true;
     isLoading = false;
-    error: string = null;
+    error: string = '';
 
     constructor(
         private aService: AuthServcie,
@@ -54,7 +54,7 @@ export class AuthComponent {
     }
 
     onHandleError(){
-        this.error = null;
+        this.error = '';
     }
 
 }

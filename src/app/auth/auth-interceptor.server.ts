@@ -20,7 +20,7 @@ export class AuthInterceptorService implements HttpInterceptor {
           return next.handle(req);
         } else {
           const modRequest = req.clone({
-            params: new HttpParams().set('auth', user.token),
+            params: new HttpParams().set('auth', user.token as string),
           });
           return next.handle(modRequest);
         }

@@ -1,42 +1,27 @@
-#Recipe Book Project
+# RecipesProject
 
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.1.2.
 
-Skills I have learned and strengthened thourough this project:
+## Development server
 
--CSS glassmophizm,
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
--Knowledge and use of various data-bindings,
+## Code scaffolding
 
--Angular directives,
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
--Styling elements with ngStyle and ngClass, View encapsulation,
+## Build
 
--Dividing project to modules for better project managment,
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
--@VieChild() usage, accesing the DOM through it,
+## Running unit tests
 
--Usage of LifeCycle Hooks,
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
--Building an authentication,
+## Running end-to-end tests
 
--Usage of dynamic components
+Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
+## Further help
 
--Working with Servies and Dependency Injection, using it for cross-component comuniaction,
-
--Working with Angular Routing,
-
--Using Guards with routing, protecting routes with canActivate, errorHandling logic
-
--Working with Observables(RxJS), understaing operators,
-
--Reactive and Template-driven forms,
-
--Angular Animations,
-
--Deploying an Angular APP to backend server, using enviroment variables,
-
--Setting up a HTTP service,
-
-
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.6.
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.

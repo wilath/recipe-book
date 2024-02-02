@@ -1,6 +1,5 @@
 import { Injectable, OnInit } from "@angular/core";
 import { Subject } from "rxjs";
-import { Observable } from "rxjs-compat";
 
 import { Ingredient } from "../shared/ingredient.model";
 import { ShoppingListService } from "../shopping-list/shopping-list.service";

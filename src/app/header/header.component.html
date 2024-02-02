@@ -1,16 +1,17 @@
 <header>
+    <div class="header-group-one">
     <h1 class="header-title">Recipe Book</h1>
 
     <div class="search">
         <input placeholder="Search..." type="text">
     </div>
-
-    <div class="header-buttons">
-        <button class="button-alpha button-recipes" *ngIf="isAuth" routerLink="/recipes" routerLinkActive="active-class">Recipes</button>
-        <button class="button-alpha button-shoppingList" *ngIf="isAuth" routerLink="/shopping-list" routerLinkActive="active-class">Shopping List</button>
+</div>
+    <div class="header-group-two">
+        <button class="button-alpha button-recipes" *ngIf="isAuth" routerLink="/recipes" routerLinkActive="button-alpha-active">Recipes</button>
+        <button class="button-alpha button-shoppingList" *ngIf="isAuth" routerLink="/shopping-list" routerLinkActive="button-alpha-active">Shopping List</button>
         <div class="auth-buttons">
             <button class="button-alpha button-manage" *ngIf="isAuth">Manage</button>
-            <button class="button-alpha button-login" *ngIf="!isAuth" routerLink="/auth" routerLinkActive="active-class">Login</button>
+            <button class="button-alpha button-login" *ngIf="!isAuth" routerLink="/auth" routerLinkActive="button-alpha-active">Login</button>
             <button class="button-alpha button-logout" *ngIf="isAuth" (click)="onLogout()">Logout</button>
         </div>    
     </div>

@@ -11,15 +11,15 @@ import { RecipesService } from '../recipes.service';
   styleUrls: ['./recipe-edit.component.scss']
 })
 export class RecipeEditComponent implements OnInit {
- id: number;
- editMode = false;
- recipeForm: FormGroup;
+ public id: number = 0
+ public editMode = false;
+ public recipeForm!: FormGroup
 
   constructor( private route: ActivatedRoute,
     private recipeService: RecipesService,
     private router: Router) { }
 
-  ngOnInit(){
+  public ngOnInit(){
     this.route.params
     .subscribe(
       (params: Params) => {
@@ -53,22 +53,21 @@ export class RecipeEditComponent implements OnInit {
     let recipeName = '';
     let recipeImagePath = '';
     let recipeDescription = '';
-    let recipeIngredients = new FormArray([]);
+    let recipeIngredients = new FormArray<FormGroup>([]);
 
     if(this.editMode){
       const recipe = this.recipeService.getRecipe(this.id);
+
       recipeName = recipe.name;
       recipeImagePath = recipe.imagePath;
       recipeDescription = recipe.description;
+
       if(recipe['ingredients']) {
         for(let ingredient of recipe.ingredients ){
           recipeIngredients.push(
             new FormGroup({
-              'name': new FormControl(ingredient.name, Validators.required),
-              'amount': new FormControl(ingredient.amount, [
-                Validators.required, 
-                Validators.pattern(/^[1-9]+[0-9]*$/)
-              ])
+              name: new FormControl(ingredient.name, [Validators.required]),
+              amount: new FormControl(ingredient.amount, [Validators.required, Validators.pattern(/^[1-9]+[0-9]*$/)])
             })
           )
         }

@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './showcase.component.html',
-  styleUrl: './showcase.component.css'
+  styleUrl: './showcase.component.scss'
 })
 export class ShowcaseComponent {
 
