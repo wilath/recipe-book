@@ -6,7 +6,7 @@ import { dataStoragaService } from '../shared/data-storage.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrl: './header.component.scss',
+  styleUrls: ['./header.component.scss', './header.component.media.scss'],
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   isAuth = false;

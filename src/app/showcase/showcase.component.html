@@ -1,3 +1,84 @@
-<p> <strong>showcase works!</strong> </p>
-afadsfdssddsfsd
-dfgdfgdfgdfdfgdfgdfgdfgsdfsdfsdfdsshfghfghfghfg
+<div class="showcase-wrap">
+  <div class="showcase-menu">
+    <form>
+      <input
+        [value]="foodCategory.breakfast"
+        id="option0"
+        name="foodtype"
+        type="radio"
+        [(ngModel)]="chosenFoodCategory"
+        
+      />
+      <label for="option0">Breakfasts</label>
+      <input
+        [value]="foodCategory.dinner"
+        id="option1"
+        name="foodtype"
+        type="radio"
+        [(ngModel)]="chosenFoodCategory"
+      />
+      <label for="option1">Dinners</label>
+      <input
+        [value]="foodCategory.drink"
+        id="option2"
+        name="foodtype"
+        type="radio"
+        [(ngModel)]="chosenFoodCategory"
+      />
+      <label for="option2">Beverages</label>
+      <input
+        [value]="foodCategory.desert"
+        id="option3"
+        name="foodtype"
+        type="radio"
+        [(ngModel)]="chosenFoodCategory"
+      />
+      <label for="option3">Deserts</label>
+      <span></span>
+    </form>
+  </div>
+
+<div class="recipes-container">
+@for (recipe of recipes | foodTypeSort: chosenFoodCategory; track $index) {
+<div class="swiper-slide post">
+  <img
+    class="post-img"
+    [src]="recipe.imagePath"
+    alt="recipe"
+  />
+
+
+  <div class="post-body">
+      <h2 class="post-name">{{recipe.name}}</h2>
+
+    <div class="post-actions">
+      <a class="post-like" 
+        ><i class="fas fa-heart"></i
+      ></a>
+  
+        <ul role="list" class="grid-flow" data-spacing="small">
+          <li>
+            <a class="post-actions-link" href="javascript:void(0)">
+              <i class="fa-solid fa-folder-open"></i>
+              <span>Add to ShoppingList</span>
+            </a>
+          </li>
+          <li>
+            <a class="post-actions-link" href="javascript:void(0)">
+              <i class="fa-solid fa-eye"></i>
+              <span>Show the Recipe</span>
+            </a>
+          </li>
+          <li>
+            <a class="post-actions-link" href="javascript:void(0)">
+              <i class="fa-solid fa-user-plus"></i>
+              <span>Follow the User</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+}
+</div>
+</div>

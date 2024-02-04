@@ -10,15 +10,15 @@ header{
     align-items: center;
     justify-content: flex-start;
     background-color: $rich-black;
-    min-height: 6rem;
+    height: 6rem;
     letter-spacing: 1rem;
    
     &:has(>.header-buttons>.auth-buttons>.button-manage:hover) ~ .manage-options{
         top: 6rem;
     }
-  
+
     .header-title{
-        color: white;
+        color: $sage;
         text-wrap: nowrap;
         letter-spacing: 0.3rem;
 
@@ -26,7 +26,6 @@ header{
     
     .search{
         margin-left: auto;
-        height: 2.4rem;
         display: flex;
         justify-content: space-between;
         align-items: center ;
@@ -48,11 +47,8 @@ header{
     .header-group-one{
         display: flex;
         width: 100%;
-        justify-content: center;
-        align-items: center;
     }
     .header-group-two{
-        
             display: flex;
 
     }
@@ -65,7 +61,7 @@ header{
     transition: top 0.3s linear;
     z-index: 2;
     margin-right: 3rem;
-    top: -6rem;
+    top: 6rem;
     right: 0;
     &:hover{
         top: 6rem;

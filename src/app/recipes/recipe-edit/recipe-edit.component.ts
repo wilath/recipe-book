@@ -4,6 +4,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 
 
 import { RecipesService } from '../recipes.service';
+import { FoodType } from '../../shared/food-type-enum';
 
 @Component({
   selector: 'app-recipe-edit',
@@ -13,7 +14,8 @@ import { RecipesService } from '../recipes.service';
 export class RecipeEditComponent implements OnInit {
  public id: number = 0
  public editMode = false;
- public recipeForm!: FormGroup
+ public recipeForm!: FormGroup;
+ public foodType = FoodType;
 
   constructor( private route: ActivatedRoute,
     private recipeService: RecipesService,
@@ -54,6 +56,7 @@ export class RecipeEditComponent implements OnInit {
     let recipeImagePath = '';
     let recipeDescription = '';
     let recipeIngredients = new FormArray<FormGroup>([]);
+    let recipeFoodType: FoodType = FoodType.dinner;
 
     if(this.editMode){
       const recipe = this.recipeService.getRecipe(this.id);
@@ -61,6 +64,7 @@ export class RecipeEditComponent implements OnInit {
       recipeName = recipe.name;
       recipeImagePath = recipe.imagePath;
       recipeDescription = recipe.description;
+      recipeFoodType = recipe.foodType;
 
       if(recipe['ingredients']) {
         for(let ingredient of recipe.ingredients ){
@@ -77,7 +81,8 @@ export class RecipeEditComponent implements OnInit {
       'name': new FormControl(recipeName, Validators.required),
       'imagePath': new FormControl(recipeImagePath, Validators.required),
       'description': new FormControl(recipeDescription, Validators.required),
-      'ingredients': recipeIngredients
+      'ingredients': recipeIngredients,
+      'foodType': new FormControl(recipeFoodType, Validators.required)
     });
 
   }

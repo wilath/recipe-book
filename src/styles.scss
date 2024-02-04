@@ -10,11 +10,11 @@
 
 h1{
     font-size: 3rem;
-    @media (max-width:960px) {
-        font-size: 1rem;
-    }
    
 }
 body{   
     background-color: $indigo-dye;
+}
+.main-wrapper{
+    padding: 0 20%;
 }

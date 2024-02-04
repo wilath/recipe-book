@@ -1,0 +1,139 @@
+@import '../styles/variables';
+
+.showcase-wrap{
+ position: relative;
+}
+.recipes-container{
+  display: flex;
+  flex-direction: row;
+}
+
+.swiper {
+  width: 80%;
+  height: 100%;
+  margin-bottom: 30px;
+}
+
+.swiper-scrollbar {
+  --swiper-scrollbar-bottom: 0;
+  --swiper-scrollbar-drag-bg-color: #dda3b6;
+  --swiper-scrollbar-size: 5px;
+}
+
+.post {
+  max-width: 400px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--clr-text);
+  background: rgba(236, 149, 200, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 16px 16px 0;
+  margin-bottom: 16px;
+}
+
+.post-img {
+  width: 100%;
+  max-width: 400px;
+  object-fit: cover;
+  overflow: hidden;
+  aspect-ratio: 4/3;
+  border-radius: 6px;
+  user-select: none;
+  pointer-events: none;
+}
+
+.post-body {
+  display: grid;
+  grid-template-columns: 15% 60% 20%;
+  align-items: center;
+  gap: 8px;
+  padding: 15px 0;
+  cursor: default;
+}
+
+.post-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+.post-actions {
+  position: relative;
+}
+
+.post-actions-content {
+  position: absolute;
+  bottom: 130%;
+  right: 0;
+  padding: 8px;
+  border-radius: 8px;
+  background: rgba(172, 172, 172, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 2px 2px 10px 2px hsl(0, 0%, 0%, 0.25);
+  transition: opacity 0.25s, scale 0.25s;
+  transform-origin: bottom right;
+}
+.showcase-menu{
+  display: flex;
+  justify-content: center;
+
+form{
+  position: relative;
+  background-color: rgba(245, 245, 245, 0.123);
+  display: flex;
+  flex-direction: row;
+  border: 1px solid $powder-blue;
+  border-radius: 150px;
+  padding: 0.8rem 0rem;
+  overflow: hidden;
+  width: 25rem;
+  input{
+    position: absolute;
+    width: 0;
+    
+  }
+  #option0:checked ~ span{
+    left: 0;
+  }
+  #option1:checked ~ span{
+    left: 25%;
+  }
+  #option2:checked ~ span{
+    left: 50%;
+  }
+  #option3:checked ~ span{
+    left: 75%;
+  }
+  label{
+    display: inline-block;
+    padding: 0.4rem 0rem;
+    min-width: 25%;
+    cursor: pointer;
+    text-align: center;
+    
+  }
+  span{
+    transition: left 0.25s ease-in-out;
+    position: absolute;
+    height: 100%;
+    width: 25%;
+    background-color: $powder-blue;
+    z-index: -1;
+    top: 0;
+    left:0;
+    border-radius: 150px;
+
+    
+  }
+}
+
+}
+
+
+

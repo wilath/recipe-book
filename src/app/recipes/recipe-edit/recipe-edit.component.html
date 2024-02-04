@@ -18,6 +18,16 @@
                     (click)="onAddIngredient()">Add Ingredient</button>
                     </div>
 
+                    <div>
+                        <input type="radio" formControlName="foodType" name="fooType" id="0" [value]="foodType.desert">
+                        <label for="0">desert</label>
+                        <input type="radio" formControlName="foodType" name="fooType" id="1" [value]="foodType.dinner">
+                        <label for="1">dinner</label>
+                        <input type="radio" formControlName="foodType" name="fooType" id="2" [value]="foodType.drink">
+                        <label for="2">drink</label>
+                        <input type="radio" formControlName="foodType" name="fooType" id="3" [value]="foodType.breakfast">
+                        <label for="3">bf</label>
+                    </div>
 
                     <div class="form_wraper">
                     <div class="form-group">

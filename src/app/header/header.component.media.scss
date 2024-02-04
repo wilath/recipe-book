@@ -1,0 +1,43 @@
+@media (max-width:980px) {
+
+    header{
+        padding: 0 0.5rem;
+        flex-direction: column;
+       
+    }
+
+    .header-group-one{
+        height: 50%;
+        align-items: center;
+        justify-content: space-between;
+
+    }
+
+    .header-group-two{
+        height: 50%;
+        width: 100%;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .button-header{
+        font-size: 0.9rem;
+        padding: 0.1rem 0.5rem;
+        height: 70%;
+        letter-spacing: normal;
+        margin: 0;
+    }
+
+    .header-title{
+        font-size: 1.6rem;
+    }
+
+    .search{
+        height: 100%;
+        
+        input{
+            max-width: 40%;
+        }
+    }
+
+}

@@ -7,11 +7,15 @@ import { HeaderComponent } from './header/header.component';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core.module';
 import { ShowcaseComponent } from './showcase/showcase.component';
+import { CommonModule } from '@angular/common';
+import { FoodTypeSortPipe } from './showcase/food-type.pipe';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent],
+  declarations: [AppComponent, HeaderComponent, ShowcaseComponent, FoodTypeSortPipe],
   imports: [
-    ShowcaseComponent,
+    FormsModule,
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
