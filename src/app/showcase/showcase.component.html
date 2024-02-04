@@ -1,4 +1,4 @@
-<div class="showcase-wrap">
+<div class="showcase-wrap glass-panel">
   <div class="showcase-menu">
     <form>
       <input
@@ -49,34 +49,12 @@
 
 
   <div class="post-body">
-      <h2 class="post-name">{{recipe.name}}</h2>
+      <h2 class="post-name">{{recipe.name}} </h2>
 
     <div class="post-actions">
-      <a class="post-like" 
-        ><i class="fas fa-heart"></i
-      ></a>
-  
-        <ul role="list" class="grid-flow" data-spacing="small">
-          <li>
-            <a class="post-actions-link" href="javascript:void(0)">
-              <i class="fa-solid fa-folder-open"></i>
-              <span>Add to ShoppingList</span>
-            </a>
-          </li>
-          <li>
-            <a class="post-actions-link" href="javascript:void(0)">
-              <i class="fa-solid fa-eye"></i>
-              <span>Show the Recipe</span>
-            </a>
-          </li>
-          <li>
-            <a class="post-actions-link" href="javascript:void(0)">
-              <i class="fa-solid fa-user-plus"></i>
-              <span>Follow the User</span>
-            </a>
-          </li>
-        </ul>
-      </div>
+      <a class="post-action"><i class="fa-solid fa-heart"></i></a>
+      <a class="post-action show-menu"><i class="fa-solid fa-ellipsis-vertical"></i></a>
+    </div>
     </div>
   </div>
 }
