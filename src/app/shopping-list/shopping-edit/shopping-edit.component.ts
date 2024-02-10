@@ -56,7 +56,7 @@ export class ShoppingEditComponent implements OnInit, OnDestroy{
 
   }
   onMerge(){
-    this.slService.mergeAlike()
+    //this.slService.mergeAlike()
   }
   onDeleteAll(){
     this.slService.deleteAll()

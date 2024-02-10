@@ -6,29 +6,31 @@ import { ShoppingListService } from './shopping-list.service';
 @Component({
   selector: 'app-shopping-list',
   templateUrl: './shopping-list.component.html',
-  styleUrls: ['./shopping-list.component.scss'] ,
+  styleUrls: ['./shopping-list.component.scss'],
 })
 export class ShoppingListComponent implements OnInit, OnDestroy {
   ingredients: Array<Ingredient> = [];
   private igChangedSub!: Subscription;
 
-  constructor(private shoppingListService: ShoppingListService) { }
+  constructor(private shoppingListService: ShoppingListService) {}
 
-  ngOnInit(){
+  public ngOnInit() {
     this.ingredients = this.shoppingListService.getShopList();
     this.igChangedSub = this.shoppingListService.ingChganged.subscribe(
-      (ingredients: Ingredient[]) => {this.ingredients = ingredients}
-    )
+      (ingredients: Ingredient[]) => {
+        this.ingredients = ingredients;
+      }
+    );
   }
-  ngOnDestroy(){
-  this.igChangedSub.unsubscribe();
-  }
-
-  onEditItem(index:number){
-    this.shoppingListService.startedEditing.next(index)
-  }
-  onDeleteAll(){
-    this.shoppingListService.deleteAll()
+  
+  public ngOnDestroy() {
+    this.igChangedSub.unsubscribe();
   }
 
+  public onEditItem(index: number) {
+    this.shoppingListService.startedEditing.next(index);
+  }
+  public onDeleteAll() {
+    this.shoppingListService.deleteAll();
+  }
 }

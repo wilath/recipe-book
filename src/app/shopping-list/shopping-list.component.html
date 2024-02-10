@@ -1,17 +1,18 @@
-<div>
-  <div>
+
+
     <app-shopping-edit></app-shopping-edit>
+
+
     <div class="shoplist-wraper">
-      <h5>Shopping-List:</h5>
-      <div class="list-flexbox">
-        <a
-          class="list-item"
-          *ngFor="let ingd of ingredients; let i = index"
-          (click)="onEditItem(i)"
+      <h3>Shopping-List:</h3
         >
-          - {{ ingd.name }} / {{ ingd.amount }}
+      <div class="list-flexbox">
+        <a class="list-item" *ngFor="let ingd of ingredients; let i = index" (click)="onEditItem(i)">
+          <div>
+            {{ ingd.name }}
+            <span>{{ ingd.amount }}</span>
+          </div>
         </a>
       </div>
     </div>
-  </div>
-</div>
+ 

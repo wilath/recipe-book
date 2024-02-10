@@ -2,14 +2,10 @@
 
     <div class="buttons-wrap">
         
-        <button type="submit" [disabled]="!f.valid">
-            {{editMode? 'Update' : 'Add'}}</button>
-        <button class="shine" type="button" (click)="onDelete()" *ngIf="editMode">
-            Delete</button>
-        <button class="shine" type="button" 
-            (click)="onClear()">
-            Clear</button>
-        <button class="shine" type="button"  style="border-right: 1px solid rgba(240, 248, 255, 0.075);" (click)="onDeleteAll()">Erase this List</button>
+        <button class="button-alpha" type="submit" [disabled]="!f.valid"> {{editMode? 'Update' : 'Add'}}</button>
+        <button class="button-alpha" type="button" (click)="onDelete()" *ngIf="editMode">Delete</button>
+        <button class="button-alpha" type="button" (click)="onClear()">Clear</button>
+        <button class="button-alpha" type="button" (click)="onDeleteAll()">Clear List</button>
     </div>
 
     <div class="inputs-wrap">

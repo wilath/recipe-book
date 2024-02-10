@@ -40,14 +40,14 @@ export class ShoppingListService {
   }
 
   //fix mergaAlike
-  mergeAlike() {
+ /* mergeAlike() {
     let ings = this.ingredients;
     let result: Ingredient[] = [];
 
    
     this.ingredients = result;
     this.ingChganged.next(this.ingredients.slice());
-  }
+  }*/
   deleteAll() {
     this.ingredients = [];
     this.ingChganged.next(this.ingredients.slice());
