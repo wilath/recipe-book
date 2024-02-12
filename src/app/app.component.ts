@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
     this.aService.autoLogin();
     this.aService.user.subscribe((user) => {
       user !== null ? (this.isLogged$ = true) : (this.isLogged$ = false);
-      console.log('change', user)
+
     });
 
     this.responsive

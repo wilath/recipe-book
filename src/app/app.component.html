@@ -1,14 +1,17 @@
 <app-header></app-header>
+
 <div class="main-wrapper">
   @if (isLogged$) {
     <app-showcase></app-showcase>
   }
  
-  <div class="glass-panel">
+  <div class="glass-panel padd1">
     <router-outlet></router-outlet>
   </div>
+
+  <footer>
+    <p><i class="fa-regular fa-copyright"></i> Daniel Redzynski</p>
+    <a href="https://github.com/wilath" target="_blank" ><i class="fa-brands fa-github"></i> GitHub Profile</a>
+    <a href="https://www.linkedin.com/in/daniel-redzynski-6562651b9/" target="_blank" ><i class="fa-brands fa-linkedin"></i> Linkedin Profile</a>
+  </footer>
 </div>
-<footer > 
-
-
-</footer>

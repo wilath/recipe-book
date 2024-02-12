@@ -51,11 +51,22 @@ table {
 	border-spacing: 0;
 }
 input{
+	border: none;
+	outline: none;
 	&:focus{
 		border: none;
 		outline: none;
 	}
+	&:autofill{
+		inherits: all;
+	}
+	&:-webkit-autofill:focus{
+		inherits: all;
+	}
 }
 button{
 	cursor: pointer;
+	&:focus{
+		outline: none;
+	}
 }

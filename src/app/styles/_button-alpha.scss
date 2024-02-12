@@ -12,10 +12,20 @@
     text-wrap: nowrap;
     border: 1px solid $powder-blue;
 
-    &:hover{
+    &:hover:enabled{
         background-color:  $powder-blue;
         color: $rich-black;
     }
+    &:hover:disabled{
+        cursor: auto;
+    }
+    &:focus-visible{
+        outline: 2px solid $sage;
+    }
+    &:disabled{
+        opacity: 0.5;
+    }
+
 
 }
 
