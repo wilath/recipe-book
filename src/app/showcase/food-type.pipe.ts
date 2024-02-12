@@ -7,8 +7,8 @@ import { FoodType } from '../shared/food-type-enum';
   name: 'foodTypeSort'
 })
 export class FoodTypeSortPipe implements PipeTransform {
-  transform(recipes: Recipe[], foodType: FoodType): Recipe[] {
-    if (!recipes) {
+  transform(recipes: Recipe[], foodType: FoodType | null): Recipe[] {
+    if (!recipes || foodType === null) {
       return recipes;
     }
   

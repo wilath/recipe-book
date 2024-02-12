@@ -2,9 +2,6 @@
     <div class="header-group-one">
     <h1 class="header-title">Recipe Book</h1>
 
-    <div class="search">
-        <input placeholder="Search..." type="text">
-    </div>
 </div>
     <div class="header-group-two">
         <button class="button-alpha button-header button-recipes" *ngIf="isAuth" routerLink="/recipes" routerLinkActive="button-alpha-active">Recipes</button>
@@ -17,7 +14,7 @@
 
   
 </header>
-<div class="manage-options">
+<div style="display: none;" class="manage-options">
     <button class="button-alpha" (click)="onFetchData()">Fetch</button>
     <button class="button-alpha" (click)="onSavedata()">Save</button>
 </div>

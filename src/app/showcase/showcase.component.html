@@ -2,6 +2,14 @@
   <div class="showcase-menu">
     <form>
       <input
+        [value]="null"
+        id="option4"
+        name="foodtype"
+        type="radio"
+        [(ngModel)]="chosenFoodCategory"
+      />
+      <label for="option4">All</label>
+      <input
         [value]="foodCategory.breakfast"
         id="option0"
         name="foodtype"
@@ -33,9 +41,13 @@
         type="radio"
         [(ngModel)]="chosenFoodCategory"
       />
-      <label for="option3">Deserts</label>
+      <label for="option3">Deserts</label>     
       <span></span>
     </form>
+
+    <div class="search">
+      <input placeholder="Search..." type="text">
+  </div>
   </div>
 
 <div class="recipes-container">

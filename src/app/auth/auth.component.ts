@@ -35,14 +35,12 @@ export class AuthComponent {
 
     auth$.subscribe(
       (resData) => {
-        console.log(resData);
         this.isLoading = false;
         this.router.navigate(['/recipes']);
       },
       (errorMsg) => {
-        console.log(errorMsg);
-        this.error = errorMsg;
         this.isLoading = false;
+        this.error = errorMsg;
       }
     );
 

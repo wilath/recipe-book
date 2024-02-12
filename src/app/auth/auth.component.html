@@ -53,7 +53,7 @@
       
     </div>
     <div *ngIf="(authForm.value.password !== authForm.value.password2) && !isLoginMode" class="auth-form-alert">
-        <p>Passwords arent alike!</p>
+        <p>Passwords are not the same!</p>
       </div>
 
     <div *ngIf="!isLoginMode" class="auth-form-group">
@@ -70,7 +70,7 @@
       />
     </div>
 
-    <div>
+    <div class="login-buttons">
       <button
         class="button-alpha"
         [disabled]="

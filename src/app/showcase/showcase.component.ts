@@ -15,7 +15,7 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
 
   constructor(private recipesService: RecipesService, private shoppingListService: ShoppingListService){};
 
-  public chosenFoodCategory : FoodType = FoodType.dinner;
+  public chosenFoodCategory : FoodType | null = FoodType.dinner;
 
   public foodCategory = FoodType;
   
