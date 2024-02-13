@@ -46,12 +46,12 @@
     </form>
 
     <div class="search">
-      <input placeholder="Search..." type="text">
+      <input placeholder="Search..." type="text" [(ngModel)]="foodSearch">
   </div>
   </div>
 
 <div class="recipes-container">
-@for (recipe of recipes | foodTypeSort: chosenFoodCategory; track $index) {
+@for (recipe of recipes | foodTypeSort: chosenFoodCategory: foodSearch; track $index) {
 <div class="swiper-slide post">
   <img
     class="post-img"
@@ -69,6 +69,25 @@
     </div>
     </div>
   </div>
+} @empty{
+  <div class="swiper-slide post">
+    <img
+      class="post-img"
+      [src]=""
+      alt="recipe"
+    />
+  
+  
+    <div class="post-body">
+        <h2 class="post-name">No recipes</h2>
+  
+      <div class="post-actions">
+        <a class="post-action" disabled ><i class="fa-solid fa-heart"></i></a>
+        <a class="post-action show-menu" disabled><i class="fa-solid fa-ellipsis-vertical"></i></a>
+      </div>
+      </div>
+    </div>
+
 }
 </div>
 </div>

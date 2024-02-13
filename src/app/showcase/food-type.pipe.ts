@@ -7,11 +7,19 @@ import { FoodType } from '../shared/food-type-enum';
   name: 'foodTypeSort'
 })
 export class FoodTypeSortPipe implements PipeTransform {
-  transform(recipes: Recipe[], foodType: FoodType | null): Recipe[] {
+  transform(recipes: Recipe[], foodType: FoodType | null, foodSearch: string): Recipe[] {
+    let recipesToReturn: Recipe[] = []
     if (!recipes || foodType === null) {
-      return recipes;
+      recipesToReturn = recipes
+    } else {
+      recipesToReturn = recipes.filter(recipe => recipe.foodType === foodType);
     }
-  
-    return recipes.filter(recipe => recipe.foodType === foodType);
+    if(foodSearch !== ''){
+      recipesToReturn = recipesToReturn.filter(recipe => {
+        return recipe.name.toLowerCase().includes(foodSearch.toLowerCase());
+      })
+    }
+    
+    return recipesToReturn;
   }
 }

@@ -11,34 +11,36 @@ import { Recipe } from '../recipes/recipe.model';
   styleUrl: './showcase.component.scss',
 })
 export class ShowcaseComponent implements OnInit, OnDestroy {
+  constructor(
+    private recipesService: RecipesService,
+    private shoppingListService: ShoppingListService
+  ) {}
 
-
-  constructor(private recipesService: RecipesService, private shoppingListService: ShoppingListService){};
-
-  public chosenFoodCategory : FoodType | null = FoodType.dinner;
+  public chosenFoodCategory: FoodType | null = FoodType.dinner;
 
   public foodCategory = FoodType;
-  
+
+  public foodSearch: string = '';
+
   public recipesSubscription!: Subscription;
 
   public recipes: Recipe[] = [];
 
-
   public ngOnInit(): void {
-      this.setRecipes()
+    this.setRecipes();
   }
 
   public ngOnDestroy(): void {
-      this.recipesSubscription.unsubscribe()
+    this.recipesSubscription.unsubscribe();
   }
-
 
   private setRecipes() {
-    this.recipes = this.recipesService.getRecipes()
+    this.recipes = this.recipesService.getRecipes();
 
-    this.recipesSubscription = this.recipesService.recipesChanged.subscribe( (recipes: Recipe[]) => {
-      this.recipes = recipes
-    })
+    this.recipesSubscription = this.recipesService.recipesChanged.subscribe(
+      (recipes: Recipe[]) => {
+        this.recipes = recipes;
+      }
+    );
   }
-
 }

@@ -10,9 +10,10 @@ import { ShowcaseComponent } from './showcase/showcase.component';
 import { CommonModule } from '@angular/common';
 import { FoodTypeSortPipe } from './showcase/food-type.pipe';
 import { FormsModule } from '@angular/forms';
+import { ShowcaseItemComponent } from './showcase/showcase-item/showcase-item.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, ShowcaseComponent, FoodTypeSortPipe],
+  declarations: [AppComponent, HeaderComponent, ShowcaseComponent, ShowcaseItemComponent, FoodTypeSortPipe],
   imports: [
     FormsModule,
     CommonModule,
