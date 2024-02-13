@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Recipe } from '../../recipes/recipe.model';
 import { RecipesService } from '../../recipes/recipes.service';
+import { User } from '../../auth/user.model';
 
 @Component({
   selector: 'app-showcase-item',
@@ -8,11 +9,19 @@ import { RecipesService } from '../../recipes/recipes.service';
   styleUrl: '../showcase.component.scss',
 })
 export class ShowcaseItemComponent {
-  @Input() public recipe!: Recipe;
-
   constructor(private recipesService: RecipesService) {}
 
-  public onLike() {}
+  @Input() public recipe!: Recipe;
+  @Input() public index! : number;
+  private user: User = JSON.parse(localStorage.getItem('userData') ||'{}')
+
+  public get isLikedByCurrentUser(){
+    return this.recipe.likes.whoLiked.includes(this.user.email)
+  }
+
+  public onLike() {
+    this.recipesService.addLikeToRecipe(this.index, this.user.email )
+  }
 
   public onFollowUser() {}
 

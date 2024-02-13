@@ -1,0 +1,14 @@
+<div class="swiper-slide post">
+  <img class="post-img" [src]="recipe.imagePath" alt="recipe" />
+
+  <div class="post-body">
+    <h2 class="post-name">{{ recipe.name }} </h2>
+    
+    <div class="post-actions">
+      <button class="post-action" [disabled]="isLikedByCurrentUser" (click)="onLike()" >{{recipe.likes.quantity}} <i [ngClass]="{'recipe-liked': isLikedByCurrentUser}" class="fa-solid fa-heart"></i></button>
+      <a class="post-action show-menu"
+        ><i class="fa-solid fa-ellipsis-vertical"></i
+      ></a>
+    </div>
+  </div>
+</div>

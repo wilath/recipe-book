@@ -1,41 +1,49 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
 import { Ingredient } from '../shared/ingredient.model';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
-import { Recipe } from './recipe.model';
+import { Likes, Recipe } from './recipe.model';
 
 @Injectable()
-export class RecipesService implements OnInit {
-  constructor(private slService: ShoppingListService) {}
+export class RecipesService {
+  constructor(private shoppingListService: ShoppingListService) {}
 
-  recipesChanged = new Subject<Recipe[]>();
+  public recipesChanged = new Subject<Recipe[]>();
   private recipes: Recipe[] = [];
 
-  ngOnInit() {}
-  getRecipes() {
+  public addLikeToRecipe(index: number, whoLiked: string) {
+    const newRecipe: Recipe = this.recipes[index];
+    newRecipe.likes.quantity++;
+    newRecipe.likes?.whoLiked.push(whoLiked);
+
+    this.recipes[index] = newRecipe;
+    this.recipesChanged.next(this.recipes.slice());
+  }
+
+  public getRecipes() {
     return this.recipes.slice();
   }
-  getRecipe(index: number) {
+  public getRecipe(index: number) {
     return this.recipes[index];
   }
-  addRecipeIng(ings: Ingredient[]) {
-    this.slService.addRecipeIng2(ings);
+  public addRecipeIng(ings: Ingredient[]) {
+    this.shoppingListService.addRecipeIng2(ings);
   }
-  addRecipe(recipe: Recipe) {
+  public addRecipe(recipe: Recipe) {
     this.recipes.push(recipe);
     this.recipesChanged.next(this.recipes.slice());
   }
 
-  updateRecipe(index: number, newRecipe: Recipe) {
+  public updateRecipe(index: number, newRecipe: Recipe) {
     this.recipes[index] = newRecipe;
     this.recipesChanged.next(this.recipes.slice());
   }
-  deleteRecepie(index: number) {
+  public deleteRecepie(index: number) {
     this.recipes.splice(index, 1);
     this.recipesChanged.next(this.recipes.slice());
   }
-  setRecepies(recipes: Recipe[]) {
+  public setRecepies(recipes: Recipe[]) {
     this.recipes = recipes;
     this.recipesChanged.next(this.recipes.slice());
   }
