@@ -12,15 +12,15 @@ export class ShowcaseItemComponent {
   constructor(private recipesService: RecipesService) {}
 
   @Input() public recipe!: Recipe;
-  @Input() public index! : number;
-  private user: User = JSON.parse(localStorage.getItem('userData') ||'{}')
+  
+  private user: User = JSON.parse(localStorage.getItem('userData') || '{}');
 
-  public get isLikedByCurrentUser(){
-    return this.recipe.likes.whoLiked.includes(this.user.email)
+  public get isLikedByCurrentUser() {
+    return this.recipe.likes.whoLiked.includes(this.user.email);
   }
 
   public onLike() {
-    this.recipesService.addLikeToRecipe(this.index, this.user.email )
+    this.recipesService.addLikeToRecipe(this.recipe.name, this.user.email);
   }
 
   public onFollowUser() {}

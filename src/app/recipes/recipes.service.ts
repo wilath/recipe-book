@@ -12,8 +12,9 @@ export class RecipesService {
   public recipesChanged = new Subject<Recipe[]>();
   private recipes: Recipe[] = [];
 
-  public addLikeToRecipe(index: number, whoLiked: string) {
-    const newRecipe: Recipe = this.recipes[index];
+  public addLikeToRecipe(recipeName: string, whoLiked: string) {
+    const index = this.recipes.findIndex( recipe => recipe.name === recipeName)
+    const newRecipe: Recipe = this.recipes[index]
     newRecipe.likes.quantity++;
     newRecipe.likes?.whoLiked.push(whoLiked);
 

@@ -53,7 +53,7 @@
 
 <div class="recipes-container">
 @for (recipeItem of recipes | foodTypeSort: chosenFoodCategory: foodSearch; track $index) {
-<app-showcase-item [recipe]="recipeItem" [index]="$index"></app-showcase-item>
+<app-showcase-item [recipe]="recipeItem"></app-showcase-item>
 } @empty{
   <div class="swiper-slide post">
     <img
