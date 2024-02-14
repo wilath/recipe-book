@@ -2,7 +2,7 @@
 import { Component, Injectable, OnDestroy, OnInit  } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Recipe } from '../recipe.model';
+import { Recipe } from '../../shared/models/recipe.model';
 import { RecipesDetailsComponent } from '../recipes-details/recipes-details.component';
 import { RecipesService } from '../recipes.service';
 
@@ -17,7 +17,7 @@ import { RecipesService } from '../recipes.service';
 export class RecipesListComponent implements OnInit, OnDestroy {
   recipes:Array<Recipe> =[];
   subscription!: Subscription;
-  animationStatus: boolean = true
+ 
 
   constructor(
     private recipeService: RecipesService,
@@ -40,6 +40,8 @@ export class RecipesListComponent implements OnInit, OnDestroy {
   ngOnDestroy(){
     this.subscription.unsubscribe();
   }
+
+  
   onNewRecipe() {
     this.router.navigate(['new'],  {relativeTo: this.route})
   }

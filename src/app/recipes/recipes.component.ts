@@ -1,5 +1,7 @@
 import { Component, OnInit} from '@angular/core';
-import { RecipesService } from './recipes.service';
+import { UserDataStoragaService } from '../shared/user-data.storage.service';
+import { tap } from 'rxjs';
+
 
 @Component({
   selector: 'app-recipes',
@@ -8,7 +10,7 @@ import { RecipesService } from './recipes.service';
 })
 export class RecipesComponent implements OnInit {
   
-  constructor() { }
+  constructor(private anag: UserDataStoragaService) { }
 
   ngOnInit(){
     

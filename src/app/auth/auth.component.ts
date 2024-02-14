@@ -1,4 +1,4 @@
-import { Component, Input, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -23,6 +23,7 @@ export class AuthComponent {
   public onSubmit(form: NgForm) {
     const email = form.value.email;
     const password = form.value.password;
+    const name = form.value.name;
     this.isLoading = true;
 
     let auth$: Observable<AuthResponseData>;
@@ -30,7 +31,7 @@ export class AuthComponent {
     if (this.isLoginMode) {
       auth$ = this.authService.logIn(email, password);
     } else {
-      auth$ = this.authService.signUp(email, password);
+      auth$ = this.authService.signUp(email,name, password);
     }
 
     auth$.subscribe(

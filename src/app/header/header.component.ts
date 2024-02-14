@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthServcie } from '../auth/auth.servcie';
-import { dataStoragaService } from '../shared/data-storage.service';
+import { DataStoragaService } from '../shared/data-storage.service';
 
 @Component({
   selector: 'app-header',
@@ -14,7 +14,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private user$!: Subscription;
 
   constructor(
-    private dataStorageService: dataStoragaService,
+    private dataStorageService: DataStoragaService,
     private aService: AuthServcie
   ) {}
 

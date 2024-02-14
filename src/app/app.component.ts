@@ -3,6 +3,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { AuthServcie } from './auth/auth.servcie';
 import { take } from 'rxjs';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -10,7 +11,8 @@ import { take } from 'rxjs';
 export class AppComponent implements OnInit {
   constructor(
     private aService: AuthServcie,
-    private responsive: BreakpointObserver
+    private responsive: BreakpointObserver,
+    
   ) {}
 
   public isLogged$: boolean = false;

@@ -26,6 +26,17 @@
         email
       />
     </div>
+    <div *ngIf="!isLoginMode" class="auth-form-group">
+      <label for="email">Name</label>
+      <input
+        autocomplete="off"
+        id="name"
+        class="auth-input"
+        ngModel
+        name="name"
+        required
+      />
+    </div>
     <div class="auth-form-group">
       <label for="password">Password</label>
       <input

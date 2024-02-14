@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Recipe } from '../recipes/recipe.model';
-import { FoodType } from '../shared/food-type-enum';
+import { Recipe } from '../shared/models/recipe.model';
+import { FoodType } from '../shared/enums/food-type-enum';
 
 
 @Pipe({

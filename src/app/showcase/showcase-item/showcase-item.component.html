@@ -3,12 +3,12 @@
 
   <div class="post-body">
     <h2 class="post-name">{{ recipe.name }} </h2>
+    <h3>{{recipe.author}}</h3>
     
     <div class="post-actions">
       <button class="post-action" [disabled]="isLikedByCurrentUser" (click)="onLike()" >{{recipe.likes.quantity}} <i [ngClass]="{'recipe-liked': isLikedByCurrentUser}" class="fa-solid fa-heart"></i></button>
-      <a class="post-action show-menu"
-        ><i class="fa-solid fa-ellipsis-vertical"></i
-      ></a>
+      <button class="post-action show-menu" (click)="onFollowUser()" ><i class="fa-solid fa-user-plus"></i></button>
+
     </div>
   </div>
 </div>

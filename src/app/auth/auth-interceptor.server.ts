@@ -10,10 +10,10 @@ import { AuthServcie } from './auth.servcie';
 
 @Injectable()
 export class AuthInterceptorService implements HttpInterceptor {
-  constructor(private aService: AuthServcie) {}
+  constructor(private authService: AuthServcie) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
-    return this.aService.user.pipe(
+    return this.authService.user.pipe(
       take(1),
       exhaustMap((user) => {
         if (!user) {
@@ -22,6 +22,7 @@ export class AuthInterceptorService implements HttpInterceptor {
           const modRequest = req.clone({
             params: new HttpParams().set('auth', user.token as string),
           });
+          
           return next.handle(modRequest);
         }
       })

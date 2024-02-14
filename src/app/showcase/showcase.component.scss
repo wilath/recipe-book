@@ -17,7 +17,8 @@
 
 .post {
   width: 17rem;
-
+  position: relative;
+  overflow: hidden;
   font-size: 1rem;
   font-weight: 500;
   color: var(--clr-text);

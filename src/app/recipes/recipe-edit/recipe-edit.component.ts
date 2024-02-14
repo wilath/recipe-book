@@ -4,7 +4,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 
 
 import { RecipesService } from '../recipes.service';
-import { FoodType } from '../../shared/food-type-enum';
+import { FoodType } from '../../shared/enums/food-type-enum';
 
 @Component({
   selector: 'app-recipe-edit',

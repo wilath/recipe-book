@@ -7,7 +7,7 @@ import {
 } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Recipe } from '../recipe.model';
+import { Recipe } from '../../shared/models/recipe.model';
 import { RecipesService } from '../recipes.service';
 import { ShoppingListService } from '../../shopping-list/shopping-list.service';
 
@@ -42,7 +42,6 @@ export class RecipesDetailsComponent implements OnInit {
   }
 
   onDeleteRecipe() {
-    console.log(this.recipeToDisplayId);
     this.recipesService.deleteRecepie(this.recipeToDisplayId);
     this.router.navigate(['/recipes']);
   }

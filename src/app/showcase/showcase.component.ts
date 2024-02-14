@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RecipesService } from '../recipes/recipes.service';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
-import { FoodType } from '../shared/food-type-enum';
+import { FoodType } from '../shared/enums/food-type-enum';
 import { Subscription } from 'rxjs';
-import { Recipe } from '../recipes/recipe.model';
+import { Recipe } from '../shared/models/recipe.model';
 
 @Component({
   selector: 'app-showcase',
