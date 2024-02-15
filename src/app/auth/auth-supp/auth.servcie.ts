@@ -2,10 +2,11 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, filter, map, tap } from 'rxjs/operators';
 import { BehaviorSubject, throwError } from 'rxjs';
-import { User } from '../shared/models/user.model';
+import { User } from '../../shared/models/user.model';
 import { Router } from '@angular/router';
-import { environment } from '../../environments/environment';
-import { UserDataStoragaService } from '../shared/user-data.storage.service';
+import { environment } from '../../../environments/environment';
+import { UserDataService } from './user-data.service';
+import { DataStoragaService } from '../../shared/data-storage.service';
 
 export interface AuthResponseData {
   kind: string;
@@ -25,7 +26,8 @@ export class AuthServcie {
   constructor(
     private http: HttpClient,
     private route: Router,
-    private userDataService: UserDataStoragaService
+    private userDataService: UserDataService,
+    private dataStroage: DataStoragaService
   ) {}
 
   public logout() {
@@ -91,7 +93,7 @@ export class AuthServcie {
           );
         }),
         tap(() => {
-          this.userDataService.storeNewUserData(email, name)
+          this.dataStroage.storeNewUser(email, name)
         })
       );
   }
@@ -126,7 +128,7 @@ export class AuthServcie {
     this.user.next(user);
     this.autoLogout(expiresIn * 1000);
     localStorage.setItem('userData', JSON.stringify(user));
-    this.userDataService.setUserData(email)
+    
     ;
   }
 

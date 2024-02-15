@@ -5,19 +5,24 @@ import { RecipesService } from '../recipes/recipes.service';
 import { map, tap } from 'rxjs/operators';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
 import { Ingredient } from './models/ingredient.model';
+import { UserData } from './models/user-data.model';
+import { UserDataService } from '../auth/auth-supp/user-data.service';
 
 @Injectable()
 export class DataStoragaService {
   constructor(
     private http: HttpClient,
     private recipesService: RecipesService,
-    private shoppingListService: ShoppingListService
+    private shoppingListService: ShoppingListService,
+    private userDataService: UserDataService
   ) {}
 
   private urlRecipes =
     'https://recipesproject-fc6f3-default-rtdb.europe-west1.firebasedatabase.app/recipes.json';
   private urlShoppingList =
     'https://recipesproject-fc6f3-default-rtdb.europe-west1.firebasedatabase.app/shoppinglist.json';
+  private urlUsers =
+    'https://recipesproject-fc6f3-default-rtdb.europe-west1.firebasedatabase.app/users.json';
 
   public storeRecipes() {
     const recipes = this.recipesService.getRecipes();
@@ -25,6 +30,7 @@ export class DataStoragaService {
     const shoppinglist = this.shoppingListService.getShopList();
     this.http.put(this.urlShoppingList, shoppinglist).subscribe();
   }
+
   public fetchRecipes() {
     this.fetchShopList();
     return this.http.get<Recipe[]>(this.urlRecipes).pipe(
@@ -41,6 +47,7 @@ export class DataStoragaService {
       })
     );
   }
+
   public fetchShopList() {
     return this.http
       .get<Ingredient[]>(this.urlShoppingList)
@@ -55,6 +62,22 @@ export class DataStoragaService {
           this.shoppingListService.setIngredients(response);
         })
       )
+      .subscribe();
+  }
+
+  public storeNewUser(email: string, name: string) {
+    const userToStore: UserData = {
+      email: email,
+      name: name,
+    };
+    this.http.put(this.urlUsers, userToStore).subscribe();
+    this.fetchUserData()
+  }
+
+  public fetchUserData() {
+    this.http
+      .get<UserData[]>(this.urlUsers)
+      .pipe(tap((users) => this.userDataService.setUserdata(users)))
       .subscribe();
   }
 }

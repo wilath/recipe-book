@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { AuthServcie } from './auth/auth.servcie';
+import { AuthServcie } from './auth/auth-supp/auth.servcie';
 import { take } from 'rxjs';
 
 

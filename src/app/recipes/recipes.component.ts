@@ -1,6 +1,4 @@
 import { Component, OnInit} from '@angular/core';
-import { UserDataStoragaService } from '../shared/user-data.storage.service';
-import { tap } from 'rxjs';
 
 
 @Component({
@@ -8,13 +6,10 @@ import { tap } from 'rxjs';
   templateUrl: './recipes.component.html',
   styleUrls: ['./recipes.component.scss'],
 })
-export class RecipesComponent implements OnInit {
+export class RecipesComponent {
   
-  constructor(private anag: UserDataStoragaService) { }
+  constructor() { }
 
-  ngOnInit(){
-    
-  }
   }
 
 

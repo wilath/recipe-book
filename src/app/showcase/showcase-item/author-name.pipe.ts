@@ -11,7 +11,7 @@ export class AuthorNamePipe implements PipeTransform {
   constructor(private userData: UserDataStoragaService) {}
 
   transform(author: string): string {
-    
+  
     
     return  ''
   }

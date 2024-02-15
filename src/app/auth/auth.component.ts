@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { AuthResponseData, AuthServcie } from './auth.servcie';
+import { AuthResponseData, AuthServcie } from './auth-supp/auth.servcie';
 
 @Component({
   selector: 'app-auth',

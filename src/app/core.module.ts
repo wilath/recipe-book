@@ -1,17 +1,18 @@
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { NgModule } from "@angular/core";
-import { AuthInterceptorService } from "./auth/auth-interceptor.server";
+import { AuthInterceptorService } from "./auth/auth-supp/auth-interceptor.server";
 import { RecipesService } from "./recipes/recipes.service";
 import { DataStoragaService } from "./shared/data-storage.service";
 import { ShoppingListService } from "./shopping-list/shopping-list.service";
-import { UserDataStoragaService } from "./shared/user-data.storage.service";
+import { UserDataService } from "./auth/auth-supp/user-data.service";
+
 
 @NgModule({
     providers: [
         ShoppingListService,
         RecipesService,
         DataStoragaService,
-        UserDataStoragaService,
+        UserDataService,
         {
           provide: HTTP_INTERCEPTORS, 
           useClass: AuthInterceptorService, 
