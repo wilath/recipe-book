@@ -1,16 +1,17 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable, OnDestroy, OnInit } from '@angular/core';
 import { Recipe } from './models/recipe.model';
 import { RecipesService } from '../recipes/recipes.service';
-import { map, tap } from 'rxjs/operators';
+import { exhaustMap, map, take, tap } from 'rxjs/operators';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
 import { Ingredient } from './models/ingredient.model';
 import { UserData } from './models/user-data.model';
 import { UserDataService } from '../auth/auth-supp/user-data.service';
 import { AuthServcie } from '../auth/auth-supp/auth.servcie';
+import { Subscription } from 'rxjs';
 
 @Injectable()
-export class DataStoragaService implements OnInit {
+export class DataStoragaService implements OnInit, OnDestroy {
   constructor(
     private http: HttpClient,
     private recipesService: RecipesService,
@@ -25,7 +26,14 @@ export class DataStoragaService implements OnInit {
   private urlUsers =
     'https://recipesproject-fc6f3-default-rtdb.europe-west1.firebasedatabase.app/users.json';
 
-  ngOnInit(): void {}
+  public ngOnInit(): void {
+  
+  }
+
+  public ngOnDestroy(): void {
+  
+  }
+
   public storeRecipes() {
     const recipes = this.recipesService.getRecipes();
     this.http.put(this.urlRecipes, recipes).subscribe();
@@ -81,6 +89,6 @@ export class DataStoragaService implements OnInit {
   public storeUsersData() {
     const usersData = this.userDataService.getUsersData();
     this.http.put(this.urlUsers, usersData).subscribe();
-    this.fetchUsersData();
+    console.log('stored');
   }
 }

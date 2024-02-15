@@ -9,11 +9,6 @@
   overflow-x: scroll;
 }
 
-.swiper {
-  width: 80%;
-  height: 100%;
-  margin-bottom: 30px;
-}
 
 .post {
   width: 17rem;
@@ -25,12 +20,12 @@
   background: rgba(255, 255, 255, 0.2);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
-  padding: 16px 16px 0;
+  padding: 1rem 1rem 0;
   margin: 1rem;
 }
 
 .post-img {
-  width: 230px;
+  width: 100%;
   object-fit: cover;
   overflow: hidden;
   aspect-ratio: 4/3;
@@ -40,6 +35,7 @@
 }
 
 .post-body {
+  position: relative;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -47,16 +43,34 @@
   padding: 15px 0;
   margin-top: auto;
   cursor: default;
+  .post-info{
+    flex-grow: 1;
+    .post-name {
+      font-size: 1.2rem;
+      font-weight: 600;
+      min-width: 100%;
+      width: 0;
+      margin-bottom: 5px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+  }
+  .user-avatar{
+    position: relative;
+    height: 2.5rem;
+    aspect-ratio: 1/1;
+    color: rgb(252, 252, 252);
+    background-color: rgba(223, 223, 223, 0.432);
+    border-radius: 0.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
-.post-name {
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-bottom: 2px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
+
 .post-actions {
   margin-left: auto;
   display: flex;
@@ -66,18 +80,23 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 2rem;
+    min-width: 2rem;
     border-radius: 5px;
-    aspect-ratio: 1/1;
+    height: 2rem;
     background-color: rgba(250, 250, 250, 0.356);
     color: whitesmoke;
     border: none;
     outline: none;
     cursor: pointer;
+    padding: 0 5px;
+
     &:disabled{
       border: none;
       outline: none;
       cursor: auto;
+    }
+    .heart{
+      margin-left: 5px;
     }
   }
 }

@@ -12,11 +12,21 @@ export class RecipesService {
   public recipesChanged = new Subject<Recipe[]>();
   private recipes: Recipe[] = [];
 
-  public addLikeToRecipe(recipeName: string, whoLiked: string) {
-    const index = this.recipes.findIndex( recipe => recipe.name === recipeName)
-    const newRecipe: Recipe = this.recipes[index]
-    newRecipe.likes.quantity++;
-    newRecipe.likes?.whoLiked.push(whoLiked);
+  public addLikeToRecipe(recipeName: string, whoLiked: string, add: boolean) {
+    const index = this.recipes.findIndex(
+      (recipe) => recipe.name === recipeName
+    );
+    const newRecipe: Recipe = this.recipes[index];
+    if (add) {
+      newRecipe.likes.quantity++;
+      newRecipe.likes.whoLiked.push(whoLiked);
+    } else {
+      newRecipe.likes.quantity--;
+      const index = newRecipe.likes?.whoLiked.indexOf(whoLiked);
+      if (index !== -1) {
+        newRecipe.likes?.whoLiked.splice(index, 1);
+      }
+    }
 
     this.recipes[index] = newRecipe;
     this.recipesChanged.next(this.recipes.slice());

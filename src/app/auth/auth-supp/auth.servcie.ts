@@ -138,7 +138,6 @@ export class AuthServcie implements OnInit {
 
     if (name) {
       this.userDataService.addNewUser(email, name);
-      this.dataStroage.storeUsersData()
     }
   }
 
