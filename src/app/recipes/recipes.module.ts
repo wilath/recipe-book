@@ -1,6 +1,6 @@
 
 import { NgModule } from "@angular/core";
-import { ReactiveFormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { SharedModule } from "../shared/shared.module";
 import { RecipeEditComponent } from "./recipe-edit/recipe-edit.component";
@@ -10,6 +10,10 @@ import { RecipesListComponent } from "./recipes-list/recipes-list.component";
 import { RecepiesRoutingModule } from "./recipes-routing.module";
 import { RecipesComponent } from "./recipes.component";
 import { RecipesDetailsComponent } from "./recipes-details/recipes-details.component";
+import { ShowcaseComponent } from "../showcase/showcase.component";
+import { ShowcaseItemComponent } from "../showcase/showcase-item/showcase-item.component";
+import { FoodTypeSortPipe } from "../showcase/food-type.pipe";
+import { AuthorNamePipe } from "../showcase/showcase-item/author-name.pipe";
 
 @NgModule({
     declarations: [
@@ -19,15 +23,20 @@ import { RecipesDetailsComponent } from "./recipes-details/recipes-details.compo
         RecipesItemComponent,
         RecipeStartComponent,
         RecipeEditComponent,
+        ShowcaseComponent,
+        ShowcaseItemComponent,
+        FoodTypeSortPipe,
+        AuthorNamePipe
     ],
     imports: [
         RouterModule,
         ReactiveFormsModule,
         SharedModule,
-        RecepiesRoutingModule
+        RecepiesRoutingModule,
+        FormsModule
     ],
     exports: [
-        
+
     ],
     providers: [
         RecipesDetailsComponent

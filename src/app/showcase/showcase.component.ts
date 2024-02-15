@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RecipesService } from '../recipes/recipes.service';
-import { ShoppingListService } from '../shopping-list/shopping-list.service';
 import { FoodType } from '../shared/enums/food-type-enum';
 import { Subscription } from 'rxjs';
 import { Recipe } from '../shared/models/recipe.model';
@@ -13,7 +12,6 @@ import { Recipe } from '../shared/models/recipe.model';
 export class ShowcaseComponent implements OnInit, OnDestroy {
   constructor(
     private recipesService: RecipesService,
-    private shoppingListService: ShoppingListService
   ) {}
 
   public chosenFoodCategory: FoodType | null = null;

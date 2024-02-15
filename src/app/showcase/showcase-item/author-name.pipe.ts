@@ -1,5 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { UserDataStoragaService } from '../../shared/user-data.storage.service';
+import { UserDataService } from '../../auth/auth-supp/user-data.service';
+import { UserData } from '../../shared/models/user-data.model';
 
 
 
@@ -8,11 +9,10 @@ import { UserDataStoragaService } from '../../shared/user-data.storage.service';
 })
 export class AuthorNamePipe implements PipeTransform {
 
-  constructor(private userData: UserDataStoragaService) {}
+  constructor(private userDataService: UserDataService) {}
 
   transform(author: string): string {
-  
-    
-    return  ''
+    const userData = this.userDataService.getUsersData().find(user => user.email === author);
+    return userData ? userData.name : author;
   }
 }

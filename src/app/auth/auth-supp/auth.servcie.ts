@@ -1,5 +1,5 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { catchError, filter, map, tap } from 'rxjs/operators';
 import { BehaviorSubject, throwError } from 'rxjs';
 import { User } from '../../shared/models/user.model';
@@ -19,7 +19,7 @@ export interface AuthResponseData {
 }
 
 @Injectable({ providedIn: 'root' })
-export class AuthServcie {
+export class AuthServcie implements OnInit {
   public user = new BehaviorSubject<User | null>(null);
   private tokenExpirationTimer: any;
 
@@ -29,6 +29,10 @@ export class AuthServcie {
     private userDataService: UserDataService,
     private dataStroage: DataStoragaService
   ) {}
+
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
+  }
 
   public logout() {
     this.user.next(null);
@@ -89,11 +93,9 @@ export class AuthServcie {
             resData.email,
             resData.localId,
             resData.idToken,
-            +resData.expiresIn
+            +resData.expiresIn,
+            name
           );
-        }),
-        tap(() => {
-          this.dataStroage.storeNewUser(email, name)
         })
       );
   }
@@ -121,15 +123,23 @@ export class AuthServcie {
       );
   }
 
-  private handleAuth(email: string, userId: string, token: string,expiresIn: number) {
-    
+  private handleAuth(
+    email: string,
+    userId: string,
+    token: string,
+    expiresIn: number,
+    name?: string
+  ) {
     const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
     const user = new User(email, userId, token, expirationDate);
     this.user.next(user);
     this.autoLogout(expiresIn * 1000);
     localStorage.setItem('userData', JSON.stringify(user));
-    
-    ;
+
+    if (name) {
+      this.userDataService.addNewUser(email, name);
+      this.dataStroage.storeUsersData()
+    }
   }
 
   private handleError(errorRes: HttpErrorResponse) {
@@ -157,5 +167,4 @@ export class AuthServcie {
     }
     return throwError(errorMsg);
   }
-
 }

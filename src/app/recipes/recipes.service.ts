@@ -3,7 +3,7 @@ import { Subject } from 'rxjs';
 
 import { Ingredient } from '../shared/models/ingredient.model';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
-import {Recipe } from '../shared/models/recipe.model';
+import { Recipe } from '../shared/models/recipe.model';
 
 @Injectable()
 export class RecipesService {

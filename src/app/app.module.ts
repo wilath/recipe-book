@@ -6,14 +6,14 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core.module';
-import { ShowcaseComponent } from './showcase/showcase.component';
+
 import { CommonModule } from '@angular/common';
-import { FoodTypeSortPipe } from './showcase/food-type.pipe';
+
 import { FormsModule } from '@angular/forms';
-import { ShowcaseItemComponent } from './showcase/showcase-item/showcase-item.component';
+
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, ShowcaseComponent, ShowcaseItemComponent, FoodTypeSortPipe],
+  declarations: [AppComponent, HeaderComponent],
   imports: [
     FormsModule,
     CommonModule,
