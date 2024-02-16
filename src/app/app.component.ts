@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+
 import { AuthServcie } from './auth/auth-supp/auth.servcie';
 
 import { DataStoragaService } from './shared/data-storage.service';
+import { UserDataService } from './auth/auth-supp/user-data.service';
+import { RecipesService } from './recipes/recipes.service';
 
 
 @Component({
@@ -12,31 +14,35 @@ import { DataStoragaService } from './shared/data-storage.service';
 export class AppComponent implements OnInit {
   constructor(
     private authService: AuthServcie,
-    private responsive: BreakpointObserver,
-    private dataStorageService: DataStoragaService
+    private dataStorageService: DataStoragaService,
+    private userDataService: UserDataService,
+    private recipesService: RecipesService
+
   ) {}
+
 
   public isLogged$: boolean = false;
 
-  ngOnInit() {
+  public usersDataChange = this.userDataService.sendDataToStore.subscribe(()=>{
+    this.dataStorageService.storeUsersData()
+  })
+  public recipesDataChange = this.recipesService.storeRecipesData.subscribe(()=>{
+    this.dataStorageService.storeRecipes()
+  })
+
+  
+  public ngOnInit() {
     this.authService.autoLogin();
     this.authService.user.subscribe((user) => {
       user !== null ? (this.isLogged$ = true) : (this.isLogged$ = false);
-      if(user){
+      if (user) {
         this.isLogged$ = true;
-        this.dataStorageService.fetchUsersData()
+        this.dataStorageService.fetchUsersData();
       } else {
-        this.isLogged$ = false
+        this.isLogged$ = false;
       }
-
     });
-
-    this.responsive
-      .observe(Breakpoints.HandsetLandscape)
-      .subscribe((result) => {
-        if (result.matches) {
-          console.log('screens matches HandsetLandscape');
-        }
-      });
   }
+  
+
 }

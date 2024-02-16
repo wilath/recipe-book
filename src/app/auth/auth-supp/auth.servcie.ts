@@ -6,7 +6,6 @@ import { User } from '../../shared/models/user.model';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { UserDataService } from './user-data.service';
-import { DataStoragaService } from '../../shared/data-storage.service';
 
 export interface AuthResponseData {
   kind: string;
@@ -28,8 +27,6 @@ export class AuthServcie {
     private route: Router,
     private userDataService: UserDataService,
   ) {}
-
-  public newUserRegistred$ = new Subject<void>()
  
   public logout() {
     this.user.next(null);
@@ -136,7 +133,6 @@ export class AuthServcie {
     if (name) {
       this.userDataService.addNewUser(email, name);
     }
-    this.newUserRegistred$.next()
   }
 
   private handleError(errorRes: HttpErrorResponse) {

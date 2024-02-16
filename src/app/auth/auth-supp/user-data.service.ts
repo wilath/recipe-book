@@ -11,9 +11,12 @@ export class UserDataService {
 
   public userDataChange = new Subject<UserData[]>();
 
+  public sendDataToStore = new Subject<void>();
+
   public setUsersData(users: UserData[]) {
     this.usersData = users;
     this.userDataChange.next(this.usersData.slice());
+    console.log('users set to userData service')
   }
 
   public getUsersData() {
@@ -26,15 +29,16 @@ export class UserDataService {
   }
 
   public addNewUser(email: string, name: string) {
+    const data = this.usersData
     const newUserData: UserData = {
       email: email,
       name: name,
+      notifications: [`Welcome ${name} I hope you will enjoy this site!`]
     };
-    this.usersData.push(newUserData);
+    data.push(newUserData);
+    this.usersData = data;
     this.userDataChange.next(this.usersData.slice());
-    for(let i = 0; i > this.usersData.length - 1; i++){
-      this.setNotificationToUser(this.usersData[i].email,UserNotification.newUserJoined, email)
-    }
+    this.sendDataToStore.next()
   }
 
   public addFollowToUser(userEmail: string,followerEmail: string, add: boolean) {
@@ -42,7 +46,6 @@ export class UserDataService {
 
     const follower = this.getUserByEmail(followerEmail);
     const user = this.getUserByEmail(userEmail);
- 
     if (add) {
       if (!user.user.followers) {
         user.user.followers = [];
@@ -60,7 +63,9 @@ export class UserDataService {
       follower.user.userFollows.splice(follower.user.userFollows.indexOf(userEmail), 1);
       data[user.index] = user.user;
       data[follower.index] = follower.user;
+      this.setNotificationToUser(user.user.email,UserNotification.gotUnfollowed,follower.user.email)
     }
+    this.sendDataToStore.next()
   }
 
   public editUser(editedUser: UserData) {
@@ -82,6 +87,7 @@ export class UserDataService {
     data[user.index] = user.user;
     this.usersData = data;
     this.userDataChange.next(this.usersData.slice())
+    this.sendDataToStore.next()
   }
 
   private getNotification(notification: UserNotification,eventUserEmail: string,recipeName?: string) {
@@ -103,6 +109,9 @@ export class UserDataService {
         break;
       case UserNotification.newUserJoined:
         message = `${user.user.name} joined the Page!`;
+        break;
+      case UserNotification.gotUnfollowed:
+        message = `${user.user.name} unfollowed You`;
         break;
     }
     return message;

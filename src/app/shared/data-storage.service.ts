@@ -92,5 +92,6 @@ export class DataStoragaService implements OnInit, OnDestroy {
   public storeUsersData() {
     const usersData = this.userDataService.getUsersData();
     this.http.put(this.urlUsers, usersData).subscribe();
+    
   }
 }

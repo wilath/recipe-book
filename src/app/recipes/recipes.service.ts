@@ -4,13 +4,16 @@ import { Subject } from 'rxjs';
 import { Ingredient } from '../shared/models/ingredient.model';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
 import { Recipe } from '../shared/models/recipe.model';
+import { UserDataService } from '../auth/auth-supp/user-data.service';
+import { UserNotification } from '../shared/enums/notifications.enum';
 
 @Injectable()
 export class RecipesService {
-  constructor(private shoppingListService: ShoppingListService) {}
+  constructor(private shoppingListService: ShoppingListService, private userDataService: UserDataService) {}
 
   public recipesChanged = new Subject<Recipe[]>();
   private recipes: Recipe[] = [];
+  public storeRecipesData = new Subject<void>();
 
   public addLikeToRecipe(recipeName: string, whoLiked: string, add: boolean) {
     const index = this.recipes.findIndex(
@@ -30,6 +33,8 @@ export class RecipesService {
 
     this.recipes[index] = newRecipe;
     this.recipesChanged.next(this.recipes.slice());
+    this.storeRecipesData.next()
+    this.userDataService.setNotificationToUser(newRecipe.author, UserNotification.recipeLiked, whoLiked, newRecipe.name)
   }
 
   public getRecipes() {
