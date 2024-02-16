@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { catchError, filter, map, tap } from 'rxjs/operators';
-import { BehaviorSubject, throwError } from 'rxjs';
+import { BehaviorSubject, Subject, throwError } from 'rxjs';
 import { User } from '../../shared/models/user.model';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
@@ -19,7 +19,7 @@ export interface AuthResponseData {
 }
 
 @Injectable({ providedIn: 'root' })
-export class AuthServcie implements OnInit {
+export class AuthServcie {
   public user = new BehaviorSubject<User | null>(null);
   private tokenExpirationTimer: any;
 
@@ -27,13 +27,10 @@ export class AuthServcie implements OnInit {
     private http: HttpClient,
     private route: Router,
     private userDataService: UserDataService,
-    private dataStroage: DataStoragaService
   ) {}
 
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
-  }
-
+  public newUserRegistred$ = new Subject<void>()
+ 
   public logout() {
     this.user.next(null);
     this.route.navigate(['/auth']);
@@ -139,6 +136,7 @@ export class AuthServcie implements OnInit {
     if (name) {
       this.userDataService.addNewUser(email, name);
     }
+    this.newUserRegistred$.next()
   }
 
   private handleError(errorRes: HttpErrorResponse) {

@@ -15,11 +15,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   constructor(
     private dataStorageService: DataStoragaService,
-    private aService: AuthServcie
+    private authService: AuthServcie
   ) {}
 
   ngOnInit() {
-    this.user$ = this.aService.user.subscribe((user) => {
+    this.user$ = this.authService.user.subscribe((user) => {
       this.isAuth = !user ? false : true;
       if (this.isAuth) {
         this.onFetchData();
@@ -41,9 +41,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.dataStorageService.fetchRecipes().subscribe();
   }
   onLogout() {
-    this.aService.logout();
+    this.authService.logout();
   }
-  onManage() {
-    this.isManage == false ? (this.isManage = true) : (this.isManage = false);
-  }
+
 }

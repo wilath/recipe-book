@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, take } from 'rxjs';
 import { AuthResponseData, AuthServcie } from './auth-supp/auth.servcie';
+import { DataStoragaService } from '../shared/data-storage.service';
 
 @Component({
   selector: 'app-auth',
@@ -14,7 +15,7 @@ export class AuthComponent {
   public isLoading = false;
   public error: string = '';
 
-  constructor(private authService: AuthServcie, private router: Router) {}
+  constructor(private authService: AuthServcie, private router: Router, private dts: DataStoragaService) {}
 
   public onSwitchMode() {
     this.isLoginMode = !this.isLoginMode;
@@ -32,6 +33,7 @@ export class AuthComponent {
       auth$ = this.authService.logIn(email, password);
     } else {
       auth$ = this.authService.signUp(email,name, password);
+      this.storeNewUser()
     }
 
     auth$.subscribe(
@@ -50,5 +52,11 @@ export class AuthComponent {
 
   public onHandleError() {
     this.error = '';
+  }
+  
+  private storeNewUser(){
+    this.authService.newUserRegistred$.pipe(take(1)).subscribe(()=>{
+      this.dts.storeUsersData()
+    })
   }
 }

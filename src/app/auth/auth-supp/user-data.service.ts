@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { UserData } from '../../shared/models/user-data.model';
 import { UserNotification } from '../../shared/enums/notifications.enum';
-import { Recipe } from '../../shared/models/recipe.model';
-import { User } from '../../shared/models/user.model';
 
 @Injectable()
 export class UserDataService {
@@ -72,6 +70,7 @@ export class UserDataService {
     this.usersData = data;
     this.userDataChange.next(this.usersData.slice());
   }
+
   public setNotificationToUser(userToNotifiy: string, notification: UserNotification,eventUserEmail: string, recipeName?: string) {
     const message = this.getNotification(notification, eventUserEmail, recipeName);
     const user = this.getUserByEmail(userToNotifiy);
@@ -106,7 +105,6 @@ export class UserDataService {
         message = `${user.user.name} joined the Page!`;
         break;
     }
-    console.log(this.usersData)
     return message;
   }
 

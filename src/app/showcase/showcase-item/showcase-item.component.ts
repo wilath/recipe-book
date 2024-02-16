@@ -15,12 +15,16 @@ export class ShowcaseItemComponent {
     private usersDataServcie: UserDataService
   ) {}
 
+
   @Input() public recipe!: Recipe;
 
   private user: User = JSON.parse(localStorage.getItem('userData') || '{}');
 
   public get isLikedByCurrentUser() {
-    return this.recipe.likes.whoLiked.includes(this.user.email);
+    let toReturn:boolean = false;
+    if(this.recipe.likes.whoLiked) {
+       toReturn = this.recipe.likes.whoLiked.includes(this.user.email)}
+    return toReturn;
   }
 
   public get isUserAuthorOfRecipe() {
@@ -28,12 +32,11 @@ export class ShowcaseItemComponent {
 
   }
 
-  public get isFollowedByCurrentUser() {
-    const followers = this.usersDataServcie.getUserData(this.recipe.author).followers
-    let isFollowing = false;
-    if(followers){  
-      isFollowing = followers.includes(this.user.email) } 
-    return isFollowing
+  public get isFollowedByCurrentUser() {  
+    let toReturn:boolean = false;
+    if(this.usersDataServcie.getUserData(this.recipe.author)) {
+       toReturn = this.usersDataServcie.getUserData(this.recipe.author).followers?.includes(this.user.email) || false}
+    return toReturn;
   }
 
   public onLike() {
@@ -41,7 +44,6 @@ export class ShowcaseItemComponent {
   }
 
   public onFollowUser() {
-    
     this.usersDataServcie.addFollowToUser(this.recipe.author, this.user.email,  !this.isFollowedByCurrentUser)
 
   }

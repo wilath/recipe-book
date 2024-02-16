@@ -10,6 +10,7 @@ import { CoreModule } from './core.module';
 import { CommonModule } from '@angular/common';
 
 import { FormsModule } from '@angular/forms';
+import { DataStoragaService } from './shared/data-storage.service';
 
 
 @NgModule({
@@ -23,6 +24,11 @@ import { FormsModule } from '@angular/forms';
     SharedModule,
     CoreModule,
   ],
+  providers:[
+    DataStoragaService,
+   
+  ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+}
