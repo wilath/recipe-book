@@ -23,21 +23,28 @@ export class ShowcaseItemComponent {
     return this.recipe.likes.whoLiked.includes(this.user.email);
   }
 
+  public get isUserAuthorOfRecipe() {
+    return this.recipe.author === this.user.email
+
+  }
+
   public get isFollowedByCurrentUser() {
-    return this.usersDataServcie
-      .getUserData(this.recipe.author)
-      .followers?.includes(this.user.email);
+    const followers = this.usersDataServcie.getUserData(this.recipe.author).followers
+    let isFollowing = false;
+    if(followers){  
+      isFollowing = followers.includes(this.user.email) } 
+    return isFollowing
   }
 
   public onLike() {
-    this.recipesService.addLikeToRecipe(
-      this.recipe.name,
-      this.user.email,
-      !this.isLikedByCurrentUser
-    );
+    this.recipesService.addLikeToRecipe(this.recipe.name,this.user.email, !this.isLikedByCurrentUser);
   }
 
-  public onFollowUser() {}
+  public onFollowUser() {
+    
+    this.usersDataServcie.addFollowToUser(this.recipe.author, this.user.email,  !this.isFollowedByCurrentUser)
+
+  }
 
   public onOpenRecipe() {}
 

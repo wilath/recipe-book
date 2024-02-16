@@ -18,8 +18,8 @@
           class="heart fa-solid fa-heart"
         ></i>
       </button>
-      <button class="post-action show-menu" (click)="onFollowUser()">
-        <i class="fa-solid fa-user-plus"></i>
+      <button [disabled]="isUserAuthorOfRecipe" [ngClass]="{ 'follow-disabled': isUserAuthorOfRecipe}" class="post-action show-menu" (click)="onFollowUser()">
+        <i [ngClass]="{ 'recipe-liked': isFollowedByCurrentUser }" class="fa-solid fa-user-plus"></i>
       </button>
     </div>
   </div>
