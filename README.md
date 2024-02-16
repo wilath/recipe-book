@@ -26,3 +26,5 @@
 -new UI and layout
 
 -admin rules
+
+-switch cross-servcie communaction from app-component to core.service.ts
