@@ -4,66 +4,126 @@ header{
     position: sticky;
     top: 0;
     z-index: 3;
-    padding: 0 3rem;
+    padding: 0 1rem;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: flex-start;
-    background-color: $rich-black;
-    height: 6rem;
-    letter-spacing: 1rem;
-   
-    &:has(>.header-buttons>.auth-buttons>.button-manage:hover) ~ .manage-options{
-        top: 6rem;
-    }
+    justify-content: space-between;
+    background-color: $uno-grey;
+    height: 3.5rem;
 
-    .header-title{
-        color: $sage;
-        text-wrap: nowrap;
-        letter-spacing: 0.3rem;
-
-    }
-    
-    .search{
-        margin-left: auto;
+    .panel{
+        height: 75%;
         display: flex;
-        justify-content: space-between;
-        align-items: center ;
-
-    
-        input{
-            background-color: $powder-blue;
-            border-radius: 150px;
-            padding: 5px 10px;
-            border: none;   
-            
-            color: $rich-black  ;   
-            &::placeholder{
-               color: $rich-black  ;   
+        flex-direction: row;
+        color: white;
+        gap: 10px;
+    }
+    .right-panel{
+        .circle{
+            height: 100%;
+            aspect-ratio: 1/1;
+            font-size: 1.4rem;
+            border-radius: 50%;
+            background-color: $uno-grey-active;
+            border: none;
+            color: $uno-white;
+            &:hover{
+                color: $sage;
+                background-color: rgba(191, 204, 148, 0.1);;
             }
-                      
+        }
+        .user-logo{
+            display: flex;
+            align-items: center;
+            h3{
+                margin-right: 10px;
+                letter-spacing: 0.2rem;
+                font-size: 1.6rem;
+            }
         }
     }
-    .header-group-one{
-        display: flex;
-        width: 100%;
-    }
-    .header-group-two{
-            display: flex;
+    .center-panel{
+        position: relative;
+        height: 80%;
+    
+        .nav-button{
+            position: relative;
+            background-color: transparent;
+            background-color: transparent;
+            border-radius: 0.8rem;
+            border: none;
+            width: 5rem;
+            font-size: 1.4rem;
+            color: rgb(233, 230, 230);
+            transition: background 0.2s linear;
+            &:hover{
+            background-color: $uno-grey-active
+            }
+        }
+        .nav-button:hover > .nav-button-desc{
+            display: block;
+        }
+        .nav-button-desc{
+            position: absolute;
+            background-color: $uno-white;
+            color: $uno-grey-active;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 0.4rem;
+            bottom: -2.4rem;
+            font-size: 0.8rem;
+            border-radius: 0.5rem;
+            display: none;
+            text-wrap: nowrap;
+            opacity: 0;
+            animation: fadeIn 0.8s ease-in-out forwards;
+        }
+        @keyframes fadeIn {
+            0% {
+              display: none;
+              opacity: 0;
+            }
+            70% {
+              display: block;
+              opacity: 0;
+            }
+            100% {
+              opacity: 1;
+            }
+          }
 
+        .marker{
+            position: absolute;
+            width: 5rem;
+            height: 3px;
+            background-color: $sage;
+            left:0;
+            bottom: -0.35rem;
+            transition: left 0.2s linear;
+        }
+        
+        .nav-button-active{
+            color: $sage;
+        }
     }
-   
-}
-.manage-options{
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    transition: top 0.3s linear;
-    z-index: 2;
-    margin-right: 3rem;
-    top: 6rem;
-    right: 0;
-    &:hover{
-        top: 6rem;
+    .left-panel{
+        .logo{
+            height: 100%;
+            aspect-ratio: 1/1;
+            background-color: $sage;
+            border: none;
+            color: $uno-white;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            span{
+                font-size: 3rem;
+                font-weight: 600;
+                transform: translate(1px,5px);
+            }
+        }
     }
 }

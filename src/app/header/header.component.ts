@@ -4,6 +4,7 @@ import { AuthServcie } from '../auth/auth-supp/auth.servcie';
 import { DataStoragaService } from '../shared/data-storage.service';
 import { UserDataService } from '../auth/auth-supp/user-data.service';
 import { UserData } from '../shared/models/user-data.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -14,7 +15,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   constructor(
     private userDataService: UserDataService,
     private dataStorageService: DataStoragaService,
-    private authService: AuthServcie
+    private authService: AuthServcie,
+    private router: Router
   ) {}
 
   public isAuth = false;
@@ -26,6 +28,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
   public userData: UserData | null = null;
 
   ngOnInit() {
+    this.router.events.subscribe(() => {
+      
+      this.isRouteActive('/recipes') || this.isRouteActive('/shopping-list');
+    });
     this.user$ = this.authService.user
       .pipe(
         tap((user) => {
@@ -50,6 +56,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.authService.logout();
   }
 
+  public isRouteActive(url: string): boolean {
+    return this.router.url.includes(url);
+  }
   private FetchData() {
     this.dataStorageService.fetchRecipes().subscribe();
   }

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { UserData } from '../../shared/models/user-data.model';
 import { UserNotification } from '../../shared/enums/notifications.enum';
+import { NotificationModel } from '../../shared/models/notification.model';
 
 @Injectable()
 export class UserDataService {
@@ -32,7 +33,7 @@ export class UserDataService {
     const newUserData: UserData = {
       email: email,
       name: name,
-      notifications: [`Welcome ${name} I hope you will enjoy this site!`]
+      notifications: [{message:`Welcome ${name} I hope you will enjoy this site!`, date: new Date()}]
     };
     data.push(newUserData);
     this.usersData = data;
@@ -82,7 +83,8 @@ export class UserDataService {
     if (!user.user.notifications) {
       user.user.notifications = [];
     }
-    user.user.notifications.push(message);
+    const newNotification: NotificationModel = {message: message, date: new Date()}
+    user.user.notifications.push(newNotification);
     data[user.index] = user.user;
     this.usersData = data;
     this.userDataChange.next(this.usersData.slice())

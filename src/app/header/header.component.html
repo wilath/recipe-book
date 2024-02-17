@@ -1,5 +1,5 @@
 <header>
-    <div class="header-group-one">
+   <!--<div class="header-group-one">
     <h1 class="header-title">Recipe Book</h1>
 
 </div>
@@ -9,6 +9,26 @@
         <button class="button-alpha button-header button-login" *ngIf="!isAuth" routerLink="/auth" routerLinkActive="button-alpha-active">Login</button>
         <button class="button-alpha button-header button-logout" *ngIf="isAuth" (click)="onLogout()">Logout</button>        
     </div>
-  
+  --> 
+    <div class="panel left-panel">
+        <div class="logo">
+            <span>R</span>
+        </div>
+    </div>
+    <div class="panel center-panel">
+        <button class="nav-button" *ngIf="isAuth" routerLink="/recipes" routerLinkActive="nav-button-active"><div class="nav-button-desc">Recipes</div><i class="fa-solid fa-book-open"></i></button>
+        
+        <button class="nav-button" *ngIf="isAuth" routerLink="/shopping-list" routerLinkActive="nav-button-active"><div class="nav-button-desc">Shopping list</div><i class="fa-solid fa-list-check"></i></button>
+        <span class="marker" [ngStyle]="{ 'left': isRouteActive('/recipes') ? '0' : isRouteActive('/shopping-list') ? 'calc(50% + 5px)' : '0' }"></span>
+    </div>
+
+    <div class="panel right-panel">
+        <div class="user-logo">
+            <h3>{{userData?.name}}</h3>
+            <button class="circle"></button>
+        </div>
+        <button class="circle notification"><i class="fa-solid fa-bell"></i></button>
+        <button class="circle logout"><i class="fa-solid fa-right-from-bracket"></i></button>
+    </div>
 </header>
 
