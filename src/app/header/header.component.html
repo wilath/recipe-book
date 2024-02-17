@@ -6,15 +6,9 @@
     <div class="header-group-two">
         <button class="button-alpha button-header button-recipes" *ngIf="isAuth" routerLink="/recipes" routerLinkActive="button-alpha-active">Recipes</button>
         <button class="button-alpha button-header button-shoppingList" *ngIf="isAuth" routerLink="/shopping-list" routerLinkActive="button-alpha-active">Shopping List</button>
-        <button class="button-alpha button-header button-manage" *ngIf="isAuth">Manage</button>
         <button class="button-alpha button-header button-login" *ngIf="!isAuth" routerLink="/auth" routerLinkActive="button-alpha-active">Login</button>
         <button class="button-alpha button-header button-logout" *ngIf="isAuth" (click)="onLogout()">Logout</button>        
     </div>
-
-
   
 </header>
-<div style="display: none;" class="manage-options">
-    <button class="button-alpha" (click)="onFetchData()">Fetch</button>
-    <button class="button-alpha" (click)="onSavedata()">Save</button>
-</div>
+

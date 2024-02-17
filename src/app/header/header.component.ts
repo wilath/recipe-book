@@ -1,7 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription, switchMap, tap } from 'rxjs';
 import { AuthServcie } from '../auth/auth-supp/auth.servcie';
 import { DataStoragaService } from '../shared/data-storage.service';
+import { UserDataService } from '../auth/auth-supp/user-data.service';
+import { UserData } from '../shared/models/user-data.model';
 
 @Component({
   selector: 'app-header',
@@ -9,39 +11,46 @@ import { DataStoragaService } from '../shared/data-storage.service';
   styleUrls: ['./header.component.scss', './header.component.media.scss'],
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  isAuth = false;
-  isManage = false;
-  private user$!: Subscription;
-
   constructor(
+    private userDataService: UserDataService,
     private dataStorageService: DataStoragaService,
     private authService: AuthServcie
   ) {}
 
-  ngOnInit() {
-    this.user$ = this.authService.user.subscribe((user) => {
-      this.isAuth = !user ? false : true;
-      if (this.isAuth) {
-        this.onFetchData();
-      }
-    });
+  public isAuth = false;
 
-    if (window.screen.width < 550) {
-      this.isManage = true;
-    }
+  private user$!: Subscription;
+
+  private userData$ = this.userDataService.userDataChange;
+
+  public userData: UserData | null = null;
+
+  ngOnInit() {
+    this.user$ = this.authService.user
+      .pipe(
+        tap((user) => {
+          if (user) {
+            this.userData$.subscribe(users => this.userData = users.filter(el => el.email === user.email)[0])
+          }
+        })
+      )
+      .subscribe((user) => {
+        this.isAuth = !user ? false : true;
+        if (this.isAuth) {
+          this.FetchData();
+        }
+      });
   }
   ngOnDestroy() {
     this.user$.unsubscribe();
+    this.userData$.unsubscribe();
   }
 
-  onSavedata() {
-    this.dataStorageService.storeRecipes();
-  }
-  onFetchData() {
-    this.dataStorageService.fetchRecipes().subscribe();
-  }
-  onLogout() {
+  public onLogout() {
     this.authService.logout();
   }
 
+  private FetchData() {
+    this.dataStorageService.fetchRecipes().subscribe();
+  }
 }

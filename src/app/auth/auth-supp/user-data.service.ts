@@ -16,7 +16,6 @@ export class UserDataService {
   public setUsersData(users: UserData[]) {
     this.usersData = users;
     this.userDataChange.next(this.usersData.slice());
-    console.log('users set to userData service')
   }
 
   public getUsersData() {
