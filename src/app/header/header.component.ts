@@ -1,10 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription, filter, switchMap, tap } from 'rxjs';
+import { Subject, Subscription, filter, switchMap, tap } from 'rxjs';
 import { AuthServcie } from '../auth/auth-supp/auth.servcie';
 import { DataStoragaService } from '../shared/data-storage.service';
 import { UserDataService } from '../auth/auth-supp/user-data.service';
 import { UserData } from '../shared/models/user-data.model';
 import { NavigationEnd, Router } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-header',
@@ -22,9 +24,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   public isAuth = false;
 
-  public userData: UserData | null = null;
+  public userData: UserData = {email: '', name: '', notifications: []}
 
-  public notificationFilter: 'all' | 'new' = 'new';
+  public notificationFilter : 'all' | 'new'  = 'new';
+
+  public notificationFilterFire = false;
 
   private user$!: Subscription;
 
@@ -32,7 +36,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   public ngOnInit() {
     this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => {
-      
       this.setMarkerClass();
     });
 
@@ -59,15 +62,21 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.authService.logout();
   }
 
-  public clearNotifications(index: number) {
-    if(index < 0){
-      console.log('all')
+  public clearNotifications(index?: Date) {
+    const newUserData = this.userData;
+    if(index === undefined){
+      for(let i = 0; i < newUserData.notifications.length ; i++){
+        newUserData.notifications[i].shown = true;
+      }
     } else {
-      console.log(index)
+      const notificationIndex = newUserData.notifications.findIndex( el=> el.date === index);
+      newUserData.notifications[notificationIndex].shown = true;
+    }
+  this.userDataService.editUser(newUserData)
+  this.notificationFilterFire = !this.notificationFilterFire
+  this.notificationFilter = 'new'
 
-    }
-    
-    }
+  }
 
   public setMarkerClass(): string {
     const currentUrl = this.router.url

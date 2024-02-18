@@ -6,12 +6,15 @@ import { NotificationModel } from '../shared/models/notification.model';
   name: 'filterShown'
 })
 export class NotificationShownPipe implements PipeTransform {
-  transform(notifications: NotificationModel[] | undefined, filter: string ): NotificationModel[] {
+  transform(notifications: NotificationModel[], filter: string, fire:boolean ): NotificationModel[] {
+
     if (!notifications) {
       return [];
     }
     if (filter === 'new') {
+      
       return notifications.filter(notification => !notification.shown);
+      
     } else {
       return notifications;
     }

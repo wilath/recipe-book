@@ -4,5 +4,5 @@ export interface NotificationModel {
     message: string,
     date: Date,
     shown: boolean,
-    eventUser?: UserData
+    eventUser?: string
 }

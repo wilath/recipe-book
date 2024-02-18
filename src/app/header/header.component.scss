@@ -203,12 +203,16 @@ header{
                     border: none;
                     margin-left: auto;
                     transition: background-color 0.2s linear;
-                    &:hover{
+                    &:hover:enabled{
                         background-color: $uno-grey-active;
                     }
                     &:active{
                         color: $sage;
                         background-color: rgba(191, 204, 148, 0.1);;
+                    }
+                    &:disabled{
+                        opacity: 0.2;
+                        cursor: auto;
                     }
                 }
                 label{

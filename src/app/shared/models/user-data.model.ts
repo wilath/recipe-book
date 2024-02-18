@@ -3,8 +3,8 @@ import { NotificationModel } from "./notification.model";
 export interface UserData {
     email: string;
     name: string;
+    notifications: NotificationModel[];
     followers?: string[];
     userFollows?: string[];
-    notifications?: NotificationModel[];
     avatar?: string;
   }

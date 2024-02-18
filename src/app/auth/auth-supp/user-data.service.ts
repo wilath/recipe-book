@@ -15,7 +15,11 @@ export class UserDataService {
   public sendDataToStore = new Subject<void>();
 
   public setUsersData(users: UserData[]) {
-    this.usersData = users;
+    const usersToSet = users.map( (el) => {
+      if(!el.notifications){el.notifications = []} 
+      return el
+    })
+    this.usersData = usersToSet;
     this.userDataChange.next(this.usersData.slice());
   }
 
@@ -84,7 +88,7 @@ export class UserDataService {
     if (!user.user.notifications) {
       user.user.notifications = [];
     }
-    const newNotification: NotificationModel = {message: message, date: new Date(),shown: false, eventUser: eventUser.user}
+    const newNotification: NotificationModel = {message: message, date: new Date(),shown: false, eventUser: eventUser.user.email}
     user.user.notifications.push(newNotification);
     data[user.index] = user.user;
     this.usersData = data;

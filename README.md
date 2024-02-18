@@ -22,6 +22,8 @@
 
 # To Do:
 
+-move shopping list to userData and change shopping list module to user module
+
 -add blog module
 
 -display of notifications
