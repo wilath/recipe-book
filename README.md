@@ -22,7 +22,11 @@
 
 # To Do:
 
+-add blog module
+
 -display of notifications
+
+-add shown:bool property to notification model,
 
 -userPanel Module
 

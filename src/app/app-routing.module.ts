@@ -5,7 +5,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const appRoutes: Routes = [
   {
     path: '',
-    redirectTo: '/recipes',
+    redirectTo: '/microblog',
     pathMatch: 'full'
   },
   {
@@ -21,7 +21,10 @@ const appRoutes: Routes = [
   {
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
-  }
+  },
+  {
+    path: 'microblog',
+    loadChildren: () => import('./microblog/microblog.module').then(m => m.MicroblogModule)}
 ];
 
 @NgModule({

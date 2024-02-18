@@ -33,7 +33,7 @@ export class UserDataService {
     const newUserData: UserData = {
       email: email,
       name: name,
-      notifications: [{message:`Welcome ${name} I hope you will enjoy this site!`, date: new Date()}]
+      notifications: [{message:`Welcome ${name} I hope you will enjoy this site!`,shown: false, date: new Date()}]
     };
     data.push(newUserData);
     this.usersData = data;
@@ -79,11 +79,12 @@ export class UserDataService {
   public setNotificationToUser(userToNotifiy: string, notification: UserNotification,eventUserEmail: string, recipeName?: string) {
     const message = this.getNotification(notification, eventUserEmail, recipeName);
     const user = this.getUserByEmail(userToNotifiy);
+    const eventUser = this.getUserByEmail(eventUserEmail);
     const data: UserData[] = this.usersData;
     if (!user.user.notifications) {
       user.user.notifications = [];
     }
-    const newNotification: NotificationModel = {message: message, date: new Date()}
+    const newNotification: NotificationModel = {message: message, date: new Date(),shown: false, eventUser: eventUser.user}
     user.user.notifications.push(newNotification);
     data[user.index] = user.user;
     this.usersData = data;

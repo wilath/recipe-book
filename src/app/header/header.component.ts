@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription, switchMap, tap } from 'rxjs';
+import { Subscription, filter, switchMap, tap } from 'rxjs';
 import { AuthServcie } from '../auth/auth-supp/auth.servcie';
 import { DataStoragaService } from '../shared/data-storage.service';
 import { UserDataService } from '../auth/auth-supp/user-data.service';
 import { UserData } from '../shared/models/user-data.model';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.scss', './header.component.media.scss'],
 })
 export class HeaderComponent implements OnInit, OnDestroy {
+
   constructor(
     private userDataService: UserDataService,
     private dataStorageService: DataStoragaService,
@@ -21,33 +22,35 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   public isAuth = false;
 
+  public userData: UserData | null = null;
+
+  public notificationFilter: 'all' | 'new' = 'new';
+
   private user$!: Subscription;
 
   private userData$ = this.userDataService.userDataChange;
 
-  public userData: UserData | null = null;
-
-  ngOnInit() {
-    this.router.events.subscribe(() => {
+  public ngOnInit() {
+    this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => {
       
-      this.isRouteActive('/recipes') || this.isRouteActive('/shopping-list');
+      this.setMarkerClass();
     });
-    this.user$ = this.authService.user
-      .pipe(
+
+    this.user$ = this.authService.user.pipe(
         tap((user) => {
           if (user) {
             this.userData$.subscribe(users => this.userData = users.filter(el => el.email === user.email)[0])
           }
-        })
-      )
-      .subscribe((user) => {
-        this.isAuth = !user ? false : true;
-        if (this.isAuth) {
-          this.FetchData();
-        }
+        }))
+        .subscribe((user) => {
+          this.isAuth = !user ? false : true;
+          if (this.isAuth) {
+            this.FetchData();
+           }
       });
   }
-  ngOnDestroy() {
+
+  public ngOnDestroy() {
     this.user$.unsubscribe();
     this.userData$.unsubscribe();
   }
@@ -56,9 +59,44 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.authService.logout();
   }
 
-  public isRouteActive(url: string): boolean {
-    return this.router.url.includes(url);
+  public clearNotifications(index: number) {
+    if(index < 0){
+      console.log('all')
+    } else {
+      console.log(index)
+
+    }
+    
+    }
+
+  public setMarkerClass(): string {
+    const currentUrl = this.router.url
+    let classToReturn = ''
+    
+    switch (true) {
+      case currentUrl.includes('microblog'):
+        classToReturn = 'marker-microblog';
+        break;
+      case currentUrl.includes('recipes'):
+        classToReturn = 'marker-recipes';
+        break;
+      case currentUrl.includes('shopping-list'):
+        classToReturn = 'marker-shopping-list';
+        break;
+      default:
+        classToReturn = 'marker-default';
+    }
+
+    return classToReturn
   }
+
+  public getUnshownNotificationsCount(): number {
+    if (!this.userData || !this.userData.notifications) {
+      return 0;
+    }
+    return this.userData.notifications.filter(el => !el.shown).length;
+  }
+
   private FetchData() {
     this.dataStorageService.fetchRecipes().subscribe();
   }

@@ -11,10 +11,14 @@ import { CommonModule } from '@angular/common';
 
 import { FormsModule } from '@angular/forms';
 import { DataStoragaService } from './shared/data-storage.service';
+import { NotificationShownPipe } from './header/notifications.pipe';
 
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent],
+  declarations: [
+    AppComponent,
+    HeaderComponent,
+    NotificationShownPipe],
   imports: [
     FormsModule,
     CommonModule,

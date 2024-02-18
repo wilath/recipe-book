@@ -8,19 +8,35 @@ header{
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     background-color: $uno-grey;
     height: 3.5rem;
+    
 
     .panel{
         height: 75%;
         display: flex;
         flex-direction: row;
+        
         color: white;
         gap: 10px;
+        flex: 1 0 0;
     }
     .right-panel{
+        justify-content: flex-end;
+        .notification-number{
+            position: absolute;
+            background-color: rgb(146, 170, 66);
+            width: 1.1rem;
+            aspect-ratio: 1/1;
+            font-size: 1.1rem;
+            border-radius: 50%;
+            color: $uno-white;
+            right:-3px;
+            top:-3px;
+        }
         .circle{
+            position: relative;
             height: 100%;
             aspect-ratio: 1/1;
             font-size: 1.4rem;
@@ -46,10 +62,10 @@ header{
     .center-panel{
         position: relative;
         height: 80%;
+        justify-content: center;
     
         .nav-button{
             position: relative;
-            background-color: transparent;
             background-color: transparent;
             border-radius: 0.8rem;
             border: none;
@@ -57,8 +73,10 @@ header{
             font-size: 1.4rem;
             color: rgb(233, 230, 230);
             transition: background 0.2s linear;
+            -webkit-tap-highlight-color: transparent;
             &:hover{
             background-color: $uno-grey-active
+            
             }
         }
         .nav-button:hover > .nav-button-desc{
@@ -102,16 +120,29 @@ header{
             bottom: -0.35rem;
             transition: left 0.2s linear;
         }
+        .marker-microblog{
+            left: calc(50% - 8rem - 2px);
+        }
+        .marker-recipes{
+            left: calc(50% - 2.5rem)
+        }
+        .marker-shopping-list{
+            left: calc(50% + 3rem + 2px)
+        }
+        .marker-default{
+            display: none;
+        }
         
         .nav-button-active{
             color: $sage;
         }
     }
     .left-panel{
+        justify-content: flex-start;
         .logo{
             height: 100%;
             aspect-ratio: 1/1;
-            background-color: $sage;
+            background-color: rgb(146, 170, 66);
             border: none;
             color: $uno-white;
             overflow: hidden;
@@ -119,11 +150,122 @@ header{
             align-items: center;
             justify-content: center;
             border-radius: 50%;
+            
             span{
-                font-size: 3rem;
+                font-size: 3.1rem;
                 font-weight: 600;
-                transform: translate(1px,5px);
+                transform: translate(1px,2px);
+                columns: white;
+                user-select: none
             }
         }
+    }
+    .notification-menu{
+        position: absolute;
+        width: 20rem;
+        min-height: 6rem;
+        background-color: $uno-grey;
+        right: 1rem;
+        top: 4.5rem;
+        border-radius: 1rem;
+        padding: 0.8rem;
+        a{
+            cursor: pointer;           
+            &:focus-visible> .notification-post{
+                outline: 1px solid $sage;
+                
+            }
+        }
+        .notification-label{
+            
+            h4{ 
+                margin-left: 5px;
+                color: $uno-white;
+                font-size: 1.8rem;
+            }
+            .notification-filter{
+                margin-top: 0.7rem;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: flex-start;
+                 button{
+                    margin: 5px;
+                    position: relative;
+                    font-size: 1.3rem;
+                    color: $uno-white;
+                    padding: 3px 10px;
+                    border-radius: 1rem;
+                    user-select: none;
+                    text-align: center;
+                    cursor: pointer;
+                    background-color: transparent;
+                    border: none;
+                    margin-left: auto;
+                    transition: background-color 0.2s linear;
+                    &:hover{
+                        background-color: $uno-grey-active;
+                    }
+                    &:active{
+                        color: $sage;
+                        background-color: rgba(191, 204, 148, 0.1);;
+                    }
+                }
+                label{
+                    margin: 5px;
+                    position: relative;
+                    font-size: 1.3rem;
+                    color: $uno-white;
+                    padding: 3px 10px;
+                    border-radius: 1rem;
+                    user-select: none;
+                    text-align: center;
+                    transition: all 0.2s linear;
+                    cursor: pointer;
+                    input{
+                        position: absolute;
+                        width: 0;
+                        
+                    }
+                    &:has(input:checked){
+                        color: $sage;
+                        background-color: rgba(191, 204, 148, 0.1);;
+                    }
+                    &:has(input:hover){
+                        background-color: $uno-grey-active;
+                    }
+                    
+                }
+            }
+        }
+        .notification-post{
+            position: relative;
+            border-radius: 1rem;
+            min-height: 3rem;
+            padding: 0.5rem;
+            transition: all 0.2s linear;
+            margin-top: 0.5rem;
+            color: $uno-white;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-start;
+            &:hover{
+                background-color: $uno-grey-active;
+            }
+            .notification-image{
+                margin-right: 0.5rem;
+                height: 3rem;
+                aspect-ratio: 1/1;
+                border-radius: 50%;
+            }
+            .notification-message{
+                font-size: 1.1rem;
+            }
+            .notification-date{
+                color: $sage;
+            }
+        }
+
     }
 }

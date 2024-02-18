@@ -16,19 +16,63 @@
         </div>
     </div>
     <div class="panel center-panel">
-        <button class="nav-button" *ngIf="isAuth" routerLink="/recipes" routerLinkActive="nav-button-active"><div class="nav-button-desc">Recipes</div><i class="fa-solid fa-book-open"></i></button>
-        
+        <button class="nav-button" *ngIf="isAuth" routerLink="/microblog" routerLinkActive="nav-button-active"><div class="nav-button-desc">Microblog</div><i class="fa-solid fa-blog"></i></button>
+        <button class="nav-button" *ngIf="isAuth" routerLink="/recipes" routerLinkActive="nav-button-active"><div class="nav-button-desc">Recipes</div><i class="fa-solid fa-book-open"></i></button>       
         <button class="nav-button" *ngIf="isAuth" routerLink="/shopping-list" routerLinkActive="nav-button-active"><div class="nav-button-desc">Shopping list</div><i class="fa-solid fa-list-check"></i></button>
-        <span class="marker" [ngStyle]="{ 'left': isRouteActive('/recipes') ? '0' : isRouteActive('/shopping-list') ? 'calc(50% + 5px)' : '0' }"></span>
+        <span class="marker" [ngClass]="setMarkerClass()"></span>
     </div>
+  
 
-    <div class="panel right-panel">
-        <div class="user-logo">
+   
+    <div  class="panel right-panel">
+        <div *ngIf="isAuth" class="user-logo">
             <h3>{{userData?.name}}</h3>
             <button class="circle"></button>
         </div>
-        <button class="circle notification"><i class="fa-solid fa-bell"></i></button>
-        <button class="circle logout"><i class="fa-solid fa-right-from-bracket"></i></button>
+        <button *ngIf="isAuth" class="circle notification">
+            <i class="fa-solid fa-bell"></i>
+            <span *ngIf="userData && userData.notifications && getUnshownNotificationsCount() > 0" class="notification-number">{{getUnshownNotificationsCount()}}</span>
+        </button>
+        <button *ngIf="isAuth" (click)="onLogout()" class="circle logout">
+            <i class="fa-solid fa-right-from-bracket"></i>
+        </button>
     </div>
+
+    <div class="notification-menu">
+        <div class="notification-label">
+            <h4>Notifications</h4>
+            <div class="notification-filter">           
+                    <label for="no-read">
+                        New
+                        <input type="radio" name="read" id="no-read" value="new" [(ngModel)]="notificationFilter" >
+                    </label>
+                    <label for="read">
+                        All
+                        <input type="radio" name="read" id="read" value="all" [(ngModel)]="notificationFilter">
+                    </label>
+                    <button type="button" (click)="clearNotifications(-1)">Clear</button>         
+            </div>
+        </div>
+        @for (item of userData?.notifications | filterShown :'notificationFilter' ; track $index) {
+            <a (click)="clearNotifications($index)">
+            <div class="notification-post">
+                <img class="notification-image" src="https://t3.ftcdn.net/jpg/05/53/79/60/360_F_553796090_XHrE6R9jwmBJUMo9HKl41hyHJ5gqt9oz.jpg" alt="!">
+                <div>
+                    <p class="notification-message">{{item.message}}</p>
+                    <p class="notification-date">{{item.date | date:'short'}}</p>
+                </div>              
+            </div>
+        </a>
+        } @empty {
+            <div  class="notification-post">
+                <img alt="?">
+                <div>
+                    <p class="notifaction-message">You dont have any notfications</p>         
+                </div>  
+            </div>
+        }
+       
+    </div>
+
 </header>
 
