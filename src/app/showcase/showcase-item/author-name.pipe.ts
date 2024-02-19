@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { UserDataService } from '../../auth/auth-supp/user-data.service';
+import { UserDataService } from '../../user-panel/user-data.service';
 
 @Pipe({
   name: 'authorname'

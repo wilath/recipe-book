@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { UserData } from '../../shared/models/user-data.model';
-import { UserNotification } from '../../shared/enums/notifications.enum';
-import { NotificationModel } from '../../shared/models/notification.model';
+import { UserData } from '../shared/models/user-data.model';
+import { UserNotification } from '../shared/enums/notifications.enum';
+import { NotificationModel } from '../shared/models/notification.model';
 
 @Injectable()
 export class UserDataService {

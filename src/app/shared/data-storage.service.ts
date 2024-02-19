@@ -5,7 +5,7 @@ import { RecipesService } from '../recipes/recipes.service';
 import { map, tap } from 'rxjs/operators';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
 import { UserData } from './models/user-data.model';
-import { UserDataService } from '../auth/auth-supp/user-data.service';
+import { UserDataService } from '../user-panel/user-data.service';
 
 
 @Injectable()

@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Recipe } from '../../shared/models/recipe.model';
 import { RecipesService } from '../../recipes/recipes.service';
 import { User } from '../../shared/models/user.model';
-import { UserDataService } from '../../auth/auth-supp/user-data.service';
+import { UserDataService } from '../../user-panel/user-data.service';
 
 @Component({
   selector: 'app-showcase-item',

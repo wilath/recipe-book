@@ -5,7 +5,7 @@ import { BehaviorSubject, Subject, throwError } from 'rxjs';
 import { User } from '../../shared/models/user.model';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
-import { UserDataService } from './user-data.service';
+import { UserDataService } from '../../user-panel/user-data.service';
 
 export interface AuthResponseData {
   kind: string;

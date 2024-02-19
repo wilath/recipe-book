@@ -4,7 +4,7 @@ import { Subject } from 'rxjs';
 import { Ingredient } from '../shared/models/ingredient.model';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
 import { Recipe } from '../shared/models/recipe.model';
-import { UserDataService } from '../auth/auth-supp/user-data.service';
+import { UserDataService } from '../user-panel/user-data.service';
 import { UserNotification } from '../shared/enums/notifications.enum';
 
 @Injectable()

@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject, Subscription, filter, switchMap, tap } from 'rxjs';
 import { AuthServcie } from '../auth/auth-supp/auth.servcie';
 import { DataStoragaService } from '../shared/data-storage.service';
-import { UserDataService } from '../auth/auth-supp/user-data.service';
+import { UserDataService } from '../user-panel/user-data.service';
 import { UserData } from '../shared/models/user-data.model';
 import { NavigationEnd, Router } from '@angular/router';
 
@@ -92,7 +92,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       case currentUrl.includes('recipes'):
         classToReturn = 'marker-recipes';
         break;
-      case currentUrl.includes('shopping-list'):
+      case currentUrl.includes('user-panel'):
         classToReturn = 'marker-shopping-list';
         break;
       default:

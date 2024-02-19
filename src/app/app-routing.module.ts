@@ -14,8 +14,8 @@ const appRoutes: Routes = [
  
   },
   {
-    path: 'shopping-list',
-    loadChildren: () => import('./shopping-list/shopping-list.module').then(m => m.ShoppingListModule)
+    path: 'user-panel',
+    loadChildren: () => import('./user-panel/user-panel.module').then(m => m.UserPanelModule)
    
   },
   {
