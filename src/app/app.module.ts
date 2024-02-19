@@ -31,6 +31,7 @@ import { MediationService } from './shared/mediation.service';
   ],
   providers:[
     DataStoragaService,   
+    MediationService
   ],
   bootstrap: [AppComponent],
 })

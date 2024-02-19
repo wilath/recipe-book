@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { DataStoragaService } from './data-storage.service';
 
 @Injectable()
 export class MediationService {
-  constructor(private dataStorageService: DataStoragaService) {}
+  constructor(private injector: Injector) {}
 
   public storetAllData() {
     this.storeMicroblogData();
@@ -12,14 +12,15 @@ export class MediationService {
   }
 
   public storeMicroblogData() {
-    this.dataStorageService.storeMicroblogData();
+    this.injector.get(DataStoragaService).storeMicroblogData()
   }
 
   public storeUsersData() {
-    this.dataStorageService.storeUsersData();
+    this.injector.get(DataStoragaService).storeUsersData()
+
   }
 
   public storeRecipesData() {
-    this.dataStorageService.storeRecipes();
+    this.injector.get(DataStoragaService).storeRecipes()
   }
 }

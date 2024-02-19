@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { AuthGuard } from "../auth/auth-supp/auth.guard";
-import { MicroblogComponent } from "./microblog/microblog.component";
+import { MicroblogComponent } from './microblog.component';
 
 
 const routes: Routes = [

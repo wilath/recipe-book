@@ -28,6 +28,8 @@
 
 -delete like notification for unlike
 
+-switch cross-servcie communaction from app-component to medation.service.ts
+
 -and more...
 
 # To Do:
@@ -35,8 +37,6 @@
 -add possibility to add microblog Post when creating new Recipe
 
 -add href for notifacion leading to event, move clear to button 
-
--switch cross-servcie communaction from app-component to core.service.ts
 
 -move shopping list to userData and change shopping list module to user module
 

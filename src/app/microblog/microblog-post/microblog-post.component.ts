@@ -1,12 +1,16 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MicroblogPost } from '../../shared/models/microblog-post.model';
+import { UserDataService } from '../../user-panel/user-data.service';
+import { UserData } from '../../shared/models/user-data.model';
 
 @Component({
   selector: 'app-microblog-post',
   templateUrl: './microblog-post.component.html',
   styleUrl: './microblog-post.component.scss',
 })
-export class MicroblogPostComponent {
+export class MicroblogPostComponent implements OnInit {
+
+  constructor(private userDataService: UserDataService) {}
 
   @Input() public microblogPost: MicroblogPost = {
     id:0,
@@ -20,4 +24,10 @@ export class MicroblogPostComponent {
       {id:0, author: '', content: '', likes: { quantity: 0, whoLiked: [] } },
     ],
   };
+
+  public postAuthor: UserData = {email:'', name:'',notifications:[], shoppingList:[]}
+
+  ngOnInit(): void {
+    this.postAuthor = this.userDataService.getUserData(this.microblogPost.author)
+  }
 }

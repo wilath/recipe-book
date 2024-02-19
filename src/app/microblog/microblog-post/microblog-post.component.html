@@ -1,1 +1,17 @@
-<p>microblog-post works!</p>
+<div class="backboard">
+  <div class="top-section">
+    <img  alt="">
+    <div>
+        {{microblogPost.author}}
+        {{microblogPost.date | date:'short'}}
+    </div>
+  </div>
+  <div class="text-section"></div>
+  <div class="image-seciotn"></div>
+  <div class="likes-section"></div>
+  <div class="comment-section">
+    @for (comment of microblogPost.comments; track $index) {
+        <app-microblog-comment [microblogComment]="comment"></app-microblog-comment>
+    }  
+  </div>
+</div>
