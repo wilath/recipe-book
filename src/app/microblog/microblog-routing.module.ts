@@ -8,8 +8,7 @@ const routes: Routes = [
     {
         path: '', 
         component: MicroblogComponent ,
-        canActivate: [AuthGuard],
-        
+        canActivate: [AuthGuard],       
     },
 ]
 

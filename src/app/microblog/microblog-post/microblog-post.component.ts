@@ -7,7 +7,9 @@ import { MicroblogPost } from '../../shared/models/microblog-post.model';
   styleUrl: './microblog-post.component.scss',
 })
 export class MicroblogPostComponent {
+
   @Input() public microblogPost: MicroblogPost = {
+    id:0,
     author: '',
     date: new Date(),
     title: '',
@@ -15,7 +17,7 @@ export class MicroblogPostComponent {
     image: '',
     likes: { quantity: 0, whoLiked: [] },
     comments: [
-      { author: '', content: '', likes: { quantity: 0, whoLiked: [] } },
+      {id:0, author: '', content: '', likes: { quantity: 0, whoLiked: [] } },
     ],
   };
 }

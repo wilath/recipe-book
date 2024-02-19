@@ -32,6 +32,8 @@
 
 # To Do:
 
+-add possibility to add microblog Post when creating new Recipe
+
 -add href for notifacion leading to event, move clear to button 
 
 -switch cross-servcie communaction from app-component to core.service.ts
