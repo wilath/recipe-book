@@ -5,6 +5,7 @@ import { RecipesService } from "./recipes/recipes.service";
 import { DataStoragaService } from "./shared/data-storage.service";
 import { ShoppingListService } from "./shopping-list/shopping-list.service";
 import { UserDataService } from "./auth/auth-supp/user-data.service";
+import { MicroblogService } from "./microblog/microblog.service";
 
 
 @NgModule({
@@ -13,6 +14,7 @@ import { UserDataService } from "./auth/auth-supp/user-data.service";
         RecipesService,
         DataStoragaService,
         UserDataService,
+        MicroblogService,
         {
           provide: HTTP_INTERCEPTORS, 
           useClass: AuthInterceptorService, 

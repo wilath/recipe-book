@@ -24,6 +24,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   public isAuth = false;
 
+  public isNotificationMenuShown = false;
+
   public userData: UserData = {email: '', name: '', notifications: []}
 
   public notificationFilter : 'all' | 'new'  = 'new';
@@ -42,7 +44,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.user$ = this.authService.user.pipe(
         tap((user) => {
           if (user) {
-            this.userData$.subscribe(users => this.userData = users.filter(el => el.email === user.email)[0])
+            this.userData$.subscribe(users => {             
+              this.userData = users.filter(el => el.email === user.email)[0]})                        
           }
         }))
         .subscribe((user) => {

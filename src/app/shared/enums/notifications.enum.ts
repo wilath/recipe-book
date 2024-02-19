@@ -4,5 +4,8 @@ export enum UserNotification{
     gotFollowed,
     gotUnfollowed,
     newRecipeByFollow,
-    newUserJoined
+    newUserJoined,
+    likedPost,
+    commentedPost,
+    newPostByFollow
 }

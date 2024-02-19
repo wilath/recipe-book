@@ -3,7 +3,8 @@ import { NotificationModel } from '../shared/models/notification.model';
 
 
 @Pipe({
-  name: 'filterShown'
+  name: 'filterShown',
+  pure: false
 })
 export class NotificationShownPipe implements PipeTransform {
   transform(notifications: NotificationModel[], filter: string, fire:boolean ): NotificationModel[] {

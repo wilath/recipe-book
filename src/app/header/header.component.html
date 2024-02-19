@@ -29,16 +29,16 @@
             <h3>{{userData.name}}</h3>
             <button class="circle"></button>
         </div>
-        <button *ngIf="isAuth" class="circle notification">
+        <button [ngClass]="{'button-menu-active' : isNotificationMenuShown}" *ngIf="isAuth" class="circle notification" (click)="isNotificationMenuShown = !isNotificationMenuShown" >
             <i class="fa-solid fa-bell"></i>
-            <span *ngIf="userData && userData.notifications && getUnshownNotificationsCount() > 0" class="notification-number">{{getUnshownNotificationsCount()}}</span>
+            <div *ngIf="userData && userData.notifications && getUnshownNotificationsCount() > 0" class="notification-number">{{getUnshownNotificationsCount()}}</div>
         </button>
         <button *ngIf="isAuth" (click)="onLogout()" class="circle logout">
             <i class="fa-solid fa-right-from-bracket"></i>
         </button>
     </div>
 
-    <div class="notification-menu">
+    <div *ngIf="isNotificationMenuShown" class="notification-menu">
         <div class="notification-label">
             <h4>Notifications</h4>
             <div class="notification-filter">           
@@ -53,7 +53,7 @@
                     <button [disabled]="getUnshownNotificationsCount() === 0 " type="button" (click)="clearNotifications()">Clear</button>         
             </div>
         </div>
-            @for (item of userData.notifications | filterShown : notificationFilter : notificationFilterFire ; track $index) {
+            @for (item of userData.notifications  | filterShown : notificationFilter : notificationFilterFire ; track $index) {
                 <a (click)="clearNotifications(item.date)">
                 <div class="notification-post">
                     <img class="notification-image" src="https://t3.ftcdn.net/jpg/05/53/79/60/360_F_553796090_XHrE6R9jwmBJUMo9HKl41hyHJ5gqt9oz.jpg" alt="!">

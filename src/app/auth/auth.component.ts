@@ -38,7 +38,7 @@ export class AuthComponent {
     auth$.subscribe(
       (resData) => {
         this.isLoading = false;
-        this.router.navigate(['/recipes']);
+        this.router.navigate(['/microblog']);
       },
       (errorMsg) => {
         this.isLoading = false;

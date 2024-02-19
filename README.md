@@ -14,30 +14,36 @@
 
 -food types
 
--all above are saved to DB
+-all meta-data are are saved to DB
 
 -user's notifications data are loaded to display in header component
-
--and more...
-
-# To Do:
-
--move shopping list to userData and change shopping list module to user module
-
--add blog module
 
 -display of notifications
 
 -add shown:bool property to notification model,
 
--userPanel Module
+-add blog module
 
--new UI and layout
+-implement notifications for blog
 
--admin rules
+-and more...
+
+# To Do:
+
+-add href for notifacion leading to event, move clear to button 
+
+-delete like notification for unlike
 
 -switch cross-servcie communaction from app-component to core.service.ts
 
+-move shopping list to userData and change shopping list module to user module
+
+-add star rating to recipes
+
+-userPanel Module
+
+-admin rules
+
 -option to set an avatar for profile
 
-
+-new UI and layout

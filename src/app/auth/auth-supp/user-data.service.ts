@@ -96,7 +96,7 @@ export class UserDataService {
     this.sendDataToStore.next()
   }
 
-  private getNotification(notification: UserNotification,eventUserEmail: string,recipeName?: string) {
+  private getNotification(notification: UserNotification,eventUserEmail: string,eventName?: string) {
     const user = this.getUserByEmail(eventUserEmail);
     let message = '';
 
@@ -105,19 +105,25 @@ export class UserDataService {
         message = `Welcome ${user.user.name} I hope you will enjoy this site!`;
         break;
       case UserNotification.recipeLiked:
-        message = `${user.user.name} liked your recipe -  ${recipeName}`;
+        message = `${user.user.name} liked your recipe - ${eventName}`;
         break;
       case UserNotification.gotFollowed:
         message = `${user.user.name} is now following You`;
         break;
       case UserNotification.newRecipeByFollow:
-        message = `${user.user.name} added new Recipe -  ${recipeName}`;
+        message = `${user.user.name} added new Recipe - ${eventName}`;
         break;
       case UserNotification.newUserJoined:
         message = `${user.user.name} joined the Page!`;
         break;
-      case UserNotification.gotUnfollowed:
-        message = `${user.user.name} unfollowed You`;
+      case UserNotification.likedPost:
+        message = `${user.user.name} liked your post - ${eventName}`;
+        break;
+      case UserNotification.commentedPost:
+        message = `${user.user.name} commented your post - ${eventName}`;
+        break;
+      case UserNotification.newPostByFollow:
+        message = `${user.user.name} added new post - ${eventName}`;
         break;
     }
     return message;
