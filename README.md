@@ -26,13 +26,13 @@
 
 -implement notifications for blog
 
+-delete like notification for unlike
+
 -and more...
 
 # To Do:
 
 -add href for notifacion leading to event, move clear to button 
-
--delete like notification for unlike
 
 -switch cross-servcie communaction from app-component to core.service.ts
 

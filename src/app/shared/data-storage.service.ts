@@ -1,16 +1,15 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, OnDestroy, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Recipe } from './models/recipe.model';
 import { RecipesService } from '../recipes/recipes.service';
 import { map, tap } from 'rxjs/operators';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
-import { Ingredient } from './models/ingredient.model';
 import { UserData } from './models/user-data.model';
 import { UserDataService } from '../auth/auth-supp/user-data.service';
 
 
 @Injectable()
-export class DataStoragaService implements OnInit, OnDestroy {
+export class DataStoragaService {
   constructor(
     private http: HttpClient,
     private recipesService: RecipesService,
@@ -22,28 +21,20 @@ export class DataStoragaService implements OnInit, OnDestroy {
 
   private urlRecipes =
     'https://recipesproject-fc6f3-default-rtdb.europe-west1.firebasedatabase.app/recipes.json';
-  private urlShoppingList =
-    'https://recipesproject-fc6f3-default-rtdb.europe-west1.firebasedatabase.app/shoppinglist.json';
   private urlUsers =
     'https://recipesproject-fc6f3-default-rtdb.europe-west1.firebasedatabase.app/users.json';
+  private ulrMicroblog = 
+    'https://recipesproject-fc6f3-default-rtdb.europe-west1.firebasedatabase.app/microblog.json';
 
-  public ngOnInit(): void {
-    
-  }
-
-  public ngOnDestroy(): void {
-   
-  }
 
   public storeRecipes() {
     const recipes = this.recipesService.getRecipes();
     this.http.put(this.urlRecipes, recipes).subscribe();
     const shoppinglist = this.shoppingListService.getShopList();
-    this.http.put(this.urlShoppingList, shoppinglist).subscribe();
   }
 
   public fetchRecipes() {
-    this.fetchShopList();
+ 
     return this.http.get<Recipe[]>(this.urlRecipes).pipe(
       map((recipes) => {
         return recipes.map((recipe) => {
@@ -59,21 +50,10 @@ export class DataStoragaService implements OnInit, OnDestroy {
     );
   }
 
-  public fetchShopList() {
-    return this.http
-      .get<Ingredient[]>(this.urlShoppingList)
-      .pipe(
-        map((ings) => {
-          return ings.map((ings) => {
-            return { ...ings };
-          });
-        }),
-
-        tap((response) => {
-          this.shoppingListService.setIngredients(response);
-        })
-      )
-      .subscribe();
+  public storeUsersData() {
+    const usersData = this.userDataService.getUsersData();
+    this.http.put(this.urlUsers, usersData).subscribe();
+    
   }
 
   public fetchUsersData() {
@@ -89,9 +69,12 @@ export class DataStoragaService implements OnInit, OnDestroy {
       .subscribe();
   }
 
-  public storeUsersData() {
-    const usersData = this.userDataService.getUsersData();
-    this.http.put(this.urlUsers, usersData).subscribe();
-    
+  public storeMicroblogData(){
+
   }
+
+  public fetchMicroblogData(){
+
+  }
+
 }

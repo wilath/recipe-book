@@ -26,7 +26,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   public isNotificationMenuShown = false;
 
-  public userData: UserData = {email: '', name: '', notifications: []}
+  public userData: UserData = {email: '', name: '', notifications: [],shoppingList: []}
 
   public notificationFilter : 'all' | 'new'  = 'new';
 

@@ -34,7 +34,10 @@ export class RecipesService {
     this.recipes[index] = newRecipe;
     this.recipesChanged.next(this.recipes.slice());
     this.storeRecipesData.next()
+    if(add){
     this.userDataService.setNotificationToUser(newRecipe.author, UserNotification.recipeLiked, whoLiked, newRecipe.name)
+
+    }
   }
 
   public getRecipes() {

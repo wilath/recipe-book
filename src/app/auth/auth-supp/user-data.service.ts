@@ -17,6 +17,7 @@ export class UserDataService {
   public setUsersData(users: UserData[]) {
     const usersToSet = users.map( (el) => {
       if(!el.notifications){el.notifications = []} 
+      if(!el.shoppingList){el.shoppingList = []}
       return el
     })
     this.usersData = usersToSet;
@@ -37,7 +38,8 @@ export class UserDataService {
     const newUserData: UserData = {
       email: email,
       name: name,
-      notifications: [{message:`Welcome ${name} I hope you will enjoy this site!`,shown: false, date: new Date()}]
+      notifications: [{message:`Welcome ${name} I hope you will enjoy this site!`,shown: false, date: new Date()}],
+      shoppingList: []
     };
     data.push(newUserData);
     this.usersData = data;
