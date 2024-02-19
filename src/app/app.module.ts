@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DataStoragaService } from './shared/data-storage.service';
 import { NotificationShownPipe } from './header/notifications.pipe';
+import { MediationService } from './shared/mediation.service';
 
 
 @NgModule({
@@ -29,8 +30,7 @@ import { NotificationShownPipe } from './header/notifications.pipe';
     CoreModule,
   ],
   providers:[
-    DataStoragaService,
-   
+    DataStoragaService,   
   ],
   bootstrap: [AppComponent],
 })

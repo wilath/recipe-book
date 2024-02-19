@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import { MicroblogPost } from '../shared/models/microblog-post.model';
 import { Subject } from 'rxjs';
 import { MicroblogComment } from '../shared/models/microblog-comment.model';
+import { MediationService } from '../shared/mediation.service';
 
 @Injectable()
 export class MicroblogService {
-  constructor() {}
+  constructor(private medationService: MediationService) {}
 
   public posts: MicroblogPost[] = [];
 
@@ -25,6 +26,10 @@ export class MicroblogService {
   public setMicroblogData(posts: MicroblogPost[]) {
     this.posts = posts;
     this.postsChange.next(this.posts);
+  }
+
+  public getMicroblogData(): MicroblogPost[]{
+    return this.posts.slice();
   }
 
   public onAddNewPost(post: MicroblogPost) {
