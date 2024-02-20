@@ -1,11 +1,11 @@
 <div class="backboard new-microblog-post">
 
-<img src="https://t3.ftcdn.net/jpg/05/53/79/60/360_F_553796090_XHrE6R9jwmBJUMo9HKl41hyHJ5gqt9oz.jpg" alt="avatar">
+<img class="profile-image" src="https://t3.ftcdn.net/jpg/05/53/79/60/360_F_553796090_XHrE6R9jwmBJUMo9HKl41hyHJ5gqt9oz.jpg" alt="avatar">
 
 
 <form [formGroup]="newMicroblogPostForm" (ngSubmit)="onSubmit()">
 <div class="content-form">
-    <textarea placeholder="Whats on your mind" name="content" id="content"  formControlName="content"></textarea>
+    <textarea [placeholder]="'Whats on your mind ' + userData.name" name="content" id="content"  formControlName="content" (input)="autoResize($event)"></textarea>
 </div>
 <div class="image-form" formArrayName="images">
     
@@ -18,8 +18,11 @@
 
 }
 </div>
-<button type="button" (click)="addImage()"></button>
-<button type="submit">Publish</button>
+<div class="form-buttons">
+    <button type="button" (click)="addImage()"><i class="fa-regular fa-images"></i>  Add image</button>
+    <button type="submit"><i class="fa-solid fa-share"></i>  Publish</button>
+</div>
+
 </form>
 
 </div>

@@ -15,12 +15,11 @@ export class MicroblogNewpostComponent implements OnInit {
  
   public newMicroblogPostForm!: FormGroup;
 
-  public userData = {}
+  public userData = {email:'', name:''}
   
   public ngOnInit(): void {
     this.initForm()
     this.loadUserData()
-    console.log(this.userData)
   }
 
   public onSubmit() {
@@ -36,10 +35,18 @@ export class MicroblogNewpostComponent implements OnInit {
     this.getImageControls.push(newImageControl);
   }
 
+  public autoResize(event: Event) {
+    const textarea = event.target as HTMLTextAreaElement
+    
+      textarea.style.height = 'auto';
+      textarea.style.height = textarea.scrollHeight + 'px';
+    
+  }
+
   private loadUserData(){
     const user = this.userDataService.getUserData(JSON.parse(localStorage.getItem('userData') || '{}').email);
     
-    this.userData = {email: user.email, name: user.name, avatar: user.avatar}
+    this.userData = {email: user.email, name: user.name}
   }
 
   private initForm() {

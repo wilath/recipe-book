@@ -1,4 +1,60 @@
-.new-microblog-post{
-    display: flex;
-    flex-direction: row;
+@import '../../styles/variables';
+.new-microblog-post {
+  display: flex;
+  flex-direction: row;
+  padding: 1rem;
+
+  .profile-image {
+    height: 3rem;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+  }
+  form {
+    flex-grow: 1;
+    .content-form{
+        margin-left: 1rem;
+        flex-grow: 1;
+        textarea{
+            padding: 0.5rem;
+            width: calc(100% - 1rem);
+            min-height: 3rem;
+            border-radius: 1rem;
+            background-color: $uno-grey-active;
+            border:none;
+            resize: none;
+            color: $uno-white;
+            overflow-y: hidden;
+            &:focus{
+                outline: none;
+                border: none;
+            }
+            &:focus-visible{
+                outline: 1px solid $sage;
+            }
+
+        }
+    }
+    .form-buttons{
+        width: calc(100% - 1rem);
+        margin: 1rem 0 0 1rem;
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+        justify-content: space-between;
+        button{
+            height: 3rem;
+            color: $uno-white;
+            border: none;
+            background-color: transparent;
+            font-size: 1.5rem;
+            border-radius: 1rem;
+            transition: all 0.2s linear;
+            padding: 0 15px;
+            &:hover{
+                background-color: $uno-grey-active;
+                color: $sage
+            }
+        }
+    }
+  }
 }
