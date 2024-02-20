@@ -4,6 +4,8 @@ import { Form, FormArray, FormBuilder, FormControl, FormGroup } from '@angular/f
 import { UserDataService } from '../../user-panel/user-data.service';
 import { UserData } from '../../shared/models/user-data.model';
 import { User } from '../../shared/models/user.model';
+import { MicroblogPost } from '../../shared/models/microblog-post.model';
+import { MicroblogService } from '../microblog.service';
 
 @Component({
   selector: 'app-microblog-newpost',
@@ -11,7 +13,7 @@ import { User } from '../../shared/models/user.model';
   styleUrl: './microblog-newpost.component.scss',
 })
 export class MicroblogNewpostComponent implements OnInit {
-  constructor(private formBuilder: FormBuilder, private userDataService: UserDataService) {}
+  constructor(private formBuilder: FormBuilder, private userDataService: UserDataService, private microblogService: MicroblogService) {}
  
   public newMicroblogPostForm!: FormGroup;
 
@@ -22,12 +24,22 @@ export class MicroblogNewpostComponent implements OnInit {
     this.loadUserData()
   }
 
-  public onSubmit() {
-    console.log(this.getImageControls)
-  }
-
   public get getImageControls(){
     return this.newMicroblogPostForm.get('images') as FormArray
+  }
+
+  public onSubmit() {
+    const newPost :MicroblogPost = {
+      id: this.microblogService.getIdforNewPost,
+      author: this.userData.email,
+      date: new Date,
+      content: this.newMicroblogPostForm.value.content,
+      images: [],
+      likes: {quantity: 0, whoLiked: []},
+      comments: []
+    }
+    this.microblogService.onAddNewPost(newPost)
+    
   }
 
   public addImage() {
@@ -37,15 +49,13 @@ export class MicroblogNewpostComponent implements OnInit {
 
   public autoResize(event: Event) {
     const textarea = event.target as HTMLTextAreaElement
-    
-      textarea.style.height = 'auto';
-      textarea.style.height = textarea.scrollHeight + 'px';
+    textarea.style.height = 'auto';
+    textarea.style.height = textarea.scrollHeight + 'px';
     
   }
 
   private loadUserData(){
     const user = this.userDataService.getUserData(JSON.parse(localStorage.getItem('userData') || '{}').email);
-    
     this.userData = {email: user.email, name: user.name}
   }
 
@@ -59,5 +69,4 @@ export class MicroblogNewpostComponent implements OnInit {
     })
   }
   
-
 }

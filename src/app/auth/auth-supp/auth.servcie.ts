@@ -158,6 +158,7 @@ export class AuthServcie {
           break;
       }
     }
+    this.userDataService.setUsersData()
     return throwError(errorMsg);
   }
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, map, tap } from 'rxjs';
 
 import { Ingredient } from '../shared/models/ingredient.model';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
@@ -17,17 +17,14 @@ export class RecipesService   {
   private recipes: Recipe[] = [];
 
 
-  public setRecepies(){
-    this.dataStorageService.fetchRecipes().subscribe(
-      (recipesToSet: Recipe[]) => {
-        if(recipesToSet) {
+  public setRecepies(): Observable<void> {
+    return this.dataStorageService.fetchRecipes().pipe(
+      tap((recipesToSet: Recipe[]) => {
+        if (recipesToSet) {
           this.recipes = recipesToSet;
           this.recipesChanged.next(this.recipes.slice());
         }
-      },
-      (error: any) => {
-        console.error('Error fetching recipes:', error);
-      }
+      }),map(() => {})
     );
   }
 

@@ -12,18 +12,7 @@ export class MicroblogPostComponent implements OnInit {
 
   constructor(private userDataService: UserDataService) {}
 
-  @Input() public microblogPost: MicroblogPost = {
-    id:0,
-    author: '',
-    date: new Date(),
-    title: '',
-    content: [],
-    image: '',
-    likes: { quantity: 0, whoLiked: [] },
-    comments: [
-      {id:0, author: '', content: '', likes: { quantity: 0, whoLiked: [] } },
-    ],
-  };
+  @Input() public microblogPost!: MicroblogPost
 
   public postAuthor = {}
 

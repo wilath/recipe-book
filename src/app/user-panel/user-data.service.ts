@@ -1,5 +1,5 @@
 import { Injectable} from '@angular/core';
-import { Subject } from 'rxjs';
+import { Observable, Subject, map, tap } from 'rxjs';
 import { UserData } from '../shared/models/user-data.model';
 import { UserNotification } from '../shared/enums/notifications.enum';
 import { NotificationModel } from '../shared/models/notification.model';
@@ -15,19 +15,15 @@ export class UserDataService  {
 
   public sendDataToStore = new Subject<void>();
 
-  public setUsersData() {
-    this.dataStorageService.fetchUsersData().subscribe(
-      (usersToSet: UserData[]) => {
+  public setUsersData(): Observable<void> {
+    return this.dataStorageService.fetchUsersData().pipe(
+      tap((usersToSet: UserData[]) => {
         if(usersToSet){
           this.usersData = usersToSet;
           this.userDataChange.next(this.usersData.slice());
+          }
         }
-      },
-      (error: any) => {
-        // Handle error if needed
-        console.error('Error fetching users data:', error);
-      }
-    );
+      ),map(()=>{}))
   }
 
   public getUsersData(): UserData[] {

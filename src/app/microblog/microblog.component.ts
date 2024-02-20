@@ -19,6 +19,7 @@ export class MicroblogComponent implements OnInit, OnDestroy {
     this.microblogSub = this.microblogService.postsChange.subscribe(posts => {
       this.posts = posts;
     });
+    
   }
   public ngOnDestroy(): void {
     this.microblogSub.unsubscribe();

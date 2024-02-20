@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { ExtraOptions, PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { RecipeResolverService } from './recipes/recipes-resolver-service';
 import { UserDataResolverService } from './user-panel/user-data-resolver.service';
 import { MicroblogResolverService } from './microblog/microblog-resolver.service';
@@ -9,7 +9,7 @@ const appRoutes: Routes = [
   {
     path: '',
     redirectTo: '/microblog',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
     path: 'recipes',

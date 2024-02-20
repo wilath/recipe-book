@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MicroblogPost } from '../shared/models/microblog-post.model';
-import { Subject } from 'rxjs';
+import { Observable, Subject, map, tap } from 'rxjs';
 import { MicroblogComment } from '../shared/models/microblog-comment.model';
 import { DataStoragaService } from '../shared/data-storage.service';
 
@@ -24,18 +24,15 @@ export class MicroblogService   {
     return highestId + 1;
   }
 
-  public setMicroblog() {
-    this.dataStorageService.fetchMicroblogData().subscribe(
+  public setMicroblog():Observable<void> {
+    return this.dataStorageService.fetchMicroblogData().pipe(tap(
       (postsToSet: MicroblogPost[]) => {
         if(postsToSet){
           this.posts = postsToSet;
           this.postsChange.next(this.posts.slice());
          }       
       },
-      (error: any) => {
-        console.error('Error fetching microblog:', error);
-      }
-    );
+    ),map(()=>{}));
   }
 
   public getMicroblogData(): MicroblogPost[]{
