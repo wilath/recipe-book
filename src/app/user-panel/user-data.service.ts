@@ -3,6 +3,7 @@ import { Subject } from 'rxjs';
 import { UserData } from '../shared/models/user-data.model';
 import { UserNotification } from '../shared/enums/notifications.enum';
 import { NotificationModel } from '../shared/models/notification.model';
+import { User } from '../shared/models/user.model';
 
 @Injectable()
 export class UserDataService {
@@ -24,11 +25,11 @@ export class UserDataService {
     this.userDataChange.next(this.usersData.slice());
   }
 
-  public getUsersData() {
+  public getUsersData(): UserData[] {
     return this.usersData.slice();
   }
 
-  public getUserData(email: string) {
+  public getUserData(email: string): UserData {
     const index = this.usersData.findIndex((user) => user.email === email);
     return this.usersData[index];
   }

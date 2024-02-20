@@ -1,6 +1,8 @@
+<div class="microblog-wrap">
+    <app-microblog-newpost> </app-microblog-newpost>
 
-<app-microblog-newpost> </app-microblog-newpost>
+    @for (post of posts; track $index) {
+        <app-microblog-post [microblogPost]="post"></app-microblog-post>
+    }
 
-@for (post of posts; track $index) {
-    <app-microblog-post [microblogPost]="post"></app-microblog-post>
-}
+</div>

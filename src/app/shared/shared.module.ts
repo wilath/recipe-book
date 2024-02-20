@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { AlertComponent } from './alert/alert.component';
 
 import { LoadingSpinnerComponent } from './loadingspinner/loading-spinner.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -12,10 +13,13 @@ import { LoadingSpinnerComponent } from './loadingspinner/loading-spinner.compon
   exports: [
     AlertComponent,
     LoadingSpinnerComponent,
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule
+
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule
   ],
 })
 export class SharedModule {}

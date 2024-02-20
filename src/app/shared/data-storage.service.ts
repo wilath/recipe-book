@@ -31,6 +31,7 @@ export class DataStoragaService {
   }
 
   public fetchRecipes() {
+    let recipes;
  
     return this.http.get<Recipe[]>(this.urlRecipes).pipe(
       map((recipes) => {
@@ -81,6 +82,12 @@ export class DataStoragaService {
         })
       )
       .subscribe();
+  }
+
+  public fetchAll(){
+    this.fetchRecipes();
+    this.fetchUsersData();
+    this.fetchMicroblogData();
   }
 
 }

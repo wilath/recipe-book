@@ -1,13 +1,25 @@
-<div class="backboard">
-<img>
-<form  >
-<div class="content-form">
-    <textarea name="content" id="content"  ngModel required></textarea>
-</div>
-<div class="image-form"></div>
-<input type="file" id="file" name="file" ngModel  >
+<div class="backboard new-microblog-post">
 
-<button type="submit"   >Publish</button>
+<img src="https://t3.ftcdn.net/jpg/05/53/79/60/360_F_553796090_XHrE6R9jwmBJUMo9HKl41hyHJ5gqt9oz.jpg" alt="avatar">
+
+
+<form [formGroup]="newMicroblogPostForm" (ngSubmit)="onSubmit()">
+<div class="content-form">
+    <textarea placeholder="Whats on your mind" name="content" id="content"  formControlName="content"></textarea>
+</div>
+<div class="image-form" formArrayName="images">
+    
+    @for (imageControl of getImageControls.controls; track $index) {
+    <input type="file" accept="image/*" id="images" name="images" [formControlName]="$index">
+    <div class="image-instance">
+        <img [src]="imageControl.value" alt="" >
+    </div>
+
+
+}
+</div>
+<button type="button" (click)="addImage()"></button>
+<button type="submit">Publish</button>
 </form>
 
 </div>
