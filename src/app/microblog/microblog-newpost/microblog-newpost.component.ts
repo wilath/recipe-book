@@ -15,7 +15,7 @@ export class MicroblogNewpostComponent implements OnInit {
  
   public newMicroblogPostForm!: FormGroup;
 
-  public userData: UserData = {name: '', email: '', notifications: [], shoppingList: []}
+  public userData = {}
   
   public ngOnInit(): void {
     this.initForm()
@@ -37,9 +37,9 @@ export class MicroblogNewpostComponent implements OnInit {
   }
 
   private loadUserData(){
-    const userEmail = JSON.parse(localStorage.getItem('userData') || '{}').email;
-    console.log(userEmail)
-    this.userData = this.userDataService.getUserData(userEmail)
+    const user = this.userDataService.getUserData(JSON.parse(localStorage.getItem('userData') || '{}').email);
+    
+    this.userData = {email: user.email, name: user.name, avatar: user.avatar}
   }
 
   private initForm() {

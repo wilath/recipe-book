@@ -25,9 +25,10 @@ export class MicroblogPostComponent implements OnInit {
     ],
   };
 
-  public postAuthor: UserData = {email:'', name:'',notifications:[], shoppingList:[]}
+  public postAuthor = {}
 
   ngOnInit(): void {
-    this.postAuthor = this.userDataService.getUserData(this.microblogPost.author)
+    const userData = this.userDataService.getUserData(this.microblogPost.author)
+    this.postAuthor = {email: userData.email, name: userData.name, avatar: userData.avatar}
   }
 }

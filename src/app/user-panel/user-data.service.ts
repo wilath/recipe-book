@@ -1,13 +1,13 @@
-import { Injectable } from '@angular/core';
+import { Injectable} from '@angular/core';
 import { Subject } from 'rxjs';
 import { UserData } from '../shared/models/user-data.model';
 import { UserNotification } from '../shared/enums/notifications.enum';
 import { NotificationModel } from '../shared/models/notification.model';
-import { User } from '../shared/models/user.model';
+import { DataStoragaService } from '../shared/data-storage.service';
 
 @Injectable()
-export class UserDataService {
-  constructor() {}
+export class UserDataService  {
+  constructor(private dataStorageService: DataStoragaService) {}
 
   public usersData: UserData[] = [];
 
@@ -15,14 +15,19 @@ export class UserDataService {
 
   public sendDataToStore = new Subject<void>();
 
-  public setUsersData(users: UserData[]) {
-    const usersToSet = users.map( (el) => {
-      if(!el.notifications){el.notifications = []} 
-      if(!el.shoppingList){el.shoppingList = []}
-      return el
-    })
-    this.usersData = usersToSet;
-    this.userDataChange.next(this.usersData.slice());
+  public setUsersData() {
+    this.dataStorageService.fetchUsersData().subscribe(
+      (usersToSet: UserData[]) => {
+        if(usersToSet){
+          this.usersData = usersToSet;
+          this.userDataChange.next(this.usersData.slice());
+        }
+      },
+      (error: any) => {
+        // Handle error if needed
+        console.error('Error fetching users data:', error);
+      }
+    );
   }
 
   public getUsersData(): UserData[] {
@@ -40,7 +45,9 @@ export class UserDataService {
       email: email,
       name: name,
       notifications: [{message:`Welcome ${name} I hope you will enjoy this site!`,shown: false, date: new Date()}],
-      shoppingList: []
+      shoppingList: [],
+      followers: [],
+      userFollows: [],
     };
     data.push(newUserData);
     this.usersData = data;

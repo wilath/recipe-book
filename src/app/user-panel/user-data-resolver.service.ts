@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { DataStoragaService } from '../shared/data-storage.service';
+import { UserDataService } from './user-data.service';
 
 @Injectable({ providedIn: 'root' })
-export class RecipeResolverService {
-  constructor(private dataStorageService: DataStoragaService) {};
-
+export class UserDataResolverService {
+  constructor(private userDataService: UserDataService) {}
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    
-  
+    return this.userDataService.setUsersData();
   }
 }

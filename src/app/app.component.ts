@@ -14,21 +14,13 @@ import { RecipesService } from './recipes/recipes.service';
 export class AppComponent implements OnInit {
   constructor(
     private authService: AuthServcie,
-    private dataStorageService: DataStoragaService,
-    private userDataService: UserDataService,
-    private recipesService: RecipesService
-
+    private userDataService: UserDataService
   ) {}
 
 
   public isLogged$: boolean = false;
 
-  public usersDataChange = this.userDataService.sendDataToStore.subscribe(()=>{
-    this.dataStorageService.storeUsersData()
-  })
-  public recipesDataChange = this.recipesService.storeRecipesData.subscribe(()=>{
-    this.dataStorageService.storeRecipes()
-  })
+
 
   
   public ngOnInit() {
@@ -37,7 +29,7 @@ export class AppComponent implements OnInit {
       user !== null ? (this.isLogged$ = true) : (this.isLogged$ = false);
       if (user) {
         this.isLogged$ = true;
-        this.dataStorageService.fetchUsersData();
+        this.userDataService.setUsersData()
       } else {
         this.isLogged$ = false;
       }

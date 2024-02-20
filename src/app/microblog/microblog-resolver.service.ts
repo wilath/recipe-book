@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { DataStoragaService } from '../shared/data-storage.service';
+import { MicroblogService } from './microblog.service';
 
 @Injectable({ providedIn: 'root' })
-export class RecipeResolverService {
-  constructor(private dataStorageService: DataStoragaService) {};
-
+export class MicroblogResolverService {
+  constructor(private microblogService: MicroblogService) {}
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    
-  
+    return this.microblogService.setMicroblog();
   }
 }

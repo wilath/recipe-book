@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { RecipeResolverService } from './recipes/recipes-resolver-service';
+import { UserDataResolverService } from './user-panel/user-data-resolver.service';
+import { MicroblogResolverService } from './microblog/microblog-resolver.service';
 
 
 const appRoutes: Routes = [
@@ -10,13 +13,13 @@ const appRoutes: Routes = [
   },
   {
     path: 'recipes',
-    loadChildren: () => import('./recipes/recipes.module').then(m => m.RecipesModule)
- 
+    loadChildren: () => import('./recipes/recipes.module').then(m => m.RecipesModule),
+    resolve:[ RecipeResolverService, UserDataResolverService]
   },
   {
     path: 'user-panel',
-    loadChildren: () => import('./user-panel/user-panel.module').then(m => m.UserPanelModule)
-   
+    loadChildren: () => import('./user-panel/user-panel.module').then(m => m.UserPanelModule),
+    resolve:[UserDataResolverService, RecipeResolverService, MicroblogResolverService]
   },
   {
     path: 'auth',
@@ -24,7 +27,9 @@ const appRoutes: Routes = [
   },
   {
     path: 'microblog',
-    loadChildren: () => import('./microblog/microblog.module').then(m => m.MicroblogModule)}
+    loadChildren: () => import('./microblog/microblog.module').then(m => m.MicroblogModule),
+    resolve:[UserDataResolverService, MicroblogResolverService]
+  }
 ];
 
 @NgModule({

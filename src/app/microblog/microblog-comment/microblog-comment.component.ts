@@ -13,10 +13,11 @@ export class MicroblogCommentComponent implements OnInit {
 
   @Input() public microblogComment: MicroblogComment = {id:0, author: '', content:'', likes:{quantity:0,whoLiked:[]}}
 
-  public commentAuthor: UserData = {email:'', name:'', notifications:[], shoppingList: []}
+  public commentAuthorData = {}
 
   public ngOnInit(): void {
-    this.commentAuthor = this.userDataService.getUserData(this.microblogComment.author)
+    const userData = this.userDataService.getUserData(this.microblogComment.author);
+    this.commentAuthorData = {email: userData.email, name: userData.name, avatar: userData.avatar}
   }
   
 }

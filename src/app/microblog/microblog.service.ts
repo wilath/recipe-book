@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { MicroblogPost } from '../shared/models/microblog-post.model';
 import { Subject } from 'rxjs';
 import { MicroblogComment } from '../shared/models/microblog-comment.model';
-import { MediationService } from '../shared/mediation.service';
+import { DataStoragaService } from '../shared/data-storage.service';
 
 @Injectable()
-export class MicroblogService {
-  constructor(private medationService: MediationService) {}
+export class MicroblogService   {
+  constructor(private dataStorageService:DataStoragaService) {}
+ 
 
   public posts: MicroblogPost[] = [];
 
@@ -23,9 +24,18 @@ export class MicroblogService {
     return highestId + 1;
   }
 
-  public setMicroblogData(posts: MicroblogPost[]) {
-    this.posts = posts;
-    this.postsChange.next(this.posts);
+  public setMicroblog() {
+    this.dataStorageService.fetchMicroblogData().subscribe(
+      (postsToSet: MicroblogPost[]) => {
+        if(postsToSet){
+          this.posts = postsToSet;
+          this.postsChange.next(this.posts.slice());
+         }       
+      },
+      (error: any) => {
+        console.error('Error fetching microblog:', error);
+      }
+    );
   }
 
   public getMicroblogData(): MicroblogPost[]{

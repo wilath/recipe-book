@@ -6,7 +6,7 @@ export interface UserData {
     name: string;
     notifications: NotificationModel[];
     shoppingList: Ingredient[];
-    followers?: string[];
-    userFollows?: string[];
+    followers: string[];
+    userFollows: string[];
     avatar?: string;
   }

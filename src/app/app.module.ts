@@ -6,13 +6,10 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core.module';
-
 import { CommonModule } from '@angular/common';
-
 import { FormsModule } from '@angular/forms';
 import { DataStoragaService } from './shared/data-storage.service';
 import { NotificationShownPipe } from './header/notifications.pipe';
-import { MediationService } from './shared/mediation.service';
 
 
 @NgModule({
@@ -30,8 +27,7 @@ import { MediationService } from './shared/mediation.service';
     CoreModule,
   ],
   providers:[
-    DataStoragaService,   
-    MediationService
+    DataStoragaService,
   ],
   bootstrap: [AppComponent],
 })
