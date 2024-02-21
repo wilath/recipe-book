@@ -13,6 +13,8 @@ import { NotificationShownPipe } from './header/notifications.pipe';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { getStorage, provideStorage } from '@angular/fire/storage';
 import { environment } from '../environments/environment';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 
 
 @NgModule({
@@ -28,6 +30,8 @@ import { environment } from '../environments/environment';
     HttpClientModule,
     SharedModule,
     CoreModule,
+    AngularFireStorageModule,
+    AngularFireDatabaseModule,
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideStorage(() => getStorage()),
   ],
