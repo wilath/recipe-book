@@ -50,6 +50,8 @@ export class MicroblogNewpostComponent implements OnInit {
       comments: []
     }
     this.microblogService.onAddNewPost(newPost)
+    this.newMicroblogPostForm.reset()
+    this.autoResize()
     
   }
 
@@ -60,11 +62,18 @@ export class MicroblogNewpostComponent implements OnInit {
     this.getImageControls.push(newImageControl);
   }
 
-  public autoResize(event: Event) {
-    const textarea = event.target as HTMLTextAreaElement
-    textarea.style.height = 'auto';
-    textarea.style.height = textarea.scrollHeight + 'px';
-    
+  public autoResize(event?: Event) {
+    if(event) {
+      const textarea = event.target as HTMLTextAreaElement
+      textarea.style.height = 'auto';
+      textarea.style.height = textarea.scrollHeight + 'px';
+    } else {
+      const textarea = document.getElementById('content') as HTMLTextAreaElement
+      textarea.style.height = 'auto'
+
+    }
+     
+   
   }
 
   public showEmojiPanel(){

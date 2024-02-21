@@ -9,7 +9,7 @@
 </div>
     <div class="image-form" formArrayName="images">    
     @for (imageControl of getImageControls.controls; track $index) {
-    <label for="images"><i class="fa-solid fa-file-import"></i></label>
+    <label [class]="'nt' + $index " for="images"><i class="fa-solid fa-file-import"></i></label>
     <input type="file" accept="image/*" id="images" name="images" [formControlName]="$index">
     <div class="image-instance">
         <img [src]="imageControl.value" alt="" >

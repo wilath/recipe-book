@@ -7,7 +7,7 @@ import { MicroblogPost } from './models/microblog-post.model';
 import { Observable } from 'rxjs';
 
 @Injectable()
-export class DataStoragaService {
+export class RealTimeDatabaseService {
   constructor(private http: HttpClient) {}
 
   private urlRecipes =

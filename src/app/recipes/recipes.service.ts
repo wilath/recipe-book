@@ -6,11 +6,11 @@ import { ShoppingListService } from '../shopping-list/shopping-list.service';
 import { Recipe } from '../shared/models/recipe.model';
 import { UserDataService } from '../user-panel/user-data.service';
 import { UserNotification } from '../shared/enums/notifications.enum';
-import { DataStoragaService } from '../shared/data-storage.service';
+import { RealTimeDatabaseService } from '../shared/real-time-database.service';
 
 @Injectable()
 export class RecipesService   {
-  constructor(private shoppingListService: ShoppingListService, private userDataService: UserDataService, private dataStorageService: DataStoragaService) {}
+  constructor(private shoppingListService: ShoppingListService, private userDataService: UserDataService, private realTimeDatabasService: RealTimeDatabaseService) {}
 
  
   public recipesChanged = new Subject<Recipe[]>();
@@ -18,7 +18,7 @@ export class RecipesService   {
 
 
   public setRecepies(): Observable<void> {
-    return this.dataStorageService.fetchRecipes().pipe(
+    return this.realTimeDatabasService.fetchRecipes().pipe(
       tap((recipesToSet: Recipe[]) => {
         if (recipesToSet) {
           this.recipes = recipesToSet;

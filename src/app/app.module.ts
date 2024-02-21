@@ -8,8 +8,11 @@ import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core.module';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { DataStoragaService } from './shared/data-storage.service';
+import { RealTimeDatabaseService } from './shared/real-time-database.service';
 import { NotificationShownPipe } from './header/notifications.pipe';
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
+import { getStorage, provideStorage } from '@angular/fire/storage';
+import { environment } from '../environments/environment';
 
 
 @NgModule({
@@ -25,9 +28,11 @@ import { NotificationShownPipe } from './header/notifications.pipe';
     HttpClientModule,
     SharedModule,
     CoreModule,
+    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+    provideStorage(() => getStorage()),
   ],
   providers:[
-    DataStoragaService,
+    RealTimeDatabaseService,
   ],
   bootstrap: [AppComponent],
 })

@@ -40,7 +40,6 @@
       padding-left: 1rem;
       display: flex;
       flex-direction: row;
-      flex-wrap: wrap;
       gap: 1px;
       input{
         position: absolute;
@@ -49,7 +48,7 @@
       label{
         display: block;
         min-width: 4rem;
-        flex-grow: 0.125;
+        flex-grow: 0.126;
         aspect-ratio: 1/1;
         background-color: $uno-grey-active;
         color: $uno-white;
@@ -62,6 +61,12 @@
           color: $sage;
           cursor: pointer;
         }
+      }
+      .nt0{
+        border-radius: 0 0 0 1rem;
+      }
+      .nt7{
+        border-radius: 0 0 1rem 0;
       }
     }
     .form-buttons {

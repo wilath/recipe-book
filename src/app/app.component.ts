@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { AuthServcie } from './auth/auth-supp/auth.servcie';
 
-import { DataStoragaService } from './shared/data-storage.service';
+import { RealTimeDatabaseService } from './shared/real-time-database.service';
 import { UserDataService } from './user-panel/user-data.service';
 import { RecipesService } from './recipes/recipes.service';
 

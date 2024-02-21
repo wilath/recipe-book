@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { MicroblogPost } from '../shared/models/microblog-post.model';
 import { Observable, Subject, map, tap } from 'rxjs';
 import { MicroblogComment } from '../shared/models/microblog-comment.model';
-import { DataStoragaService } from '../shared/data-storage.service';
+import { RealTimeDatabaseService } from '../shared/real-time-database.service';
 
 @Injectable()
 export class MicroblogService   {
-  constructor(private dataStorageService:DataStoragaService) {}
+  constructor(private realTimeDatabaseService:RealTimeDatabaseService) {}
  
 
   public posts: MicroblogPost[] = [];
@@ -25,7 +25,7 @@ export class MicroblogService   {
   }
 
   public setMicroblog():Observable<void> {
-    return this.dataStorageService.fetchMicroblogData().pipe(tap(
+    return this.realTimeDatabaseService.fetchMicroblogData().pipe(tap(
       (postsToSet: MicroblogPost[]) => {
         if(postsToSet){
           this.posts = postsToSet;

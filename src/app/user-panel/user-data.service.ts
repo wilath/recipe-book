@@ -3,11 +3,11 @@ import { Observable, Subject, map, tap } from 'rxjs';
 import { UserData } from '../shared/models/user-data.model';
 import { UserNotification } from '../shared/enums/notifications.enum';
 import { NotificationModel } from '../shared/models/notification.model';
-import { DataStoragaService } from '../shared/data-storage.service';
+import { RealTimeDatabaseService } from '../shared/real-time-database.service';
 
 @Injectable()
 export class UserDataService  {
-  constructor(private dataStorageService: DataStoragaService) {}
+  constructor(private realTimeDatabaseService: RealTimeDatabaseService) {}
 
   public usersData: UserData[] = [];
 
@@ -16,7 +16,7 @@ export class UserDataService  {
   public sendDataToStore = new Subject<void>();
 
   public setUsersData(): Observable<void> {
-    return this.dataStorageService.fetchUsersData().pipe(
+    return this.realTimeDatabaseService.fetchUsersData().pipe(
       tap((usersToSet: UserData[]) => {
         if(usersToSet){
           this.usersData = usersToSet;

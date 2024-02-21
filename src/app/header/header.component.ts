@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject, Subscription, filter, switchMap, tap } from 'rxjs';
 import { AuthServcie } from '../auth/auth-supp/auth.servcie';
-import { DataStoragaService } from '../shared/data-storage.service';
+import { RealTimeDatabaseService } from '../shared/real-time-database.service';
 import { UserDataService } from '../user-panel/user-data.service';
 import { UserData } from '../shared/models/user-data.model';
 import { NavigationEnd, Router } from '@angular/router';
@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   constructor(
     private userDataService: UserDataService,
-    private dataStorageService: DataStoragaService,
+    private dataStorageService: RealTimeDatabaseService,
     private authService: AuthServcie,
     private router: Router
   ) {}
