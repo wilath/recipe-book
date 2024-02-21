@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { AlertComponent } from './alert/alert.component';
-
 import { LoadingSpinnerComponent } from './loadingspinner/loading-spinner.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { PickerComponent } from '@ctrl/ngx-emoji-mart';
 
 @NgModule({
   declarations: [
@@ -14,12 +14,14 @@ import { ReactiveFormsModule } from '@angular/forms';
     AlertComponent,
     LoadingSpinnerComponent,
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    PickerComponent
 
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    PickerComponent
     
   ],
 })

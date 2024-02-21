@@ -1,18 +1,21 @@
-<div class="backboard mt-1rem">
-  <div class="top-section">
-    <img  alt="">
-    <div>
-        {{microblogPost.author}}
-        {{microblogPost.date | date:'short'}}
+
+  <div class="backboard mt-1rem post-wrapper">
+    <div class="top-section">
+      <img class="profile-image" src="https://t3.ftcdn.net/jpg/05/53/79/60/360_F_553796090_XHrE6R9jwmBJUMo9HKl41hyHJ5gqt9oz.jpg" alt="avatar">
+      <div class="author-data">
+          <h4>{{postAuthor.name}}</h4>
+          <h5>{{microblogPost.date | date:'shortDate'}} <span>·</span> {{calculateTimeSincePost(microblogPost.date)}} <span>·</span> <i class="fa-solid fa-earth-europe"></i></h5>      
+      </div>
+    </div>
+    <div class="text-section">
+      <p>{{microblogPost.content}}</p>
+    </div>
+    <div class="image-seciotn"></div>
+    <div class="likes-section"></div>
+    <div class="comment-section">
+      @for (comment of microblogPost.comments; track $index) {
+          <app-microblog-comment [microblogComment]="comment"></app-microblog-comment>
+      }  
     </div>
   </div>
-  <div class="text-section"></div>
-  {{microblogPost.content}}
-  <div class="image-seciotn"></div>
-  <div class="likes-section"></div>
-  <div class="comment-section">
-    @for (comment of microblogPost.comments; track $index) {
-        <app-microblog-comment [microblogComment]="comment"></app-microblog-comment>
-    }  
-  </div>
-</div>
+  

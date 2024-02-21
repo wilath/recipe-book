@@ -1,0 +1,50 @@
+@import '../../styles/variables';
+.post-wrapper {
+  
+  .top-section {
+    display: flex;
+    flex-direction: row;
+    justify-items: flex-start;
+    align-items: flex-start;
+    padding: 1rem;
+    .author-data{
+        margin-left: 1rem;
+        color: $uno-white;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+
+        h4{
+            font-size: 1.5rem;
+        }
+        h5{
+            margin-top: 5px;
+            color: $sage;
+
+            span{
+                color: $uno-white;
+                margin: 0 5px;
+                font-weight: 900;
+            }
+
+            i{
+                position: relative;
+                color: $uno-white;
+                font-size: 0.9rem;
+                
+            }
+        }
+    }
+    .profile-image {
+      height: 3rem;
+      aspect-ratio: 1/1;
+      border-radius: 50%;
+    }
+  }
+  .text-section{
+    color:$uno-white;
+    padding: 1rem;
+    font-size: 1.2rem;
+  }
+}

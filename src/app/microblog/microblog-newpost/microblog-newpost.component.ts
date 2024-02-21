@@ -18,7 +18,14 @@ export class MicroblogNewpostComponent implements OnInit {
   public newMicroblogPostForm!: FormGroup;
 
   public userData = {email:'', name:''}
-  
+
+  public isEmojiPickerVisible: boolean = false;
+
+  public isPhotoAddOption: boolean = false;
+
+  public photoQuantity: number = 0
+
+ 
   public ngOnInit(): void {
     this.initForm()
     this.loadUserData()
@@ -26,6 +33,10 @@ export class MicroblogNewpostComponent implements OnInit {
 
   public get getImageControls(){
     return this.newMicroblogPostForm.get('images') as FormArray
+  }
+
+  public get getContentControl(){
+    return this.newMicroblogPostForm.get('content') as FormControl
   }
 
   public onSubmit() {
@@ -43,6 +54,8 @@ export class MicroblogNewpostComponent implements OnInit {
   }
 
   public addImage() {
+    this.isPhotoAddOption = true
+    this.photoQuantity++
     const newImageControl = this.formBuilder.control('');
     this.getImageControls.push(newImageControl);
   }
@@ -54,13 +67,22 @@ export class MicroblogNewpostComponent implements OnInit {
     
   }
 
+  public showEmojiPanel(){
+     this.isEmojiPickerVisible = !this.isEmojiPickerVisible
+  }
+
+  public addEmoji(event: any) {
+    let textArea = this.getContentControl.value
+    this.getContentControl.setValue(`${textArea} ${event.emoji.native}`)
+  }
+
   private loadUserData(){
     const user = this.userDataService.getUserData(JSON.parse(localStorage.getItem('userData') || '{}').email);
     this.userData = {email: user.email, name: user.name}
   }
 
   private initForm() {
-    let content = new FormControl();
+    let content = new FormControl('');
     let images = new FormArray<FormControl>([])
 
     this.newMicroblogPostForm = this.formBuilder.group({

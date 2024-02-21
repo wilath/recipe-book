@@ -30,15 +30,21 @@
 
 -switch cross-servcie communaction from app-component to medation.service.ts
 
+-move shopping list to userData and change switch shopping list module to user module
+
+-emojis
+
+-defer loading for posts in microblog module, skeloton loading
+
 -and more...
 
 # To Do:
 
+-adding pictures for posts
+
 -add possibility to add microblog Post when creating new Recipe
 
 -add href for notifacion leading to event, move clear to button 
-
--move shopping list to userData and change shopping list module to user module
 
 -add star rating to recipes
 

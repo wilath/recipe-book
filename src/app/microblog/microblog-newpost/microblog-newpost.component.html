@@ -5,22 +5,37 @@
 
 <form [formGroup]="newMicroblogPostForm" (ngSubmit)="onSubmit()">
 <div class="content-form">
-    <textarea [placeholder]="'Whats on your mind ' + userData.name" name="content" id="content"  formControlName="content" (input)="autoResize($event)"></textarea>
+    <textarea [ngClass]="{'no-lower-border-radius': isPhotoAddOption}"  [placeholder]="'Whats on your mind ' + userData.name" name="content" id="content" formControlName="content" (input)="autoResize($event)"></textarea>
 </div>
-<div class="image-form" formArrayName="images">
-    
+    <div class="image-form" formArrayName="images">    
     @for (imageControl of getImageControls.controls; track $index) {
+    <label for="images"><i class="fa-solid fa-file-import"></i></label>
     <input type="file" accept="image/*" id="images" name="images" [formControlName]="$index">
     <div class="image-instance">
         <img [src]="imageControl.value" alt="" >
     </div>
 
-
 }
 </div>
 <div class="form-buttons">
-    <button type="button" (click)="addImage()"><i class="fa-regular fa-images"></i>  Add image</button>
+    <button class="emoji-button" type="button" [ngClass]="{'emoji-active' : isEmojiPickerVisible}"  (click)="showEmojiPanel()">
+        @if (isEmojiPickerVisible) {
+            <i class="fa-regular fa-face-laugh-wink"></i> 
+        } @else {
+            <i class="fa-regular fa-face-smile-beam"></i>
+        }
+         Emojis</button>
+
+    <ng-container *ngIf="isEmojiPickerVisible">
+        @defer (when isEmojiPickerVisible) {
+            <emoji-mart class="emoji-mart" set="twitter" color="#bfcc94d9" [showPreview]="false" [enableSearch]="false" [darkMode]=true [emojiSize]="20" [include]="['people','foods']" (emojiClick)="addEmoji($event)"></emoji-mart>
+        }
+    </ng-container>
+    
+    <button type="button" [disabled]="photoQuantity > 7" (click)="addImage()"><i class="fa-regular fa-images"></i>  Add image</button>
     <button type="submit"><i class="fa-solid fa-share"></i>  Publish</button>
+   
+    
 </div>
 
 </form>

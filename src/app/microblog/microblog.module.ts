@@ -6,7 +6,7 @@ import { MicroblogPostComponent } from './microblog-post/microblog-post.componen
 import { MicroblogCommentComponent } from './microblog-comment/microblog-comment.component';
 import { MicroblogNewpostComponent } from './microblog-newpost/microblog-newpost.component';
 import { SharedModule } from '../shared/shared.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MicroblogPostPlaceholderComponent } from './microblog-post-placeholder/microblog-post-placeholder.component';
 
 
 
@@ -15,7 +15,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MicroblogComponent,
     MicroblogPostComponent,
     MicroblogCommentComponent,
-    MicroblogNewpostComponent
+    MicroblogNewpostComponent,
+    MicroblogPostPlaceholderComponent
   ],
   imports: [
     CommonModule,
