@@ -1,11 +1,11 @@
-import { Target } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
-import { Form, FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { UserDataService } from '../../user-panel/user-data.service';
-import { UserData } from '../../shared/models/user-data.model';
-import { User } from '../../shared/models/user.model';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FileUpload } from '../../shared/models/file-upload.model';
 import { MicroblogPost } from '../../shared/models/microblog-post.model';
+import { StorageService } from '../../shared/storage.service';
+import { UserDataService } from '../../user-panel/user-data.service';
 import { MicroblogService } from '../microblog.service';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-microblog-newpost',
@@ -13,9 +13,13 @@ import { MicroblogService } from '../microblog.service';
   styleUrl: './microblog-newpost.component.scss',
 })
 export class MicroblogNewpostComponent implements OnInit {
-  constructor(private formBuilder: FormBuilder, private userDataService: UserDataService, private microblogService: MicroblogService) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private storage: StorageService, 
+    private userDataService: UserDataService, 
+    private microblogService: MicroblogService) {}
  
-  public newMicroblogPostForm!: FormGroup;
+  public newPostForm!: FormGroup;
 
   public userData = {email:'', name:''}
 
@@ -23,44 +27,70 @@ export class MicroblogNewpostComponent implements OnInit {
 
   public isPhotoAddOption: boolean = false;
 
-  public photoQuantity: number = 0
+  public photoQuantity: number = 0;
 
- 
   public ngOnInit(): void {
     this.initForm()
     this.loadUserData()
   }
 
-  public get getImageControls(){
-    return this.newMicroblogPostForm.get('images') as FormArray
-  }
+  public onFileUpload(event: any ,index : number){
 
-  public get getContentControl(){
-    return this.newMicroblogPostForm.get('content') as FormControl
+    const file: File = event.target.files[0];
+    if(file) {
+      this.storage.pushFileToStorage(new FileUpload(file)).pipe(finalize(()=>{
+        if(this.photoQuantity < 8) {
+          this.addImageInput() 
+        }
+      })).subscribe(
+        (res) => {
+          const imagesFormArray = (<FormArray>this.newPostForm.get('images')).controls as Array<FormGroup>;
+         
+            if (typeof res === `number` ) {
+              imagesFormArray[index].patchValue({percentages:res});
+            } else if (res) {
+              imagesFormArray[index].patchValue({imageUrl: res.url});
+            }
+           
+        }
+      )
+    }
+  }
+  public deleteImageFromForm(index: number){
+    console.log('delete item')
   }
 
   public onSubmit() {
+    
     const newPost :MicroblogPost = {
       id: this.microblogService.getIdforNewPost,
       author: this.userData.email,
       date: new Date,
-      content: this.newMicroblogPostForm.value.content,
+      content: this.newPostForm!.value.content,
       images: [],
       likes: {quantity: 0, whoLiked: []},
       comments: []
     }
     this.microblogService.onAddNewPost(newPost)
-    this.newMicroblogPostForm.reset()
+    this.initForm()
     this.autoResize()
+    this.isPhotoAddOption = false
     
   }
 
-  public addImage() {
+  public addImageInput() {
     this.isPhotoAddOption = true
     this.photoQuantity++
-    const newImageControl = this.formBuilder.control('');
-    this.getImageControls.push(newImageControl);
+    (<FormArray>this.newPostForm.get('images')).push(
+      new FormGroup({
+        'input': new FormControl(null),
+        'percentages': new FormControl(null),
+        'imageUrl': new FormControl('')
+      })
+     )  
   }
+
+  
 
   public autoResize(event?: Event) {
     if(event) {
@@ -81,8 +111,8 @@ export class MicroblogNewpostComponent implements OnInit {
   }
 
   public addEmoji(event: any) {
-    let textArea = this.getContentControl.value
-    this.getContentControl.setValue(`${textArea} ${event.emoji.native}`)
+    const textArea = <FormControl>this.newPostForm.get('content');
+    (<FormControl>this.newPostForm.get('content')).setValue(`${textArea.value} ${event.emoji.native}`)
   }
 
   private loadUserData(){
@@ -92,12 +122,12 @@ export class MicroblogNewpostComponent implements OnInit {
 
   private initForm() {
     let content = new FormControl('');
-    let images = new FormArray<FormControl>([])
+    let images = new FormArray<FormGroup>([]);
 
-    this.newMicroblogPostForm = this.formBuilder.group({
+    this.newPostForm! = this.formBuilder.group({
       content: content,
       images: images,
     })
   }
-  
+
 }

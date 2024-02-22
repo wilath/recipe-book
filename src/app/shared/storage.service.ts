@@ -1,13 +1,7 @@
 import { Injectable } from '@angular/core';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { Observable, Subject, finalize } from 'rxjs';
 import { FileUpload } from './models/file-upload.model';
-import { Observable, Subject, finalize, merge, of } from 'rxjs';
-import { AngularFireDatabase, AngularFireList} from '@angular/fire/compat/database';
-import { AngularFireStorage } from '@angular/fire/compat/storage'
-
-export interface storageFileReturn {
-  percentages: Observable<number | undefined>;
-  fileData: FileUpload
-}
 
 
 @Injectable()

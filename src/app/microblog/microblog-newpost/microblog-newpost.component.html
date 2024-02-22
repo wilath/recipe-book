@@ -3,18 +3,22 @@
 <img class="profile-image" src="https://t3.ftcdn.net/jpg/05/53/79/60/360_F_553796090_XHrE6R9jwmBJUMo9HKl41hyHJ5gqt9oz.jpg" alt="avatar">
 
 
-<form [formGroup]="newMicroblogPostForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="newPostForm" (ngSubmit)="onSubmit()">
 <div class="content-form">
     <textarea [ngClass]="{'no-lower-border-radius': isPhotoAddOption}"  [placeholder]="'Whats on your mind ' + userData.name" name="content" id="content" formControlName="content" (input)="autoResize($event)"></textarea>
 </div>
     <div class="image-form" formArrayName="images">    
-    @for (imageControl of getImageControls.controls; track $index) {
-    <label [class]="'nt' + $index " for="images"><i class="fa-solid fa-file-import"></i></label>
-    <input type="file" accept="image/*" id="images" name="images" [formControlName]="$index">
-    <div class="image-instance">
-        <img [src]="imageControl.value" alt="" >
-    </div>
-
+    @for (imageControl of newPostForm.value.images; track $index) {
+        <ng-container [formGroupName]="$index">
+            <div [class]="'nt' + $index" class="label-wrapper">
+            <label  for="images"><i class="fa-solid fa-file-import"></i>
+                <input  type="file" accept="image/*" id="images" name="images" formControlName="input" (change)="onFileUpload($event, $index)" >
+                <div [ngStyle]="{ 'height': imageControl.percentages + '%' }" class="image-loading"></div>
+                <img class="image-display" *ngIf="imageControl.imageUrl && imageControl.percentages === 100" [src]="imageControl.imageUrl" alt="XD" >
+            </label>                     
+            <a stopPropagation *ngIf="imageControl.imageUrl && imageControl.percentages === 100" (click)="deleteImageFromForm($index)"><div class="image-delete"><i class="fa-regular fa-trash-can"></i></div></a>
+        </div>                     
+        </ng-container>
 }
 </div>
 <div class="form-buttons">
@@ -32,7 +36,7 @@
         }
     </ng-container>
     
-    <button type="button" [disabled]="photoQuantity > 7" (click)="addImage()"><i class="fa-regular fa-images"></i>  Add image</button>
+    <button type="button" [disabled]="photoQuantity > 7" (click)="addImageInput()"><i class="fa-regular fa-images"></i>  Add image</button>
     <button type="submit"><i class="fa-solid fa-share"></i>  Publish</button>
    
     
