@@ -15,6 +15,8 @@ import { getStorage, provideStorage } from '@angular/fire/storage';
 import { environment } from '../environments/environment';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { StorageService } from './shared/storage.service';
+import { AngularFireModule } from '@angular/fire/compat';
 
 
 @NgModule({
@@ -32,11 +34,13 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
     CoreModule,
     AngularFireStorageModule,
     AngularFireDatabaseModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideStorage(() => getStorage()),
   ],
   providers:[
     RealTimeDatabaseService,
+    StorageService
   ],
   bootstrap: [AppComponent],
 })
