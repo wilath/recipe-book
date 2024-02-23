@@ -35,8 +35,8 @@ export class StorageService {
     return extraDataSubject.asObservable();
   }
 
-  public deleteFile(fileUpload: FileUpload): void {
-    this.deleteFileStorage(fileUpload.name);    
+  public deleteFile(fileUploaDname: string): void {
+    this.deleteFileStorage(fileUploaDname);    
   }
 
   private deleteFileStorage(name: string): void {

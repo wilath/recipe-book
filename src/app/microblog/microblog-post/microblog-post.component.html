@@ -11,6 +11,9 @@
       <p>{{microblogPost.content}}</p>
     </div>
     <div class="image-seciotn"></div>
+    @for (image of microblogPost.images ; track $index){
+      <img style="width: 100%" [src]="image.url" alt="XD">
+    }
     <div class="likes-section"></div>
     <div class="comment-section">
       @for (comment of microblogPost.comments; track $index) {

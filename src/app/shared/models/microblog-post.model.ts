@@ -1,4 +1,5 @@
 import { MicroblogService } from "../../microblog/microblog.service";
+import { FileAnchor } from "./file-upload.model";
 import { MicroblogComment } from "./microblog-comment.model";
 import { Likes } from "./recipe.model"
 
@@ -7,11 +8,11 @@ export class MicroblogPost {
     author: string;
     date: Date;
     content: string[];
-    images?: string[];
+    images?: FileAnchor[];
     likes: Likes;
     comments: MicroblogComment[];
 
-    constructor(id: number,author: string, date : Date, content: string[], images: string[], likes: Likes, comments : MicroblogComment[],){
+    constructor(id: number,author: string, date : Date, content: string[], images: FileAnchor[], likes: Likes, comments : MicroblogComment[],){
         this.author = author;
         this.date = date;
         this.content = content;

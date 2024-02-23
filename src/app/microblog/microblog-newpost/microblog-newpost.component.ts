@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { FileUpload } from '../../shared/models/file-upload.model';
+import { FileAnchor, FileUpload } from '../../shared/models/file-upload.model';
 import { MicroblogPost } from '../../shared/models/microblog-post.model';
 import { StorageService } from '../../shared/storage.service';
 import { UserDataService } from '../../user-panel/user-data.service';
@@ -12,13 +12,13 @@ import { finalize } from 'rxjs';
   templateUrl: './microblog-newpost.component.html',
   styleUrl: './microblog-newpost.component.scss',
 })
-export class MicroblogNewpostComponent implements OnInit {
+export class MicroblogNewpostComponent implements OnInit, OnDestroy {
   constructor(
     private formBuilder: FormBuilder,
     private storage: StorageService, 
     private userDataService: UserDataService, 
     private microblogService: MicroblogService) {}
- 
+
   public newPostForm!: FormGroup;
 
   public userData = {email:'', name:''}
@@ -34,13 +34,24 @@ export class MicroblogNewpostComponent implements OnInit {
     this.loadUserData()
   }
 
+  public ngOnDestroy(): void {
+    console.log('destroy fired')
+    const images = (<{input: string, percentages: number, imageData: FileAnchor}[]>this.newPostForm.value.images)
+    .map( (el) => {return el.imageData})
+    .filter( el => el.url)
+
+    for(let i = 0; i < images.length; i++){
+      this.storage.deleteFile(images[i].name)
+    }
+  }
+ 
   public onFileUpload(event: any ,index : number){
 
     const file: File = event.target.files[0];
     if(file) {
       this.storage.pushFileToStorage(new FileUpload(file)).pipe(finalize(()=>{
         if(this.photoQuantity < 8) {
-          this.addImageInput() 
+          this.onAddImageInput() 
         }
       })).subscribe(
         (res) => {
@@ -49,48 +60,51 @@ export class MicroblogNewpostComponent implements OnInit {
             if (typeof res === `number` ) {
               imagesFormArray[index].patchValue({percentages:res});
             } else if (res) {
-              imagesFormArray[index].patchValue({imageUrl: res.url});
-            }
-           
+              imagesFormArray[index].patchValue({imageData: {name: res.name, url: res.url}});
+            }       
         }
       )
     }
   }
-  public deleteImageFromForm(index: number){
-    console.log('delete item')
+
+  public onDeleteImageFromForm(index: number){
+    const imagesFormArray = (<FormArray>this.newPostForm.get('images'));
+    imagesFormArray.removeAt(index)
   }
 
-  public onSubmit() {
-    
-    const newPost :MicroblogPost = {
-      id: this.microblogService.getIdforNewPost,
-      author: this.userData.email,
-      date: new Date,
-      content: this.newPostForm!.value.content,
-      images: [],
-      likes: {quantity: 0, whoLiked: []},
-      comments: []
-    }
-    this.microblogService.onAddNewPost(newPost)
-    this.initForm()
-    this.autoResize()
-    this.isPhotoAddOption = false
-    
-  }
-
-  public addImageInput() {
+  public onAddImageInput() {
     this.isPhotoAddOption = true
     this.photoQuantity++
     (<FormArray>this.newPostForm.get('images')).push(
       new FormGroup({
         'input': new FormControl(null),
-        'percentages': new FormControl(null),
-        'imageUrl': new FormControl('')
+        'percentages': new FormControl(0),
+        'imageData': new FormControl<FileAnchor>({name:'', url: ''})
       })
      )  
   }
 
-  
+  public onSubmit() {
+
+    const images = (<{input: string, percentages: number, imageData: FileAnchor}[]>this.newPostForm.value.images)
+    .map( (el) => {return el.imageData})
+    .filter( el => el.url);
+
+    const newPost :MicroblogPost = {
+      id: this.microblogService.getIdforNewPost,
+      author: this.userData.email,
+      date: new Date,
+      content: this.newPostForm!.value.content,
+      images: images,
+      likes: {quantity: 0, whoLiked: []},
+      comments: []
+    }
+
+    this.microblogService.onAddNewPost(newPost)
+    this.initForm()
+    this.autoResize()
+    this.isPhotoAddOption = false
+  }
 
   public autoResize(event?: Event) {
     if(event) {
@@ -106,7 +120,7 @@ export class MicroblogNewpostComponent implements OnInit {
    
   }
 
-  public showEmojiPanel(){
+  public onShowEmojiPanel(){
      this.isEmojiPickerVisible = !this.isEmojiPickerVisible
   }
 
