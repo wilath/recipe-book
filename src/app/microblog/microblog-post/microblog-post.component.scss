@@ -1,40 +1,38 @@
-@import '../../styles/variables';
+@import "../../styles/variables";
 .post-wrapper {
-  
   .top-section {
     display: flex;
     flex-direction: row;
     justify-items: flex-start;
     align-items: flex-start;
     padding: 1rem;
-    .author-data{
-        margin-left: 1rem;
-        color: $uno-white;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: center;
+    .author-data {
+      margin-left: 1rem;
+      color: $uno-white;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
 
-        h4{
-            font-size: 1.5rem;
+      h4 {
+        font-size: 1.5rem;
+      }
+      h5 {
+        margin-top: 5px;
+        color: $sage;
+
+        span {
+          color: $uno-white;
+          margin: 0 5px;
+          font-weight: 900;
         }
-        h5{
-            margin-top: 5px;
-            color: $sage;
 
-            span{
-                color: $uno-white;
-                margin: 0 5px;
-                font-weight: 900;
-            }
-
-            i{
-                position: relative;
-                color: $uno-white;
-                font-size: 0.9rem;
-                
-            }
+        i {
+          position: relative;
+          color: $uno-white;
+          font-size: 0.9rem;
         }
+      }
     }
     .profile-image {
       height: 3rem;
@@ -42,37 +40,36 @@
       border-radius: 50%;
     }
   }
-  .text-section{
-    color:$uno-white;
+  .text-section {
+    color: $uno-white;
     padding: 1rem;
     font-size: 1.2rem;
   }
-  .image-section{
+
+  .image-section {
     width: 100%;
-    aspect-ratio: 1/1;
     border: 1px solid red;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-    grid-gap: 10px;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
 
     .image-display {
       width: 100%;
-      height: 100px; /* Dostosuj wysokość obrazów */
-      background-color: #ccc; /* Dostosuj kolor tła obrazów */
     }
 
     .image-display:nth-child(1) {
       grid-column: span 2;
       grid-row: span 2;
     }
-    
+
     .image-display:nth-child(2) {
       grid-row: span 2;
     }
-    
+
     .image-display:nth-child(3) {
       grid-column: span 2;
     }
-    
   }
 }
