@@ -19,6 +19,7 @@ export class MicroblogPostComponent implements OnInit {
   public ngOnInit(): void {
     const userData = this.userDataService.getUserData(this.microblogPost.author)
     this.postAuthor = {email: userData.email, name: userData.name, avatar: userData.avatar}
+    console.log(this.microblogPost)
   }
 
   public calculateTimeSincePost(postDate: Date): string {

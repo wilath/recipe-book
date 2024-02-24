@@ -35,7 +35,6 @@ export class MicroblogNewpostComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    console.log('destroy fired')
     const images = (<{input: string, percentages: number, imageData: FileAnchor}[]>this.newPostForm.value.images)
     .map( (el) => {return el.imageData})
     .filter( el => el.url)

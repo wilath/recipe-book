@@ -8,7 +8,7 @@ export class MicroblogPost {
     author: string;
     date: Date;
     content: string[];
-    images?: FileAnchor[];
+    images: FileAnchor[];
     likes: Likes;
     comments: MicroblogComment[];
 

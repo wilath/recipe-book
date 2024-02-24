@@ -10,10 +10,22 @@
     <div class="text-section">
       <p>{{microblogPost.content}}</p>
     </div>
-    <div class="image-seciotn"></div>
-    @for (image of microblogPost.images ; track $index){
-      <img style="width: 100%" [src]="image.url" alt="XD">
-    }
+    <div class="image-section">
+    
+      <a *ngIf="microblogPost.images[0]">
+        <img class="image-display"  [src]="microblogPost.images[0].url" [alt]="microblogPost.images[0].name">
+      </a>
+      <a *ngIf="microblogPost.images[1]">
+        <img class="image-display"  [src]="microblogPost.images[1].url" [alt]="microblogPost.images[1].name">
+      </a>
+      <a *ngIf="microblogPost.images[2] && microblogPost.images.length <= 3">
+        <img class="image-display"  [src]="microblogPost.images[2].url" [alt]="microblogPost.images[2].name">
+      </a>
+      <a *ngIf="microblogPost.images.length > 3">
+        <img class="image-display" [src]="microblogPost.images[3].url" [alt]="microblogPost.images[3].name">
+      </a>
+  
+    </div>
     <div class="likes-section"></div>
     <div class="comment-section">
       @for (comment of microblogPost.comments; track $index) {

@@ -47,4 +47,32 @@
     padding: 1rem;
     font-size: 1.2rem;
   }
+  .image-section{
+    width: 100%;
+    aspect-ratio: 1/1;
+    border: 1px solid red;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    grid-gap: 10px;
+
+    .image-display {
+      width: 100%;
+      height: 100px; /* Dostosuj wysokość obrazów */
+      background-color: #ccc; /* Dostosuj kolor tła obrazów */
+    }
+
+    .image-display:nth-child(1) {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+    
+    .image-display:nth-child(2) {
+      grid-row: span 2;
+    }
+    
+    .image-display:nth-child(3) {
+      grid-column: span 2;
+    }
+    
+  }
 }
