@@ -61,10 +61,19 @@
           <button (click)="openComments()"><i [ngStyle]="{'color': isCommentSectionOpen ? 'rgb(66, 103, 178)' : 'white'}" class="fa-solid fa-comments"></i> Comments</button>
         </div>
       </div>
+      <div *ngIf="isCommentSectionOpen" class="comments-section">
+        <div class="add-comment">
+        <img class="profile-image2" src="https://t3.ftcdn.net/jpg/05/53/79/60/360_F_553796090_XHrE6R9jwmBJUMo9HKl41hyHJ5gqt9oz.jpg" alt="avatar">
+          <form >
+            <textarea></textarea>
+            <button></button>
+            <button></button>
+          </form>
+        </div>
+        @for (comment of microblogPost.comments; track $index) {
+            <app-microblog-comment [microblogComment]="comment"></app-microblog-comment>
+        }  
+      </div>
     </div>
-    <div class="comment-section">
-      @for (comment of microblogPost.comments; track $index) {
-          <app-microblog-comment [microblogComment]="comment"></app-microblog-comment>
-      }  
-    </div>
+   
   

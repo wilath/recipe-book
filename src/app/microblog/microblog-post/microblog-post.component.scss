@@ -1,6 +1,20 @@
 @import "../../styles/variables";
 
+.profile-image {
+  height: 3rem;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+}
+
+.profile-image2 {
+  height: 2rem;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+}
+
 .post-wrapper {
+
+
   .top-section {
     display: flex;
     flex-direction: row;
@@ -38,11 +52,7 @@
       }
     }
 
-    .profile-image {
-      height: 3rem;
-      aspect-ratio: 1/1;
-      border-radius: 50%;
-    }
+
   }
 
   .text-section {
@@ -114,7 +124,7 @@
   }
 
   .likes-section {
-    margin: 1rem;
+    margin: 0 1rem;
     padding: 0.5rem 0;
     border-top: 1px solid $uno-grey-active;
     color: $uno-white;
@@ -127,17 +137,19 @@
       display: flex;
       align-items: center;
       justify-content: flex-start;
-      gap:15px;
+      gap: 15px;
       font-size: 1.1rem;
-      i{
+
+      i {
         font-size: 0.95rem
       }
     }
-    .likes-buttons{
+
+    .likes-buttons {
       display: flex;
       align-items: center;
       justify-content: flex-start;
-      gap:15px;
+      gap: 15px;
 
       button {
         position: relative;
@@ -149,18 +161,56 @@
         border-radius: 1rem;
         transition: all 0.2s linear;
         padding: 0 15px;
+
         &:hover {
           background-color: $uno-grey-active;
           color: $sage;
         }
-        &:hover>.fa-heart{
+
+        &:hover>.fa-heart {
           color: tomato
         }
-        &:hover>.fa-comments{
+
+        &:hover>.fa-comments {
           color: rgb(66, 103, 178)
         }
 
       }
     }
+  }
+
+  .comments-section {
+    border-top: 1px solid $uno-grey-active;
+    margin: 0 1rem;
+    padding: 1rem 0;
+    .add-comment {
+      display: flex;
+      flex-direction: row;
+      form {
+        margin-left: 1rem;
+        flex-grow: 1;
+        textarea {
+          padding: 0.5rem;
+          width: calc(100% - 1rem);
+          min-height: 3rem;
+          border-radius: 1rem;
+          background-color: $uno-grey-active;
+          border: none;
+          resize: none;
+          color: $uno-white;
+          overflow-y: hidden;
+
+          &:focus {
+            outline: none;
+            border: none;
+          }
+
+          &:focus-visible {
+            outline: 1px solid $sage;
+          }
+        }
+      }
+    }
+
   }
 }
