@@ -10,20 +10,46 @@
     <div class="text-section">
       <p>{{microblogPost.content}}</p>
     </div>
-    <div class="image-section">
-    
-      <a *ngIf="microblogPost.images[0]">
-        <img class="image-display"  [src]="microblogPost.images[0].url" [alt]="microblogPost.images[0].name">
-      </a>
-      <a *ngIf="microblogPost.images[1]">
-        <img class="image-display"  [src]="microblogPost.images[1].url" [alt]="microblogPost.images[1].name">
-      </a>
-      <a *ngIf="microblogPost.images[2] && microblogPost.images.length <= 3">
-        <img class="image-display"  [src]="microblogPost.images[2].url" [alt]="microblogPost.images[2].name">
-      </a>
-      <a *ngIf="microblogPost.images.length > 3">
-        <img class="image-display" [src]="microblogPost.images[3].url" [alt]="microblogPost.images[3].name">
-      </a>
+    <div 
+    class="image-section"
+    *ngIf="microblogPost.images.length > 0"
+    [ngStyle]="{'aspect-ratio': microblogPost.images.length === 2 ? '3/4':'3/2'}"
+    >
+      
+      <div *ngIf="microblogPost.images[0]"
+        [ngClass]="{
+        'grid-full': microblogPost.images.length === 1,
+        'grid-top': microblogPost.images.length === 2,
+        'grid-big-left': microblogPost.images.length > 2}"> <!--kafelek pierwszy-->
+        <a>
+          <img
+          class="image-section-photo"  
+          [src]="microblogPost.images[0].url" 
+          [alt]="microblogPost.images[0].name">
+        </a>
+        </div>
+      <div *ngIf="microblogPost.images[1]"
+        [ngClass]="{
+        'grid-bottom': microblogPost.images.length === 2,
+        'grid-small-top': microblogPost.images.length > 2}"> <!--kafelek drugi-->
+        <a >
+          <img 
+          class="image-section-photo"  
+          [src]="microblogPost.images[1].url" 
+          [alt]="microblogPost.images[1].name">
+        </a>
+        </div>
+      <div class="grid-small-bottom" *ngIf="microblogPost.images[2] && microblogPost.images.length <= 3"> <!--kafelek trzeci-->
+        <a>
+          <img class="image-section-photo" [src]="microblogPost.images[2].url" [alt]="microblogPost.images[2].name">
+        </a>
+      </div>
+      <div class="grid-small-bottom" *ngIf="microblogPost.images.length > 3"> <!-- kafelek z plusem-->
+        <a>
+          <div class="image-plus"> <p>+ {{microblogPost.images.length - 2 }}</p></div>
+          <img class="image-section-photo" [src]="microblogPost.images[2].url" [alt]="microblogPost.images[2].name">
+        </a>
+      </div>
   
     </div>
     <div class="likes-section"></div>
