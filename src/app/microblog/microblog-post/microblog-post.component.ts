@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MicroblogPost } from '../../shared/models/microblog-post.model';
 import { UserDataService } from '../../user-panel/user-data.service';
 import { UserData } from '../../shared/models/user-data.model';
+import { MicroblogService } from '../microblog.service';
 
 @Component({
   selector: 'app-microblog-post',
@@ -10,16 +11,26 @@ import { UserData } from '../../shared/models/user-data.model';
 })
 export class MicroblogPostComponent implements OnInit {
 
-  constructor(private userDataService: UserDataService) {}
+  constructor(private userDataService: UserDataService, private microblogService: MicroblogService) {}
 
   @Input() public microblogPost!: MicroblogPost
 
   public postAuthor!: {email: string, name: string, avatar?: string};
 
+  private loggedUserEmail: string = ''
+
+  public timeSincePosted: string = '';
+
+  public isLikedByCurrentUser: boolean = false;
+
+  public isCommentSectionOpen: boolean = false
+
   public ngOnInit(): void {
-    const userData = this.userDataService.getUserData(this.microblogPost.author)
-    this.postAuthor = {email: userData.email, name: userData.name, avatar: userData.avatar}
-    console.log(this.microblogPost)
+    const userData = this.userDataService.getUserData(this.microblogPost.author);
+    this.postAuthor = {email: userData.email, name: userData.name, avatar: userData.avatar};
+    this.loggedUserEmail = JSON.parse(localStorage.getItem('userData') || '{}').email
+    this.timeSincePosted = this.calculateTimeSincePost(this.microblogPost.date);
+    this.isLikedByCurrentUser = this.microblogPost.likes.whoLiked.includes(this.loggedUserEmail)
   }
 
   public calculateTimeSincePost(postDate: Date): string {
@@ -41,5 +52,14 @@ export class MicroblogPostComponent implements OnInit {
     } else {
       return Math.floor(diffInSeconds) + ' seconds ago';
     }
+  }
+
+  public onLikePost(){
+    this.microblogService.onLikePost(this.microblogPost.id, this.loggedUserEmail, !this.isLikedByCurrentUser);
+    this.isLikedByCurrentUser = !this.isLikedByCurrentUser;
+  }
+
+  public openComments(){
+    this.isCommentSectionOpen = !this.isCommentSectionOpen
   }
 }

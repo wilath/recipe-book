@@ -1,4 +1,5 @@
 @import "../../styles/variables";
+
 .post-wrapper {
   .top-section {
     display: flex;
@@ -6,6 +7,7 @@
     justify-items: flex-start;
     align-items: flex-start;
     padding: 1rem;
+
     .author-data {
       margin-left: 1rem;
       color: $uno-white;
@@ -17,6 +19,7 @@
       h4 {
         font-size: 1.5rem;
       }
+
       h5 {
         margin-top: 5px;
         color: $sage;
@@ -34,12 +37,14 @@
         }
       }
     }
+
     .profile-image {
       height: 3rem;
       aspect-ratio: 1/1;
       border-radius: 50%;
     }
   }
+
   .text-section {
     color: $uno-white;
     padding: 1rem;
@@ -54,41 +59,48 @@
     grid-column-gap: 0px;
     grid-row-gap: 0px;
 
-      a{
-        cursor: pointer;       
-      }
+    a {
+      cursor: pointer;
+    }
 
-    .image-section-photo{
+    .image-section-photo {
       object-fit: cover;
       width: 100%;
       height: 100%;
     }
-    .grid-full{
+
+    .grid-full {
       grid-column: 1 / 3;
       grid-row: 1 / 3;
     }
-    .grid-top{
+
+    .grid-top {
       grid-column: 1 / 3;
       grid-row: 1 / 2;
     }
-    .grid-bottom{
+
+    .grid-bottom {
       grid-column: 1 / 3;
       grid-row: 2 / 3
     }
-    .grid-big-left{
+
+    .grid-big-left {
       grid-column: 1 / 2;
       grid-row: 1 / 3;
     }
-    .grid-small-top{
+
+    .grid-small-top {
       grid-column: 2 / 3;
       grid-row: 1 / 2
     }
-    .grid-small-bottom{
+
+    .grid-small-bottom {
       grid-column: 2 / 3;
       grid-row: 2 / 3;
       position: relative;
     }
-    .image-plus{
+
+    .image-plus {
       position: absolute;
       width: 100%;
       height: 100%;
@@ -98,6 +110,57 @@
       display: flex;
       align-items: center;
       justify-content: center;
+    }
+  }
+
+  .likes-section {
+    margin: 1rem;
+    padding: 0.5rem 0;
+    border-top: 1px solid $uno-grey-active;
+    color: $uno-white;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+
+    .likes-info {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap:15px;
+      font-size: 1.1rem;
+      i{
+        font-size: 0.95rem
+      }
+    }
+    .likes-buttons{
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap:15px;
+
+      button {
+        position: relative;
+        height: 2.3rem;
+        color: $uno-white;
+        border: none;
+        background-color: transparent;
+        font-size: 1.3rem;
+        border-radius: 1rem;
+        transition: all 0.2s linear;
+        padding: 0 15px;
+        &:hover {
+          background-color: $uno-grey-active;
+          color: $sage;
+        }
+        &:hover>.fa-heart{
+          color: tomato
+        }
+        &:hover>.fa-comments{
+          color: rgb(66, 103, 178)
+        }
+
+      }
     }
   }
 }
