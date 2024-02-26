@@ -8,6 +8,7 @@ import { MicroblogNewpostComponent } from './microblog-newpost/microblog-newpost
 import { SharedModule } from '../shared/shared.module';
 import { MicroblogPostPlaceholderComponent } from './microblog-post-placeholder/microblog-post-placeholder.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -23,7 +24,8 @@ import { HttpClientModule } from '@angular/common/http';
     CommonModule,
     MicroblogRoutingModule,
     SharedModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ]
 })
 export class MicroblogModule { }

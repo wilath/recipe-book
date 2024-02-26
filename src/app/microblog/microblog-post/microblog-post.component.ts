@@ -3,6 +3,7 @@ import { MicroblogPost } from '../../shared/models/microblog-post.model';
 import { UserDataService } from '../../user-panel/user-data.service';
 import { UserData } from '../../shared/models/user-data.model';
 import { MicroblogService } from '../microblog.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-microblog-post',
@@ -10,8 +11,7 @@ import { MicroblogService } from '../microblog.service';
   styleUrl: './microblog-post.component.scss',
 })
 export class MicroblogPostComponent implements OnInit {
-
-  constructor(private userDataService: UserDataService, private microblogService: MicroblogService) {}
+  constructor(private userDataService: UserDataService, private microblogService: MicroblogService, private formBuilder: FormBuilder) {}
 
   @Input() public microblogPost!: MicroblogPost
 
@@ -23,7 +23,9 @@ export class MicroblogPostComponent implements OnInit {
 
   public isLikedByCurrentUser: boolean = false;
 
-  public isCommentSectionOpen: boolean = false
+  public isCommentSectionOpen: boolean = false;
+
+  public newCommentForm!: FormGroup;
 
   public ngOnInit(): void {
     const userData = this.userDataService.getUserData(this.microblogPost.author);
@@ -33,6 +35,13 @@ export class MicroblogPostComponent implements OnInit {
     this.isLikedByCurrentUser = this.microblogPost.likes.whoLiked.includes(this.loggedUserEmail)
   }
 
+  public onSubmit() {
+    throw new Error('Method not implemented.');
+  }
+  
+  public showEmojiPanel() {
+    throw new Error('Method not implemented.');
+  }
   public calculateTimeSincePost(postDate: Date): string {
     const now = new Date();
     const diffInMilliseconds = now.getTime() - postDate.getTime();

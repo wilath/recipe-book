@@ -7,7 +7,7 @@
 }
 
 .profile-image2 {
-  height: 2rem;
+  height: 2.5rem;
   aspect-ratio: 1/1;
   border-radius: 50%;
 }
@@ -183,30 +183,49 @@
     border-top: 1px solid $uno-grey-active;
     margin: 0 1rem;
     padding: 1rem 0;
+
     .add-comment {
       display: flex;
       flex-direction: row;
+
       form {
+        position: relative;
         margin-left: 1rem;
         flex-grow: 1;
-        textarea {
-          padding: 0.5rem;
-          width: calc(100% - 1rem);
-          min-height: 3rem;
-          border-radius: 1rem;
-          background-color: $uno-grey-active;
-          border: none;
-          resize: none;
-          color: $uno-white;
-          overflow-y: hidden;
+        border-radius: 1rem;
+        padding: 0.25rem;
+        background-color: $uno-grey-active;
+        border: none;
+        color: $uno-white;
+        display: flex;
+        flex-direction: row;
+        height: 2rem;
 
+        textarea {
+          background-color: transparent;
+          resize: none;
+          overflow-y: hidden;
+          flex-grow: 1;
+          color: $uno-white;
+          border: none;
+          margin-left: 0.25rem;
           &:focus {
             outline: none;
             border: none;
           }
+        }
 
-          &:focus-visible {
-            outline: 1px solid $sage;
+        .add-comment-buttons {
+
+          button {
+            border: none;
+            background-color: transparent;
+            font-size: 1.3rem;
+            color: $uno-white;
+            transition: color 0.2s linear;
+            &:hover{
+              color: $sage;
+            }
           }
         }
       }

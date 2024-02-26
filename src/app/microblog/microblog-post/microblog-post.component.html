@@ -64,10 +64,12 @@
       <div *ngIf="isCommentSectionOpen" class="comments-section">
         <div class="add-comment">
         <img class="profile-image2" src="https://t3.ftcdn.net/jpg/05/53/79/60/360_F_553796090_XHrE6R9jwmBJUMo9HKl41hyHJ5gqt9oz.jpg" alt="avatar">
-          <form >
-            <textarea></textarea>
-            <button></button>
-            <button></button>
+          <form [formGroup] = "newCommentForm" >
+            <textarea placeholder="Add new comment..."  ></textarea>
+            <div class="add-comment-buttons">
+              <button (click)="showEmojiPanel()" ><i class="fa-regular fa-face-smile-wink"></i></button>
+              <button (click)="onSubmit()" ><i class="fa-solid fa-share"></i></button>
+            </div>
           </form>
         </div>
         @for (comment of microblogPost.comments; track $index) {
