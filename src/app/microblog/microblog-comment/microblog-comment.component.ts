@@ -11,7 +11,7 @@ import { UserData } from '../../shared/models/user-data.model';
 export class MicroblogCommentComponent implements OnInit {
   constructor(private userDataService: UserDataService)  {}
 
-  @Input() public microblogComment: MicroblogComment = {id:0, author: '', content:'', likes:{quantity:0,whoLiked:[]}}
+  @Input() public microblogComment: MicroblogComment = {id:0, author: '', content:'', likes:{quantity:0,whoLiked:[]}, date: new Date()}
 
   public commentAuthorData = {}
 

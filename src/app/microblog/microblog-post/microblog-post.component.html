@@ -85,6 +85,7 @@
         </div>
         @for (comment of microblogPost.comments; track $index) {
             <app-microblog-comment [microblogComment]="comment"></app-microblog-comment>
+           {{$index}} XDD
         }  
       </div>
     </div>

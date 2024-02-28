@@ -55,6 +55,8 @@ export class MicroblogPostComponent implements OnInit {
       likes: {quantity: 0, whoLiked: []},
       date: new Date()
     }
+    this.microblogService.onAddCommentToPost(this.microblogPost.id, newComment);
+    this.initForm()
   }
   
   public showEmojiPanel() {

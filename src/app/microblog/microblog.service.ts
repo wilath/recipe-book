@@ -66,7 +66,7 @@ export class MicroblogService   {
     this.postsChange.next(this.posts.slice());
   }
 
-  public onCommentPost(postId: number, comment: MicroblogComment) {
+  public onAddCommentToPost(postId: number, comment: MicroblogComment) {
     const newPosts = this.posts;
     const postIndex = newPosts.findIndex((el) => el.id === postId);
     if (postIndex !== -1) {
