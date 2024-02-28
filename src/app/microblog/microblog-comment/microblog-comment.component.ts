@@ -2,6 +2,7 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { UserDataService } from '../../user-panel/user-data.service';
 import { MicroblogComment } from '../../shared/models/microblog-comment.model';
 import { UserData } from '../../shared/models/user-data.model';
+import { FileAnchor } from '../../shared/models/file-upload.model';
 
 @Component({
   selector: 'app-microblog-comment',
@@ -13,7 +14,7 @@ export class MicroblogCommentComponent implements OnInit {
 
   @Input() public microblogComment: MicroblogComment = {id:0, author: '', content:'', likes:{quantity:0,whoLiked:[]}, date: new Date()}
 
-  public commentAuthorData = {}
+  public commentAuthorData: {email: string, name: string, avatar: FileAnchor} = {email:'', name:'',avatar:{name:'', url: ''}}
 
   public ngOnInit(): void {
     const userData = this.userDataService.getUserData(this.microblogComment.author);

@@ -1,3 +1,4 @@
+import { FileAnchor } from "./file-upload.model";
 import { Ingredient } from "./ingredient.model";
 import { NotificationModel } from "./notification.model";
 
@@ -8,5 +9,5 @@ export interface UserData {
     shoppingList: Ingredient[];
     followers: string[];
     userFollows: string[];
-    avatar?: string;
+    avatar: FileAnchor
   }
