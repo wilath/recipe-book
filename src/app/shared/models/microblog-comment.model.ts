@@ -5,4 +5,5 @@ export interface MicroblogComment{
     author: string;
     content: string;
     likes: Likes;
+    date: Date,
 }

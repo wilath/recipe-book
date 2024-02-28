@@ -89,7 +89,7 @@ export class MicroblogNewpostComponent implements OnInit, OnDestroy {
     .map( (el) => {return el.imageData})
     .filter( el => el.url);
 
-    const newPost :MicroblogPost = {
+    const newPost :MicroblogPost = ({
       id: this.microblogService.getIdforNewPost,
       author: this.userData.email,
       date: new Date,
@@ -97,7 +97,7 @@ export class MicroblogNewpostComponent implements OnInit, OnDestroy {
       images: images,
       likes: {quantity: 0, whoLiked: []},
       comments: []
-    }
+    })
 
     this.microblogService.onAddNewPost(newPost)
     this.initForm()

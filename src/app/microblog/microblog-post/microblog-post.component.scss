@@ -233,3 +233,30 @@
 
   }
 }
+
+.emoji-mart {
+  position: absolute;
+  background-color: transparent;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 3rem;
+  z-index: 4;
+
+  scrollbar-width: thin;
+  scrollbar-color: $uno-grey-active transparent;
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #06b741;
+    border-radius: 10px;
+    border: 5px solid #ffffff;
+  }
+}
+
+.emoji-active {
+  background-color: $uno-grey-active;
+  color: $sage;
+}

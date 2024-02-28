@@ -3,7 +3,8 @@ import { MicroblogPost } from '../../shared/models/microblog-post.model';
 import { UserDataService } from '../../user-panel/user-data.service';
 import { UserData } from '../../shared/models/user-data.model';
 import { MicroblogService } from '../microblog.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { MicroblogComment } from '../../shared/models/microblog-comment.model';
 
 @Component({
   selector: 'app-microblog-post',
@@ -27,6 +28,9 @@ export class MicroblogPostComponent implements OnInit {
 
   public newCommentForm!: FormGroup;
 
+  public isEmojiPickerVisible: boolean = false;
+  
+
   public ngOnInit(): void {
     const userData = this.userDataService.getUserData(this.microblogPost.author);
     this.postAuthor = {email: userData.email, name: userData.name, avatar: userData.avatar};
@@ -35,13 +39,33 @@ export class MicroblogPostComponent implements OnInit {
     this.isLikedByCurrentUser = this.microblogPost.likes.whoLiked.includes(this.loggedUserEmail)
   }
 
+  public initForm(){
+    let content = new FormControl('');
+    this.newCommentForm = this.formBuilder.group({
+      content: content
+    })
+
+  }
+
   public onSubmit() {
-    throw new Error('Method not implemented.');
+    const newComment: MicroblogComment = {
+      id: this.microblogPost.getHighestCommentId(),
+      author: this.loggedUserEmail,
+      content: this.newCommentForm.value.content,
+      likes: {quantity: 0, whoLiked: []},
+      date: new Date()
+    }
   }
   
   public showEmojiPanel() {
-    throw new Error('Method not implemented.');
+    this.isEmojiPickerVisible = !this.isEmojiPickerVisible
   }
+
+  public addEmoji(event: any){
+    const textArea = <FormControl>this.newCommentForm.get('content');
+    (<FormControl>this.newCommentForm.get('content')).setValue(`${textArea.value} ${event.emoji.native}`)
+  }
+
   public calculateTimeSincePost(postDate: Date): string {
     const now = new Date();
     const diffInMilliseconds = now.getTime() - postDate.getTime();
@@ -69,6 +93,8 @@ export class MicroblogPostComponent implements OnInit {
   }
 
   public openComments(){
-    this.isCommentSectionOpen = !this.isCommentSectionOpen
+    this.isCommentSectionOpen = !this.isCommentSectionOpen;
+    this.initForm();
   }
+
 }
