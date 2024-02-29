@@ -1,8 +1,8 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { UserDataService } from '../../user-panel/user-data.service';
+import { Component, Input, OnInit } from '@angular/core';
 import { MicroblogComment } from '../../shared/models/microblog-comment.model';
-import { UserData } from '../../shared/models/user-data.model';
-import { FileAnchor } from '../../shared/models/file-upload.model';
+import { SimpleUserdata } from '../../shared/models/user-data.model';
+import { UserDataService } from '../../user-panel/user-data.service';
+import { MicroblogService } from '../microblog.service';
 
 @Component({
   selector: 'app-microblog-comment',
@@ -10,15 +10,52 @@ import { FileAnchor } from '../../shared/models/file-upload.model';
   styleUrl: './microblog-comment.component.scss',
 })
 export class MicroblogCommentComponent implements OnInit {
-  constructor(private userDataService: UserDataService)  {}
+  constructor(private userDataService: UserDataService, private microblogService: MicroblogService)  {}
 
   @Input() public microblogComment: MicroblogComment = {id:0, author: '', content:'', likes:{quantity:0,whoLiked:[]}, date: new Date()}
+  
+  @Input() public postId: number = 0
 
-  public commentAuthorData: {email: string, name: string, avatar: FileAnchor} = {email:'', name:'',avatar:{name:'', url: ''}}
+  public commentAuthorData!: SimpleUserdata;
+
+  public timeSincePosted: string = '';
+
+  public isLikedByCurrentUser : boolean = false;
+  
+  private loggedUserEmail: string = '';
 
   public ngOnInit(): void {
     const userData = this.userDataService.getUserData(this.microblogComment.author);
-    this.commentAuthorData = {email: userData.email, name: userData.name, avatar: userData.avatar}
+    this.commentAuthorData = {email: userData.email, name: userData.name, avatar: userData.avatar};
+    this.timeSincePosted = this.calculateTimeSincePost(this.microblogComment.date);
+    this.loggedUserEmail = JSON.parse(localStorage.getItem('userData') || '{}').email;
+    this.isLikedByCurrentUser = this.microblogComment.likes.whoLiked.includes(this.loggedUserEmail)
+  }
+
+  public onAddLike() { 
+    this.microblogService.onLikeComment(this.postId, this.microblogComment.id, this.loggedUserEmail, !this.isLikedByCurrentUser);
+    this.isLikedByCurrentUser = !this.isLikedByCurrentUser;
+  }
+
+  private calculateTimeSincePost(postDate: Date): string {
+    const now = new Date();
+    const diffInMilliseconds = now.getTime() - postDate.getTime();
+    const diffInSeconds = diffInMilliseconds / 1000; 
+    const diffInMinutes = diffInSeconds / 60; 
+    const diffInHours = diffInMinutes / 60; 
+    const diffInDays = diffInHours / 24; 
+  
+    if (diffInDays > 7) {
+      return '>7 days';
+    } else if (diffInDays >= 1) {
+      return Math.floor(diffInDays) + ' days ago';
+    } else if (diffInHours >= 1) {
+      return Math.floor(diffInHours) + ' hours ago';
+    } else if (diffInMinutes >= 1) {
+      return Math.floor(diffInMinutes) + ' minutes ago';
+    } else {
+      return Math.floor(diffInSeconds) + ' seconds ago';
+    }
   }
   
 }

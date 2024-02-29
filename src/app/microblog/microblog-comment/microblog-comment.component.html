@@ -1,9 +1,19 @@
 <div class="comment-wrap">
-    <img [src]="commentAuthorData.avatar.url" alt="">
-
-    <div class="comment-content"></div>
-    <div class="comment-meta"></div>
-    <div class="comment-likes"></div>
-
-
+  <img
+    src="https://t3.ftcdn.net/jpg/05/53/79/60/360_F_553796090_XHrE6R9jwmBJUMo9HKl41hyHJ5gqt9oz.jpg"
+    alt="avatar"
+    class="profile-image"
+  />
+  <div class="content-wrap">
+    
+    <div class="comment-content">
+        <h4>{{ commentAuthorData.name }}  <span class="likes-quantity">{{microblogComment.likes.quantity}} <i class="fa-solid fa-heart"></i> </span> </h4>
+      <p>{{ microblogComment.content }}</p>
+    </div>
+    <div class="comment-meta">
+      {{microblogComment.date | date:'shortDate'}} <span>·</span> {{ timeSincePosted }} <span>·</span> <button type="button" class="love-it" (click)="onAddLike()" > {{isLikedByCurrentUser? 'I dont love it' : 'I love it!'}}</button> 
+      
+    </div>
+    
+  </div>
 </div>

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MicroblogPost } from '../../shared/models/microblog-post.model';
 import { UserDataService } from '../../user-panel/user-data.service';
-import { UserData } from '../../shared/models/user-data.model';
+import { SimpleUserdata, UserData } from '../../shared/models/user-data.model';
 import { MicroblogService } from '../microblog.service';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MicroblogComment } from '../../shared/models/microblog-comment.model';
@@ -16,7 +16,7 @@ export class MicroblogPostComponent implements OnInit {
 
   @Input() public microblogPost!: MicroblogPost
 
-  public postAuthor!: {email: string, name: string, avatar?: string};
+  public postAuthor!: SimpleUserdata
 
   private loggedUserEmail: string = ''
 

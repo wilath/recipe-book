@@ -84,8 +84,8 @@
           </form>
         </div>
         @for (comment of microblogPost.comments; track $index) {
-            <app-microblog-comment [microblogComment]="comment"></app-microblog-comment>
-           {{$index}} XDD
+            <app-microblog-comment [microblogComment]="comment" [postId]="microblogPost.id"></app-microblog-comment>
+           
         }  
       </div>
     </div>
