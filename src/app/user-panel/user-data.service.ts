@@ -121,9 +121,9 @@ export class UserDataService  {
       case UserNotification.gotFollowed:
         message = `${user.user.name} is now following You`;
         break;
-        case UserNotification.gotUnfollowed:
-          message = `${user.user.name} stopped following You`;
-          break;
+      case UserNotification.gotUnfollowed:
+        message = `${user.user.name} stopped following You`;
+        break;
       case UserNotification.newRecipeByFollow:
         message = `${user.user.name} added new Recipe - ${eventName}`;
         break;
@@ -131,10 +131,13 @@ export class UserDataService  {
         message = `${user.user.name} joined the Page!`;
         break;
       case UserNotification.likedPost:
-        message = `${user.user.name} liked your post - ${eventName}`;
+        message = `${user.user.name} liked your post` ;
+        break;
+      case UserNotification.likedComment:
+        message = `${user.user.name} liked your comment`;
         break;
       case UserNotification.commentedPost:
-        message = `${user.user.name} commented your post - ${eventName}`;
+        message = `${user.user.name} commented your post `;
         break;
       case UserNotification.newPostByFollow:
         message = `${user.user.name} added new post - ${eventName}`;

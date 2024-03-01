@@ -3,10 +3,12 @@ import { MicroblogPost } from '../shared/models/microblog-post.model';
 import { Observable, Subject, map, tap } from 'rxjs';
 import { MicroblogComment } from '../shared/models/microblog-comment.model';
 import { RealTimeDatabaseService } from '../shared/real-time-database.service';
+import { UserDataService } from '../user-panel/user-data.service';
+import { UserNotification } from '../shared/enums/notifications.enum';
 
 @Injectable()
 export class MicroblogService   {
-  constructor(private realTimeDatabaseService:RealTimeDatabaseService) {}
+  constructor(private realTimeDatabaseService:RealTimeDatabaseService, private userDataService: UserDataService) {}
  
 
   public posts: MicroblogPost[] = [];
@@ -74,6 +76,7 @@ export class MicroblogService   {
     }
     this.posts = newPosts;
     this.postsChange.next(this.posts.slice());
+    this.userDataService.setNotificationToUser(this.posts[postIndex].author, UserNotification.commentedPost, comment.author)
   }
 
   public onDeleteComment(postId: number, commentId: number) {
@@ -122,6 +125,7 @@ export class MicroblogService   {
       }
       this.posts = newPosts;
       this.postsChange.next(this.posts.slice());
+      this.userDataService.setNotificationToUser(this.posts[postIndex].author, UserNotification.likedPost, userEmail)
   }
 
   public onLikeComment(postId: number, commentId: number, userEmail: string, add: boolean) {
@@ -143,5 +147,6 @@ export class MicroblogService   {
     }
     this.posts = newPosts;
     this.postsChange.next(this.posts.slice());
+    this.userDataService.setNotificationToUser(this.posts[postIndex].comments[newCommentIndex].author, UserNotification.likedComment, userEmail)
   }
 }

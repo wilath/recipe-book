@@ -6,6 +6,7 @@ export enum UserNotification{
     newRecipeByFollow,
     newUserJoined,
     likedPost,
+    likedComment,
     commentedPost,
     newPostByFollow
 }
