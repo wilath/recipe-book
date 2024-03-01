@@ -11,7 +11,14 @@
       <p>{{ microblogComment.content }}</p>
     </div>
     <div class="comment-meta">
-      {{microblogComment.date | date:'shortDate'}} <span>·</span> {{ timeSincePosted }} <span>·</span> <button type="button" class="love-it" (click)="onAddLike()" > {{isLikedByCurrentUser? 'I dont love it' : 'I love it!'}}</button> 
+      {{microblogComment.date | date:'shortDate'}} 
+      <span>·</span> 
+      {{ timeSincePosted }} 
+      <span>·</span> 
+      <button type="button" class="love-it" (click)="onAddLike()" > {{isLikedByCurrentUser? 'I dont love it' : 'I love it!'}}</button> 
+      <span>·</span> 
+      <button type="button" class="love-it" (click)="onFollowUser()" > {{isFollowedByCurrentUser? 'Unfollow' : 'Follow'}}</button> 
+
       
     </div>
     

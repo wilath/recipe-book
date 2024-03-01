@@ -1,6 +1,6 @@
 import { Injectable} from '@angular/core';
 import { Observable, Subject, map, tap } from 'rxjs';
-import { UserData } from '../shared/models/user-data.model';
+import { UserData, emptyUserData } from '../shared/models/user-data.model';
 import { UserNotification } from '../shared/enums/notifications.enum';
 import { NotificationModel } from '../shared/models/notification.model';
 import { RealTimeDatabaseService } from '../shared/real-time-database.service';
@@ -100,6 +100,11 @@ export class UserDataService  {
     this.usersData = data;
     this.userDataChange.next(this.usersData.slice())
     this.sendDataToStore.next()
+  }
+
+  public checkIfUserisFollowed(userEmailToCheck: string, followerEmail: string): boolean{
+    const user = this.usersData.find((user) => user.email === userEmailToCheck) || emptyUserData
+    return user.followers.includes(followerEmail)
   }
 
   private getNotification(notification: UserNotification,eventUserEmail: string,eventName?: string) {

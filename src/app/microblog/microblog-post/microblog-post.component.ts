@@ -1,10 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MicroblogPost } from '../../shared/models/microblog-post.model';
 import { UserDataService } from '../../user-panel/user-data.service';
-import { SimpleUserdata, UserData } from '../../shared/models/user-data.model';
+import { UserData, emptyUserData } from '../../shared/models/user-data.model';
 import { MicroblogService } from '../microblog.service';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MicroblogComment } from '../../shared/models/microblog-comment.model';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-microblog-post',
@@ -12,13 +13,14 @@ import { MicroblogComment } from '../../shared/models/microblog-comment.model';
   styleUrl: './microblog-post.component.scss',
 })
 export class MicroblogPostComponent implements OnInit {
+
   constructor(private userDataService: UserDataService, private microblogService: MicroblogService, private formBuilder: FormBuilder) {}
 
   @Input() public microblogPost!: MicroblogPost
 
-  public postAuthor!: SimpleUserdata
+  public postAuthor!: UserData;
 
-  private loggedUserEmail: string = ''
+  public loggedUserEmail: string = ''
 
   public timeSincePosted: string = '';
 
@@ -26,17 +28,20 @@ export class MicroblogPostComponent implements OnInit {
 
   public isCommentSectionOpen: boolean = false;
 
+  public isEmojiPickerVisible: boolean = false;
+
+  public isFollowedByCurrentUser: boolean = false;
+  
   public newCommentForm!: FormGroup;
 
-  public isEmojiPickerVisible: boolean = false;
   
 
   public ngOnInit(): void {
-    const userData = this.userDataService.getUserData(this.microblogPost.author);
-    this.postAuthor = {email: userData.email, name: userData.name, avatar: userData.avatar};
+    this.postAuthor = this.userDataService.getUserData(this.microblogPost.author);
     this.loggedUserEmail = JSON.parse(localStorage.getItem('userData') || '{}').email
     this.timeSincePosted = this.calculateTimeSincePost(this.microblogPost.date);
-    this.isLikedByCurrentUser = this.microblogPost.likes.whoLiked.includes(this.loggedUserEmail)
+    this.isLikedByCurrentUser = this.microblogPost.likes.whoLiked.includes(this.loggedUserEmail);
+    this.CheckIfFollowedByCurrentUser()
   }
 
   public initForm(){
@@ -59,14 +64,6 @@ export class MicroblogPostComponent implements OnInit {
     this.initForm()
   }
   
-  public showEmojiPanel() {
-    this.isEmojiPickerVisible = !this.isEmojiPickerVisible
-  }
-
-  public addEmoji(event: any){
-    const textArea = <FormControl>this.newCommentForm.get('content');
-    (<FormControl>this.newCommentForm.get('content')).setValue(`${textArea.value} ${event.emoji.native}`)
-  }
 
   public calculateTimeSincePost(postDate: Date): string {
     const now = new Date();
@@ -97,6 +94,25 @@ export class MicroblogPostComponent implements OnInit {
   public openComments(){
     this.isCommentSectionOpen = !this.isCommentSectionOpen;
     this.initForm();
+  }
+
+  public onFollowUser() {
+    this.userDataService.addFollowToUser(this.postAuthor.email, this.loggedUserEmail, !this.isFollowedByCurrentUser);
+    this.CheckIfFollowedByCurrentUser()
+  }
+
+  public showEmojiPanel() {
+    this.isEmojiPickerVisible = !this.isEmojiPickerVisible
+  }
+  
+  public addEmoji(event: any){
+    const textArea = <FormControl>this.newCommentForm.get('content');
+    (<FormControl>this.newCommentForm.get('content')).setValue(`${textArea.value} ${event.emoji.native}`)
+  }
+  
+  private CheckIfFollowedByCurrentUser() {
+    this.isFollowedByCurrentUser = this.userDataService.checkIfUserisFollowed(this.postAuthor.email, this.loggedUserEmail);
+    
   }
 
 }

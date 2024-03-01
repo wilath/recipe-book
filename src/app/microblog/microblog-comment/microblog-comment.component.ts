@@ -12,15 +12,17 @@ import { MicroblogService } from '../microblog.service';
 export class MicroblogCommentComponent implements OnInit {
   constructor(private userDataService: UserDataService, private microblogService: MicroblogService)  {}
 
-  @Input() public microblogComment: MicroblogComment = {id:0, author: '', content:'', likes:{quantity:0,whoLiked:[]}, date: new Date()}
+  @Input() public microblogComment: MicroblogComment = {id:0, author: '', content:'', likes:{quantity:0,whoLiked:[]}, date: new Date()};
   
-  @Input() public postId: number = 0
+  @Input() public postId: number = 0;
 
   public commentAuthorData!: SimpleUserdata;
 
   public timeSincePosted: string = '';
 
   public isLikedByCurrentUser : boolean = false;
+
+  public isFollowedByCurrentUser : boolean = false;
   
   private loggedUserEmail: string = '';
 
@@ -29,12 +31,18 @@ export class MicroblogCommentComponent implements OnInit {
     this.commentAuthorData = {email: userData.email, name: userData.name, avatar: userData.avatar};
     this.timeSincePosted = this.calculateTimeSincePost(this.microblogComment.date);
     this.loggedUserEmail = JSON.parse(localStorage.getItem('userData') || '{}').email;
-    this.isLikedByCurrentUser = this.microblogComment.likes.whoLiked.includes(this.loggedUserEmail)
+    this.isLikedByCurrentUser = this.microblogComment.likes.whoLiked.includes(this.loggedUserEmail);
+    this.CheckIfFollowedByCurrentUser();
   }
 
   public onAddLike() { 
     this.microblogService.onLikeComment(this.postId, this.microblogComment.id, this.loggedUserEmail, !this.isLikedByCurrentUser);
     this.isLikedByCurrentUser = !this.isLikedByCurrentUser;
+  }
+
+  public onFollowUser() {
+    this.userDataService.addFollowToUser(this.microblogComment.author, this.loggedUserEmail, !this.isFollowedByCurrentUser);
+    this.CheckIfFollowedByCurrentUser()
   }
 
   private calculateTimeSincePost(postDate: Date): string {
@@ -57,5 +65,8 @@ export class MicroblogCommentComponent implements OnInit {
       return Math.floor(diffInSeconds) + ' seconds ago';
     }
   }
-  
+
+  private CheckIfFollowedByCurrentUser() {
+    this.isFollowedByCurrentUser = this.userDataService.checkIfUserisFollowed(this.microblogComment.author, this.loggedUserEmail);
+  }
 }

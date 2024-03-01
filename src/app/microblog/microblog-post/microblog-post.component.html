@@ -58,6 +58,9 @@
         </div>
         <div class="likes-buttons">
           <button (click)="onLikePost()"><i [ngStyle]="{'color': isLikedByCurrentUser ? 'tomato' : 'white'}" class="fa-solid fa-heart"></i> I love it!</button>
+          @if (postAuthor.email !== loggedUserEmail) {
+            <button (click)="onFollowUser()"><i [ngStyle]="{'color': isFollowedByCurrentUser ? 'rgb(244,198,77)' : 'white'}" class="fa-solid fa-user-plus"></i> Follow </button>
+          }
           <button (click)="openComments()"><i [ngStyle]="{'color': isCommentSectionOpen ? 'rgb(66, 103, 178)' : 'white'}" class="fa-solid fa-comments"></i> Comments</button>
         </div>
       </div>
