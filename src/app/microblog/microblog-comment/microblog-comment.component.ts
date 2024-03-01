@@ -10,6 +10,7 @@ import { MicroblogService } from '../microblog.service';
   styleUrl: './microblog-comment.component.scss',
 })
 export class MicroblogCommentComponent implements OnInit {
+
   constructor(private userDataService: UserDataService, private microblogService: MicroblogService)  {}
 
   @Input() public microblogComment: MicroblogComment = {id:0, author: '', content:'', likes:{quantity:0,whoLiked:[]}, date: new Date()};
@@ -24,7 +25,7 @@ export class MicroblogCommentComponent implements OnInit {
 
   public isFollowedByCurrentUser : boolean = false;
   
-  private loggedUserEmail: string = '';
+  public loggedUserEmail: string = '';
 
   public ngOnInit(): void {
     const userData = this.userDataService.getUserData(this.microblogComment.author);
@@ -43,6 +44,10 @@ export class MicroblogCommentComponent implements OnInit {
   public onFollowUser() {
     this.userDataService.addFollowToUser(this.microblogComment.author, this.loggedUserEmail, !this.isFollowedByCurrentUser);
     this.CheckIfFollowedByCurrentUser()
+  }
+
+  public onDeleteComment() {
+    this.microblogService.onDeleteComment(this.postId, this.microblogComment.id)
   }
 
   private calculateTimeSincePost(postDate: Date): string {

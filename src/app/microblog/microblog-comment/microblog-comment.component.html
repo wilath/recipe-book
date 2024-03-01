@@ -17,9 +17,12 @@
       <span>·</span> 
       <button type="button" class="love-it" (click)="onAddLike()" > {{isLikedByCurrentUser? 'I dont love it' : 'I love it!'}}</button> 
       <span>·</span> 
+      @if (microblogComment.author !== loggedUserEmail) {
       <button type="button" class="love-it" (click)="onFollowUser()" > {{isFollowedByCurrentUser? 'Unfollow' : 'Follow'}}</button> 
+      } @else {
+        <button type="button" class="love-it" (click)="onDeleteComment()" > Delete</button>       
+      }
 
-      
     </div>
     
   </div>

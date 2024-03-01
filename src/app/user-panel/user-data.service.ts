@@ -121,6 +121,9 @@ export class UserDataService  {
       case UserNotification.gotFollowed:
         message = `${user.user.name} is now following You`;
         break;
+        case UserNotification.gotUnfollowed:
+          message = `${user.user.name} stopped following You`;
+          break;
       case UserNotification.newRecipeByFollow:
         message = `${user.user.name} added new Recipe - ${eventName}`;
         break;

@@ -138,7 +138,7 @@ export class MicroblogNewpostComponent implements OnInit, OnDestroy {
     let images = new FormArray<FormGroup>([]);
 
     this.newPostForm! = this.formBuilder.group({
-      content: content,
+      content: content, 
       images: images,
     })
   }

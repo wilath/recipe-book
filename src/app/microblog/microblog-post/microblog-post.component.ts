@@ -101,6 +101,10 @@ export class MicroblogPostComponent implements OnInit {
     this.CheckIfFollowedByCurrentUser()
   }
 
+  public onDeletePost(){
+    this.microblogService.onDeletePost(this.microblogPost.id)
+  }
+
   public showEmojiPanel() {
     this.isEmojiPickerVisible = !this.isEmojiPickerVisible
   }
