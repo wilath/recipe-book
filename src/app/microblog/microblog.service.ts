@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MicroblogPost } from '../shared/models/microblog-post.model';
-import { Observable, Subject, map, tap } from 'rxjs';
+import { Observable, Subject, defaultIfEmpty, map, tap } from 'rxjs';
 import { MicroblogComment } from '../shared/models/microblog-comment.model';
 import { RealTimeDatabaseService } from '../shared/real-time-database.service';
 import { UserDataService } from '../user-panel/user-data.service';
@@ -27,7 +27,28 @@ export class MicroblogService   {
   }
 
   public setMicroblog():Observable<void> {
-    return this.realTimeDatabaseService.fetchMicroblogData().pipe(tap(
+    return this.realTimeDatabaseService.fetchMicroblogData().pipe(
+      map(postsToSet => {
+        if(postsToSet){
+      return postsToSet.map(
+        post => {
+          return new MicroblogPost(
+            post.id,
+            post.author,
+            new Date(post.date),
+            post.content,
+            post.images ? post.images : new Array(),
+            post.likes && post.likes.whoLiked ? post.likes : { quantity: post.likes.quantity? post.likes.quantity : 0, whoLiked: [] },
+            post.comments ? post.comments.map(comment => {
+              return {
+                ...comment,
+                likes: comment.likes && comment.likes.whoLiked ? comment.likes : { quantity: comment.likes.quantity? comment.likes.quantity : 0, whoLiked: [] },
+                date: new Date(comment.date)
+              };
+            }) : new Array()
+          );
+        })} else { return []};
+    }),tap(
       (postsToSet: MicroblogPost[]) => {
         if(postsToSet){
           this.posts = postsToSet;
@@ -148,5 +169,9 @@ export class MicroblogService   {
     this.posts = newPosts;
     this.postsChange.next(this.posts.slice());
     this.userDataService.setNotificationToUser(this.posts[postIndex].comments[newCommentIndex].author, UserNotification.likedComment, userEmail)
+  }
+
+  public storeDatainDatabase(){
+    this.realTimeDatabaseService.storeMicroblogData(this.posts)
   }
 }

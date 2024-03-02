@@ -36,11 +36,16 @@
 
 -defer loading for posts in microblog module, skeloton loading
 
+-adding pictures for posts
+
+-microblog has working posts, comments, and actions around it(likes, follows, cr/u/d)
+
+-notifications for likes/comments, new comments/ new posts
+
 -and more...
 
 # To Do:
 
--adding pictures for posts
 
 -add possibility to add microblog Post when creating new Recipe
 

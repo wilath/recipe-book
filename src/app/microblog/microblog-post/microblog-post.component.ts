@@ -1,11 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MicroblogPost } from '../../shared/models/microblog-post.model';
-import { UserDataService } from '../../user-panel/user-data.service';
-import { UserData, emptyUserData } from '../../shared/models/user-data.model';
-import { MicroblogService } from '../microblog.service';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MicroblogComment } from '../../shared/models/microblog-comment.model';
-import { map } from 'rxjs';
+import { MicroblogPost } from '../../shared/models/microblog-post.model';
+import { UserData } from '../../shared/models/user-data.model';
+import { UserDataService } from '../../user-panel/user-data.service';
+import { MicroblogService } from '../microblog.service';
 
 @Component({
   selector: 'app-microblog-post',
@@ -15,6 +14,7 @@ import { map } from 'rxjs';
 export class MicroblogPostComponent implements OnInit {
 
   constructor(private userDataService: UserDataService, private microblogService: MicroblogService, private formBuilder: FormBuilder) {}
+
 
   @Input() public microblogPost!: MicroblogPost
 
@@ -34,8 +34,6 @@ export class MicroblogPostComponent implements OnInit {
   
   public newCommentForm!: FormGroup;
 
-  
-
   public ngOnInit(): void {
     this.postAuthor = this.userDataService.getUserData(this.microblogPost.author);
     this.loggedUserEmail = JSON.parse(localStorage.getItem('userData') || '{}').email
@@ -44,6 +42,7 @@ export class MicroblogPostComponent implements OnInit {
     this.CheckIfFollowedByCurrentUser()
   }
 
+  
   public initForm(){
     let content = new FormControl('');
     this.newCommentForm = this.formBuilder.group({

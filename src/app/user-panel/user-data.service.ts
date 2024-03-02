@@ -87,7 +87,7 @@ export class UserDataService  {
   }
 
   public setNotificationToUser(userToNotifiy: string, notification: UserNotification,eventUserEmail: string, recipeName?: string) {
-    const message = this.getNotification(notification, eventUserEmail, recipeName);
+    const message = this.getNotificationMessage(notification, eventUserEmail, recipeName);
     const user = this.getUserByEmail(userToNotifiy);
     const eventUser = this.getUserByEmail(eventUserEmail);
     const data: UserData[] = this.usersData;
@@ -107,7 +107,7 @@ export class UserDataService  {
     return user.followers.includes(followerEmail)
   }
 
-  private getNotification(notification: UserNotification,eventUserEmail: string,eventName?: string) {
+  private getNotificationMessage(notification: UserNotification, eventUserEmail: string, eventName?: string) {
     const user = this.getUserByEmail(eventUserEmail);
     let message = '';
 
