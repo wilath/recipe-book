@@ -5,7 +5,11 @@
 
 <form [formGroup]="newPostForm" (ngSubmit)="onSubmit()">
 <div class="content-form">
-    <textarea [ngClass]="{'no-lower-border-radius': isPhotoAddOption}"  [placeholder]="'Whats on your mind ' + userData.name" name="content" id="content" formControlName="content" (input)="autoResize($event)"></textarea>
+    <textarea 
+    cdkTextareaAutosize
+    [ngClass]="{'no-lower-border-radius': isPhotoAddOption}"  
+    [placeholder]="'Whats on your mind ' + userData.name + ' ?'" 
+    name="content" id="content" formControlName="content" ></textarea>
 </div>
     <div class="image-form" formArrayName="images">    
     @for (imageControl of newPostForm.value.images; track $index) {
@@ -16,7 +20,7 @@
                 <div [ngStyle]="{ 'height': imageControl.percentages + '%'}"  class="image-loading"></div>
                 <img class="image-display" *ngIf="imageControl.imageData.url && imageControl.percentages === 100" [src]="imageControl.imageData.url" alt="XD" >
             </label>                     
-            <a stopPropagation *ngIf="imageControl.imageData.url && imageControl.percentages === 100" (click)="onDeleteImageFromForm($index)"><div class="image-delete"><i class="fa-regular fa-trash-can"></i></div></a>
+            <a *ngIf="imageControl.imageData.url && imageControl.percentages === 100" (click)="onDeleteImageFromForm($index)"><div class="image-delete"><i class="fa-regular fa-trash-can"></i></div></a>
         </div>                     
         </ng-container>
 }

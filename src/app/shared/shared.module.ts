@@ -4,6 +4,7 @@ import { AlertComponent } from './alert/alert.component';
 import { LoadingSpinnerComponent } from './loadingspinner/loading-spinner.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PickerComponent } from '@ctrl/ngx-emoji-mart';
+import {TextFieldModule} from '@angular/cdk/text-field';
 
 @NgModule({
   declarations: [
@@ -15,13 +16,15 @@ import { PickerComponent } from '@ctrl/ngx-emoji-mart';
     LoadingSpinnerComponent,
     CommonModule,
     ReactiveFormsModule,
-    PickerComponent
+    PickerComponent,
+    TextFieldModule
 
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    PickerComponent
+    PickerComponent,
+    TextFieldModule
     
   ],
 })

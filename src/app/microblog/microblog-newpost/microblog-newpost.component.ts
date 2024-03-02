@@ -1,11 +1,12 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { FileAnchor, FileUpload } from '../../shared/models/file-upload.model';
 import { MicroblogPost } from '../../shared/models/microblog-post.model';
 import { StorageService } from '../../shared/storage.service';
 import { UserDataService } from '../../user-panel/user-data.service';
 import { MicroblogService } from '../microblog.service';
-import { finalize } from 'rxjs';
+import { finalize, take } from 'rxjs';
+import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 
 @Component({
   selector: 'app-microblog-newpost',
@@ -17,7 +18,8 @@ export class MicroblogNewpostComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private storage: StorageService, 
     private userDataService: UserDataService, 
-    private microblogService: MicroblogService) {}
+    private microblogService: MicroblogService
+  ) {}
 
   public newPostForm!: FormGroup;
 
@@ -101,22 +103,8 @@ export class MicroblogNewpostComponent implements OnInit, OnDestroy {
 
     this.microblogService.onAddNewPost(newPost)
     this.initForm()
-    this.autoResize()
+  
     this.isPhotoAddOption = false
-  }
-
-  public autoResize(event?: Event) {
-    if(event) {
-      const textarea = event.target as HTMLTextAreaElement
-      textarea.style.height = 'auto';
-      textarea.style.height = textarea.scrollHeight + 'px';
-    } else {
-      const textarea = document.getElementById('content') as HTMLTextAreaElement
-      textarea.style.height = 'auto'
-
-    }
-     
-   
   }
 
   public onShowEmojiPanel(){

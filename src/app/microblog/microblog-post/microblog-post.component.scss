@@ -200,7 +200,7 @@
         color: $uno-white;
         display: flex;
         flex-direction: row;
-        height: 2rem;
+        min-height: 2rem;
 
         textarea {
           background-color: transparent;
@@ -217,6 +217,11 @@
         }
 
         .add-comment-buttons {
+          align-self: flex-end;
+          margin-bottom: 0.25rem;
+          .active{
+            color: $sage;
+          }
 
           button {
             border: none;

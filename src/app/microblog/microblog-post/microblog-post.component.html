@@ -71,13 +71,13 @@
         <div class="add-comment">
         <img class="profile-image2" src="https://t3.ftcdn.net/jpg/05/53/79/60/360_F_553796090_XHrE6R9jwmBJUMo9HKl41hyHJ5gqt9oz.jpg" alt="avatar">
           <form [formGroup] = "newCommentForm" >
-            <textarea placeholder="Add new comment..." formControlName = 'content' ></textarea>
+            <textarea cdkTextareaAutosize placeholder="Add new comment..." formControlName='content'></textarea>
             <div class="add-comment-buttons">
               <button  type="button" (click)="showEmojiPanel()" [ngClass]="{'emoji-active' : isEmojiPickerVisible}" >
                 @if (isEmojiPickerVisible) {
-                  <i class="fa-regular fa-face-laugh-wink"></i> 
+                  <i class="active fa-regular fa-face-laugh-wink"></i> 
               } @else {
-                  <i class="fa-regular fa-face-smile-beam"></i>
+                  <i class="fa-regular fa-face-smile-beam  "></i>
               }
               </button>
               <button  type="submit" (click)="onSubmit()" ><i class="fa-solid fa-share"></i></button>
