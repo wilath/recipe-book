@@ -1,7 +1,7 @@
 <div class="microblog-wrap">
   <app-microblog-newpost> </app-microblog-newpost>
 
-  @for (post of posts; track $index) {
+  @for (post of (posts | dateLikeSort: SortType.sortByDate) ; track $index) {
 
     @defer (on viewport()) {
         <app-microblog-post  [microblogPost]="post"></app-microblog-post>

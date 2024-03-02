@@ -9,6 +9,7 @@ import { SharedModule } from '../shared/shared.module';
 import { MicroblogPostPlaceholderComponent } from './microblog-post-placeholder/microblog-post-placeholder.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { DateLikePipe } from '../shared/pipes/date-like-sort.pipe';
 
 
 
@@ -18,14 +19,16 @@ import { FormsModule } from '@angular/forms';
     MicroblogPostComponent,
     MicroblogCommentComponent,
     MicroblogNewpostComponent,
-    MicroblogPostPlaceholderComponent
+    MicroblogPostPlaceholderComponent,
+    DateLikePipe
   ],
   imports: [
     CommonModule,
     MicroblogRoutingModule,
     SharedModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    
   ]
 })
 export class MicroblogModule { }

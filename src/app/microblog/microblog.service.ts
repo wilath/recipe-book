@@ -71,7 +71,7 @@ export class MicroblogService   {
 
   public onDeletePost(postId: number) {
     const newPosts = this.posts.filter((el) => {
-      el.id !== postId;
+      return el.id !== postId;
     });
     this.posts = newPosts;
     this.postsChange.next(this.posts.slice());
