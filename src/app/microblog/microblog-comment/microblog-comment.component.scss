@@ -16,7 +16,7 @@
     min-width: 55%;
     .comment-content {
       position: relative;
-      padding: 0.5rem;
+      padding: 0.6rem;
      
       background-color: $uno-grey-active;
       color: $uno-white;
@@ -51,6 +51,7 @@
       }
       p {
         font-size: 1rem;
+        margin-top: 0.1rem;
       }
     }
     .comment-meta {

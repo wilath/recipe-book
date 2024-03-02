@@ -11,15 +11,16 @@
   }
   form {
     flex-grow: 1;
+    
+    
     .content-form {
       margin-left: 1rem;
       flex-grow: 1;
       background-color: $uno-grey-active;
       border-radius: 1rem;
+      margin-bottom: 1px;
+      
 
-      .no-lower-border-radius {
-        border-radius: 1rem 1rem 0 0;
-      }
       textarea {
         width: calc(100% - 1rem);
         background-color: transparent;
@@ -32,6 +33,9 @@
           border: none;
         }       
       }
+    }
+    .no-lower-border-radius {
+      border-radius: 1rem 1rem 0 0;
     }
     .image-form {
       padding-left: 1rem;

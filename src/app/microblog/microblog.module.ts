@@ -10,6 +10,7 @@ import { MicroblogPostPlaceholderComponent } from './microblog-post-placeholder/
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { DateLikePipe } from '../shared/pipes/date-like-sort.pipe';
+import { MicroblogPhotosDisplayComponent } from './microblog-photos-display/microblog-photos-display.component';
 
 
 
@@ -20,6 +21,7 @@ import { DateLikePipe } from '../shared/pipes/date-like-sort.pipe';
     MicroblogCommentComponent,
     MicroblogNewpostComponent,
     MicroblogPostPlaceholderComponent,
+    MicroblogPhotosDisplayComponent,
     DateLikePipe
   ],
   imports: [
@@ -27,8 +29,7 @@ import { DateLikePipe } from '../shared/pipes/date-like-sort.pipe';
     MicroblogRoutingModule,
     SharedModule,
     HttpClientModule,
-    FormsModule,
-    
+    FormsModule,  
   ]
 })
 export class MicroblogModule { }

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MicroblogComment } from '../../shared/models/microblog-comment.model';
 import { MicroblogPost } from '../../shared/models/microblog-post.model';
 import { UserData } from '../../shared/models/user-data.model';
@@ -48,7 +48,8 @@ export class MicroblogPostComponent implements OnInit {
   }
 
   public initForm(){
-    let content = new FormControl('');
+    let content = new FormControl('', [
+      Validators.required]);
     this.newCommentForm = this.formBuilder.group({
       content: content
     })
@@ -114,6 +115,14 @@ export class MicroblogPostComponent implements OnInit {
   public addEmoji(event: any){
     const textArea = <FormControl>this.newCommentForm.get('content');
     (<FormControl>this.newCommentForm.get('content')).setValue(`${textArea.value} ${event.emoji.native}`)
+  }
+
+  public onEnterKey(event: Event): void {
+    const EventKey = event as KeyboardEvent
+    if (EventKey.key === 'Enter' && !EventKey.shiftKey) {
+      EventKey.preventDefault(); 
+      this.onSubmit(); 
+    }
   }
 
   public onChangeSortType(sort: SortType){

@@ -18,6 +18,8 @@ export class MicroblogComponent implements OnInit, OnDestroy {
 
   public SortType = SortType;
 
+  public isPhotoDisplayOn: boolean = true;
+
   public ngOnInit(): void {
     this.microblogSub = this.microblogService.postsChange.subscribe(posts => {
       this.posts = posts;
@@ -26,6 +28,7 @@ export class MicroblogComponent implements OnInit, OnDestroy {
     this.posts = this.microblogService.getMicroblogData()
     
   }
+
   public ngOnDestroy(): void {
     this.microblogSub.unsubscribe();
   }

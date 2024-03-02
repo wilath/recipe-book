@@ -7,7 +7,7 @@
   <div class="content-wrap">
     
     <div class="comment-content">
-        <h4>{{ commentAuthorData.name }}  <span class="likes-quantity">{{microblogComment.likes.quantity}} <i class="fa-solid fa-heart"></i> </span> </h4>
+        <h4>{{ commentAuthorData.name }}  @if (microblogComment.likes.quantity > 0) {<span class="likes-quantity">{{microblogComment.likes.quantity}} <i class="fa-solid fa-heart"></i> </span> } </h4>
       <p>{{ microblogComment.content }}</p>
     </div>
     <div class="comment-meta">

@@ -42,10 +42,15 @@
 
 -notifications for likes/comments, new comments/ new posts
 
+-fixed textareas with CDK, upgrade of post display
+
 -and more...
 
 # To Do:
 
+-implement  NgOptimizedImage
+
+-create carousel-like photo display of images from posts
 
 -add possibility to add microblog Post when creating new Recipe
 

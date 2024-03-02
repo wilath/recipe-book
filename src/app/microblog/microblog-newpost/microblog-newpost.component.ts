@@ -1,5 +1,5 @@
 import { Component, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { FileAnchor, FileUpload } from '../../shared/models/file-upload.model';
 import { MicroblogPost } from '../../shared/models/microblog-post.model';
 import { StorageService } from '../../shared/storage.service';
@@ -122,7 +122,8 @@ export class MicroblogNewpostComponent implements OnInit, OnDestroy {
   }
 
   private initForm() {
-    let content = new FormControl('');
+    let content = new FormControl('', [
+      Validators.required] );
     let images = new FormArray<FormGroup>([]);
 
     this.newPostForm! = this.formBuilder.group({

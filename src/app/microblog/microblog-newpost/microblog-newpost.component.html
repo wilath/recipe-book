@@ -4,10 +4,9 @@
 
 
 <form [formGroup]="newPostForm" (ngSubmit)="onSubmit()">
-<div class="content-form">
+<div [ngClass]="{'no-lower-border-radius': isPhotoAddOption}"  class="content-form">
     <textarea 
-    cdkTextareaAutosize
-    [ngClass]="{'no-lower-border-radius': isPhotoAddOption}"  
+    cdkTextareaAutosize   
     [placeholder]="'Whats on your mind ' + userData.name + ' ?'" 
     name="content" id="content" formControlName="content" ></textarea>
 </div>
