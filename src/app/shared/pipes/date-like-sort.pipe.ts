@@ -14,7 +14,6 @@ export class DateLikePipe implements PipeTransform {
       return [];
     }
 
-
     if (sortByDate === SortType.sortByDate) {
       elements.sort((a, b) => {
         const dateA = new Date(a.date).getTime();
@@ -22,7 +21,7 @@ export class DateLikePipe implements PipeTransform {
         return dateB - dateA; 
       });
     } else {
-        elements.sort((a, b) => a.likes.quantity - b.likes.quantity); 
+        elements.sort((a, b) => b.likes.quantity - a.likes.quantity); 
     }
 
     return elements;

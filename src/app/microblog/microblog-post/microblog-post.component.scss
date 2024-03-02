@@ -187,6 +187,7 @@
     .add-comment {
       display: flex;
       flex-direction: row;
+      margin-bottom: 1rem;
 
       form {
         position: relative;
@@ -227,6 +228,22 @@
               color: $sage;
             }
           }
+        }
+      }
+    }
+
+    .sorting-buttons{
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+
+      button{
+        border: none;
+        background-color: transparent;
+        color: $uno-white;
+        font-size: 1rem;
+        &:hover{
+          text-decoration: underline;
         }
       }
     }

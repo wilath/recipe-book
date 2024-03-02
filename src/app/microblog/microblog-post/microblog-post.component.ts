@@ -5,6 +5,7 @@ import { MicroblogPost } from '../../shared/models/microblog-post.model';
 import { UserData } from '../../shared/models/user-data.model';
 import { UserDataService } from '../../user-panel/user-data.service';
 import { MicroblogService } from '../microblog.service';
+import { SortType } from '../../shared/pipes/date-like-sort.pipe';
 
 @Component({
   selector: 'app-microblog-post',
@@ -34,6 +35,10 @@ export class MicroblogPostComponent implements OnInit {
   
   public newCommentForm!: FormGroup;
 
+  public sortType = SortType;
+
+  public choosenSortType: SortType = SortType.sortByLikes
+
   public ngOnInit(): void {
     this.postAuthor = this.userDataService.getUserData(this.microblogPost.author);
     this.loggedUserEmail = JSON.parse(localStorage.getItem('userData') || '{}').email
@@ -42,7 +47,6 @@ export class MicroblogPostComponent implements OnInit {
     this.CheckIfFollowedByCurrentUser()
   }
 
-  
   public initForm(){
     let content = new FormControl('');
     this.newCommentForm = this.formBuilder.group({
@@ -63,7 +67,6 @@ export class MicroblogPostComponent implements OnInit {
     this.initForm()
   }
   
-
   public calculateTimeSincePost(postDate: Date): string {
     const now = new Date();
     const diffInMilliseconds = now.getTime() - postDate.getTime();
@@ -112,10 +115,13 @@ export class MicroblogPostComponent implements OnInit {
     const textArea = <FormControl>this.newCommentForm.get('content');
     (<FormControl>this.newCommentForm.get('content')).setValue(`${textArea.value} ${event.emoji.native}`)
   }
+
+  public onChangeSortType(sort: SortType){
+    this.choosenSortType = sort;
+  }
   
   private CheckIfFollowedByCurrentUser() {
     this.isFollowedByCurrentUser = this.userDataService.checkIfUserisFollowed(this.postAuthor.email, this.loggedUserEmail);
-    
   }
 
 }

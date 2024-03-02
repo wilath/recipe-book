@@ -1,10 +1,9 @@
 @import "../../styles/variables";
 .comment-wrap {
-  margin-top: 1rem;
   display: flex;
   flex-direction: row;
-  border-top: 1px solid $uno-grey-active;
-  padding-top: 1rem;
+  margin-bottom: 0.2rem;
+
 
   .profile-image {
     border-radius: 50%;
@@ -40,10 +39,14 @@
           font-size: 0.85rem;
           background-color: rgb(150, 150, 150);
           border-radius: 0.5rem;
-          padding: 0.1rem 0.2rem;
+          padding: 0.2rem 0.3rem;
           color: $uno-white;
           right: 1rem;
-          bottom: -0.5rem;
+          top: -0.5rem;
+
+          i{
+            color: tomato;
+          }
         }
       }
       p {
