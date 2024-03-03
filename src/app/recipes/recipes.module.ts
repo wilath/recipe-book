@@ -12,8 +12,8 @@ import { RecipesComponent } from "./recipes.component";
 import { RecipesDetailsComponent } from "./recipes-details/recipes-details.component";
 import { ShowcaseComponent } from "../showcase/showcase.component";
 import { ShowcaseItemComponent } from "../showcase/showcase-item/showcase-item.component";
-import { FoodTypeSortPipe } from "../showcase/food-type.pipe";
-import { AuthorNamePipe } from "../showcase/showcase-item/author-name.pipe";
+import { FoodTypeSortPipe } from "../shared/pipes/food-type.pipe";
+import { AuthorNamePipe } from "../shared/pipes/author-name.pipe";
 
 @NgModule({
     declarations: [

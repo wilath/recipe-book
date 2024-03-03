@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { Recipe } from '../../shared/models/recipe.model';
 import { RecipesDetailsComponent } from '../recipes-details/recipes-details.component';
 import { RecipesService } from '../recipes.service';
+import { FoodType } from '../../shared/enums/food-type-enum';
 
 @Component({
   selector: 'app-recipes-list',
@@ -13,19 +14,27 @@ import { RecipesService } from '../recipes.service';
 
 })
 
-
 export class RecipesListComponent implements OnInit, OnDestroy {
-  recipes:Array<Recipe> =[];
-  private subscription!: Subscription;
- 
 
   constructor(
     private recipeService: RecipesService,
     private router: Router,
     private route: ActivatedRoute,
-    private goManage: RecipesDetailsComponent
-    ) {
-   }
+    private recipeDetailsComponent: RecipesDetailsComponent
+    ) {}
+
+  public recipes:Array<Recipe> =[];
+
+  public chosenFoodCategory: FoodType | null = null;
+
+  public foodCategory = FoodType;
+
+  public foodSearch: string = '';
+
+  private subscription!: Subscription;
+ 
+
+  
 
 
 
@@ -46,13 +55,13 @@ export class RecipesListComponent implements OnInit, OnDestroy {
     this.router.navigate(['new'],  {relativeTo: this.route})
   }
   DeleteRecipe(){
-    this.goManage.onDeleteRecipe()
+    this.recipeDetailsComponent.onDeleteRecipe()
   }
   EditRecipe(){
-    this.goManage.onEditRecipe()
+    this.recipeDetailsComponent.onEditRecipe()
   }
   ToShoplist(){
-    this.goManage.onToShopList()
+    this.recipeDetailsComponent.onToShopList()
   }
 
 
