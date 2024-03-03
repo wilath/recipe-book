@@ -6,6 +6,8 @@ import { Recipe } from '../../shared/models/recipe.model';
 import { RecipesDetailsComponent } from '../recipes-details/recipes-details.component';
 import { RecipesService } from '../recipes.service';
 import { FoodType } from '../../shared/enums/food-type-enum';
+import { SortType } from '../../shared/pipes/date-like-sort.pipe';
+import { FoodSort } from '../../shared/enums/food-sort.enum';
 
 @Component({
   selector: 'app-recipes-list',
@@ -16,6 +18,7 @@ import { FoodType } from '../../shared/enums/food-type-enum';
 
 export class RecipesListComponent implements OnInit, OnDestroy {
 
+
   constructor(
     private recipeService: RecipesService,
     private router: Router,
@@ -23,21 +26,20 @@ export class RecipesListComponent implements OnInit, OnDestroy {
     private recipeDetailsComponent: RecipesDetailsComponent
     ) {}
 
-  public recipes:Array<Recipe> =[];
+  public recipes:Array<Recipe> = [];
 
   public chosenFoodCategory: FoodType | null = null;
 
   public foodCategory = FoodType;
 
+  public foodSort = FoodSort;
+
+  public chosenSortType: FoodSort = FoodSort.Popular;
+
   public foodSearch: string = '';
 
   private subscription!: Subscription;
  
-
-  
-
-
-
   ngOnInit() {
     this.subscription = this.recipeService.recipesChanged.subscribe(
       (recipes:Recipe[]) => {
@@ -63,6 +65,9 @@ export class RecipesListComponent implements OnInit, OnDestroy {
   ToShoplist(){
     this.recipeDetailsComponent.onToShopList()
   }
+  showUsersRecipes() {
+  }
+
 
 
 }

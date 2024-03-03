@@ -144,7 +144,6 @@ export class MicroblogPostComponent implements OnInit {
         return acc;
       }
     }, this.microblogPost.comments[0]);
-    console.log(this.topComment)
   }
 
 }

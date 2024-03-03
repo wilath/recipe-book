@@ -1,4 +1,9 @@
-<div class="showcase-menu">
+
+
+
+<div class="filters">
+<div class="filters-row">
+  <div class="food-type-filers">
   <form>
     <input
       [value]="null"
@@ -43,14 +48,58 @@
     <span></span>
   </form>
 
+  
+  </div>
+  <div class="user-filters">
+    <button (click)="onNewRecipe()">New Recipe</button>
+    <button (click)="showUsersRecipes()">Your Recipes</button>
+  </div>
+</div>
+<div class="filters-row">
   <div class="search">
     <input placeholder="Search..." type="text" [(ngModel)]="foodSearch" />
   </div>
+  <div class="sort">
+    <form>
+      <input 
+      [value]="foodSort.Latest" 
+      type="radio"
+      id="latest"
+      name="foodSort"
+      [(ngModel)]="chosenSortType">
+      <label  for="latest">Latest</label>
+      <input 
+      [value]="foodSort.Popular" 
+      type="radio"
+      id="popular"
+      name="foodSort"
+      [(ngModel)]="chosenSortType">
+      <label for="popular">Popular</label>
+      <input 
+      [value]="foodSort.BestRating" 
+      type="radio"
+      id="bestRating"
+      name="foodSort"
+      [(ngModel)]="chosenSortType">
+      <label for="bestRating">Best rated</label>
+      <input 
+      [value]="foodSort.Quickest" 
+      type="radio"
+      id="quickest"
+      name="foodSort"
+      [(ngModel)]="chosenSortType">
+      <label for="quickest">Quickest</label>
+    </form>
+  </div>
+
+</div>
+
 </div>
 
 
 
-<div (click)="onNewRecipe()" >
+
+<div >
   <span>New Recipe</span>
 </div>
 
@@ -59,9 +108,9 @@
 
 
 
-@for (recipe of recipes; track $index) {
+@for (recipe of recipes | foodTypeSort: chosenFoodCategory : foodSearch; track $index) {
 
-<app-recipes-item [recipe]="recipe" [index]="$index"></app-recipes-item>
+  <app-recipes-item [recipe]="recipe" [index]="$index"></app-recipes-item>
 }
 
 <!--   
