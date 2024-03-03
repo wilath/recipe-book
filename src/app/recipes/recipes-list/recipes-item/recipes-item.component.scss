@@ -1,0 +1,36 @@
+@import '../../../styles/variables';
+.post{
+    color: $uno-white;
+    border-radius: 1rem;
+    overflow: hidden;
+    border: 1px solid red;
+
+    .recipe-image{
+        width: 300px;
+        aspect-ratio: 3/2;
+    }
+    .recipe-title{
+        font-size: 1.4rem;
+        font-weight: 500;
+        padding: 0.5rem 0;
+        margin-left: 1rem;
+    }
+    .recipe-info{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-evenly;
+        margin: 1rem 0;
+    }
+    .user-info{
+        margin: 0 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+
+
+
+
+}

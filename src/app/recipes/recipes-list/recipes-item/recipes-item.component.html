@@ -1,29 +1,39 @@
-
-
-<div 
-
-    style="cursor:pointer"
+<!-- 
     [routerLink]="[index]"
-    routerLinkActive="active">
 
+-->
+<div >
 
-    <div class="post">
-        <img style="width: 100px; aspect-ratio:  1/1;" [src]="recipe.imagePath" alt="recipe" />
-      
-        <div class="post-body">
-          <div class="user-avatar">
-            <i class="fa-solid fa-user"></i>
+    <div class="post" >
+        <img class="recipe-image"  [src]="recipe.imagePath" alt="recipe" />
+        <div class="recipe-title">
+          {{recipe.name}}
+        </div>
+        <div class="recipe-info">
+            <div class="stars">
+              <div class="stars-background"></div>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+            </div>
+            <div class="level">
+              {{recipe.level}}
+            </div>
+            <div class="time">
+              {{recipe.prepTimeMinutes}}
+            </div>
+        </div>
+        <div class="user-info">
+          <div>
+            <img src="" alt="avatar">
+            {{recipe.author | authorname}}
           </div>
-          <div class="post-info">
-            <h2 class="post-name">{{ recipe.name }}</h2>
-            <h3>{{ recipe.author | authorname }}</h3>
-          </div>
-      
-          <div class="post-actions">
+          <div class="recipe-actions">
             <button class="post-action" (click)="onLike() ">
-              {{ recipe.likes.quantity }}
-              <i
-                [ngClass]="{ 'recipe-liked': isLikedByCurrentUser }"
+              {{recipe.likes.quantity}}
+              <i [ngClass]="{ 'recipe-liked': isLikedByCurrentUser }"
                 class="heart fa-solid fa-heart"
               ></i>
             </button>
@@ -31,7 +41,7 @@
               <i [ngClass]="{ 'recipe-liked': isFollowedByCurrentUser }" class="fa-solid fa-user-plus"></i>
             </button>
           </div>
-        </div>
+        
       </div>
       
 
@@ -39,4 +49,3 @@
 
 
 
-</div>

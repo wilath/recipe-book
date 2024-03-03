@@ -14,6 +14,7 @@
     />
     <label for="option4">All</label>
     <input
+
       [value]="foodCategory.breakfast"
       id="option0"
       name="foodtype"
@@ -52,7 +53,8 @@
   </div>
   <div class="user-filters">
     <button (click)="onNewRecipe()">New Recipe</button>
-    <button (click)="showUsersRecipes()">Your Recipes</button>
+    <input id="userFilter" type="checkbox"(click)="showUsersRecipes()">
+    <label for="userFilter">Your Recipes</label>
   </div>
 </div>
 <div class="filters-row">
@@ -61,7 +63,7 @@
   </div>
   <div class="sort">
     <form>
-      <input 
+      <input
       [value]="foodSort.Latest" 
       type="radio"
       id="latest"
@@ -99,19 +101,27 @@
 
 
 
-<div >
-  <span>New Recipe</span>
-</div>
 
 
 
 
 
 
-@for (recipe of recipes | foodTypeSort: chosenFoodCategory : foodSearch; track $index) {
+<div class="recipe-list-wrapper">
+  @for (
+  recipe of recipes 
+  | foodTypeSort: 
+    chosenFoodCategory: 
+    foodSearch:
+    chosenSortType:
+    userSort;
+    track $index) {
 
   <app-recipes-item [recipe]="recipe" [index]="$index"></app-recipes-item>
 }
+
+</div>
+
 
 <!--   
         <div class="router_wraper">

@@ -6,7 +6,6 @@ import { Recipe } from '../../shared/models/recipe.model';
 import { RecipesDetailsComponent } from '../recipes-details/recipes-details.component';
 import { RecipesService } from '../recipes.service';
 import { FoodType } from '../../shared/enums/food-type-enum';
-import { SortType } from '../../shared/pipes/date-like-sort.pipe';
 import { FoodSort } from '../../shared/enums/food-sort.enum';
 
 @Component({
@@ -28,6 +27,8 @@ export class RecipesListComponent implements OnInit, OnDestroy {
 
   public recipes:Array<Recipe> = [];
 
+  public loggedUserEmail: string = ''
+
   public chosenFoodCategory: FoodType | null = null;
 
   public foodCategory = FoodType;
@@ -38,8 +39,12 @@ export class RecipesListComponent implements OnInit, OnDestroy {
 
   public foodSearch: string = '';
 
+  public userSort: boolean = false
+
   private subscription!: Subscription;
  
+  
+
   ngOnInit() {
     this.subscription = this.recipeService.recipesChanged.subscribe(
       (recipes:Recipe[]) => {

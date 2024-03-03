@@ -5,3 +5,12 @@
         justify-content: space-between;
     }
 }
+.recipe-list-wrapper{
+    margin: 1rem 0;
+    gap: 1rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
