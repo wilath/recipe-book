@@ -26,10 +26,19 @@ export class RealTimeDatabaseService {
     return this.http.get<Recipe[]>(this.urlRecipes).pipe(
         map((recipes) => {
           return recipes.map((recipe) => {
-            return {
-              ...recipe,
-              ingredients: recipe.ingredients ? recipe.ingredients : [],
-            }
+            return new Recipe(
+              recipe.name,
+              recipe.description,
+              recipe.imagePath,
+              recipe.ingredients ? recipe.ingredients : [],
+              recipe.foodType,
+              recipe.author,
+              recipe.level,
+              recipe.prepTimeMinutes,
+              recipe.date,
+              recipe.likes ? recipe.likes : { quantity: 0, whoLiked: [] },
+              recipe.stars ? recipe.stars : []
+          );
           })
         })
       )

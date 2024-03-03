@@ -12,9 +12,9 @@ export interface Rating {
 }
 
 export enum DifficultyLevel{
-    Easy,
-    Medium,
-    Hard
+    Easy = "Easy",
+    Medium = "Medium",
+    Hard = "Hard"
 }
 
 export class Recipe{
@@ -29,7 +29,7 @@ export class Recipe{
     public date: Date;
     public likes: Likes;
     public stars: Rating[];
-    constructor(name:string, desc:string, imagePath:string, ingredients: Ingredient[], foodType: FoodType, author: string, level: DifficultyLevel, prepTimeMinutes: number, date: Date, likes?: Likes, ){
+    constructor(name:string, desc:string, imagePath:string, ingredients: Ingredient[], foodType: FoodType, author: string, level: DifficultyLevel, prepTimeMinutes: number, date: Date, likes?: Likes, stars?: Rating[] ){
         this.name = name;
         this.description = desc;
         this.imagePath = imagePath;
@@ -42,4 +42,15 @@ export class Recipe{
         this.likes = likes || { quantity: 0, whoLiked: [] };
         this.stars = [];
     }
+
+    public get getAverageRating(): number {
+        if (this.stars.length === 0) {
+            return 0; 
+        } else {
+            const sum = this.stars.reduce((total, rating) => total + rating.rate, 0);
+            return sum / this.stars.length;
+        }
+    }
+
+   
 }
