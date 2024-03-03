@@ -37,14 +37,17 @@ export class MicroblogPostComponent implements OnInit {
 
   public sortType = SortType;
 
-  public choosenSortType: SortType = SortType.sortByLikes
+  public choosenSortType: SortType = SortType.sortByLikes;
+
+  public topComment!: MicroblogComment;
 
   public ngOnInit(): void {
     this.postAuthor = this.userDataService.getUserData(this.microblogPost.author);
     this.loggedUserEmail = JSON.parse(localStorage.getItem('userData') || '{}').email
     this.timeSincePosted = this.calculateTimeSincePost(this.microblogPost.date);
     this.isLikedByCurrentUser = this.microblogPost.likes.whoLiked.includes(this.loggedUserEmail);
-    this.CheckIfFollowedByCurrentUser()
+    this.CheckIfFollowedByCurrentUser();
+    this.microblogPost.comments.length > 0 ? this.setTopComment() : undefined
   }
 
   public initForm(){
@@ -131,6 +134,17 @@ export class MicroblogPostComponent implements OnInit {
   
   private CheckIfFollowedByCurrentUser() {
     this.isFollowedByCurrentUser = this.userDataService.checkIfUserisFollowed(this.postAuthor.email, this.loggedUserEmail);
+  }
+
+  private setTopComment() {
+    this.topComment = this.microblogPost.comments.reduce((acc, curr) => {
+      if (curr.likes.quantity > acc.likes.quantity) {
+        return curr;
+      } else {
+        return acc;
+      }
+    }, this.microblogPost.comments[0]);
+    console.log(this.topComment)
   }
 
 }
