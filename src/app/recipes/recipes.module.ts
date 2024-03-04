@@ -10,7 +10,7 @@ import { RecipesListComponent } from "./recipes-list/recipes-list.component";
 import { RecepiesRoutingModule } from "./recipes-routing.module";
 import { RecipesComponent } from "./recipes.component";
 import { RecipesDetailsComponent } from "./recipes-details/recipes-details.component";
-import { FoodTypeSortPipe } from "../shared/pipes/food-type.pipe";
+import { FoodSortPipe, FoodTypePipe } from "../shared/pipes/food-type.pipe";
 import { AuthorNamePipe } from "../shared/pipes/author-name.pipe";
 
 @NgModule({
@@ -21,7 +21,8 @@ import { AuthorNamePipe } from "../shared/pipes/author-name.pipe";
         RecipesItemComponent,
         RecipeStartComponent,
         RecipeEditComponent,
-        FoodTypeSortPipe,
+        FoodTypePipe,
+        FoodSortPipe,
         AuthorNamePipe
     ],
     imports: [

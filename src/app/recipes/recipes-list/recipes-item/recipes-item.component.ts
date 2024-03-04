@@ -13,11 +13,12 @@ import { User } from '../../../shared/models/user.model';
   styleUrls: ['./recipes-item.component.scss'],
 })
 
-export class RecipesItemComponent implements OnInit {
+export class RecipesItemComponent implements OnChanges {
   constructor(
     private recipesService: RecipesService,
     private usersDataServcie: UserDataService
   ) {}
+  
   
   @Input() public recipe!: Recipe;
 
@@ -31,18 +32,18 @@ export class RecipesItemComponent implements OnInit {
 
   public totalRatePercentage: number = 0
 
- 
-
   public user!: User;
 
-  public ngOnInit(): void {
+ 
+
+  public ngOnChanges(changes: SimpleChanges): void {
     this.user = JSON.parse(localStorage.getItem('userData') || '{}');
+    this.totalRatePercentage = (this.recipe.getAverageRating)*20;
     this.isLikedByCurrentUser = this.recipe.isLikedByUser(this.user.email);
     this.rateByCurrentUser = this.recipe.isRatedByUser(this.user.email).toString();
-    this.totalRatePercentage = (this.recipe.getAverageRating)*20
     this.setFollow();
   }
-  
+
   public onLike() {
     this.recipesService.addLikeToRecipe(this.recipe.name,this.user.email, !this.isLikedByCurrentUser);
     this.isLikedByCurrentUser = !this.isLikedByCurrentUser
@@ -55,7 +56,6 @@ export class RecipesItemComponent implements OnInit {
 
   public onOpenRecipe() {
   }
-
 
   public onRateRecipe(event: Event) {
     const target = event.target as HTMLInputElement;

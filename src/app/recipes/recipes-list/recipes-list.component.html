@@ -103,14 +103,15 @@
 <div class="recipe-list-wrapper">
   @for (
   recipe of recipes 
-  | foodTypeSort: 
+  | foodType: 
     chosenFoodCategory: 
     foodSearch:
-    chosenSortType:
-    userSort;
-    track $index) {
+    userSort
+  | foodSort:
+    chosenSortType
+    ;track $index) {
 
-  <app-recipes-item [recipe]="recipe" [index]="$index"></app-recipes-item>
+  <app-recipes-item [recipe]="recipe"></app-recipes-item>
 }
 
 </div>

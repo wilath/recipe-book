@@ -5,13 +5,13 @@ import { FoodSort } from '../enums/food-sort.enum';
 
 
 @Pipe({
-  name: 'foodTypeSort'
+  name: 'foodType'
 })
-export class FoodTypeSortPipe implements PipeTransform {
+export class FoodTypePipe implements PipeTransform {
 
   private loggedUserEmail = JSON.parse(localStorage.getItem('userData') || '{}').email;
 
-  transform(recipes: Recipe[], foodType: FoodType | null, foodSearch: string, sortType: FoodSort, userSort: boolean ): Recipe[] {
+  transform(recipes: Recipe[], foodType: FoodType | null, foodSearch: string, userSort: boolean ): Recipe[] {
     let recipesToReturn: Recipe[] = []
     if (!recipes || foodType === null) {
       recipesToReturn = recipes
@@ -28,18 +28,31 @@ export class FoodTypeSortPipe implements PipeTransform {
         return recipe.author === this.loggedUserEmail;
       })
     }
+    return recipesToReturn;
+  }
+}
+
+
+@Pipe({
+  name: 'foodSort',
+})
+export class FoodSortPipe implements PipeTransform {
+
+  transform(recipes: Recipe[], sortType: FoodSort ): Recipe[] {
+    let recipesToReturn: Recipe[] = []
+
     switch (sortType) {
       case FoodSort.Latest:
-        recipesToReturn = recipesToReturn.sort((a, b) => b.date.getTime() - a.date.getTime());
+        recipesToReturn = recipes.sort((a, b) => b.date.getTime() - a.date.getTime());
         break;
       case FoodSort.Popular:
-        recipesToReturn =  recipesToReturn.sort((a, b) => b.likes.quantity - a.likes.quantity);
+        recipesToReturn = recipes.sort((a, b) => b.likes.quantity - a.likes.quantity);
         break;
       case FoodSort.BestRating:
-        recipesToReturn = recipesToReturn.sort((a, b) => b.getAverageRating - a.getAverageRating);
+        recipesToReturn = recipes.sort((a, b) => b.getAverageRating - a.getAverageRating);
         break;
       case FoodSort.Quickest:
-        recipesToReturn =  recipesToReturn.sort((a, b) => a.prepTimeMinutes - b.prepTimeMinutes);
+        recipesToReturn =  recipes.sort((a, b) => a.prepTimeMinutes - b.prepTimeMinutes);
         break;
       default:
            recipesToReturn = recipesToReturn; 
@@ -48,3 +61,4 @@ export class FoodTypeSortPipe implements PipeTransform {
     return recipesToReturn;
   }
 }
+
