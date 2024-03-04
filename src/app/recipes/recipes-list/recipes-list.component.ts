@@ -39,8 +39,6 @@ export class RecipesListComponent implements OnInit, OnDestroy {
 
   public foodSearch: string = '';
 
-  public userSort: boolean = false
-
   private subscription!: Subscription;
  
   ngOnInit() {
@@ -68,9 +66,7 @@ export class RecipesListComponent implements OnInit, OnDestroy {
   ToShoplist(){
     this.recipeDetailsComponent.onToShopList()
   }
-  showUsersRecipes() {
-    this.userSort = !this.userSort
-  }
+  
 
 
 

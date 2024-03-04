@@ -1,12 +1,15 @@
 @import "../../../styles/variables";
+
+
 .post {
   color: $uno-white;
   border-radius: 1rem;
   overflow: hidden;
   background-color: $uno-grey;
 
+ 
   .recipe-image {
-    width: 280px;
+    width: 100%;
     aspect-ratio: 3/2;
   }
   .recipe-title {

@@ -34,8 +34,6 @@ export class RecipesItemComponent implements OnChanges {
 
   public user!: User;
 
- 
-
   public ngOnChanges(changes: SimpleChanges): void {
     this.user = JSON.parse(localStorage.getItem('userData') || '{}');
     this.totalRatePercentage = (this.recipe.getAverageRating)*20;

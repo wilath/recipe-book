@@ -1,16 +1,69 @@
-.filters{
-    .filters-row{
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-}
-.recipe-list-wrapper{
-    margin: 1rem 0;
-    gap: 1rem;
+@import "../../styles/variables";
+
+.filters {
+  background-color: $uno-grey;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  color: $uno-white;
+  .filters-row {
+    position: relative;
     display: flex;
-    flex-direction: row;
     align-items: center;
-    justify-content: flex-start;
-    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0.5rem;
+    .search {
+      input {
+        padding: 0.25rem 0.5rem;
+        border-radius: 0.5rem;
+        background-color: $uno-grey-active;
+        font-size: 1rem;
+        font-family: inherit;
+        color: $uno-white
+      }
+    }
+    label {
+      cursor: pointer;
+      padding: 0.25rem 0.5rem;
+      background-color: $uno-grey-active;
+      border-radius: 0.5rem;
+      margin-right: 0.5rem;
+      transition: all 0.2s linear;
+      input {
+        position: absolute;
+        width: 0;
+      }
+      &:has(input:checked) {
+        background-color: $sage;
+        color: $uno-grey;
+      }
+    }
+    button {
+      background-color: transparent;
+      border: none;
+      font-size: 1rem;
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.5rem;
+      color: $uno-white;
+      font-family: inherit;
+      transition: all 0.2s linear;
+      &:hover {
+        background-color: $uno-grey-active;
+        i {
+          color: $sage;
+        }
+      }
+    }
+  }
+}
+
+.recipe-list-wrapper {
+  margin: 1rem 0;
+
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(280px, 1fr)
+  ); /* Automatyczne dopasowanie ilości kolumn */
+  grid-auto-rows: minmax(100px, auto); /* Automatyczna wysokość wierszy */
+  gap: 1rem; /* Odstęp między elementami */
 }

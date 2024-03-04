@@ -11,7 +11,7 @@ export class FoodTypePipe implements PipeTransform {
 
   private loggedUserEmail = JSON.parse(localStorage.getItem('userData') || '{}').email;
 
-  transform(recipes: Recipe[], foodType: FoodType | null, foodSearch: string, userSort: boolean ): Recipe[] {
+  transform(recipes: Recipe[], foodType: FoodType | null, foodSearch: string): Recipe[] {
     let recipesToReturn: Recipe[] = []
     if (!recipes || foodType === null) {
       recipesToReturn = recipes
@@ -23,11 +23,7 @@ export class FoodTypePipe implements PipeTransform {
         return recipe.name.toLowerCase().includes(foodSearch.toLowerCase());
       })
     }
-    if(userSort){
-      recipesToReturn = recipesToReturn.filter(recipe => {
-        return recipe.author === this.loggedUserEmail;
-      })
-    }
+   
     return recipesToReturn;
   }
 }

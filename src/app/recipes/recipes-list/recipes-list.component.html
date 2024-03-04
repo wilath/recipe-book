@@ -1,96 +1,112 @@
 
 <div class="filters">
 <div class="filters-row">
-  <div class="food-type-filers">
+  <div class="food-type-filters">
   <form>
-    <input
+    
+    <label for="option4">All
+      <input
       [value]="null"
       id="option4"
       name="foodtype"
       type="radio"
       [(ngModel)]="chosenFoodCategory"
     />
-    <label for="option4">All</label>
-    <input
-
+    </label>
+    
+    <label for="option0">Breakfasts
+      <input
       [value]="foodCategory.breakfast"
       id="option0"
       name="foodtype"
       type="radio"
       [(ngModel)]="chosenFoodCategory"
     />
-    <label for="option0">Breakfasts</label>
-    <input
+    </label>
+    
+    <label for="option1">Dinners
+      <input
       [value]="foodCategory.dinner"
       id="option1"
       name="foodtype"
       type="radio"
       [(ngModel)]="chosenFoodCategory"
     />
-    <label for="option1">Dinners</label>
-    <input
+    </label>
+   
+    <label for="option2">Beverages
+      <input
       [value]="foodCategory.drink"
       id="option2"
       name="foodtype"
       type="radio"
       [(ngModel)]="chosenFoodCategory"
     />
-    <label for="option2">Beverages</label>
-    <input
+    </label>
+    
+    <label for="option3">Deserts
+      <input
       [value]="foodCategory.desert"
       id="option3"
       name="foodtype"
       type="radio"
       [(ngModel)]="chosenFoodCategory"
     />
-    <label for="option3">Deserts</label>
+    </label>
     <span></span>
   </form>
 
   
   </div>
   <div class="user-filters">
-    <button (click)="onNewRecipe()">New Recipe</button>
-    <input id="userFilter" type="checkbox"(click)="showUsersRecipes()">
-    <label for="userFilter">Your Recipes</label>
+    <button (click)="onNewRecipe()"><i class="fa-solid fa-plus"></i> New Recipe</button>
   </div>
 </div>
 <div class="filters-row">
-  <div class="search">
-    <input placeholder="Search..." type="text" [(ngModel)]="foodSearch" />
-  </div>
   <div class="sort">
     <form>
-      <input
+      
+      <label  for="latest">Latest
+        <input
       [value]="foodSort.Latest" 
       type="radio"
       id="latest"
       name="foodSort"
       [(ngModel)]="chosenSortType">
-      <label  for="latest">Latest</label>
-      <input 
+      </label>
+      
+      <label for="popular">Popular
+        <input 
       [value]="foodSort.Popular" 
       type="radio"
       id="popular"
       name="foodSort"
       [(ngModel)]="chosenSortType">
-      <label for="popular">Popular</label>
-      <input 
+      </label>
+      
+      <label for="bestRating">Best rated
+        <input 
       [value]="foodSort.BestRating" 
       type="radio"
       id="bestRating"
       name="foodSort"
       [(ngModel)]="chosenSortType">
-      <label for="bestRating">Best rated</label>
-      <input 
+      </label>
+      
+      <label for="quickest">Quickest
+        <input 
       [value]="foodSort.Quickest" 
       type="radio"
       id="quickest"
       name="foodSort"
       [(ngModel)]="chosenSortType">
-      <label for="quickest">Quickest</label>
+      </label>
     </form>
   </div>
+  <div class="search">
+    <input placeholder="Search..." type="text" [(ngModel)]="foodSearch" />
+  </div>
+  
 
 </div>
 
@@ -105,8 +121,7 @@
   recipe of recipes 
   | foodType: 
     chosenFoodCategory: 
-    foodSearch:
-    userSort
+    foodSearch
   | foodSort:
     chosenSortType
     ;track $index) {
