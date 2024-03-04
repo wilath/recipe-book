@@ -40,7 +40,7 @@ export class Recipe{
         this.prepTimeMinutes = prepTimeMinutes;
         this.date = date;
         this.likes = likes || { quantity: 0, whoLiked: [] };
-        this.stars = [];
+        this.stars = stars || [];
     }
 
     public get getAverageRating(): number {
@@ -59,7 +59,7 @@ export class Recipe{
 
     public isRatedByUser(userEmail: string): number {
         const userRating = this.stars.find(rating => rating.user === userEmail);
-        return userRating ? userRating.rate : 1;
+        return userRating ? userRating.rate : 0;
     }
     
 }

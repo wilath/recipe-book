@@ -1,20 +1,24 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Recipe } from '../../../shared/models/recipe.model';
 import { RecipesService } from '../../recipes.service';
 import { UserDataService } from '../../../user-panel/user-data.service';
 import { User } from '../../../shared/models/user.model';
+
+
+
 
 @Component({
   selector: 'app-recipes-item',
   templateUrl: './recipes-item.component.html',
   styleUrls: ['./recipes-item.component.scss'],
 })
+
 export class RecipesItemComponent implements OnInit {
   constructor(
     private recipesService: RecipesService,
     private usersDataServcie: UserDataService
   ) {}
-
+  
   @Input() public recipe!: Recipe;
 
   @Input() public index: number = 0;
@@ -23,17 +27,22 @@ export class RecipesItemComponent implements OnInit {
 
   public isFollowedByCurrentUser: boolean = false;
 
-  public rateByCurrentUser: number = 0;
+  public rateByCurrentUser: string = "0";
+
+  public totalRatePercentage: number = 0
+
+ 
 
   public user!: User;
 
   public ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem('userData') || '{}');
     this.isLikedByCurrentUser = this.recipe.isLikedByUser(this.user.email);
-    this.rateByCurrentUser = this.recipe.isRatedByUser(this.user.email);
-    this.setFollow()
+    this.rateByCurrentUser = this.recipe.isRatedByUser(this.user.email).toString();
+    this.totalRatePercentage = (this.recipe.getAverageRating)*20
+    this.setFollow();
   }
-
+  
   public onLike() {
     this.recipesService.addLikeToRecipe(this.recipe.name,this.user.email, !this.isLikedByCurrentUser);
     this.isLikedByCurrentUser = !this.isLikedByCurrentUser
@@ -50,9 +59,8 @@ export class RecipesItemComponent implements OnInit {
 
   public onRateRecipe(event: Event) {
     const target = event.target as HTMLInputElement;
-    const isRated = this.rateByCurrentUser === 0 ? false : true;
-    this.recipesService.addRateToRecipe(this.recipe.name, this.user.email,parseInt(target.value,10), isRated);
-   
+    this.recipesService.addRateToRecipe(this.recipe.name, this.user.email,parseInt(target.value,10));
+    this.totalRatePercentage = (this.recipe.getAverageRating)*20;
   }
 
   private setFollow() {  

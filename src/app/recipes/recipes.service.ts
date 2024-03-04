@@ -63,13 +63,14 @@ export class RecipesService implements OnDestroy   {
 
   }
 
-  public addRateToRecipe(recipeName: string, whoRated: string, rate: number, add: boolean){
+  public addRateToRecipe(recipeName: string, whoRated: string, rate: number){
     const index = this.recipes.findIndex(
      (recipe) => recipe.name === recipeName
     );
     const newRecipes = this.recipes;
     const recipeToUpdate: Recipe = this.recipes[index];
-    if(add) {
+    const userRatingIndex = recipeToUpdate.stars.findIndex(rating => rating.user === whoRated);
+    if(userRatingIndex === -1) {
       recipeToUpdate.stars.push({user: whoRated, rate: rate})
     } else {
       const userRatingIndex = recipeToUpdate.stars.findIndex(rating => rating.user === whoRated);
@@ -79,7 +80,6 @@ export class RecipesService implements OnDestroy   {
     newRecipes[index] = recipeToUpdate;
     this.recipes = newRecipes;
     this.recipesChanged.next(this.recipes.slice());
-    
     this.userDataService.setNotificationToUser(recipeToUpdate.author, UserNotification.recipeRated, whoRated, recipeToUpdate.name, rate.toString())
   }
 
