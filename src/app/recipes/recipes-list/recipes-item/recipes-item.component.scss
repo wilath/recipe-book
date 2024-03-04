@@ -48,13 +48,43 @@
           display: flex;
           top: 0;
           left: 0;
-          overflow: hidden;
+          overflow: hidden;     
+          font-size: 1rem;
+
         }
 
         .rating-lower {
           padding: 0;
           display: flex;
-          z-index: 0;
+          z-index: 0;     
+          font-size: 1rem;
+
+        }
+        .star-picker{
+          display: flex;
+          position: absolute;
+          top: 0;
+          left:0;
+          z-index: 2;
+
+          input{
+            width: 0;
+            position: absolute;
+
+           
+          }
+          label{
+            margin: 0;
+            padding: 0;
+            color: transparent;
+            cursor: pointer;
+            &:has(input:checked){
+             
+                -webkit-text-stroke: 1px white;  
+              
+            }
+          }
+      
         }
       }
     }

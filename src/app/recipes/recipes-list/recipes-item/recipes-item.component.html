@@ -25,6 +25,20 @@
             <span><i class="fa-solid fa-star"></i></span>
             <span><i class="fa-solid fa-star"></i></span>
           </div>
+
+          <div class="star-picker">
+            
+            <label [for]="recipe.name +'star1'"><i class="fa-solid fa-star"></i><input value="1" [name]="recipe.name +'star'" [id]="recipe.name +'star1'" type="radio" [(ngModel)]="rateByCurrentUser" (click)="onRateRecipe($event)"></label>
+            
+            <label [for]="recipe.name +'star2'"><i class="fa-solid fa-star"></i><input value="2" [name]="recipe.name +'star'" [id]="recipe.name +'star2'" type="radio" [(ngModel)]="rateByCurrentUser" (click)="onRateRecipe($event)"></label>
+            
+            <label [for]="recipe.name +'star3'"><i class="fa-solid fa-star"></i><input value="3" [name]="recipe.name +'star'" [id]="recipe.name +'star3'" type="radio" [(ngModel)]="rateByCurrentUser" (click)="onRateRecipe($event)"></label>
+            
+            <label [for]="recipe.name +'star4'"><i class="fa-solid fa-star"></i><input value="4" [name]="recipe.name +'star'" [id]="recipe.name +'star4'" type="radio" [(ngModel)]="rateByCurrentUser" (click)="onRateRecipe($event)"></label>
+            
+            <label [for]="recipe.name +'star5'"><i class="fa-solid fa-star"></i><input value="5" [name]="recipe.name +'star'" [id]="recipe.name +'star5'" type="radio" [(ngModel)]="rateByCurrentUser" (click)="onRateRecipe($event)"></label>           
+          </div>
+         
         </div>
         324
       </div>
@@ -57,7 +71,7 @@
             class="heart fa-solid fa-heart"
           ></i>
         </button>
-          @if (!isUserAuthorOfRecipe) {
+          @if (recipe.author !== user.email) {
             <button (click)="onFollowUser()">
               <i
                 [ngClass]="{ 'user-followed': isFollowedByCurrentUser }"

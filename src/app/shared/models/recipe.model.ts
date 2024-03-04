@@ -52,5 +52,14 @@ export class Recipe{
         }
     }
 
-   
+    public isLikedByUser(userEmail: string): boolean{
+        const likes = this.likes.whoLiked     
+        return likes.includes(userEmail)
+    }
+
+    public isRatedByUser(userEmail: string): number {
+        const userRating = this.stars.find(rating => rating.user === userEmail);
+        return userRating ? userRating.rate : 1;
+    }
+    
 }

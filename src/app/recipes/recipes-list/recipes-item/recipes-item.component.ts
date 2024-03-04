@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Recipe } from '../../../shared/models/recipe.model';
 import { RecipesService } from '../../recipes.service';
 import { UserDataService } from '../../../user-panel/user-data.service';
@@ -9,49 +9,56 @@ import { User } from '../../../shared/models/user.model';
   templateUrl: './recipes-item.component.html',
   styleUrls: ['./recipes-item.component.scss'],
 })
-export class RecipesItemComponent {
+export class RecipesItemComponent implements OnInit {
   constructor(
     private recipesService: RecipesService,
     private usersDataServcie: UserDataService
   ) {}
 
-  @Input() public  recipe!: Recipe;
+  @Input() public recipe!: Recipe;
 
-  @Input() public  index: number = 0;
+  @Input() public index: number = 0;
 
-  private user: User = JSON.parse(localStorage.getItem('userData') || '{}');
+  public isLikedByCurrentUser : boolean = false;
 
-  public get isLikedByCurrentUser() {
-    let toReturn:boolean = false;
-    if(this.recipe.likes.whoLiked) {
-       toReturn = this.recipe.likes.whoLiked.includes(this.user.email)}
-    return toReturn;
-  }
+  public isFollowedByCurrentUser: boolean = false;
 
-  public get isUserAuthorOfRecipe() {
-    return this.recipe.author === this.user.email
-  }
+  public rateByCurrentUser: number = 0;
 
-  public get isFollowedByCurrentUser() {  
-    let toReturn:boolean = false;
-    if(this.usersDataServcie.getUserData(this.recipe.author)) {
-       toReturn = this.usersDataServcie.getUserData(this.recipe.author).followers?.includes(this.user.email) || false}
-    return toReturn;
+  public user!: User;
+
+  public ngOnInit(): void {
+    this.user = JSON.parse(localStorage.getItem('userData') || '{}');
+    this.isLikedByCurrentUser = this.recipe.isLikedByUser(this.user.email);
+    this.rateByCurrentUser = this.recipe.isRatedByUser(this.user.email);
+    this.setFollow()
   }
 
   public onLike() {
     this.recipesService.addLikeToRecipe(this.recipe.name,this.user.email, !this.isLikedByCurrentUser);
+    this.isLikedByCurrentUser = !this.isLikedByCurrentUser
   }
 
   public onFollowUser() {
-    this.usersDataServcie.addFollowToUser(this.recipe.author, this.user.email,  !this.isFollowedByCurrentUser)
-
+    this.usersDataServcie.addFollowToUser(this.recipe.author, this.user.email,  !this.isFollowedByCurrentUser);
+    this.isFollowedByCurrentUser = !this.isFollowedByCurrentUser;
   }
 
   public onOpenRecipe() {
   }
 
-  public onAddToShoppingList() {
+
+  public onRateRecipe(event: Event) {
+    const target = event.target as HTMLInputElement;
+    const isRated = this.rateByCurrentUser === 0 ? false : true;
+    this.recipesService.addRateToRecipe(this.recipe.name, this.user.email,parseInt(target.value,10), isRated);
+   
+  }
+
+  private setFollow() {  
+    if(this.usersDataServcie.getUserData(this.recipe.author)) {
+       this.isFollowedByCurrentUser = this.usersDataServcie.getUserData(this.recipe.author).followers?.includes(this.user.email) || false}
+    
   }
 }
 

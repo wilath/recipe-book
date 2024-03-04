@@ -86,8 +86,8 @@ export class UserDataService  {
     this.userDataChange.next(this.usersData.slice());
   }
 
-  public setNotificationToUser(userToNotifiy: string, notification: UserNotification,eventUserEmail: string, recipeName?: string) {
-    const message = this.getNotificationMessage(notification, eventUserEmail, recipeName);
+  public setNotificationToUser(userToNotifiy: string, notification: UserNotification,eventUserEmail: string, recipeName?: string, eventData?: string) {
+    const message = this.getNotificationMessage(notification, eventUserEmail, recipeName, eventData);
     const user = this.getUserByEmail(userToNotifiy);
     const eventUser = this.getUserByEmail(eventUserEmail);
     const data: UserData[] = this.usersData;
@@ -107,7 +107,7 @@ export class UserDataService  {
     return user.followers.includes(followerEmail)
   }
 
-  private getNotificationMessage(notification: UserNotification, eventUserEmail: string, eventName?: string) {
+  private getNotificationMessage(notification: UserNotification, eventUserEmail: string, eventName?: string, eventData?: string) {
     const user = this.getUserByEmail(eventUserEmail);
     let message = '';
 
@@ -117,6 +117,9 @@ export class UserDataService  {
         break;
       case UserNotification.recipeLiked:
         message = `${user.user.name} liked your recipe - ${eventName}`;
+        break;
+      case UserNotification.recipeRated:
+        message = `${user.user.name} rated your recipe - ${eventName} at ${eventData} stars!`;
         break;
       case UserNotification.gotFollowed:
         message = `${user.user.name} is now following You`;
