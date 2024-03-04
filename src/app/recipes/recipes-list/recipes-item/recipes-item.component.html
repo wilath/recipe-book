@@ -45,29 +45,27 @@
       </div>
     </div>
     <div class="user-info">
-      <div>
-        <img src="" alt="avatar" />
-        {{ recipe.author | authorname }}
+      <div class="user-data">
+        <img src="https://t3.ftcdn.net/jpg/05/53/79/60/360_F_553796090_XHrE6R9jwmBJUMo9HKl41hyHJ5gqt9oz.jpg" alt="avatar" />
+        <h4>{{ recipe.author | authorname }}</h4>
       </div>
       <div class="recipe-actions">
-        <button class="post-action" (click)="onLike()">
+        <button  (click)="onLike()">
           {{ recipe.likes.quantity }}
           <i
             [ngClass]="{ 'recipe-liked': isLikedByCurrentUser }"
             class="heart fa-solid fa-heart"
           ></i>
         </button>
-        <button
-          [disabled]="isUserAuthorOfRecipe"
-          [ngClass]="{ 'follow-disabled': isUserAuthorOfRecipe }"
-          class="post-action show-menu"
-          (click)="onFollowUser()"
-        >
-          <i
-            [ngClass]="{ 'recipe-liked': isFollowedByCurrentUser }"
-            class="fa-solid fa-user-plus"
-          ></i>
-        </button>
+          @if (!isUserAuthorOfRecipe) {
+            <button (click)="onFollowUser()">
+              <i
+                [ngClass]="{ 'user-followed': isFollowedByCurrentUser }"
+                class="fa-solid fa-user-plus"
+              ></i>
+            </button>
+          }
+       
       </div>
     </div>
   </div>

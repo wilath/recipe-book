@@ -28,17 +28,22 @@ export class FoodTypeSortPipe implements PipeTransform {
         return recipe.author === this.loggedUserEmail;
       })
     }
-    switch(sortType){
+    switch (sortType) {
       case FoodSort.Latest:
-      break;
+        recipesToReturn = recipesToReturn.sort((a, b) => b.date.getTime() - a.date.getTime());
+        break;
       case FoodSort.Popular:
-      break;
+        recipesToReturn =  recipesToReturn.sort((a, b) => b.likes.quantity - a.likes.quantity);
+        break;
       case FoodSort.BestRating:
-      break;
+        recipesToReturn = recipesToReturn.sort((a, b) => b.getAverageRating - a.getAverageRating);
+        break;
       case FoodSort.Quickest:
-      break;
-
-    }
+        recipesToReturn =  recipesToReturn.sort((a, b) => a.prepTimeMinutes - b.prepTimeMinutes);
+        break;
+      default:
+           recipesToReturn = recipesToReturn; 
+  }
     
     return recipesToReturn;
   }

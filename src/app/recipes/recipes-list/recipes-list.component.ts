@@ -71,6 +71,7 @@ export class RecipesListComponent implements OnInit, OnDestroy {
     this.recipeDetailsComponent.onToShopList()
   }
   showUsersRecipes() {
+    this.userSort = !this.userSort
   }
 
 
