@@ -40,39 +40,67 @@
             .group-label{          
                 font-weight: 400;
                 text-decoration: underline $sage;
-                margin-bottom: 0.5rem;
+                margin-bottom: 1rem;
             }          
         }
         .food-level-wrap{
+            margin-top: 1rem;
             position: relative;
-            border: 1px solid red;
             width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+            
             .bar{
-                position: absolute;
+                position: relative;
                 width: 100%;
                 height: 5px;
                 background-color: $uno-white;
                 border-radius: 5px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                .progress-bar{
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 5px;
+                    background-color: $sage;
+                    transition: all 0.3s linear;
+                }
             }
-            input{
-                position: absolute;
-                display: none;
-                
-            }
+            
             label{
+                cursor: pointer;
                 position: relative;
-                margin-top: 1rem;
+               
+                input{
+                    position: absolute;
+                    display: none;                 
+                }
+                &:nth-child(2) > span{
+                    background-color: $sage
+                }
 
                span{
                 display: block;
                 width: 1rem;
                 border-radius: 50%;
                 aspect-ratio: 1/1;
-                background-color: $uno-white
+                background-color: $uno-white;
+                transition: all 0s linear;
+                transition-delay: 0.3s;
+
+                
                }
+               &:has(input:checked) > span {
+                background-color: $sage;
+               }
+            }
+            .extra-labels{
+                margin-top: 0.5rem;
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
             }
         }
         .form-group-images{

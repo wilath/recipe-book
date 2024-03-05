@@ -46,13 +46,29 @@
                     <div class="form-group">
                         <label class="group-label" >Select the level of difficulty </label>
                         <div class="food-level-wrap">
-                            <div class="bar"></div>
-                            <label [for]="foodLevel.Easy"><span></span>Easy</label>
-                            <input type="radio" name="level" [id]="foodLevel.Easy" [value]="foodLevel.Easy" formControlName="level">
-                            <label [for]="foodLevel.Medium"><span></span>Medium</label>
-                            <input type="radio" name="level" [id]="foodLevel.Medium" [value]="foodLevel.Medium" formControlName="level">
-                            <label [for]="foodLevel.Hard"><span></span>Hard</label>
-                            <input type="radio" name="level" [id]="foodLevel.Hard" [value]="foodLevel.Hard" formControlName="level">
+                            <div class="bar">
+                                <div 
+                                [ngStyle]="{'width': recipeForm.value.level === foodLevel.Easy ? '0' : recipeForm.value.level === foodLevel.Medium ? '50%' : '100%' }" class="progress-bar">
+                            </div>
+
+                            <label [for]="foodLevel.Easy"><span></span>
+                                <input type="radio" name="level" [id]="foodLevel.Easy" [value]="foodLevel.Easy" formControlName="level">
+                            </label>
+                            
+                            <label [for]="foodLevel.Medium"><span [ngStyle]="{'backgroundColor': recipeForm.value.level === foodLevel.Hard ? 'rgb(191, 204, 148)' : ''}"></span>
+                                <input type="radio" name="level" [id]="foodLevel.Medium" [value]="foodLevel.Medium" formControlName="level">
+                            </label>
+                            
+                            <label [for]="foodLevel.Hard"><span></span>
+                                <input type="radio" name="level" [id]="foodLevel.Hard" [value]="foodLevel.Hard" formControlName="level">
+                            </label>                                              
+                            </div>
+                            <div class="extra-labels">
+                                <label [for]="foodLevel.Easy">Easy</label>
+                                <label [for]="foodLevel.Medium">Medium</label>
+                                <label [for]="foodLevel.Hard">Hard</label>
+
+                            </div> 
                         </div>
                     </div>
                     <div class="form-group">
