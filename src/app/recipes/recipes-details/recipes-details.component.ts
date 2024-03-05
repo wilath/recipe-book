@@ -17,36 +17,36 @@ import { ShoppingListService } from '../../shopping-list/shopping-list.service';
   styleUrls: ['./recipes-details.component.scss'],
 })
 export class RecipesDetailsComponent implements OnInit {
-  recipeToDisplay!: Recipe;
-  recipeToDisplayId: number = 0;
-
+  
   constructor(
     private recipesService: RecipesService,
     private shoppingListService: ShoppingListService,
     private route: ActivatedRoute,
     private router: Router
-  ) {}
-
+    ) {}
+    
+    public recipe!: Recipe;
+    
+    public recipeId: number = 0;
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
-      this.recipeToDisplayId = +params['id'];
-      this.recipeToDisplay = this.recipesService.getRecipe(
-        this.recipeToDisplayId
+      this.recipeId = +params['id'];
+      this.recipe = this.recipesService.getRecipe(
+        this.recipeId
       );
     });
   }
 
   onEditRecipe() {
     this.router.navigate(['edit'], { relativeTo: this.route });
-    //this.router.navigate(['../', this.id, 'edit'], { relativeTo: this.route})
   }
 
   onDeleteRecipe() {
-    this.recipesService.deleteRecepie(this.recipeToDisplayId);
+    this.recipesService.deleteRecepie(this.recipeId);
     this.router.navigate(['/recipes']);
   }
   onToShopList() {
-    this.shoppingListService.addRecipeIng2(this.recipeToDisplay.ingredients);
-    console.log(this.recipeToDisplay);
+    this.shoppingListService.addRecipeIng2(this.recipe.ingredients);
+    console.log(this.recipe);
   }
 }

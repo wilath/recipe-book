@@ -27,9 +27,10 @@ export class RealTimeDatabaseService {
         map((recipes) => {
           return recipes.map((recipe) => {
             return new Recipe(
+              recipe.id,
               recipe.name,
               recipe.description,
-              recipe.imagePath,
+              recipe.images ? recipe.images : [],
               recipe.ingredients ? recipe.ingredients : [],
               recipe.foodType,
               recipe.author,

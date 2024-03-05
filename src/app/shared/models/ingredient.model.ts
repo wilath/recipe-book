@@ -15,7 +15,6 @@ export enum IngredientUnits {
     Pinch = 'pinch',
     Dash = 'dash',
     Drop = 'drop'
-
 }
 
 export interface IngredientQuantity{
@@ -30,6 +29,5 @@ export class Ingredient {
     constructor(name: string, ammount: IngredientQuantity) {
         this.name = name;
         this.ammount = ammount
-
     }
 }  

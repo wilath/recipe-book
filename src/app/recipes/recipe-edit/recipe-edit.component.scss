@@ -1,0 +1,35 @@
+@import '../../styles/variables';
+
+.recipe-edit-wraper{
+    background-color: $uno-grey;
+    border-radius: 1rem;
+    font-family: "Barlow Semi Condensed", sans-serif;
+    color: $uno-white;
+    .edit-header{
+         margin: 1rem 0;
+         padding: 1rem 0;
+         h2{
+            font-size: 1.7rem;
+            background-color: $uno-grey-active;
+            text-align: center;
+            padding: 0.5rem 0;
+            text-decoration: underline $sage;
+         }
+    }
+    .form-wraper{
+        padding: 1rem;
+        
+        .form-group{
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 1rem;
+            font-size: 1.5rem;
+            .group-label{
+                
+                font-weight: 400 ;
+            }
+        }
+    }
+}

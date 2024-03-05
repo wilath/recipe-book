@@ -88,7 +88,8 @@ export class RecipesService implements OnDestroy   {
   }
 
   public getRecipe(index: number) {
-    return this.recipes[index];
+    const recipeIndex = this.recipes.findIndex(recipe => recipe.id === index)
+    return this.recipes[recipeIndex];
   }
 
   public addRecipeIng(ings: Ingredient[]) {
@@ -108,6 +109,13 @@ export class RecipesService implements OnDestroy   {
   public deleteRecepie(index: number) {
     this.recipes.splice(index, 1);
     this.recipesChanged.next(this.recipes.slice());
+  }
+  
+  public getIdforNewRecipe():number{  
+    if (!this.recipes || this.recipes.length === 0) {
+      return 0; 
+    }
+    return Math.max(...this.recipes.map(rec => rec.id)) + 1;
   }
   
 }

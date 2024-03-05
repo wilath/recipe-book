@@ -1,15 +1,7 @@
-<div class="navbar_recipes">
-  <div>
-    <div (click)="onEditRecipe()" class="navbar_item_wrap shine"> <span>Edit</span></div>
-    <div (click)="onDeleteRecipe()" class="navbar_item_wrap shine"> <span>Delete</span></div>
-    <div (click)="onToShopList()" class="navbar_item_wrap shine"> <span>To shopping list</span></div>
-  </div>
-</div>
-
 
 <div class="details-header">
   <div class="title-wraper">
-    <h1 id="title">{{recipeToDisplay.name}}</h1>
+    <h1 id="title">{{recipe.name}}</h1>
   </div>
   <!-- <img src={{flyIn.imagePath}} alt={{flyIn.name}} class="details-img"> -->
 </div>
@@ -17,11 +9,11 @@
   <div class="details-ings">
     <h5>Ingredients:</h5>
     <div class="details-ings-flex">
-      <p *ngFor="let ing of recipeToDisplay.ingredients">- {{ing.name}}</p>
+      <p *ngFor="let ing of recipe.ingredients">- {{ing.name}}</p>
     </div>
   </div>
   <div class="details-description">
     <h5>Description:</h5>
-    <div class="description">{{recipeToDisplay.description}}</div>
+    <div class="description">{{recipe.description}}</div>
   </div>
 </div>

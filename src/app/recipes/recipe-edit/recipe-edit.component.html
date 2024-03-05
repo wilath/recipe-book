@@ -1,100 +1,119 @@
-<div class="wraper">
+<div class="recipe-edit-wraper">
+    <div class="edit-header">
+        <h2>Add Recipe</h2>
+    </div>
+
         <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
           
                     <div class="navbar_recipes">
                     <button 
                     type="submit" 
-                    class="navbar_item_wrap shine"
                     [disabled]="!recipeForm.valid">
                     Save</button>
                     <button 
                     type="button" 
-                    class="navbar_item_wrap shine"
                     (click)="onCancel()">
                     Cancel</button>
-                    <button 
-                    type="button" 
-                    class="navbar_item_wrap shine" 
-                    (click)="onAddIngredient()">Add Ingredient</button>
+                   
                     </div>
 
-                    <div>
-                        <input type="radio" formControlName="foodType" name="fooType" id="0" [value]="foodType.desert">
-                        <label for="0">desert</label>
-                        <input type="radio" formControlName="foodType" name="fooType" id="1" [value]="foodType.dinner">
-                        <label for="1">dinner</label>
-                        <input type="radio" formControlName="foodType" name="fooType" id="2" [value]="foodType.drink">
-                        <label for="2">drink</label>
-                        <input type="radio" formControlName="foodType" name="fooType" id="3" [value]="foodType.breakfast">
-                        <label for="3">bf</label>
+                 
+
+                    <div class="form-wraper">
+
+                    <div class="form-group">
+                        <label for="name" class="group-label">Enter the name of the dish</label>
+                        <input type="text" id="name" formControlName="name" class="form-control">
                     </div>
 
-                    <div class="form_wraper">
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input 
-                        type="text" 
-                        id="name"
-                        formControlName="name"
-                        class="form-control">
-                    </div>
-            
-         
-                    <div class="form-group">
-                        <label for="imagePath">Image URL</label>
-                        <input 
-                        type="text" 
-                        id="imagePath"
-                        formControlName="imagePath"
-                        class="form-control"
-                        #imagePath>
-                    </div>
-            
-           
-                    <!-- <img [src]="imagePath.value" alt="" class="img-responsive"> -->
-           
-                    <div class="form-group">
-                        <label for="description">Description</label>
-                        <textarea 
-                        type="text" 
-                        id="description"
-                        formControlName="description"
-                        class="form-control"
-                        rows="6"></textarea>
-                    </div>
-            
-                    <label for="ingredients">Ingredients</label>
-                
-                    <div 
-                    formArrayName="ingredients">
 
-                    
-                        <div
-                        class="ingredients_wraper"
-                        *ngFor="let control of controls; let i = index "
-                        [formGroupName]="i"
-                        style="margin-top: 10px">
-                    
-                            <input 
-                            type="text" 
-                            id="form-text"
-                            class="form-control "
-                            formControlName="name">
-                    
-                            <input 
-                            type="number" 
-                            id="form-number"
-                            class="form-control"
-                            formControlName="amount">
-                        
-                            <button 
-                            type="button" 
-                            class="navbar_item_wrap shine"
-                            id="form-button"
-                            (click)="onDeleteIng(i)">X</button>
+                    <div class="form-group">
+                        <label class="group-label">Select a food category</label>
+                        <div>
+                            <input type="radio" formControlName="type" name="type" id="0" [value]="foodType.desert">
+                            <label for="0">Desert</label>
+                            <input type="radio" formControlName="type" name="type" id="1" [value]="foodType.dinner">
+                            <label for="1">Dinner</label>
+                            <input type="radio" formControlName="type" name="type" id="2" [value]="foodType.drink">
+                            <label for="2">Beverage</label>
+                            <input type="radio" formControlName="type" name="type" id="3" [value]="foodType.breakfast">
+                            <label for="3">Breakfast</label>
                         </div>
+                    </div>
+
+                  
+
+                    <div class="form-group">
+                        <label class="group-label" >Select the level of difficulty </label>
+                        <div>
+                            <label [for]="foodLevel.Easy">Easy</label>
+                            <input type="radio" name="level" [id]="foodLevel.Easy" [value]="foodLevel.Easy" formControlName="level">
+                            <label [for]="foodLevel.Medium">Medium</label>
+                            <input type="radio" name="level" [id]="foodLevel.Medium" [value]="foodLevel.Medium" formControlName="level">
+                            <label [for]="foodLevel.Hard">Hard</label>
+                            <input type="radio" name="level" [id]="foodLevel.Hard" [value]="foodLevel.Hard" formControlName="level">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="group-label" for="foodTime">Select a preparation time </label>
+                        <input type="number" formControlName="prepTime">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="group-label" for="description">Enter a description of the dish</label>
+                        <textarea type="text" id="description" formControlName="description"></textarea>
+                    </div>
+
+                             
+           
+                    <div class="form-group">
+
+                        <label class="group-label" >Enter ingredients</label>  
+                        <button type="button" (click)="onAddIngredient()">Add Ingredient</button>
+                    
+                        <div formArrayName="ingredients">
+
+                            @for (ingredientControl of recipeForm.value.ingredients; track $index) {
+                                <div [formGroupName]="$index" >
+                            
+                                    <input 
+                                    type="text" 
+                                    formControlName="name">
+                            
+                                    <input 
+                                    type="number" 
+                                    formControlName="ammount">
+                                    <input 
+                                    type="text"
+                                    formControlName="unit">
+                                
+                                    <button 
+                                    type="button" 
+                                    (click)="onDeleteIng($index)">X</button>
+                                </div>
+
+
+                            }
+                    
+                            
+                    </div>
+
+            </div>
+
+            <div class="image-form" formArrayName="images">    
+                @for (imageControl of recipeForm.value.images; track $index) {
+                    <ng-container [formGroupName]="$index">
+                        <div [class]="'nt' + $index" class="label-wrapper">
+                        <label  [for]="'image' + $index"><i class="fa-solid fa-file-import"></i>
+                            <input  type="file" accept="image/*" [id]="'image' + $index" [name]="'image' + $index" formControlName="input" (change)="onFileUpload($event, $index)" >
+                            <div [ngStyle]="{ 'height': imageControl.percentages + '%'}"  class="image-loading"></div>
+                            <img class="image-display" *ngIf="imageControl.imageData.url && imageControl.percentages === 100" [src]="imageControl.imageData.url" alt="XD" >
+                        </label>                     
+                        <a *ngIf="imageControl.imageData.url && imageControl.percentages === 100" (click)="onDeleteImageFromForm($index)"><div class="image-delete"><i class="fa-regular fa-trash-can"></i></div></a>
+                    </div>                     
+                    </ng-container>
+            }
                 </div>
-                
                     
                         
                      

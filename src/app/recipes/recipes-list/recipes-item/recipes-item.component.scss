@@ -7,16 +7,33 @@
   overflow: hidden;
   background-color: $uno-grey;
 
- 
+ .image-wrap{
+  overflow: hidden;
+
+ }
   .recipe-image {
     width: 100%;
     aspect-ratio: 3/2;
+    transition: all 0.2s linear;
+    object-fit: cover;
+    
+    &:hover{
+      cursor: pointer;
+      filter:opacity(0.8);
+      transform: scale(1.05);
+    }
   }
   .recipe-title {
     font-size: 1.4rem;
     font-weight: 500;
     padding: 0.5rem 0;
     margin-left: 1rem;
+    .go-to-recipe{
+      &:hover{
+        text-decoration: underline;
+        cursor: pointer;
+      }
+    }
   }
   .recipe-info {
     display: flex;

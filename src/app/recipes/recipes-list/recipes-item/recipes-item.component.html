@@ -4,9 +4,12 @@
 -->
 <div>
   <div class="post">
-    <img class="recipe-image" [src]="recipe.imagePath" alt="recipe" />
+    <div class="image-wrap">
+    <a (click)="onNavigateToRecipeDetails()" ><img class="recipe-image" [src]="recipe.images[0].url" alt="recipe" /></a>
+    </div>
     <div class="recipe-title">
-      {{ recipe.name }}
+      <a class="go-to-recipe" (click)="onNavigateToRecipeDetails()">{{ recipe.name }}</a>
+      
     </div>
     <div class="recipe-info">
       <div class="stars info-part">

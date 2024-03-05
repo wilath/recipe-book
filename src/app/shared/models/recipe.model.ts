@@ -1,4 +1,5 @@
 import { FoodType } from "../enums/food-type-enum";
+import { FileAnchor } from "./file-upload.model";
 import { Ingredient } from "./ingredient.model";
 
 export interface Likes {
@@ -18,9 +19,10 @@ export enum DifficultyLevel{
 }
 
 export class Recipe{
+    public id: number;
     public name:string;
     public description:string;
-    public imagePath:string;
+    public images: FileAnchor[];
     public ingredients: Ingredient[];
     public foodType: FoodType;
     public author: string;
@@ -29,10 +31,11 @@ export class Recipe{
     public date: Date;
     public likes: Likes;
     public stars: Rating[];
-    constructor(name:string, desc:string, imagePath:string, ingredients: Ingredient[], foodType: FoodType, author: string, level: DifficultyLevel, prepTimeMinutes: number, date: Date, likes?: Likes, stars?: Rating[] ){
+    constructor(id: number, name:string, desc:string, images:FileAnchor[], ingredients: Ingredient[], foodType: FoodType, author: string, level: DifficultyLevel, prepTimeMinutes: number, date: Date, likes?: Likes, stars?: Rating[] ){
+        this.id = id
         this.name = name;
         this.description = desc;
-        this.imagePath = imagePath;
+        this.images = images;
         this.ingredients = ingredients;
         this.foodType = foodType;
         this.author = author;

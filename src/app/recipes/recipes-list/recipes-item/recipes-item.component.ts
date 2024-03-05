@@ -3,8 +3,7 @@ import { Recipe } from '../../../shared/models/recipe.model';
 import { RecipesService } from '../../recipes.service';
 import { UserDataService } from '../../../user-panel/user-data.service';
 import { User } from '../../../shared/models/user.model';
-
-
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -16,7 +15,9 @@ import { User } from '../../../shared/models/user.model';
 export class RecipesItemComponent implements OnChanges {
   constructor(
     private recipesService: RecipesService,
-    private usersDataServcie: UserDataService
+    private usersDataServcie: UserDataService,
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
   
   
@@ -59,6 +60,11 @@ export class RecipesItemComponent implements OnChanges {
     const target = event.target as HTMLInputElement;
     this.recipesService.addRateToRecipe(this.recipe.name, this.user.email,parseInt(target.value,10));
     this.totalRatePercentage = (this.recipe.getAverageRating)*20;
+  }
+
+  public onNavigateToRecipeDetails(){
+    this.router.navigate([`${this.recipe.id}`],  {relativeTo: this.route})
+
   }
 
   private setFollow() {  
