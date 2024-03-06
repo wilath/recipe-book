@@ -73,7 +73,28 @@
                     </div>
                     <div class="form-group">
                         <label class="group-label" for="foodTime">Select a preparation time </label>
-                        <input type="number" formControlName="prepTime">
+                        <div class="food-level-wrap">
+                            <div class="bar">
+                                <div 
+                                [ngStyle]="{'width': (recipeForm.value.prepTime | prepTimeToPercent) + '%' }" class="progress-bar">
+                            </div>
+
+                            @for (prepTime of prepTimes ; track $index) {
+                                <label [for]="prepTime"><span [ngStyle]="{'backgroundColor': recipeForm.value.prepTime >= prepTime ? 'rgb(191, 204, 148)':''}"></span>
+                                    <input type="radio" name="prepTime" [id]="prepTime" [value]="prepTime" formControlName="prepTime">
+                                </label>
+                            }
+                                          
+                            </div>
+                            <div class="extra-labels">
+                                @for (prepTime of prepTimes ; track $index) {
+                                    <label [for]="prepTime">{{prepTime}}</label>
+                                }
+                              
+                                
+
+                            </div> 
+                        </div>
                     </div>
 
                     <div class="form-group">

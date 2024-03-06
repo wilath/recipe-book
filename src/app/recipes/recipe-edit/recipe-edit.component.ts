@@ -4,7 +4,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import { RecipesService } from '../recipes.service';
 import { FoodType } from '../../shared/enums/food-type-enum';
-import { DifficultyLevel } from '../../shared/models/recipe.model';
+import { DifficultyLevel, PreperationTime } from '../../shared/models/recipe.model';
 import { FileAnchor, FileUpload } from '../../shared/models/file-upload.model';
 import { finalize } from 'rxjs';
 import { StorageService } from '../../shared/storage.service';
@@ -27,6 +27,7 @@ export class RecipeEditComponent implements OnInit {
   public recipeForm!: FormGroup;
   public foodType = FoodType;
   public foodLevel = DifficultyLevel;
+  public prepTimes = Object.keys(PreperationTime).filter( el => el.length < 3).map(el => {return parseInt(el,10)})
   public isPhotoAddOption = false;
   public photoQuantity = 0;
 

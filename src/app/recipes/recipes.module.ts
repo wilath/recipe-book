@@ -12,6 +12,7 @@ import { RecipesComponent } from "./recipes.component";
 import { RecipesDetailsComponent } from "./recipes-details/recipes-details.component";
 import { FoodSortPipe, FoodTypePipe } from "../shared/pipes/food-type.pipe";
 import { AuthorNamePipe } from "../shared/pipes/author-name.pipe";
+import { PrepTimePercentPipe } from "../shared/pipes/prepTime-to-perecent.pipe";
 
 @NgModule({
     declarations: [
@@ -23,7 +24,8 @@ import { AuthorNamePipe } from "../shared/pipes/author-name.pipe";
         RecipeEditComponent,
         FoodTypePipe,
         FoodSortPipe,
-        AuthorNamePipe
+        AuthorNamePipe,
+        PrepTimePercentPipe
     ],
     imports: [
         RouterModule,
