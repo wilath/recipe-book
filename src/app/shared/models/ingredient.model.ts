@@ -17,17 +17,15 @@ export enum IngredientUnits {
     Drop = 'drop'
 }
 
-export interface IngredientQuantity{
-    number: number,
-    unit: IngredientUnits
-}
 
 export class Ingredient {
     name: string;
-    ammount: IngredientQuantity;
+    ammount: number;
+    unit: IngredientUnits
 
-    constructor(name: string, ammount: IngredientQuantity) {
+    constructor(name: string, ammount: number, unit: IngredientUnits) {
         this.name = name;
-        this.ammount = ammount
+        this.ammount = ammount;
+        this.unit = unit
     }
 }  

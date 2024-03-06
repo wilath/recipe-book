@@ -101,7 +101,8 @@ export class RecipesService implements OnDestroy   {
     this.recipesChanged.next(this.recipes.slice());
   }
 
-  public updateRecipe(index: number, newRecipe: Recipe) {
+  public updateRecipe(newRecipe: Recipe) {
+    const index = this.recipes.findIndex( recipe => recipe.id === newRecipe.id);
     this.recipes[index] = newRecipe;
     this.recipesChanged.next(this.recipes.slice());
   }

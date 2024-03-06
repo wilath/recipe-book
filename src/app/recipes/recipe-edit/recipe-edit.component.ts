@@ -3,7 +3,7 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { RecipesService } from '../recipes.service';
 import { FoodType } from '../../shared/enums/food-type-enum';
-import { DifficultyLevel } from '../../shared/models/recipe.model';
+import { DifficultyLevel, Recipe } from '../../shared/models/recipe.model';
 import { FileAnchor, FileUpload } from '../../shared/models/file-upload.model';
 import { finalize } from 'rxjs';
 import { StorageService } from '../../shared/storage.service';
@@ -24,15 +24,17 @@ export class RecipeEditComponent implements OnInit {
 
   public id: number = 0;
 
+  public recipe: Recipe | null = null
+
   public editMode = false;
 
   public foodType = FoodType;
 
   public foodLevel = DifficultyLevel;
 
-  public prepTimes = [5,15,30,45,60,75,90];
-
   public unitTypes = IngredientUnits;
+  
+  public prepTimes = [5,15,30,45,60,75,90];
 
   public isPhotoAddOption = false;
 
@@ -40,11 +42,17 @@ export class RecipeEditComponent implements OnInit {
 
   public recipeForm!: FormGroup;
 
+  public loggedUser!: string;
+
   public ngOnInit() {
     this.route.params.subscribe((params: Params) => {
-      this.id = +params['id'];
       this.editMode = params['id'] != null;
+      if(this.editMode){
+        this.recipe = this.recipeService.getRecipe(this.id);
+      }
       this.initForm();
+      this.loggedUser = JSON.parse(localStorage.getItem('userData') || '{}').email;
+      console.log(this.loggedUser)
     });
     
   }
@@ -110,15 +118,30 @@ export class RecipeEditComponent implements OnInit {
   }
 
   public onSubmit() {
-    /* const newRecipe = new Recipe(
-      this.recipeForm.value['name'],
-      this.recipeForm.value['description'],
-      this.recipeForm.value['imagePath'],
-      this.recipeForm.value['ingredients']); */
+
+    const images = (<{input: string, percentages: number, imageData: FileAnchor}[]>this.recipeForm.value.images)
+    .map( (el) => {return el.imageData})
+    .filter( el => el.url);
+
+    const newRecipe = new Recipe(
+      this.recipe ? this.recipe.id : this.recipeService.getIdforNewRecipe(),
+      this.recipeForm.value.name,
+      this.recipeForm.value.description,
+      images,
+      this.recipeForm.value.ingredients,
+      this.recipeForm.value.type,
+      this.recipe ? this.recipe.author : this.loggedUser,
+      this.recipeForm.value.level,
+      this.recipeForm.value.prepTime,
+      this.recipe ? this.recipe.date : new Date(),
+      this.recipe ? this.recipe.likes :{ quantity: 0, whoLiked: [] },
+      this.recipe ? this.recipe.stars : []
+
+    )
     if (this.editMode) {
-      this.recipeService.updateRecipe(this.id, this.recipeForm.value);
+      this.recipeService.updateRecipe(newRecipe);
     } else {
-      this.recipeService.addRecipe(this.recipeForm.value);
+      this.recipeService.addRecipe(newRecipe);
     }
     this.onCancel();
   }
@@ -132,28 +155,28 @@ export class RecipeEditComponent implements OnInit {
     let recipeIngredients = new FormArray<FormGroup>([]);
     let recipeImages = new FormArray<FormGroup>([]);
 
-    if (this.editMode) {
-      const recipe = this.recipeService.getRecipe(this.id);
+    if (this.editMode && this.recipe) {
+      
 
-      recipeName = recipe.name;
-      recipeFoodType = recipe.foodType;
-      recipeLevel = recipe.level;
-      recipePrepTime = recipe.prepTimeMinutes;
-      recipeDescription = recipe.description;
+      recipeName = this.recipe.name;
+      recipeFoodType = this.recipe.foodType;
+      recipeLevel = this.recipe.level;
+      recipePrepTime = this.recipe.prepTimeMinutes;
+      recipeDescription = this.recipe.description;
 
-      if (recipe['ingredients']) {
-        for (let ingredient of recipe.ingredients) {
+      if (this.recipe['ingredients']) {
+        for (let ingredient of this.recipe.ingredients) {
           recipeIngredients.push(
             new FormGroup({
               name: new FormControl(ingredient.name, [Validators.required]),
-              ammount: new FormControl(ingredient.ammount.number, [Validators.required]),
-              unit: new FormControl(ingredient.ammount.unit, [Validators.required])
+              ammount: new FormControl(ingredient.ammount, [Validators.required]),
+              unit: new FormControl(ingredient.unit, [Validators.required])
             })
           );
         }
       }
-      if (recipe['images']) {
-        for (let image of recipe.images) {
+      if (this.recipe['images']) {
+        for (let image of this.recipe.images) {
           recipeImages.push(
             new FormGroup({
               input: new FormControl(image.name, [Validators.required]),
