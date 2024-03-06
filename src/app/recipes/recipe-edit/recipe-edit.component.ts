@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-
 import { RecipesService } from '../recipes.service';
 import { FoodType } from '../../shared/enums/food-type-enum';
-import { DifficultyLevel, PreperationTime } from '../../shared/models/recipe.model';
+import { DifficultyLevel } from '../../shared/models/recipe.model';
 import { FileAnchor, FileUpload } from '../../shared/models/file-upload.model';
 import { finalize } from 'rxjs';
 import { StorageService } from '../../shared/storage.service';
@@ -23,13 +22,20 @@ export class RecipeEditComponent implements OnInit {
   ) {}
 
   public id: number = 0;
+
   public editMode = false;
-  public recipeForm!: FormGroup;
+
   public foodType = FoodType;
+
   public foodLevel = DifficultyLevel;
-  public prepTimes = Object.keys(PreperationTime).filter( el => el.length < 3).map(el => {return parseInt(el,10)})
+
+  public prepTimes = [5,15,30,45,60,75,90]
+
   public isPhotoAddOption = false;
+
   public photoQuantity = 0;
+
+  public recipeForm!: FormGroup;
 
   public ngOnInit() {
     this.route.params.subscribe((params: Params) => {
@@ -39,15 +45,16 @@ export class RecipeEditComponent implements OnInit {
     });
     
   }
-  onDeleteIng(index: number) {
+
+  public onDeleteIng(index: number) {
     (<FormArray>this.recipeForm.get('ingredients')).removeAt(index);
   }
 
-  onCancel() {
+  public onCancel() {
     this.router.navigate(['../'], { relativeTo: this.route });
   }
 
-  onAddIngredient() {
+  public onAddIngredient() {
     (<FormArray>this.recipeForm.get('ingredients')).push(
       new FormGroup({
         name: new FormControl(null, Validators.required),
@@ -97,6 +104,20 @@ export class RecipeEditComponent implements OnInit {
         }
       )
     }
+  }
+
+  public onSubmit() {
+    /* const newRecipe = new Recipe(
+      this.recipeForm.value['name'],
+      this.recipeForm.value['description'],
+      this.recipeForm.value['imagePath'],
+      this.recipeForm.value['ingredients']); */
+    if (this.editMode) {
+      this.recipeService.updateRecipe(this.id, this.recipeForm.value);
+    } else {
+      this.recipeService.addRecipe(this.recipeForm.value);
+    }
+    this.onCancel();
   }
 
   private initForm() {
@@ -152,19 +173,5 @@ export class RecipeEditComponent implements OnInit {
       images: recipeImages
     });
   }
-  onSubmit() {
-    /* const newRecipe = new Recipe(
-      this.recipeForm.value['name'],
-      this.recipeForm.value['description'],
-      this.recipeForm.value['imagePath'],
-      this.recipeForm.value['ingredients']); */
-    if (this.editMode) {
-      this.recipeService.updateRecipe(this.id, this.recipeForm.value);
-    } else {
-      this.recipeService.addRecipe(this.recipeForm.value);
-    }
-    this.onCancel();
-  }
-
-  
+ 
 }

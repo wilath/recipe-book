@@ -23,7 +23,7 @@
 
                     <div class="form-group">
                         <label for="name" class="group-label">Enter the name of the dish</label>
-                        <input type="text" id="name" formControlName="name" class="form-control">
+                        <input  type="text" id="name" formControlName="name" class="form-control name-input">
                     </div>
 
 
@@ -55,7 +55,7 @@
                                 <input type="radio" name="level" [id]="foodLevel.Easy" [value]="foodLevel.Easy" formControlName="level">
                             </label>
                             
-                            <label [for]="foodLevel.Medium"><span [ngStyle]="{'backgroundColor': recipeForm.value.level === foodLevel.Hard ? 'rgb(191, 204, 148)' : ''}"></span>
+                            <label [for]="foodLevel.Medium"><span [ngStyle]="{'backgroundColor': recipeForm.value.level === foodLevel.Hard ? 'rgb(176, 202, 92)' : ''}"></span>
                                 <input type="radio" name="level" [id]="foodLevel.Medium" [value]="foodLevel.Medium" formControlName="level">
                             </label>
                             
@@ -80,7 +80,7 @@
                             </div>
 
                             @for (prepTime of prepTimes ; track $index) {
-                                <label [for]="prepTime"><span [ngStyle]="{'backgroundColor': recipeForm.value.prepTime >= prepTime ? 'rgb(191, 204, 148)':''}"></span>
+                                <label [for]="prepTime"><span [ngStyle]="{'backgroundColor': recipeForm.value.prepTime >= prepTime ? 'rgb(176, 202, 92)':''}"></span>
                                     <input type="radio" name="prepTime" [id]="prepTime" [value]="prepTime" formControlName="prepTime">
                                 </label>
                             }
@@ -88,7 +88,7 @@
                             </div>
                             <div class="extra-labels">
                                 @for (prepTime of prepTimes ; track $index) {
-                                    <label [for]="prepTime">{{prepTime}}</label>
+                                    <label class="lab" [for]="prepTime">{{prepTime}}</label>
                                 }
                               
                                 
@@ -99,7 +99,11 @@
 
                     <div class="form-group">
                         <label class="group-label" for="description">Enter a description of the dish</label>
-                        <textarea type="text" id="description" formControlName="description"></textarea>
+                        <div class="textarea-wrapper">
+                            <textarea cdkTextareaAutosize cdkAutosizeMinRows="3"
+                            type="text" id="description"  formControlName="description"></textarea>
+                        </div>
+                       
                     </div>
 
                              

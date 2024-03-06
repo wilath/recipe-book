@@ -17,15 +17,7 @@ export enum DifficultyLevel{
     Medium = "Medium",
     Hard = "Hard"
 }
-export enum PreperationTime {
-    five = 5,
-    fivteen = 15,
-    thirty = 30,
-    fourFive = 45,
-    sixty = 60,
-    sevenfive = 75,
-    ninty = 90
-}
+
 
 export class Recipe{
     public id: number;
