@@ -87,8 +87,10 @@ export class RecipesService implements OnDestroy   {
     return this.recipes.slice();
   }
 
-  public getRecipe(index: number) {
-    const recipeIndex = this.recipes.findIndex(recipe => recipe.id === index)
+  public getRecipe(id: number) {
+    const recipeIndex = this.recipes.findIndex(recipe => recipe.id == id);
+    
+    
     return this.recipes[recipeIndex];
   }
 

@@ -22,8 +22,6 @@ export class RecipeEditComponent implements OnInit {
     private storage: StorageService, 
   ) {}
 
-  public id: number = 0;
-
   public recipe: Recipe | null = null
 
   public editMode = false;
@@ -48,11 +46,11 @@ export class RecipeEditComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       this.editMode = params['id'] != null;
       if(this.editMode){
-        this.recipe = this.recipeService.getRecipe(this.id);
+        this.recipe = this.recipeService.getRecipe(params['id']);
       }
-      this.initForm();
       this.loggedUser = JSON.parse(localStorage.getItem('userData') || '{}').email;
-      console.log(this.loggedUser)
+      this.initForm();
+      console.log(this.recipe)
     });
     
   }
@@ -157,7 +155,6 @@ export class RecipeEditComponent implements OnInit {
 
     if (this.editMode && this.recipe) {
       
-
       recipeName = this.recipe.name;
       recipeFoodType = this.recipe.foodType;
       recipeLevel = this.recipe.level;
@@ -179,9 +176,9 @@ export class RecipeEditComponent implements OnInit {
         for (let image of this.recipe.images) {
           recipeImages.push(
             new FormGroup({
-              input: new FormControl(image.name, [Validators.required]),
+              input: new FormControl(null, [Validators.required]),
               percentages: new FormControl(100, [Validators.required]),
-              imageData: new FormControl(image.url, [Validators.required])
+              imageData: new FormControl({name: image.name,url:image.url}, [Validators.required])
             })
           );
         }
