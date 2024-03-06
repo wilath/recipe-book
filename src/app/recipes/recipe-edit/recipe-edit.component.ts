@@ -7,6 +7,7 @@ import { DifficultyLevel } from '../../shared/models/recipe.model';
 import { FileAnchor, FileUpload } from '../../shared/models/file-upload.model';
 import { finalize } from 'rxjs';
 import { StorageService } from '../../shared/storage.service';
+import { IngredientUnits } from '../../shared/models/ingredient.model';
 
 @Component({
   selector: 'app-recipe-edit',
@@ -29,7 +30,9 @@ export class RecipeEditComponent implements OnInit {
 
   public foodLevel = DifficultyLevel;
 
-  public prepTimes = [5,15,30,45,60,75,90]
+  public prepTimes = [5,15,30,45,60,75,90];
+
+  public unitTypes = IngredientUnits;
 
   public isPhotoAddOption = false;
 

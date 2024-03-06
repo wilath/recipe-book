@@ -1,178 +1,310 @@
 <div class="recipe-edit-wraper">
+  
+
+  <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
     <div class="edit-header">
+      <button type="button" class="top-button cancel-button" (click)="onCancel()"> <i class="fa-solid fa-share"></i> Cancel</button>
+
         <h2>Add Recipe</h2>
+      <button type="submit" class="top-button submit-button" [disabled]="!recipeForm.valid">{{editMode? 'Save':'Add'}} <i class="fa-solid fa-share"></i> </button>
+        
+      </div>
+    
+    
+
+    <div class="form-wraper">
+      <div class="form-group">
+        <label for="name" class="group-label">Enter the name of the dish</label>
+        <input
+          type="text"
+          id="name"
+          formControlName="name"
+          class="form-control name-input"
+        />
+      </div>
+
+      <div class="form-group">
+        <label class="group-label">Select the food category</label>
+        <div class="food-types">
+          <label for="0"
+            >Desert
+            <input
+              type="radio"
+              formControlName="type"
+              name="type"
+              id="0"
+              [value]="foodType.desert"
+            />
+          </label>
+
+          <label for="1"
+            >Dinner
+            <input
+              type="radio"
+              formControlName="type"
+              name="type"
+              id="1"
+              [value]="foodType.dinner"
+            />
+          </label>
+
+          <label for="2"
+            >Beverage
+            <input
+              type="radio"
+              formControlName="type"
+              name="type"
+              id="2"
+              [value]="foodType.drink"
+            />
+          </label>
+
+          <label for="3"
+            >Breakfast
+            <input
+              type="radio"
+              formControlName="type"
+              name="type"
+              id="3"
+              [value]="foodType.breakfast"
+            />
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="group-label">Select the level of difficulty </label>
+        <div class="food-level-wrap">
+          <div class="bar">
+            <div
+              [ngStyle]="{
+                width:
+                  recipeForm.value.level === foodLevel.Easy
+                    ? '0'
+                    : recipeForm.value.level === foodLevel.Medium
+                    ? '50%'
+                    : '100%'
+              }"
+              class="progress-bar"
+            ></div>
+
+            <label [for]="foodLevel.Easy"
+              ><span></span>
+              <input
+                type="radio"
+                name="level"
+                [id]="foodLevel.Easy"
+                [value]="foodLevel.Easy"
+                formControlName="level"
+              />
+            </label>
+
+            <label [for]="foodLevel.Medium"
+              ><span
+                [ngStyle]="{
+                  backgroundColor:
+                    recipeForm.value.level === foodLevel.Hard
+                      ? 'rgb(176, 202, 92)'
+                      : ''
+                }"
+              ></span>
+              <input
+                type="radio"
+                name="level"
+                [id]="foodLevel.Medium"
+                [value]="foodLevel.Medium"
+                formControlName="level"
+              />
+            </label>
+
+            <label [for]="foodLevel.Hard"
+              ><span></span>
+              <input
+                type="radio"
+                name="level"
+                [id]="foodLevel.Hard"
+                [value]="foodLevel.Hard"
+                formControlName="level"
+              />
+            </label>
+          </div>
+          <div class="extra-labels">
+            <label [for]="foodLevel.Easy">Easy</label>
+            <label [for]="foodLevel.Medium">Medium</label>
+            <label [for]="foodLevel.Hard">Hard</label>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="group-label" for="foodTime"
+          >Select a preparation time
+        </label>
+        <div class="food-level-wrap">
+          <div class="bar">
+            <div
+              [ngStyle]="{
+                width: (recipeForm.value.prepTime | prepTimeToPercent) + '%'
+              }"
+              class="progress-bar"
+            ></div>
+
+            @for (prepTime of prepTimes ; track $index) {
+            <label [for]="prepTime"
+              ><span
+                [ngStyle]="{
+                  backgroundColor:
+                    recipeForm.value.prepTime >= prepTime
+                      ? 'rgb(176, 202, 92)'
+                      : ''
+                }"
+              ></span>
+              <input
+                type="radio"
+                name="prepTime"
+                [id]="prepTime"
+                [value]="prepTime"
+                formControlName="prepTime"
+              />
+            </label>
+            }
+          </div>
+          <div class="extra-labels">
+            @for (prepTime of prepTimes ; track $index) {
+            <label class="lab" [for]="prepTime">{{ prepTime }}</label>
+            }
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="group-label" for="description"
+          >Enter a description of the dish</label
+        >
+        <div class="textarea-wrapper">
+          <textarea
+            cdkTextareaAutosize
+            cdkAutosizeMinRows="3"
+            type="text"
+            id="description"
+            formControlName="description"
+          ></textarea>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="add-wrap">
+          <label class="group-label">Add ingredients </label>
+          <button class="add-button" type="button" (click)="onAddIngredient()">
+            <i class="fa-solid fa-plus"></i>
+          </button>
+        </div>
+
+        <div class="ingredients" formArrayName="ingredients">
+
+          @for (ingredientControl of recipeForm.value.ingredients; track $index)
+          {
+          <ng-container *ngVar="$index as globalIndex">
+            <div class="ingredient-form" [formGroupName]="$index">
+              <input
+                type="text"
+                placeholder="Ingredient"
+                formControlName="name"
+              />
+              <input type="number" placeholder="1" formControlName="ammount" />
+
+              <div class="select-unit">
+                <button type="button" class="show-units">
+                  {{
+                    ingredientControl.unit
+                      ? ingredientControl.unit
+                      : "Select Unit"
+                  }}
+                  <i class="fa-solid fa-chevron-up"></i>
+                  <div class="units">
+                    @for (unit of unitTypes | keyvalue; track unit) {
+                    <label [for]="globalIndex + unit.key">
+                      <input
+                        type="radio"
+                        name="unit"
+                        formControlName="unit"
+                        [id]="globalIndex + unit.key"
+                        [value]="unit.value"
+                      />{{ unit.key }}
+                    </label>
+                    }
+                  </div>
+                </button>
+              </div>
+              <button
+                class="delete-ing"
+                type="button"
+                (click)="onDeleteIng($index)"
+              >
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+            </div>
+          </ng-container>
+          }
+        </div>
+      </div>
+
+      <div class="form-group-images">
+        <div
+          [ngStyle]="{ 'margin-bottom': !isPhotoAddOption ? '1rem' : '0.5rem' }"
+          class="add-wrap"
+        >
+          <label class="group-label">Add photos </label>
+          <button
+            class="add-button"
+            type="button"
+            [disabled]="photoQuantity > 7"
+            (click)="onAddImageInput()"
+          >
+            <i class="fa-solid fa-plus"></i>
+          </button>
+        </div>
+
+        <div class="image-form" formArrayName="images">
+          @for (imageControl of recipeForm.value.images; track $index) {
+          <ng-container [formGroupName]="$index">
+            <div [class]="'nt' + $index" class="label-wrapper">
+              <label [for]="'image' + $index"
+                ><i class="fa-solid fa-file-import"></i>
+                <input
+                  type="file"
+                  accept="image/*"
+                  [id]="'image' + $index"
+                  [name]="'image' + $index"
+                  formControlName="input"
+                  (change)="onFileUpload($event, $index)"
+                />
+                <div
+                  [ngStyle]="{ height: imageControl.percentages + '%' }"
+                  class="image-loading"
+                ></div>
+                <img
+                  class="image-display"
+                  *ngIf="
+                    imageControl.imageData.url &&
+                    imageControl.percentages === 100
+                  "
+                  [src]="imageControl.imageData.url"
+                  alt="XD"
+                />
+              </label>
+              <a
+                *ngIf="
+                  imageControl.imageData.url && imageControl.percentages === 100
+                "
+                (click)="onDeleteImageFromForm($index)"
+                ><div class="image-delete">
+                  <i class="fa-regular fa-trash-can"></i></div
+              ></a>
+            </div>
+          </ng-container>
+          }
+        </div>
+      </div>
     </div>
-
-        <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
-          
-                    <div class="navbar_recipes">
-                    <button 
-                    type="submit" 
-                    [disabled]="!recipeForm.valid">
-                    Save</button>
-                    <button 
-                    type="button" 
-                    (click)="onCancel()">
-                    Cancel</button>
-                   
-                    </div>
-
-                 
-
-                    <div class="form-wraper">
-
-                    <div class="form-group">
-                        <label for="name" class="group-label">Enter the name of the dish</label>
-                        <input  type="text" id="name" formControlName="name" class="form-control name-input">
-                    </div>
-
-
-                    <div class="form-group">
-                        <label class="group-label">Select a food category</label>
-                        <div>
-                            <input type="radio" formControlName="type" name="type" id="0" [value]="foodType.desert">
-                            <label for="0">Desert</label>
-                            <input type="radio" formControlName="type" name="type" id="1" [value]="foodType.dinner">
-                            <label for="1">Dinner</label>
-                            <input type="radio" formControlName="type" name="type" id="2" [value]="foodType.drink">
-                            <label for="2">Beverage</label>
-                            <input type="radio" formControlName="type" name="type" id="3" [value]="foodType.breakfast">
-                            <label for="3">Breakfast</label>
-                        </div>
-                    </div>
-
-                  
-
-                    <div class="form-group">
-                        <label class="group-label" >Select the level of difficulty </label>
-                        <div class="food-level-wrap">
-                            <div class="bar">
-                                <div 
-                                [ngStyle]="{'width': recipeForm.value.level === foodLevel.Easy ? '0' : recipeForm.value.level === foodLevel.Medium ? '50%' : '100%' }" class="progress-bar">
-                            </div>
-
-                            <label [for]="foodLevel.Easy"><span></span>
-                                <input type="radio" name="level" [id]="foodLevel.Easy" [value]="foodLevel.Easy" formControlName="level">
-                            </label>
-                            
-                            <label [for]="foodLevel.Medium"><span [ngStyle]="{'backgroundColor': recipeForm.value.level === foodLevel.Hard ? 'rgb(176, 202, 92)' : ''}"></span>
-                                <input type="radio" name="level" [id]="foodLevel.Medium" [value]="foodLevel.Medium" formControlName="level">
-                            </label>
-                            
-                            <label [for]="foodLevel.Hard"><span></span>
-                                <input type="radio" name="level" [id]="foodLevel.Hard" [value]="foodLevel.Hard" formControlName="level">
-                            </label>                                              
-                            </div>
-                            <div class="extra-labels">
-                                <label [for]="foodLevel.Easy">Easy</label>
-                                <label [for]="foodLevel.Medium">Medium</label>
-                                <label [for]="foodLevel.Hard">Hard</label>
-
-                            </div> 
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="group-label" for="foodTime">Select a preparation time </label>
-                        <div class="food-level-wrap">
-                            <div class="bar">
-                                <div 
-                                [ngStyle]="{'width': (recipeForm.value.prepTime | prepTimeToPercent) + '%' }" class="progress-bar">
-                            </div>
-
-                            @for (prepTime of prepTimes ; track $index) {
-                                <label [for]="prepTime"><span [ngStyle]="{'backgroundColor': recipeForm.value.prepTime >= prepTime ? 'rgb(176, 202, 92)':''}"></span>
-                                    <input type="radio" name="prepTime" [id]="prepTime" [value]="prepTime" formControlName="prepTime">
-                                </label>
-                            }
-                                          
-                            </div>
-                            <div class="extra-labels">
-                                @for (prepTime of prepTimes ; track $index) {
-                                    <label class="lab" [for]="prepTime">{{prepTime}}</label>
-                                }
-                              
-                                
-
-                            </div> 
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="group-label" for="description">Enter a description of the dish</label>
-                        <div class="textarea-wrapper">
-                            <textarea cdkTextareaAutosize cdkAutosizeMinRows="3"
-                            type="text" id="description"  formControlName="description"></textarea>
-                        </div>
-                       
-                    </div>
-
-                             
-           
-                    <div class="form-group">
-                        <div class="add-wrap">
-                        <label class="group-label" >Add ingredients </label>
-                        <button class="add-button" type="button" (click)="onAddIngredient()"><i class="fa-solid fa-plus"></i></button>
-                        </div>
-                        
-                    
-                        <div formArrayName="ingredients">
-
-                            @for (ingredientControl of recipeForm.value.ingredients; track $index) {
-                                <div [formGroupName]="$index" >
-                            
-                                    <input 
-                                    type="text" 
-                                    formControlName="name">
-                            
-                                    <input 
-                                    type="number" 
-                                    formControlName="ammount">
-                                    <input 
-                                    type="text"
-                                    formControlName="unit">
-                                
-                                    <button 
-                                    type="button" 
-                                    (click)="onDeleteIng($index)">X</button>
-                                </div>
-                            }                                    
-                        </div>
-
-                 
-
-                    </div>
-
-                    <div class="form-group-images">
-                        <div [ngStyle]="{'margin-bottom' :!isPhotoAddOption? '1rem' : '0.5rem'}" class="add-wrap">
-                        <label  class="group-label">Add photos </label>
-                        <button class="add-button" type="button" [disabled]="photoQuantity > 7" (click)="onAddImageInput()"><i class="fa-solid fa-plus"></i></button>
-                    </div>
-
-                        
-                        <div class="image-form" formArrayName="images">    
-                            @for (imageControl of recipeForm.value.images; track $index) {
-                                <ng-container [formGroupName]="$index">
-                                    <div [class]="'nt' + $index" class="label-wrapper">
-                                    <label  [for]="'image' + $index"><i class="fa-solid fa-file-import"></i>
-                                        <input  type="file" accept="image/*" [id]="'image' + $index" [name]="'image' + $index" formControlName="input" (change)="onFileUpload($event, $index)" >
-                                        <div [ngStyle]="{ 'height': imageControl.percentages + '%'}"  class="image-loading"></div>
-                                        <img class="image-display" *ngIf="imageControl.imageData.url && imageControl.percentages === 100" [src]="imageControl.imageData.url" alt="XD" >
-                                    </label>                     
-                                    <a *ngIf="imageControl.imageData.url && imageControl.percentages === 100" (click)="onDeleteImageFromForm($index)"><div class="image-delete"><i class="fa-regular fa-trash-can"></i></div></a>
-                                </div>                     
-                                </ng-container>
-                            }
-                        </div>
-
-
-
-
-
-                    </div>
-
-                    
-                                        
-                </div>
-
-        </form>
-    </div>
+  </form>
+</div>
