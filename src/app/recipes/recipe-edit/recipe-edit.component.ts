@@ -50,13 +50,8 @@ export class RecipeEditComponent implements OnInit {
       }
       this.loggedUser = JSON.parse(localStorage.getItem('userData') || '{}').email;
       this.initForm();
-      console.log(this.recipe)
     });
     
-  }
-
-  public onDeleteIng(index: number) {
-    (<FormArray>this.recipeForm.get('ingredients')).removeAt(index);
   }
 
   public onCancel() {
@@ -76,6 +71,10 @@ export class RecipeEditComponent implements OnInit {
     );
   }
 
+  public onDeleteIngredient(index: number) {
+    (<FormArray>this.recipeForm.get('ingredients')).removeAt(index);
+  }
+
   public onAddImageInput() {
     this.isPhotoAddOption = true
     this.photoQuantity++
@@ -88,9 +87,19 @@ export class RecipeEditComponent implements OnInit {
      )  
   }
 
-  public onDeleteImageFromForm(index: number){
+  public onDeleteImageInput(index: number){
     const imagesFormArray = (<FormArray>this.recipeForm.get('images'));
     imagesFormArray.removeAt(index)
+  }
+
+  public onAddDescriptionStep() {
+    (<FormArray>this.recipeForm.get('description')?.get('steps')).push(
+      new FormControl('', Validators.required)
+    )
+  }
+
+  public onDeleteDescriptionStep(index:number){
+    (<FormArray>this.recipeForm.get('description')?.get('steps')).removeAt(index)
   }
 
   public onFileUpload(event: any ,index : number){
@@ -149,7 +158,10 @@ export class RecipeEditComponent implements OnInit {
     let recipeFoodType = FoodType.dinner
     let recipeLevel = DifficultyLevel.Easy;
     let recipePrepTime = 45;
-    let recipeDescription = '';
+    let recipeDescription = new FormGroup({
+      main: new FormControl('', [Validators.required]),
+      steps: new FormArray<FormControl>([], [Validators.required])
+    });
     let recipeIngredients = new FormArray<FormGroup>([]);
     let recipeImages = new FormArray<FormGroup>([]);
 
@@ -159,7 +171,17 @@ export class RecipeEditComponent implements OnInit {
       recipeFoodType = this.recipe.foodType;
       recipeLevel = this.recipe.level;
       recipePrepTime = this.recipe.prepTimeMinutes;
-      recipeDescription = this.recipe.description;
+     
+
+      if (this.recipe['description']){
+        recipeDescription.patchValue({
+          main: this.recipe.description.main
+        });
+        const stepsArray = recipeDescription.get('steps') as FormArray
+        for(let step of this.recipe.description.steps){
+          stepsArray.push(new FormControl(step, [Validators.required]))
+        }
+      }
 
       if (this.recipe['ingredients']) {
         for (let ingredient of this.recipe.ingredients) {
@@ -191,7 +213,7 @@ export class RecipeEditComponent implements OnInit {
       type: new FormControl(recipeFoodType, Validators.required),
       level: new FormControl(recipeLevel, Validators.required),
       prepTime: new FormControl(recipePrepTime, Validators.required),
-      description: new FormControl(recipeDescription, Validators.required),
+      description: recipeDescription,
       ingredients: recipeIngredients,
       images: recipeImages
     });

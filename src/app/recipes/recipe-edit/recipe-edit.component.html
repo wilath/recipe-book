@@ -1,32 +1,31 @@
-<div class="recipe-edit-wraper">
+<div class="recipe-edit-wraper backboard-uno-grey border-radius-1r  pt-1r">
   
 
   <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
-    <div class="edit-header">
-      <button type="button" class="top-button cancel-button" (click)="onCancel()"> <i class="fa-solid fa-share"></i> Cancel</button>
-
+    <div class="edit-header padding-1r">
+      <button type="button" class="button-alpha hover-grey hover-i-sage2 border-radius-1r padding-c1 font-size-15r" (click)="onCancel()"> <i id="mirror" class="fa-solid fa-share"></i> Cancel</button>
         <h2>Add Recipe</h2>
-      <button type="submit" class="top-button submit-button" [disabled]="!recipeForm.valid">{{editMode? 'Save':'Add'}} <i class="fa-solid fa-share"></i> </button>
+      <button type="submit" class="button-alpha hover-grey hover-i-sage2 border-radius-1r padding-c1 font-size-15r"[disabled]="!recipeForm.valid">{{editMode? 'Save':'Add'}} <i class="fa-solid fa-share"></i> </button>
         
-      </div>
-    
+    </div>
     
 
     <div class="form-wraper">
-      <div class="form-group">
-        <label for="name" class="group-label">Enter the name of the dish</label>
+
+      <div class="padding-1r font-size-15r form-group">
+        <label for="name" class="font-weight-400">Enter the name of the dish</label>
         <input
           type="text"
           id="name"
           formControlName="name"
-          class="form-control name-input"
+          class="form-control name-input backboard-uno-grey-active border-radius-1r font-size-15r"
         />
       </div>
 
-      <div class="form-group">
-        <label class="group-label">Select the food category</label>
+      <div class="padding-1r font-size-15r form-group">
+        <label class="font-weight-400">Select the food category</label>
         <div class="food-types">
-          <label for="0"
+          <label class="no-input-visible padding-c1 border-radius-hr mr-hrem label-hover-active-grey checked-sage2" for="0"
             >Desert
             <input
               type="radio"
@@ -37,7 +36,7 @@
             />
           </label>
 
-          <label for="1"
+          <label class="no-input-visible padding-c1 border-radius-hr mr-hrem label-hover-active-grey checked-sage2" for="1"
             >Dinner
             <input
               type="radio"
@@ -48,7 +47,7 @@
             />
           </label>
 
-          <label for="2"
+          <label class="no-input-visible padding-c1 border-radius-hr mr-hrem label-hover-active-grey checked-sage2" for="2"
             >Beverage
             <input
               type="radio"
@@ -59,7 +58,7 @@
             />
           </label>
 
-          <label for="3"
+          <label class="no-input-visible padding-c1 border-radius-hr mr-hrem label-hover-active-grey checked-sage2" for="3"
             >Breakfast
             <input
               type="radio"
@@ -72,8 +71,8 @@
         </div>
       </div>
 
-      <div class="form-group">
-        <label class="group-label">Select the level of difficulty </label>
+      <div class="padding-1r font-size-15r form-group">
+        <label class="font-weight-400">Select the level of difficulty </label>
         <div class="food-level-wrap">
           <div class="bar">
             <div
@@ -135,8 +134,8 @@
           </div>
         </div>
       </div>
-      <div class="form-group">
-        <label class="group-label" for="foodTime"
+      <div class="padding-1r font-size-15r form-group">
+        <label class="font-weight-400" for="foodTime"
           >Select a preparation time
         </label>
         <div class="food-level-wrap">
@@ -176,8 +175,8 @@
         </div>
       </div>
 
-      <div class="form-group">
-        <label class="group-label" for="description"
+      <div class="padding-1r font-size-15r form-group" formGroupName="description">
+        <label class="font-weight-400" for="main"
           >Enter a description of the dish</label
         >
         <div class="textarea-wrapper">
@@ -186,15 +185,33 @@
             cdkAutosizeMinRows="3"
             type="text"
             id="description"
-            formControlName="description"
+            formControlName="main"
           ></textarea>
+        </div>
+        <div class="padding-1r font-size-15r form-group" id="description-steps" formArrayName="steps">
+          <div class="add-wrap">
+            <label class="font-weight-400">Add cooking steps </label>
+            <button class="button-alpha hover-active-grey border-radius-hr padding-15r" type="button" (click)="onAddDescriptionStep()">
+              <i class="fa-solid fa-plus"></i>
+            </button>
+          </div>
+          @for (step of recipeForm.value.description.steps ; track $index) {
+            <div class="add-wrap">
+              <label [for]="$index">Step {{$index + 1}}</label>
+            <button type="button" class="button-alpha hover-active-grey border-radius-hr padding-15r" (click)="onDeleteDescriptionStep($index)"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="textarea-wrapper">
+            <textarea cdkTextareaAutosize cdkAutosizeMinRows="1" [name]="$index" [id]="$index" [formControlName]="$index"></textarea>
+            </div>
+          }
+
         </div>
       </div>
 
-      <div class="form-group">
+      <div class="padding-1r font-size-15r form-group">
         <div class="add-wrap">
-          <label class="group-label">Add ingredients </label>
-          <button class="add-button" type="button" (click)="onAddIngredient()">
+          <label class="font-weight-400">Add ingredients </label>
+          <button class="button-alpha hover-active-grey border-radius-hr padding-15r" type="button" (click)="onAddIngredient()">
             <i class="fa-solid fa-plus"></i>
           </button>
         </div>
@@ -238,7 +255,7 @@
               <button
                 class="delete-ing"
                 type="button"
-                (click)="onDeleteIng($index)"
+                (click)="onDeleteIngredient($index)"
               >
                 <i class="fa-solid fa-xmark"></i>
               </button>
@@ -248,14 +265,14 @@
         </div>
       </div>
 
-      <div class="form-group-images">
+      <div class="padding-1r font-size-15r form-group-images">
         <div
           [ngStyle]="{ 'margin-bottom': !isPhotoAddOption ? '1rem' : '0.5rem' }"
           class="add-wrap"
         >
-          <label class="group-label">Add photos </label>
+          <label class="font-weight-400">Add photos </label>
           <button
-            class="add-button"
+            class="button-alpha hover-active-grey border-radius-hr padding-15r"
             type="button"
             [disabled]="photoQuantity > 7"
             (click)="onAddImageInput()"
@@ -296,7 +313,7 @@
                 *ngIf="
                   imageControl.imageData.url && imageControl.percentages === 100
                 "
-                (click)="onDeleteImageFromForm($index)"
+                (click)="onDeleteImageInput($index)"
                 ><div class="image-delete">
                   <i class="fa-regular fa-trash-can"></i></div
               ></a>

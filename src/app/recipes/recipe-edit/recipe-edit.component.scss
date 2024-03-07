@@ -1,44 +1,26 @@
 @import "../../styles/variables";
 
-.recipe-edit-wraper {
-  background-color: $uno-grey;
-  border-radius: 1rem;
-  font-family: "Barlow Semi Condensed", sans-serif;
-  color: $uno-white;
+#mirror{
+  transform: scaleX(-1);
+}
+.name-input{
+  width: calc(100% - 24px);       
+  padding: 6px 12px;
   font-weight: 300;
-  padding-top: 1rem;
+}
+
+
+.recipe-edit-wraper {
+  font-family: "Barlow Semi Condensed", sans-serif;
+  font-weight: 300;
+  
   .edit-header {
     background-color: $uno-grey-active;
-    padding: 1rem;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    .cancel-button{
-      i{
-        transform:scaleX(-1);
-      }
-    }
-    .top-button{
-      border: none;
-      background-color: transparent;
-      color: $uno-white;
-      font-size: 1.6rem;
-      padding: 0.2rem 1rem;
-      border-radius: 1rem;
-      transition: all 0.2s linear;
-      &:disabled{
-        opacity: 0.5;
-        cursor: auto;
-      }
-      &:hover:enabled{
-        background-color: $uno-grey;
-        color: $sage;
-        i{
-          color: $sage2
-        }
-      }
-      
+   
     }
     h2 {
       font-size: 1.9rem;
@@ -46,81 +28,17 @@
       text-decoration: underline $sage2;
     }
   }
-  .form-wraper {
-    .add-button {
-      margin-left: 5px;
-      border: none;
-      background-color: transparent;
-      color: $uno-white;
-      border-radius: 0.5rem;
-      padding: 0.5rem;
-      transition: all 0.2s linear;
-      &:hover {
-        background-color: $uno-grey-active;
-        color: $sage;
-      }
-    }
+  
+  .form-wraper { 
     .form-group {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
       justify-content: center;
-      padding: 1rem;
-      font-size: 1.5rem;
       border-bottom: 1px solid $uno-grey-active;
-      .name-input {
-        background: $uno-grey-active;
-        color: $uno-white;
-        border-radius: 1rem;
-        width: calc(100% - 24px);
-        border: none;
-        font-size: 1.5rem;
-        padding: 6px 12px;
-        font-weight: 300;
-      }
-      .group-label {
-        font-weight: 400;
-        margin-bottom: 1rem;
-      }
-      .textarea-wrapper {
-        background: $uno-grey-active;
-        border-radius: 1rem;
-        width: calc(100% - 24px);
-        padding: 6px 12px;
 
-        textarea {
-          resize: none;
-          width: 100%;
-          background-color: transparent;
-          color: $uno-white;
-          border: none;
-          &:focus {
-            outline: none;
-          }
-        }
-      }
       .food-types {
         position: relative;
-
-        label {
-          cursor: pointer;
-          border-radius: 0.5rem;
-          background-color: transparent;
-          padding: 0.2rem 0.5rem;
-          transition: all 0.2s linear;
-          margin-right: 0.5rem;
-          &:hover {
-            background-color: $uno-grey-active;
-          }
-          &:has(input:checked) {
-            background-color: $uno-grey-active;
-            color: $sage2;
-          }
-          input {
-            position: absolute;
-            width: 0;
-          }
-        }
       }
     }
     .food-level-wrap {
@@ -387,4 +305,14 @@
       }
     }
   }
+
+#description-steps{
+  border: none;
+  width: calc(100% - 2rem);
+}
+.add-wrap{
+  display: flex;
+  flex: row;
+  align-items: center;
+  margin-bottom: 1rem;
 }

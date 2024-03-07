@@ -1,0 +1,18 @@
+@import '../styles/variables';
+
+.textarea-wrapper {
+    background: $uno-grey-active;
+    padding: 6px 12px;
+    border-radius: 1rem;
+
+    textarea {
+      resize: none;
+      width: 100%;
+      background-color: transparent;
+      color: $uno-white;
+      border: none;
+      &:focus {
+        outline: none;
+      }
+    }
+  }

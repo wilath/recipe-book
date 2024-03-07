@@ -27,8 +27,10 @@
     font-size: 1.4rem;
     font-weight: 500;
     padding: 0.5rem 0;
-    margin-left: 1rem;
+    margin: 0 1rem;
+    min-height: 3rem;
     .go-to-recipe{
+      
       &:hover{
         text-decoration: underline;
         cursor: pointer;

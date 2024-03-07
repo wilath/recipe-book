@@ -1,0 +1,29 @@
+@import "../styles/variables";
+
+.no-input-visible {
+  cursor: pointer;
+  background-color: transparent;
+  transition: all 0.2s linear;
+  input {
+    width: 0;
+    position: absolute;
+  }
+}
+.label-hover-active-grey {
+    &:hover {
+      background-color: $uno-grey-active;
+      color: $sage;
+    }
+  }
+.checked-sage2{
+    &:has(input:checked) {
+        background-color: $uno-grey-active;
+        color: $sage2;
+      }
+}
+.checked-sage{
+    &:has(input:checked) {
+        background-color: $uno-grey-active;
+        color: $sage;
+      }
+}

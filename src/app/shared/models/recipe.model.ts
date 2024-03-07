@@ -18,11 +18,15 @@ export enum DifficultyLevel{
     Hard = "Hard"
 }
 
+export interface Description{
+    main: string,
+    steps: string[]
+}
 
 export class Recipe{
     public id: number;
     public name:string;
-    public description:string;
+    public description:Description;
     public images: FileAnchor[];
     public ingredients: Ingredient[];
     public foodType: FoodType;
@@ -32,7 +36,7 @@ export class Recipe{
     public date: Date;
     public likes: Likes;
     public stars: Rating[];
-    constructor(id: number, name:string, desc:string, images:FileAnchor[], ingredients: Ingredient[], foodType: FoodType, author: string, level: DifficultyLevel, prepTimeMinutes: number, date: Date, likes?: Likes, stars?: Rating[] ){
+    constructor(id: number, name:string, desc:Description, images:FileAnchor[], ingredients: Ingredient[], foodType: FoodType, author: string, level: DifficultyLevel, prepTimeMinutes: number, date: Date, likes?: Likes, stars?: Rating[] ){
         this.id = id
         this.name = name;
         this.description = desc;

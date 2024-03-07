@@ -1,35 +1,44 @@
-@import './variables';
+@import "./variables";
 
-.button-alpha{
-    background-color: transparent;
-    padding: 0.5rem 1rem;
-    border-radius: 10px;
-    margin: 5px;
-    border: none;
-    letter-spacing: 0.2rem;
-    font-size: 1.2rem;
-    color: white;
-    text-wrap: nowrap;
-    border: 1px solid $powder-blue;
+.button-alpha {
+  border: none;
+  background-color: transparent;
+  color: $uno-white;
+  transition: all 0.2s linear;
 
-    &:hover:enabled{
-        background-color:  $powder-blue;
-        color: $rich-black;
+  &:hover:disabled {
+    cursor: auto;
+  }
+  &:focus-visible:enabled {
+    outline: none;
+    background-color: $uno-grey-active;
+    color: $sage;
+  }
+  &:disabled {
+    opacity: 0.5;
+  }
+  &:focus,
+  :focus-visible {
+    outline: none;
+  }
+}
+.hover-active-grey {
+  &:hover:enabled {
+    background-color: $uno-grey-active;
+    color: $sage;
+  }
+}
+.hover-grey {
+  &:hover:enabled {
+    background-color: $uno-grey;
+    color: $sage;
+  }
+}
+.hover-i-sage2 {
+  &:hover:enabled {
+    i {
+      color: $sage2;
     }
-    &:hover:disabled{
-        cursor: auto;
-    }
-    &:focus-visible{
-        outline: 2px solid $sage;
-    }
-    &:disabled{
-        opacity: 0.5;
-    }
-
-
+  }
 }
 
-.button-alpha-active{
-    background-color: $powder-blue;
-    color: $rich-black;
-}

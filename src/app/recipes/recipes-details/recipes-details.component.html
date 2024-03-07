@@ -1,19 +1,18 @@
 
-<div class="details-header">
-  <div class="title-wraper">
-    <h1 id="title">{{recipe.name}}</h1>
+<div >
+  <div >
+    <h1>{{recipe.name}}</h1>
   </div>
-  <!-- <img src={{flyIn.imagePath}} alt={{flyIn.name}} class="details-img"> -->
 </div>
-<div class="scroll-window">
-  <div class="details-ings">
+<div >
+  <div >
     <h5>Ingredients:</h5>
-    <div class="details-ings-flex">
+    <div>
       <p *ngFor="let ing of recipe.ingredients">- {{ing.name}}</p>
     </div>
   </div>
-  <div class="details-description">
+  <div >
     <h5>Description:</h5>
-    <div class="description">{{recipe.description}}</div>
+    <div >{{recipe.description}}</div>
   </div>
 </div>

@@ -1,0 +1,85 @@
+@import './variables';
+
+//backround rules
+
+.backboard-uno-grey{
+  background-color: $uno-grey;
+  color: $uno-white
+}
+
+.backboard-uno-grey-active{
+  background-color: $uno-grey-active;
+  color: $uno-white
+}
+
+// margin rules
+
+.mt-1rem{
+  margin-top: 1rem;
+}
+
+.mb-1rem{
+  margin-bottom: 1rem;
+}
+
+.mr-1rem{
+  margin-right: 1rem;
+}
+
+.ml-1rem{
+  margin-left: 1rem;
+}
+
+.mr-hrem{
+  margin-right: 0.5rem;
+}
+
+.ml-hrem{
+  margin-left: 1rem;
+}
+
+// padding rules
+
+.padding-1r {
+  padding: 1rem;
+}
+
+.padding-15r {
+  padding: .5rem;
+}
+
+.padding-c1 {
+  padding: 0.2rem 0.5rem;
+}
+
+.pt-1r{
+  padding-top: 1rem;
+}
+
+.pb-1r{
+  padding-bottom: 1rem;
+}
+
+// border radius rules
+
+.border-radius-1r {
+  border-radius: 1rem;
+}
+
+.border-radius-hr {
+  border-radius: 0.5rem;
+}
+
+//font rules
+
+.font-size-15r {
+  font-size: 1.5rem;
+}
+
+.font-size-2r {
+  font-size: 2rem;
+}
+
+.font-weight-400{
+  font-weight: 400;
+}
