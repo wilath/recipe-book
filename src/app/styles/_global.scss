@@ -35,8 +35,18 @@
 }
 
 .ml-hrem{
-  margin-left: 1rem;
+  margin-left: 0.5rem;
 }
+.mb-hrem{
+  margin-bottom: 0.5rem;
+}
+.mb-02rem{
+  margin-bottom: 0.2rem;
+}
+.mt-hrem{
+  margin-top: 0.5rem;
+}
+
 
 // padding rules
 
@@ -72,6 +82,13 @@
 
 //font rules
 
+.font-size-1r{
+  font-size: 1rem;
+}
+.font-size-12r{
+  font-size: 1.2rem;
+}
+
 .font-size-15r {
   font-size: 1.5rem;
 }
@@ -82,4 +99,10 @@
 
 .font-weight-400{
   font-weight: 400;
+}
+
+// dimension rules
+
+.width100{
+  width: 100%;
 }

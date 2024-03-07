@@ -46,19 +46,13 @@
         </div>
         {{recipe.stars.length ? recipe.stars.length : 0}}
       </div>
-      <div class="level info-part">
-        <div class="level-container mg-02">
-          <span [ngStyle]="{'background-color': recipe.level === 'Easy'? 'rgb(228,230,235)' : 'transparent'}" id="sp1"></span>
-          <span [ngStyle]="{'backgroundColor': recipe.level === 'Medium'? 'rgb(228,230,235)' : 'transparent'}" id="sp2"></span>
-          <span [ngStyle]="{'backgroundColor': recipe.level === 'Hard'? 'rgb(228,230,235)' : 'transparent'}" id="sp3"></span>
-        </div>
+      <div class="info-part">
+        <app-levels [level]="recipe.level" class="mb-02rem"></app-levels>
+        
         {{ recipe.level }}
       </div>
-      <div class="time info-part">
-        <div class="clock mg-02">
-          <span id="pointer1"></span>
-          <span id="pointer2"></span>
-        </div>
+      <div class="info-part">
+        <app-clock class="mb-02rem"></app-clock>
         {{ recipe.prepTimeMinutes }} min.
       </div>
     </div>

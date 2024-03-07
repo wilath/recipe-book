@@ -1,0 +1,22 @@
+@import '../../styles/variables';
+.details-wrap{
+    .recipe-main-details{
+        display: flex;
+        border-bottom: 1px solid $uno-grey-active;
+
+        .half{
+            width: 50%;
+            aspect-ratio: 1/1;
+        }
+        .recipe-info{}
+        .recipe-image{
+            img{
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+                border-radius: 0 1rem 0 0;
+            }
+        }
+        
+    }
+}

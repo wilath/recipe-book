@@ -1,318 +1,308 @@
 @import "../../styles/variables";
 
-#mirror{
+#mirror {
   transform: scaleX(-1);
 }
-.name-input{
-  width: calc(100% - 24px);       
+
+#description-steps {
+  border: none;
+  width: calc(100% - 2rem);
+}
+
+.name-input {
+  width: calc(100% - 24px);
   padding: 6px 12px;
   font-weight: 300;
+}
+
+.textarea-width {
+  width: calc(100% - 2rem);
+  
+}
+
+.add-wrap {
+  display: flex;
+  align-items: center;
 }
 
 
 .recipe-edit-wraper {
   font-family: "Barlow Semi Condensed", sans-serif;
   font-weight: 300;
-  
+
   .edit-header {
     background-color: $uno-grey-active;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-   
-    }
-    h2 {
-      font-size: 1.9rem;
-      text-align: center;
-      text-decoration: underline $sage2;
+  }
+  h2 {
+    font-size: 1.9rem;
+    text-align: center;
+    text-decoration: underline $sage2;
+  }
+}
+
+.form-wraper {
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    border-bottom: 1px solid $uno-grey-active;
+  }
+
+  .bar {
+    position: relative;
+    width: 100%;
+    height: 5px;
+    background-color: $uno-white;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .progress-bar {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 5px;
+      background-color: $sage2;
+      transition: all 0.3s linear;
     }
   }
-  
-  .form-wraper { 
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: center;
-      border-bottom: 1px solid $uno-grey-active;
 
-      .food-types {
-        position: relative;
+  .track-label {
+    &:nth-child(2) > span {
+      background-color: $sage2;
+    }
+
+    span {
+      display: block;
+      width: 1rem;
+      border-radius: 50%;
+      aspect-ratio: 1/1;
+      background-color: $uno-white;
+      transition: all 0s linear;
+      transition-delay: 0.3s;
+    }
+    &:has(input:checked) > span {
+      background-color: $sage2;
+    }
+  }
+
+  .extra-labels {
+    margin-top: 0.5rem;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    .lab {
+      min-width: 24px;
+      text-align: center;
+      &:nth-child(1) {
+        text-align: start;
       }
     }
-    .food-level-wrap {
-      margin-top: 1rem;
-      position: relative;
-      width: 100%;
+  }
 
-      .bar {
-        position: relative;
-        width: 100%;
-        height: 5px;
-        background-color: $uno-white;
-        border-radius: 5px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        .progress-bar {
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          border-radius: 5px;
-          background-color: $sage2;
-          transition: all 0.3s linear;
-        }
+  .ingredients {
+    margin-top: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 5px;
+    .ingredient-form {
+      background-color: $uno-grey-active;
+      border-radius: 0.5rem;
+      display: flex;
+      input {
+        background-color: transparent;
+        color: $uno-white;
+        font-size: 1rem;
       }
-
-      label {
-        cursor: pointer;
-        position: relative;
-
-        input {
-          position: absolute;
-          display: none;
-        }
-        &:nth-child(2) > span {
-          background-color: $sage2;
-        }
-
-        span {
+      input[type="text"] {
+        padding-left: 0.5rem;
+        width: 6rem;
+      }
+      input[type="number"] {
+        width: 2rem;
+        text-align: end;
+        -moz-appearance: textfield;
+        appearance: none;
+        border-left: 1px solid $uno-dark;
+        margin-right: 5px;
+      }
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+      .select-unit {
+        .show-units {
           display: block;
-          width: 1rem;
-          border-radius: 50%;
-          aspect-ratio: 1/1;
-          background-color: $uno-white;
-          transition: all 0s linear;
-          transition-delay: 0.3s;
-        }
-        &:has(input:checked) > span {
-          background-color: $sage2;
-        }
-      }
-      .extra-labels {
-        margin-top: 0.5rem;
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        .lab {
-          min-width: 24px;
+          position: relative;
           text-align: center;
-          &:nth-child(1) {
-            text-align: start;
-          }
-        }
-      }
-    }
-    .ingredients {
-      margin-top: 0.5rem;
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      width: 100%;
-      gap: 5px;
-      .ingredient-form {
-        background-color: $uno-grey-active;
-        border-radius: 0.5rem;
-        display: flex;
-        input {
+          border: none;
+          outline: none;
           background-color: transparent;
           color: $uno-white;
           font-size: 1rem;
-        }
-        input[type="text"] {
-          padding-left: 0.5rem;
-          width: 6rem
-        }
-        input[type="number"] {
-          width: 2rem;
-          text-align: end;
-          -moz-appearance: textfield;
-          appearance: none;
-          border-left: 1px solid $uno-dark;
-          margin-right: 5px;
-        }
-        input::-webkit-outer-spin-button,
-        input::-webkit-inner-spin-button {
-          -webkit-appearance: none;
-          margin: 0;
-        }
-        .select-unit {
-          .show-units {
-            display: block;
-            position: relative;
-            text-align: center;
-            border: none;
-            outline: none;
-            background-color: transparent;
-            color: $uno-white;
-            font-size: 1rem;
-            height: 100%;
-            padding: 0;
-            i {
-              transition: all 0.1s linear;
-              opacity: 0.5;
-              color: $sage;
-            }
-
-            &:hover > .units {
-              display: flex;
-            }
-            &:hover > i {
-              transform: rotate(180deg);
-            }
-            &:has(> .units:hover) > i {
-              transform: rotate(180deg);
-            }
-          }
-          .units {
-            position: absolute;
-            display: none;
-            flex-direction: column;
-            bottom: 100%;
-            background-color: $uno-dark;
-            gap: 5px;
-            border-radius: 0.5rem;
-            overflow: hidden;
-            &:hover {
-              display: flex;
-            }
-            label {
-              cursor: pointer;
-              padding: 0.2rem 0.3rem;
-              width: calc(100% - 0.6rem);
-              text-align: start;
-
-              &:has(input:checked) {
-                color: $sage2;
-                background-color: $uno-grey-active;
-              }
-              &:hover {
-                color: $sage;
-                background-color: $uno-grey-active;
-              }
-              input {
-                position: absolute;
-                width: 0;
-              }
-            }
-          }
-        }
-        .delete-ing {
-          font-size: 1.2rem;
-          background-color: $uno-dark;
-          color: $uno-white;
-          border: none;
           height: 100%;
-          margin-left: 5px;
-          border-radius: 0 0.25rem 0.25rem 0;
-          transition: color 0.2s linear;
-          &:hover {
-            color: $sage2;
+          padding: 0;
+          i {
+            transition: all 0.1s linear;
+            opacity: 0.5;
+            color: $sage;
           }
+
+          &:hover > .units {
+            display: flex;
+          }
+          &:hover > i {
+            transform: rotate(180deg);
+          }
+          &:has(> .units:hover) > i {
+            transform: rotate(180deg);
+          }
+        }
+        .units {
+          position: absolute;
+          display: none;
+          flex-direction: column;
+          bottom: 100%;
+          background-color: $uno-dark;
+          gap: 5px;
+          border-radius: 0.5rem;
+          overflow: hidden;
+          &:hover {
+            display: flex;
+          }
+          label {
+            cursor: pointer;
+            padding: 0.2rem 0.3rem;
+            width: calc(100% - 0.6rem);
+            text-align: start;
+
+            &:has(input:checked) {
+              color: $sage2;
+              background-color: $uno-grey-active;
+            }
+            &:hover {
+              color: $sage;
+              background-color: $uno-grey-active;
+            }
+            input {
+              position: absolute;
+              width: 0;
+            }
+          }
+        }
+      }
+      .delete-ing {
+        font-size: 1.2rem;
+        background-color: $uno-dark;
+        color: $uno-white;
+        border: none;
+        height: 100%;
+        margin-left: 5px;
+        border-radius: 0 0.25rem 0.25rem 0;
+        transition: color 0.2s linear;
+        &:hover {
+          color: $sage2;
         }
       }
     }
+  }
 
-    .form-group-images {
-      position: relative;
+  .form-group-images {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    font-size: 1.5rem;
+    padding-top: 1rem;
+    .group-label {
+      margin-left: 1rem;
+      font-weight: 400;
+    }
+
+    .image-form {
       display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: center;
-      font-size: 1.5rem;
-      padding-top: 1rem;
-      .group-label {
-        margin-left: 1rem;
-        font-weight: 400;
+      flex-direction: row;
+      gap: 1px;
+      width: 100%;
+      input {
+        position: absolute;
+        width: 0;
       }
+      .label-wrapper {
+        position: relative;
+        display: block;
+        min-width: 7rem;
+        flex-grow: 0.126;
+        aspect-ratio: 1/1;
+        background-color: $uno-grey-active;
+        color: $uno-white;
+        overflow: hidden;
+        font-size: 4rem;
 
-      .image-form {
-        display: flex;
-        flex-direction: row;
-        gap: 1px;
-        width: 100%;
-        input {
-          position: absolute;
-          width: 0;
-        }
-        .label-wrapper {
-          position: relative;
-          display: block;
-          min-width: 7rem;
-          flex-grow: 0.126;
-          aspect-ratio: 1/1;
-          background-color: $uno-grey-active;
-          color: $uno-white;
-          overflow: hidden;
-          font-size: 4rem;
-
-          label {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            height: 100%;
-            transition: color 0.2s linear;
-            &:hover {
-              color: $sage;
-              cursor: pointer;
-            }
-
-            .image-display {
-              position: absolute;
-              left: 0;
-              bottom: 0;
-              width: 100%;
-              height: 100%;
-            }
-
-            .image-loading {
-              position: absolute;
-              left: 0;
-              bottom: 0;
-              width: 100%;
-              background-color: rgba(164, 185, 93, 0.5);
-            }
-          }
-          .image-delete {
+        label {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+          height: 100%;
+          transition: color 0.2s linear;
+          &:hover {
+            color: $sage;
             cursor: pointer;
+          }
+
+          .image-display {
             position: absolute;
             left: 0;
             bottom: 0;
             width: 100%;
             height: 100%;
-            opacity: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: $uno-grey-active;
-            transition: opacity 0.2s linear;
-            &:hover {
-              opacity: 0.8;
-            }
+          }
+
+          .image-loading {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: rgba(164, 185, 93, 0.5);
           }
         }
+        .image-delete {
+          cursor: pointer;
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          width: 100%;
+          height: 100%;
+          opacity: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background-color: $uno-grey-active;
+          transition: opacity 0.2s linear;
+          &:hover {
+            opacity: 0.8;
+          }
+        }
+      }
 
-        .nt0 {
-          border-radius: 0 0 0 1rem;
-        }
-        .nt7 {
-          border-radius: 0 0 1rem 0;
-        }
+      .nt0 {
+        border-radius: 0 0 0 1rem;
+      }
+      .nt7 {
+        border-radius: 0 0 1rem 0;
       }
     }
   }
-
-#description-steps{
-  border: none;
-  width: calc(100% - 2rem);
-}
-.add-wrap{
-  display: flex;
-  flex: row;
-  align-items: center;
-  margin-bottom: 1rem;
 }

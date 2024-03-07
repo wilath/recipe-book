@@ -1,15 +1,19 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { AlertComponent } from './alert/alert.component';
-import { LoadingSpinnerComponent } from './loadingspinner/loading-spinner.component';
+import { AlertComponent } from './components/alert/alert.component';
+import { LoadingSpinnerComponent } from './components/loadingspinner/loading-spinner.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PickerComponent } from '@ctrl/ngx-emoji-mart';
 import {TextFieldModule} from '@angular/cdk/text-field';
+import { ClockComponent } from './components/clock/clock.component';
+import { LevelsComponent } from './components/levels/levels.component';
 
 @NgModule({
   declarations: [
     AlertComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    ClockComponent,
+    LevelsComponent
   ],
   exports: [
     AlertComponent,
@@ -17,7 +21,9 @@ import {TextFieldModule} from '@angular/cdk/text-field';
     CommonModule,
     ReactiveFormsModule,
     PickerComponent,
-    TextFieldModule
+    TextFieldModule,
+    ClockComponent,
+    LevelsComponent
 
   ],
   imports: [

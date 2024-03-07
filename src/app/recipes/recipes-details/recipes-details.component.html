@@ -1,7 +1,23 @@
+<div class="details-wrap backboard-uno-grey border-radius-1r ">
+  <div class="recipe-main-details">
 
-<div >
+    <div class="recipe-info half ">
+      <div class="padding-1r">
+        <h1>{{recipe.name}}</h1>
+        <h3>author: {{recipe.author | authorname}}</h3>
+      </div>
+      
+    </div>
+
+    <div class="recipe-image half">
+      <img [src]="recipe.images[0].url" [alt]="recipe.images[0].name">
+    </div>
+
+  </div>
+
+<div class="">
   <div >
-    <h1>{{recipe.name}}</h1>
+    
   </div>
 </div>
 <div >
@@ -15,4 +31,5 @@
     <h5>Description:</h5>
     <div >{{recipe.description}}</div>
   </div>
+</div>
 </div>

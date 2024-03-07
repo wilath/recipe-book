@@ -42,3 +42,16 @@
   }
 }
 
+.button-bravo-delete{
+    content: '<i class="fa-solid fa-xmark"></i>';
+    font-size: 1.2rem;
+    background-color: $uno-dark;
+    color: $uno-white;
+    transition: color 0.2s linear;
+    border: none;
+    &:hover:enabled {
+      color: $sage2;
+    }
+  
+
+}

@@ -29,7 +29,7 @@ export class RealTimeDatabaseService {
             return new Recipe(
               recipe.id,
               recipe.name,
-              recipe.description,
+              recipe.description.steps ? recipe.description : {main:recipe.description.main, steps: []},
               recipe.images ? recipe.images : [],
               recipe.ingredients ? recipe.ingredients : [],
               recipe.foodType,
