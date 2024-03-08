@@ -45,12 +45,6 @@ export class RecipesItemComponent implements OnChanges  {
     this._rateByCurrentUser = value;
   }
 
-  public onRateRecipe(value: number) {
-    
-    this.recipesService.addRateToRecipe(this.recipe.name, this.user.email,value);
-    this.totalRatePercentage = (this.recipe.getAverageRating)*20;
-  }
- 
   public ngOnChanges(changes: SimpleChanges): void {
     this.user = JSON.parse(localStorage.getItem('userData') || '{}');
     this.totalRatePercentage = (this.recipe.getAverageRating)*20;
@@ -58,6 +52,12 @@ export class RecipesItemComponent implements OnChanges  {
     this.rateByCurrentUser = this.recipe.isRatedByUser(this.user.email);
     this.setFollow();
   }
+
+  public onRateRecipe(value: number) {
+    this.recipesService.addRateToRecipe(this.recipe.name, this.user.email,value);
+    this.totalRatePercentage = (this.recipe.getAverageRating)*20;
+  }
+ 
 
   public onLike() {
     this.recipesService.addLikeToRecipe(this.recipe.name,this.user.email, !this.isLikedByCurrentUser);

@@ -4,7 +4,29 @@
     <div class="recipe-info half ">
       <div class="padding-1r">
         <h1>{{recipe.name}}</h1>
-        <h3>author: {{recipe.author | authorname}}</h3>
+        <h3><span class="sage2">by:</span> {{recipe.author | authorname}}</h3>
+      </div>
+      <div class="flex-row-csa padding-1r bt-uga">
+        <div class="flex-col-cc">
+          <app-stars [(usersRate)]="rateByCurrentUser" [recipeName]="recipe.name" [perecentages]="totalRatePercentage" ></app-stars>        
+            {{recipe.stars.length}}
+        </div>
+        <div class="flex-col-cc">
+          <app-levels class="mb-02rem" [level]="recipe.level"></app-levels>
+          {{recipe.level}}
+        </div>
+        <div class="flex-col-cc">
+          <app-clock class="mb-02rem"></app-clock>
+          {{recipe.prepTimeMinutes}} min.
+        </div>
+      </div>
+      <div class="flex-row-csa padding-1r bt-uga">
+        <button class="button-alpha hover-active-grey border-radius-hr padding-c1 font-size-12r"><i
+          [ngClass]="{ 'recipe-liked': isLikedByCurrentUser }"
+          class="mr-hrem fa-solid fa-heart"
+        ></i> I love it!</button>
+        <button class="button-alpha hover-active-grey border-radius-hr padding-c1 font-size-12r"><i class="fa-solid fa-user-plus mr-hrem"></i>Follow</button>
+        <button class="button-alpha hover-active-grey border-radius-hr padding-c1 font-size-12r"><i class="fa-solid fa-list mr-hrem"></i>To Shopping List</button>
       </div>
       
     </div>

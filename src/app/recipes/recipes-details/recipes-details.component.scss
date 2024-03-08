@@ -6,14 +6,17 @@
 
         .half{
             width: 50%;
-            aspect-ratio: 1/1;
+            aspect-ratio: 3/2;
         }
-        .recipe-info{}
+        .recipe-info{
+            position: relative;
+           
+        }
         .recipe-image{
             img{
                 width: 100%;
                 height: 100%;
-                object-fit: contain;
+                object-fit: cover;
                 border-radius: 0 1rem 0 0;
             }
         }

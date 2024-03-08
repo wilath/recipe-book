@@ -79,7 +79,11 @@
 .border-radius-hr {
   border-radius: 0.5rem;
 }
+// border rules
 
+.bt-uga{
+  border-top: 1px solid $uno-grey-active;
+}
 //font rules
 
 .font-size-1r{
@@ -105,4 +109,25 @@
 
 .width100{
   width: 100%;
+}
+
+//flex rules
+
+.flex-col-cc{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.flex-row-cc{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.flex-row-csa{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
 }

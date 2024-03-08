@@ -37,7 +37,7 @@ export class RealTimeDatabaseService {
               recipe.level,
               recipe.prepTimeMinutes,
               recipe.date,
-              recipe.likes ? recipe.likes : { quantity: 0, whoLiked: [] },
+              recipe.likes.whoLiked ? recipe.likes : { quantity: recipe.likes.quantity? recipe.likes.quantity : 0, whoLiked: [] },
               recipe.stars ? recipe.stars : []
           );
           })
