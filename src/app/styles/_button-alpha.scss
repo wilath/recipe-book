@@ -25,7 +25,7 @@
 .hover-active-grey {
   &:hover:enabled {
     background-color: $uno-grey-active;
-    color: $sage;
+    
   }
 }
 .hover-grey {
@@ -53,5 +53,10 @@
       color: $sage2;
     }
   
-
+}
+.recipe-liked{
+  color: $uno-tomato
+}
+.user-followed{
+  color: $uno-apricot
 }

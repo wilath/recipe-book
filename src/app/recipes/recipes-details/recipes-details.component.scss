@@ -1,25 +1,34 @@
-@import '../../styles/variables';
-.details-wrap{
-    .recipe-main-details{
-        display: flex;
-        border-bottom: 1px solid $uno-grey-active;
-
-        .half{
-            width: 50%;
-            aspect-ratio: 3/2;
-        }
-        .recipe-info{
-            position: relative;
-           
-        }
-        .recipe-image{
-            img{
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                border-radius: 0 1rem 0 0;
-            }
-        }
-        
+@import "../../styles/variables";
+.details-wrap {
+  .half {
+    width: 50%;
+  }
+  .ingredient-row {
+    width: calc(100% - 2rem);
+    display: flex;
+    .dots {
+      flex-grow: 1;
+      border-bottom: 1px dotted $uno-grey-active;
     }
+  }
+  .sage2-underline{
+    text-decoration: underline $sage2;
+  }
+  .recipe-details {
+    display: flex;
+    border-bottom: 1px solid $uno-grey-active;
+
+    .recipe-info {
+      position: relative;
+    }
+    .recipe-image {
+        height: 100%;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        border-radius: 0 1rem 0 0;
+      }
+    }
+  }
 }

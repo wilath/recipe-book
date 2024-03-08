@@ -1,5 +1,13 @@
 @import './variables';
 
+//color rukes
+.sage{
+  color: $sage;
+}
+.sage2{
+  color: $sage2
+}
+
 //backround rules
 
 .backboard-uno-grey{
@@ -13,6 +21,9 @@
 }
 
 // margin rules
+.m-1rem{
+  margin: 1rem;
+}
 
 .mt-1rem{
   margin-top: 1rem;
@@ -119,6 +130,12 @@
   align-items: center;
   justify-content: center;
 }
+.flex-col-fsc{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
 .flex-row-cc{
   display: flex;
   flex-direction: row;
@@ -130,4 +147,10 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
+}
+.gap5{
+  gap: 5px
+}
+.gap10{
+  gap: 10px
 }

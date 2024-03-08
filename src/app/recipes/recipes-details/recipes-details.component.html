@@ -1,57 +1,114 @@
-<div class="details-wrap backboard-uno-grey border-radius-1r ">
-  <div class="recipe-main-details">
-
-    <div class="recipe-info half ">
+<div class="details-wrap backboard-uno-grey border-radius-1r">
+  <div class="recipe-details">
+    <div class="recipe-info half">
       <div class="padding-1r">
-        <h1>{{recipe.name}}</h1>
-        <h3><span class="sage2">by:</span> {{recipe.author | authorname}}</h3>
+        <h1>{{ recipe.name }}</h1>
+        <h3>
+          <span class="sage2 ml-hrem">by:</span>
+          {{ recipe.author | authorname }}
+        </h3>
       </div>
       <div class="flex-row-csa padding-1r bt-uga">
         <div class="flex-col-cc">
-          <app-stars [(usersRate)]="rateByCurrentUser" [recipeName]="recipe.name" [perecentages]="totalRatePercentage" ></app-stars>        
-            {{recipe.stars.length}}
+          <i class="mb-02rem fa-solid fa-heart recipe-liked font-size-15r"></i>
+          {{ recipe.likes.quantity }}
+        </div>
+        <div class="flex-col-cc">
+          <app-stars
+            [(usersRate)]="rateByCurrentUser"
+            [recipeName]="recipe.name"
+            [perecentages]="totalRatePercentage"
+          ></app-stars>
+          {{ recipe.stars.length }}
         </div>
         <div class="flex-col-cc">
           <app-levels class="mb-02rem" [level]="recipe.level"></app-levels>
-          {{recipe.level}}
+          {{ recipe.level }}
         </div>
         <div class="flex-col-cc">
           <app-clock class="mb-02rem"></app-clock>
-          {{recipe.prepTimeMinutes}} min.
+          {{ recipe.prepTimeMinutes }} min.
         </div>
       </div>
       <div class="flex-row-csa padding-1r bt-uga">
-        <button class="button-alpha hover-active-grey border-radius-hr padding-c1 font-size-12r"><i
-          [ngClass]="{ 'recipe-liked': isLikedByCurrentUser }"
-          class="mr-hrem fa-solid fa-heart"
-        ></i> I love it!</button>
-        <button class="button-alpha hover-active-grey border-radius-hr padding-c1 font-size-12r"><i class="fa-solid fa-user-plus mr-hrem"></i>Follow</button>
-        <button class="button-alpha hover-active-grey border-radius-hr padding-c1 font-size-12r"><i class="fa-solid fa-list mr-hrem"></i>To Shopping List</button>
+        <button
+          class="button-alpha hover-active-grey border-radius-hr padding-c1 font-size-12r"
+        >
+          <i
+            [ngClass]="{ 'recipe-liked': isLikedByCurrentUser }"
+            class="mr-hrem fa-solid fa-heart"
+          ></i>
+          I love it!
+        </button>
+        <button
+          class="button-alpha hover-active-grey border-radius-hr padding-c1 font-size-12r"
+        >
+          <i
+            [ngClass]="{ 'user-followed': isFollowedByCurrentUser }"
+            class="fa-solid fa-user-plus mr-hrem"
+          ></i
+          >Follow
+        </button>
+        <button
+          class="hover-i-sage2 button-alpha hover-active-grey border-radius-hr padding-c1 font-size-12r"
+        >
+          <i class="fa-solid fa-list mr-hrem"></i>To Shopping List
+        </button>
       </div>
-      
+      @if (recipe.author === userData.email) {
+      <div class="flex-row-csa padding-1r bt-uga">
+        <button
+          class="hover-i-sage2 button-alpha hover-active-grey border-radius-hr padding-c1 font-size-12r"
+        >
+          <i class="fa-solid fa-xmark mr-hrem"></i>Delete Recipe
+        </button>
+        <button
+          class="hover-i-sage2 button-alpha hover-active-grey border-radius-hr padding-c1 font-size-12r"
+        >
+          <i class="fa-solid fa-pen-to-square mr-hrem"></i>Edit Recipe
+        </button>
+      </div>
+      }
     </div>
 
     <div class="recipe-image half">
-      <img [src]="recipe.images[0].url" [alt]="recipe.images[0].name">
+      <img [src]="recipe.images[0].url" [alt]="recipe.images[0].name" />
+    </div>
+  </div>
+
+  <div class="width100 recipe-details">
+    <div class="half ">
+      <div class="m-1rem flex-col-fsc gap10 font-size-12r">
+        <h5 class="font-size-15r mb-hrem sage2-underline">Ingredients:</h5>
+        @for (ingredient of recipe.ingredients; track $index) {
+          <div class=" ingredient-row font-size-12r">
+            {{ingredient.name}} <div class="dots"></div> {{ingredient.ammount}} <span class="sage">{{ingredient.unit}}</span> 
+          </div>
+        }
+      </div>
     </div>
 
-  </div>
 
-<div class="">
-  <div >
-    
-  </div>
-</div>
-<div >
-  <div >
-    <h5>Ingredients:</h5>
+    <div class="half ">
+      <div class="m-1rem flex-col-fsc  font-size-1r">
+        <h5 class="font-size-15r mb-hrem sage2-underline">Description:</h5>
+        <p class="font-size-12r">{{recipe.description.main}}</p>
+        @for (step of recipe.description.steps; track $index) {
+          <h5 class="sage2-underline mb-hrem mt-hrem font-size-15r">Step {{$index + 1}}</h5>
+          <p class="font-size-12r"> {{step}}</p>
+        }
+      </div>
+
+    </div>
+
+
+
+
+
+
+
     <div>
-      <p *ngFor="let ing of recipe.ingredients">- {{ing.name}}</p>
-    </div>
-  </div>
-  <div >
-    <h5>Description:</h5>
-    <div >{{recipe.description}}</div>
-  </div>
-</div>
+
+      
+    
 </div>

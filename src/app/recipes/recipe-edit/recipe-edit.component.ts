@@ -160,7 +160,7 @@ export class RecipeEditComponent implements OnInit {
     let recipePrepTime = 45;
     let recipeDescription = new FormGroup({
       main: new FormControl('', [Validators.required]),
-      steps: new FormArray<FormControl>([], [Validators.required])
+      steps: new FormArray<FormControl>([])
     });
     let recipeIngredients = new FormArray<FormGroup>([]);
     let recipeImages = new FormArray<FormGroup>([]);
@@ -179,7 +179,7 @@ export class RecipeEditComponent implements OnInit {
         });
         const stepsArray = recipeDescription.get('steps') as FormArray
         for(let step of this.recipe.description.steps){
-          stepsArray.push(new FormControl(step, [Validators.required]))
+          stepsArray.push(new FormControl(step))
         }
       }
 
@@ -198,8 +198,8 @@ export class RecipeEditComponent implements OnInit {
         for (let image of this.recipe.images) {
           recipeImages.push(
             new FormGroup({
-              input: new FormControl(null, [Validators.required]),
-              percentages: new FormControl(100, [Validators.required]),
+              input: new FormControl(null),
+              percentages: new FormControl(100),
               imageData: new FormControl({name: image.name,url:image.url}, [Validators.required])
             })
           );

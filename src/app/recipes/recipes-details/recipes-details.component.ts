@@ -49,6 +49,7 @@ export class RecipesDetailsComponent implements OnInit {
     this.userData = this.userDataService.getUserData(
       JSON.parse(localStorage.getItem('userData') || '{}').email
     );
+    this.isFollowedByCurrentUser = this.userDataService.checkIfUserisFollowed(this.recipe.author, this.userData.email)
     this.isLikedByCurrentUser = this.recipe.isLikedByUser(this.userData.email);
     this._rateByCurrentUser = this.recipe.isRatedByUser(this.userData.email);
     this.totalRatePercentage = this.recipe.getAverageRating * 20;
@@ -62,6 +63,7 @@ export class RecipesDetailsComponent implements OnInit {
       value
     );
     this.totalRatePercentage = this.recipe.getAverageRating * 20;
+    this.isLikedByCurrentUser = this.recipe.isLikedByUser(this.userData.email)
   }
 
   public onEditRecipe() {
