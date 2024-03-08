@@ -6,20 +6,22 @@ import { User } from '../../../shared/models/user.model';
 import { ActivatedRoute, Router } from '@angular/router';
 
 
+
 @Component({
   selector: 'app-recipes-item',
   templateUrl: './recipes-item.component.html',
   styleUrls: ['./recipes-item.component.scss'],
 })
 
-export class RecipesItemComponent implements OnChanges {
+export class RecipesItemComponent implements OnChanges  {
   constructor(
     private recipesService: RecipesService,
     private usersDataServcie: UserDataService,
     private router: Router,
     private route: ActivatedRoute
-  ) {}
+  ) {
   
+  }
   
   @Input() public recipe!: Recipe;
 
@@ -29,17 +31,31 @@ export class RecipesItemComponent implements OnChanges {
 
   public isFollowedByCurrentUser: boolean = false;
 
-  public rateByCurrentUser: string = "0";
-
   public totalRatePercentage: number = 0
-
+  
   public user!: User;
 
+  public _rateByCurrentUser!: number;
+
+  public get rateByCurrentUser(){
+    return this._rateByCurrentUser
+  }
+  public set rateByCurrentUser(value:number){
+    this.onRateRecipe(value)
+    this._rateByCurrentUser = value;
+  }
+
+  public onRateRecipe(value: number) {
+    
+    this.recipesService.addRateToRecipe(this.recipe.name, this.user.email,value);
+    this.totalRatePercentage = (this.recipe.getAverageRating)*20;
+  }
+ 
   public ngOnChanges(changes: SimpleChanges): void {
     this.user = JSON.parse(localStorage.getItem('userData') || '{}');
     this.totalRatePercentage = (this.recipe.getAverageRating)*20;
     this.isLikedByCurrentUser = this.recipe.isLikedByUser(this.user.email);
-    this.rateByCurrentUser = this.recipe.isRatedByUser(this.user.email).toString();
+    this.rateByCurrentUser = this.recipe.isRatedByUser(this.user.email);
     this.setFollow();
   }
 
@@ -56,11 +72,7 @@ export class RecipesItemComponent implements OnChanges {
   public onOpenRecipe() {
   }
 
-  public onRateRecipe(event: Event) {
-    const target = event.target as HTMLInputElement;
-    this.recipesService.addRateToRecipe(this.recipe.name, this.user.email,parseInt(target.value,10));
-    this.totalRatePercentage = (this.recipe.getAverageRating)*20;
-  }
+ 
 
   public onNavigateToRecipeDetails(){
     this.router.navigate([`${this.recipe.id}`],  {relativeTo: this.route})

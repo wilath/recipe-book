@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
     <span id="pointer2"></span>
   </div>`,
   styles: [`
-    @import '../../styles/_variables.scss';
+    @import '../../../styles/variables';;
 
     .clock {
       position: relative;

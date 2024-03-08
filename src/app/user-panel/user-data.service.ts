@@ -13,7 +13,7 @@ export class UserDataService  {
 
   public userDataChange = new Subject<UserData[]>();
 
-  public sendDataToStore = new Subject<void>();
+ 
 
   public setUsersData(): Observable<void> {
     return this.realTimeDatabaseService.fetchUsersData().pipe(
@@ -48,7 +48,7 @@ export class UserDataService  {
     data.push(newUserData);
     this.usersData = data;
     this.userDataChange.next(this.usersData.slice());
-    this.sendDataToStore.next()
+    this.realTimeDatabaseService.storeUsersData(this.usersData)
   }
 
   public addFollowToUser(userEmail: string,followerEmail: string, add: boolean) {
@@ -75,7 +75,7 @@ export class UserDataService  {
       data[follower.index] = follower.user;
       this.setNotificationToUser(user.user.email,UserNotification.gotUnfollowed,follower.user.email)
     }
-    this.sendDataToStore.next()
+    this.realTimeDatabaseService.storeUsersData(this.usersData)
   }
 
   public editUser(editedUser: UserData) {
@@ -99,7 +99,7 @@ export class UserDataService  {
     data[user.index] = user.user;
     this.usersData = data;
     this.userDataChange.next(this.usersData.slice())
-    this.sendDataToStore.next()
+    this.realTimeDatabaseService.storeUsersData(this.usersData)
   }
 
   public checkIfUserisFollowed(userEmailToCheck: string, followerEmail: string): boolean{

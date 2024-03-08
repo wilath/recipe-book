@@ -29,7 +29,7 @@ import { DifficultyLevel } from '../../models/recipe.model';
   `,
   styles: [
     `
-      @import '../../styles/_variables.scss';
+      @import '../../../styles/variables';;
 
       .level-container {
         display: flex;

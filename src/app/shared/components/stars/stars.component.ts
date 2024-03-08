@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
+
 @Component({
   selector: 'app-stars',
   template: `
@@ -26,7 +27,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
               [id]="recipeName + 'star' + $index"
               type="radio"
               [(ngModel)]="usersRate"
-              (change)="emitData($event)"
+              (change)="emitData()"
           /></label>
 
           }
@@ -36,7 +37,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   `,
   styles: [
     `
-      @import '../../styles/_variables.scss';
+      @import '../../../styles/variables';;
+
       .stars-container {
         display: inline-block;
         unicode-bidi: bidi-override;
@@ -101,8 +103,7 @@ export class StarsComponent {
 
   public ratings: number[] = [1, 2, 3, 4, 5];
 
-  public emitData(event: Event) {
-    const target = event.target as HTMLInputElement;
-    this.usersRateChange.emit(parseInt(target.value, 10));
+  public emitData() {
+    this.usersRateChange.emit(this.usersRate);
   }
 }

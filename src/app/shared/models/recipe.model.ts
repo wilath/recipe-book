@@ -62,7 +62,11 @@ export class Recipe{
 
     public isLikedByUser(userEmail: string): boolean{
         const likes = this.likes.whoLiked     
-        return likes.includes(userEmail)
+        if(likes){
+            return likes.includes(userEmail)
+        } else {
+            return false
+        }
     }
 
     public isRatedByUser(userEmail: string): number {
