@@ -14,6 +14,7 @@
   .sage2-underline{
     text-decoration: underline $sage2;
   }
+ 
   .recipe-details {
     display: flex;
     border-bottom: 1px solid $uno-grey-active;
@@ -22,13 +23,22 @@
       position: relative;
     }
     .recipe-image {
-        height: 100%;
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-        border-radius: 0 1rem 0 0;
-      }
+        position: relative;
+        height: auto;
+        .image-container{
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            img {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 0 1rem 0 0;
+              }
+        }
+       
+      
     }
   }
 }

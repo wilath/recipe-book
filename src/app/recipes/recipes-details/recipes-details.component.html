@@ -8,7 +8,7 @@
           {{ recipe.author | authorname }}
         </h3>
       </div>
-      <div class="flex-row-csa padding-1r bt-uga">
+      <div class="flex-row-csa padding-1r bt-uga ">
         <div class="flex-col-cc">
           <i class="mb-02rem fa-solid fa-heart recipe-liked font-size-15r"></i>
           {{ recipe.likes.quantity }}
@@ -72,7 +72,9 @@
     </div>
 
     <div class="recipe-image half">
-      <img [src]="recipe.images[0].url" [alt]="recipe.images[0].name" />
+      <div class="image-container">
+        <img [src]="recipe.images[0].url" [alt]="recipe.images[0].name">
+      </div>
     </div>
   </div>
 
@@ -82,7 +84,7 @@
         <h5 class="font-size-15r mb-hrem sage2-underline">Ingredients:</h5>
         @for (ingredient of recipe.ingredients; track $index) {
           <div class=" ingredient-row font-size-12r">
-            {{ingredient.name}} <div class="dots"></div> {{ingredient.ammount}} <span class="sage">{{ingredient.unit}}</span> 
+            {{ingredient.name}} <div class="dots"></div> {{ingredient.ammount}} <span class="sage ml-02rem">{{ingredient.unit}}</span> 
           </div>
         }
       </div>
