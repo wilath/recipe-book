@@ -36,8 +36,12 @@ export class RealTimeDatabaseService {
               recipe.author,
               recipe.level,
               recipe.prepTimeMinutes,
-              recipe.date,
-              recipe.comments ? recipe.comments : [],
+              new Date(recipe.date),
+              recipe.comments ?  recipe.comments.map(comment => ({
+                ...comment,
+                date: new Date(comment.date),
+                likes: comment.likes
+              })) : [],
               recipe.likes.whoLiked ? recipe.likes : { quantity: recipe.likes.quantity? recipe.likes.quantity : 0, whoLiked: [] },
               recipe.stars ? recipe.stars : []
           );

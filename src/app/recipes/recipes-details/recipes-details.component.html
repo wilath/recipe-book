@@ -125,13 +125,14 @@
   </h2>
   @if (isCommentSectionVisible) {
   
-    <div class="add-comment">
+    <div class="flex-row-cfs gap10">
       <img
-        class="profile-image2"
+        class="avatar-image-25rem"
         src="https://t3.ftcdn.net/jpg/05/53/79/60/360_F_553796090_XHrE6R9jwmBJUMo9HKl41hyHJ5gqt9oz.jpg"
         alt="avatar"
       />
-      <form [formGroup]="newCommentForm">
+      <form class="flex-grow-1" [formGroup]="newCommentForm">
+        <div class="textarea-wrapper  flex-row-cfs">
         <textarea
           cdkTextareaAutosize
           placeholder="Add new comment..."
@@ -173,11 +174,13 @@
             }
           </ng-container>
         </div>
+      </div>
+        
       </form>
     </div>
   
   @for (comment of recipe.comments; track $index) {
-    <app-comment [isRecipeOpinion]="true" [comment]="comment" [postId]="recipe.id"></app-comment>
+    <app-comment class="mt-1rem" [isRecipeOpinion]="true" [comment]="comment" [postId]="recipe.id"></app-comment>
   } @empty {
   <h2 class="font-size-12r padding-1r">
     There are no opinions on this recipe, be the first one!

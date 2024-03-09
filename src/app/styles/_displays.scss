@@ -1,0 +1,48 @@
+//display rules
+
+.flex-col-cc {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-col-fsc {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.flex-row-cc {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-row-csa {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.flex-row-cfs {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.flex-grow-1 {
+  flex-grow: 1;
+}
+
+.gap5 {
+  gap: 5px;
+}
+
+.gap10 {
+  gap: 10px;
+}
