@@ -1,7 +1,7 @@
 import { FoodType } from "../enums/food-type-enum";
 import { FileAnchor } from "./file-upload.model";
 import { Ingredient } from "./ingredient.model";
-import { Comment } from "./microblog-comment.model";
+import { ItemComment } from "./microblog-comment.model";
 
 export interface Likes {
     quantity: number,
@@ -35,10 +35,10 @@ export class Recipe{
     public level: DifficultyLevel;
     public prepTimeMinutes: number;
     public date: Date;
-    public comments: Comment[];
+    public comments: ItemComment[];
     public likes: Likes;
     public stars: Rating[];
-    constructor(id: number, name:string, desc:Description, images:FileAnchor[], ingredients: Ingredient[], foodType: FoodType, author: string, level: DifficultyLevel, prepTimeMinutes: number, date: Date, comments: Comment[], likes?: Likes, stars?: Rating[] ){
+    constructor(id: number, name:string, desc:Description, images:FileAnchor[], ingredients: Ingredient[], foodType: FoodType, author: string, level: DifficultyLevel, prepTimeMinutes: number, date: Date, comments: ItemComment[], likes?: Likes, stars?: Rating[] ){
         this.id = id
         this.name = name;
         this.description = desc;
@@ -61,6 +61,13 @@ export class Recipe{
             const sum = this.stars.reduce((total, rating) => total + rating.rate, 0);
             return sum / this.stars.length;
         }
+    }
+
+    public getHighestCommentId(): number  {
+        if (!this.comments || this.comments.length === 0) {
+            return 0; 
+        }
+        return Math.max(...this.comments.map(comment => comment.id)) + 1;
     }
 
     public isLikedByUser(userEmail: string): boolean{

@@ -7,6 +7,7 @@ import { Recipe } from '../shared/models/recipe.model';
 import { UserDataService } from '../user-panel/user-data.service';
 import { UserNotification } from '../shared/enums/notifications.enum';
 import { RealTimeDatabaseService } from '../shared/real-time-database.service';
+import { ItemComment } from '../shared/models/microblog-comment.model';
 
 @Injectable()
 export class RecipesService implements OnDestroy   {
@@ -120,5 +121,69 @@ export class RecipesService implements OnDestroy   {
     }
     return Math.max(...this.recipes.map(rec => rec.id)) + 1;
   }
+
+  public onAddCommentToRecipe(recipeId: number, comment: ItemComment) {
+    const newRecipes = this.recipes;
+    const recIndex = newRecipes.findIndex((el) => el.id === recipeId);
+    if (recIndex !== -1) {
+      newRecipes[recIndex].comments.push(comment);
+    }
+    this.recipes = newRecipes;
+    this.recipesChanged.next(this.recipes.slice());
+    this.userDataService.setNotificationToUser(this.recipes[recIndex].author, UserNotification.commentedPost, comment.author)
+  }
+
+  public onDeleteComment(recipeId: number, commentId: number) {
+    const newRecipes = this.recipes;
+    const recipeIndex = newRecipes.findIndex((el) => el.id === recipeId);
+    if (recipeIndex !== -1) {
+      newRecipes[recipeIndex].comments = newRecipes[recipeIndex].comments.filter(
+        (el) => el.id !== commentId
+      );
+    }
+    this.recipes = newRecipes;
+    this.recipesChanged.next(this.recipes.slice());
+  }
+
+  public onEditComment(recipeId: number, comment: ItemComment) {
+    const newRecipes = this.recipes;
+    const recipeIndex = newRecipes.findIndex((el) => el.id === recipeId);
+
+    if (recipeIndex !== -1) {
+      newRecipes[recipeIndex].comments = newRecipes[recipeIndex].comments.map((el) => {
+        if (el.id === comment.id) {
+          return (el = comment);
+        } else {
+          return el;
+        }
+      });
+    }
+    this.recipes = newRecipes;
+    this.recipesChanged.next(this.recipes.slice());
+  }
+
+
+  public onLikeComment(recipeId: number, commentId: number, userEmail: string, add: boolean) {
+    const newRecipes = this.recipes;
+    const recipeIndex = newRecipes.findIndex((el) => el.id === recipeId);
+    const newCommentIndex = newRecipes[recipeIndex].comments.findIndex( el => el.id === commentId)
+
+    if(recipeIndex !== -1) {
+      switch (add){
+        case true:
+          newRecipes[recipeIndex].comments[newCommentIndex].likes.quantity++
+          newRecipes[recipeIndex].comments[newCommentIndex].likes.whoLiked.push(userEmail)
+        break;
+        case false:
+          newRecipes[recipeIndex].comments[newCommentIndex].likes.quantity--
+          newRecipes[recipeIndex].comments[newCommentIndex].likes.whoLiked = newRecipes[recipeIndex].comments[newCommentIndex].likes.whoLiked.filter(el => el !== userEmail)
+        break;
+      }
+    }
+    this.recipes = newRecipes;
+    this.recipesChanged.next(this.recipes.slice());
+    this.userDataService.setNotificationToUser(this.recipes[recipeIndex].comments[newCommentIndex].author, UserNotification.likedComment, userEmail)
+  }
+
   
 }

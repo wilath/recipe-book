@@ -41,6 +41,11 @@
     }
   }
 }
+.hover-color-sage{
+  &:hover{
+    color: $sage;
+  }
+}
 
 .button-bravo-delete{
     content: '<i class="fa-solid fa-xmark"></i>';
@@ -59,4 +64,7 @@
 }
 .user-followed{
   color: $uno-apricot
+}
+.trans02linear{
+  transition: all 0.2s linear;
 }

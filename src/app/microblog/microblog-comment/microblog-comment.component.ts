@@ -1,8 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Comment } from '../../shared/models/microblog-comment.model';
+import { ItemComment } from '../../shared/models/microblog-comment.model';
 import { SimpleUserdata } from '../../shared/models/user-data.model';
 import { UserDataService } from '../../user-panel/user-data.service';
 import { MicroblogService } from '../microblog.service';
+import { RecipesService } from '../../recipes/recipes.service';
 
 @Component({
   selector: 'app-comment',
@@ -11,11 +12,13 @@ import { MicroblogService } from '../microblog.service';
 })
 export class CommentComponent implements OnInit {
 
-  constructor(private userDataService: UserDataService, private microblogService: MicroblogService)  {}
+  constructor(private userDataService: UserDataService, private microblogService: MicroblogService, private recipesService: RecipesService)  {}
 
-  @Input() public comment: Comment = {id:0, author: '', content:'', likes:{quantity:0,whoLiked:[]}, date: new Date()};
+  @Input() public comment: ItemComment = {id:0, author: '', content:'', likes:{quantity:0,whoLiked:[]}, date: new Date()};
   
   @Input() public postId: number = 0;
+
+  @Input() public isRecipeOpinion = false;
 
   public commentAuthorData!: SimpleUserdata;
 
@@ -37,7 +40,11 @@ export class CommentComponent implements OnInit {
   }
 
   public onAddLike() { 
-    this.microblogService.onLikeComment(this.postId, this.comment.id, this.loggedUserEmail, !this.isLikedByCurrentUser);
+    if(!this.isRecipeOpinion){
+      this.microblogService.onLikeComment(this.postId, this.comment.id, this.loggedUserEmail, !this.isLikedByCurrentUser);
+    } else {
+      this.recipesService.onLikeComment(this.postId, this.comment.id, this.loggedUserEmail, !this.isLikedByCurrentUser)
+    }
     this.isLikedByCurrentUser = !this.isLikedByCurrentUser;
   }
 
@@ -47,7 +54,11 @@ export class CommentComponent implements OnInit {
   }
 
   public onDeleteComment() {
-    this.microblogService.onDeleteComment(this.postId, this.comment.id)
+    if(!this.isRecipeOpinion){
+      this.microblogService.onDeleteComment(this.postId, this.comment.id)
+    } else {
+      this.recipesService.onDeleteComment(this.postId, this.comment.id)
+    }
   }
 
   private calculateTimeSincePost(postDate: Date): string {

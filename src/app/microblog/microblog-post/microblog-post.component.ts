@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Comment } from '../../shared/models/microblog-comment.model';
+import { ItemComment } from '../../shared/models/microblog-comment.model';
 import { MicroblogPost } from '../../shared/models/microblog-post.model';
 import { UserData } from '../../shared/models/user-data.model';
 import { UserDataService } from '../../user-panel/user-data.service';
@@ -39,7 +39,7 @@ export class MicroblogPostComponent implements OnInit {
 
   public choosenSortType: SortType = SortType.sortByLikes;
 
-  public topComment!: Comment;
+  public topComment!: ItemComment;
 
   public ngOnInit(): void {
     this.postAuthor = this.userDataService.getUserData(this.microblogPost.author);
@@ -60,7 +60,7 @@ export class MicroblogPostComponent implements OnInit {
   }
 
   public onSubmit() {
-    const newComment: Comment = {
+    const newComment: ItemComment = {
       id: this.microblogPost.getHighestCommentId(),
       author: this.loggedUserEmail,
       content: this.newCommentForm.value.content,

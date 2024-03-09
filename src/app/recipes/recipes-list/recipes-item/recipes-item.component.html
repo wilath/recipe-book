@@ -11,21 +11,24 @@
       <a class="go-to-recipe" (click)="onNavigateToRecipeDetails()">{{ recipe.name }}</a>
       
     </div>
-    <div class="recipe-info">
-      <div class="stars info-part">
-        <app-stars [(usersRate)]="rateByCurrentUser" [recipeName]="recipe.name" [perecentages]="totalRatePercentage"></app-stars>
-        {{recipe.stars.length ? recipe.stars.length : 0}}
+    @if (!isSimpleDisplay) {
+      <div class="recipe-info">
+        <div class="stars info-part">
+          <app-stars [(usersRate)]="rateByCurrentUser" [recipeName]="recipe.name" [perecentages]="totalRatePercentage"></app-stars>
+          {{recipe.stars.length ? recipe.stars.length : 0}}
+        </div>
+        <div class="info-part">
+          <app-levels [level]="recipe.level" class="mb-02rem"></app-levels>
+          
+          {{ recipe.level }}
+        </div>
+        <div class="info-part">
+          <app-clock class="mb-02rem"></app-clock>
+          {{ recipe.prepTimeMinutes }} min.
+        </div>
       </div>
-      <div class="info-part">
-        <app-levels [level]="recipe.level" class="mb-02rem"></app-levels>
-        
-        {{ recipe.level }}
-      </div>
-      <div class="info-part">
-        <app-clock class="mb-02rem"></app-clock>
-        {{ recipe.prepTimeMinutes }} min.
-      </div>
-    </div>
+    
+    
     <div class="user-info">
       <div class="user-data">
         <img src="https://t3.ftcdn.net/jpg/05/53/79/60/360_F_553796090_XHrE6R9jwmBJUMo9HKl41hyHJ5gqt9oz.jpg" alt="avatar" />
@@ -50,5 +53,6 @@
        
       </div>
     </div>
+  }
   </div>
 </div>

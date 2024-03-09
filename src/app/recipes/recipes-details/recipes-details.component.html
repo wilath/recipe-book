@@ -73,44 +73,114 @@
 
     <div class="recipe-image half">
       <div class="image-container">
-        <img [src]="recipe.images[0].url" [alt]="recipe.images[0].name">
+        <img [src]="recipe.images[0].url" [alt]="recipe.images[0].name" />
       </div>
     </div>
   </div>
 
   <div class="width100 recipe-details">
-    <div class="half ">
+    <div class="half">
       <div class="m-1rem flex-col-fsc gap10 font-size-12r">
         <h5 class="font-size-15r mb-hrem sage2-underline">Ingredients:</h5>
         @for (ingredient of recipe.ingredients; track $index) {
-          <div class=" ingredient-row font-size-12r">
-            {{ingredient.name}} <div class="dots"></div> {{ingredient.ammount}} <span class="sage ml-02rem">{{ingredient.unit}}</span> 
-          </div>
+        <div class="ingredient-row font-size-12r">
+          {{ ingredient.name }}
+          <div class="dots"></div>
+          {{ ingredient.ammount }}
+          <span class="sage ml-02rem">{{ ingredient.unit }}</span>
+        </div>
         }
       </div>
     </div>
 
-
-    <div class="half ">
-      <div class="m-1rem flex-col-fsc  font-size-1r">
+    <div class="half">
+      <div class="m-1rem flex-col-fsc font-size-1r">
         <h5 class="font-size-15r mb-hrem sage2-underline">Description:</h5>
-        <p class="font-size-12r">{{recipe.description.main}}</p>
+        <p class="font-size-12r">{{ recipe.description.main }}</p>
         @for (step of recipe.description.steps; track $index) {
-          <h5 class="sage2-underline mb-hrem mt-hrem font-size-15r">Step {{$index + 1}}</h5>
-          <p class="font-size-12r"> {{step}}</p>
+        <h5 class="sage2-underline mb-hrem mt-hrem font-size-15r">
+          Step {{ $index + 1 }}
+        </h5>
+        <p class="font-size-12r">{{ step }}</p>
         }
       </div>
-
     </div>
-
-
-
-
-
-
-
-    <div>
-
-      
-    
+    <div></div>
+  </div>
+</div>
+<div class="backboard-uno-grey border-radius-1r mt-1rem padding-1r">
+  <h2 class="font-size-15r">
+    <span class="mr-1rem">
+      <i class="fa-solid fa-comments"></i> {{ recipe.comments.length }}</span
+    >
+    <a class="hover-color-sage" (click)="showHideComments()"
+      >Opinions on the recipe</a
+    >
+    <i
+      [ngStyle]="{
+        transform: !isCommentSectionVisible ? 'rotate(180deg)' : ''
+      }"
+      class="trans02linear sage fa-solid fa-chevron-up ml-hrem font-size-1r"
+    ></i>
+  </h2>
+  @if (isCommentSectionVisible) {
+  
+    <div class="add-comment">
+      <img
+        class="profile-image2"
+        src="https://t3.ftcdn.net/jpg/05/53/79/60/360_F_553796090_XHrE6R9jwmBJUMo9HKl41hyHJ5gqt9oz.jpg"
+        alt="avatar"
+      />
+      <form [formGroup]="newCommentForm">
+        <textarea
+          cdkTextareaAutosize
+          placeholder="Add new comment..."
+          formControlName="content"
+          (keydown.enter)="onEnterKey($event)"
+        ></textarea>
+        <div class="add-comment-buttons">
+          <button
+            type="button"
+            (click)="showEmojiPanel()"
+            [ngClass]="{ 'emoji-active': isEmojiPickerVisible }"
+          >
+            @if (isEmojiPickerVisible) {
+            <i class="active fa-regular fa-face-laugh-wink"></i>
+            } @else {
+            <i class="fa-regular fa-face-smile-beam"></i>
+            }
+          </button>
+          <button
+            [disabled]="!newCommentForm.valid"
+            type="submit"
+            (click)="onSubmit()"
+          >
+            <i class="fa-solid fa-share"></i>
+          </button>
+          <ng-container *ngIf="isEmojiPickerVisible">
+            @defer (when isEmojiPickerVisible) {
+            <emoji-mart
+              class="emoji-mart"
+              set="twitter"
+              color="#bfcc94d9"
+              [showPreview]="false"
+              [enableSearch]="false"
+              [darkMode]="true"
+              [emojiSize]="20"
+              [include]="['people', 'foods']"
+              (emojiClick)="addEmoji($event)"
+            ></emoji-mart>
+            }
+          </ng-container>
+        </div>
+      </form>
+    </div>
+  
+  @for (comment of recipe.comments; track $index) {
+    <app-comment [isRecipeOpinion]="true" [comment]="comment" [postId]="recipe.id"></app-comment>
+  } @empty {
+  <h2 class="font-size-12r padding-1r">
+    There are no opinions on this recipe, be the first one!
+  </h2>
+  } }
 </div>

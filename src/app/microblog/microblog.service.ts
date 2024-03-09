@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MicroblogPost } from '../shared/models/microblog-post.model';
 import { Observable, Subject, defaultIfEmpty, map, tap } from 'rxjs';
-import { Comment } from '../shared/models/microblog-comment.model';
+import { ItemComment } from '../shared/models/microblog-comment.model';
 import { RealTimeDatabaseService } from '../shared/real-time-database.service';
 import { UserDataService } from '../user-panel/user-data.service';
 import { UserNotification } from '../shared/enums/notifications.enum';
@@ -89,7 +89,27 @@ export class MicroblogService   {
     this.postsChange.next(this.posts.slice());
   }
 
-  public onAddCommentToPost(postId: number, comment: Comment) {
+  public onLikePost(postId: number, userEmail: string, add: boolean) {
+    const newPosts = this.posts;
+    const postIndex = newPosts.findIndex((el) => el.id === postId);
+    if(postIndex !== -1) {
+      switch (add){
+        case true:
+          newPosts[postIndex].likes.quantity++
+          newPosts[postIndex].likes.whoLiked.push(userEmail)
+        break;
+        case false:
+          newPosts[postIndex].likes.quantity--
+          newPosts[postIndex].likes.whoLiked = newPosts[postIndex].likes.whoLiked.filter(el => el !== userEmail)
+        break;
+      }
+    }
+    this.posts = newPosts;
+    this.postsChange.next(this.posts.slice());
+    this.userDataService.setNotificationToUser(this.posts[postIndex].author, UserNotification.likedPost, userEmail)
+}
+
+  public onAddCommentToPost(postId: number, comment: ItemComment) {
     const newPosts = this.posts;
     const postIndex = newPosts.findIndex((el) => el.id === postId);
     if (postIndex !== -1) {
@@ -112,7 +132,7 @@ export class MicroblogService   {
     this.postsChange.next(this.posts.slice());
   }
 
-  public onEditComment(postId: number, comment: Comment) {
+  public onEditComment(postId: number, comment: ItemComment) {
     const newPosts = this.posts;
     const postIndex = newPosts.findIndex((el) => el.id === postId);
 
@@ -129,25 +149,6 @@ export class MicroblogService   {
     this.postsChange.next(this.posts.slice());
   }
 
-  public onLikePost(postId: number, userEmail: string, add: boolean) {
-      const newPosts = this.posts;
-      const postIndex = newPosts.findIndex((el) => el.id === postId);
-      if(postIndex !== -1) {
-        switch (add){
-          case true:
-            newPosts[postIndex].likes.quantity++
-            newPosts[postIndex].likes.whoLiked.push(userEmail)
-          break;
-          case false:
-            newPosts[postIndex].likes.quantity--
-            newPosts[postIndex].likes.whoLiked = newPosts[postIndex].likes.whoLiked.filter(el => el !== userEmail)
-          break;
-        }
-      }
-      this.posts = newPosts;
-      this.postsChange.next(this.posts.slice());
-      this.userDataService.setNotificationToUser(this.posts[postIndex].author, UserNotification.likedPost, userEmail)
-  }
 
   public onLikeComment(postId: number, commentId: number, userEmail: string, add: boolean) {
     const newPosts = this.posts;

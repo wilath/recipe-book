@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Recipe } from '../../shared/models/recipe.model';
 import { RecipesService } from '../recipes.service';
-import { ShoppingListService } from '../../shopping-list/shopping-list.service';
 import { UserData } from '../../shared/models/user-data.model';
 import { UserDataService } from '../../user-panel/user-data.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ItemComment } from '../../shared/models/microblog-comment.model';
 
 @Component({
   selector: 'app-recipes-details',
@@ -12,6 +13,7 @@ import { UserDataService } from '../../user-panel/user-data.service';
   styleUrls: ['./recipes-details.component.scss'],
 })
 export class RecipesDetailsComponent implements OnInit {
+ 
   constructor(
     private recipesService: RecipesService,
     private userDataService: UserDataService,
@@ -23,6 +25,8 @@ export class RecipesDetailsComponent implements OnInit {
 
   public recipe!: Recipe;
 
+  public usersRecipes!: Recipe[];
+
   public userData!: UserData;
 
   public totalRatePercentage: number = 0;
@@ -31,7 +35,13 @@ export class RecipesDetailsComponent implements OnInit {
 
   public isFollowedByCurrentUser: boolean = false;
 
+  public isCommentSectionVisible: boolean = true;
+
+  public isEmojiPickerVisible: boolean = false;
+
   public _rateByCurrentUser: number = 0;
+
+  public newCommentForm!: FormGroup;
 
   public get rateByCurrentUser() {
     return this._rateByCurrentUser;
@@ -49,15 +59,20 @@ export class RecipesDetailsComponent implements OnInit {
     this.userData = this.userDataService.getUserData(
       JSON.parse(localStorage.getItem('userData') || '{}').email
     );
+    this.usersRecipes = this.recipesService.getRecipes().filter(recipe => recipe.author ===  this.recipe.author)
     this.isFollowedByCurrentUser = this.userDataService.checkIfUserisFollowed(this.recipe.author, this.userData.email)
     this.isLikedByCurrentUser = this.recipe.isLikedByUser(this.userData.email);
     this._rateByCurrentUser = this.recipe.isRatedByUser(this.userData.email);
     this.totalRatePercentage = this.recipe.getAverageRating * 20;
     this.setFollow();
+    this.initForm()
+  }
+
+  public onGoBack() {
+    this.router.navigate(['/recipes']);
   }
 
   public onRateRecipe(value: number) {
-    console.log('rate details')
 
     this.recipesService.addRateToRecipe(
       this.recipe.name,
@@ -68,17 +83,58 @@ export class RecipesDetailsComponent implements OnInit {
     this.isLikedByCurrentUser = this.recipe.isLikedByUser(this.userData.email)
   }
 
-  public onEditRecipe() {
-    this.router.navigate(['edit'], { relativeTo: this.route });
-  }
-
   public onDeleteRecipe() {
     this.recipesService.deleteRecepie(this.id);
     this.router.navigate(['/recipes']);
   }
+
+  public onEditRecipe() {
+    this.router.navigate(['edit'], { relativeTo: this.route });
+  }
+
+  public showHideComments(){
+    this.isCommentSectionVisible = !this.isCommentSectionVisible
+  }
+
   public onToShopList() {}
 
-  public onGoBack() {}
+  public initForm(){
+    let content = new FormControl('', [
+      Validators.required]);
+    this.newCommentForm = new FormGroup({
+      content: content
+    })
+
+  }
+
+  public onSubmit() {
+    const newComment: ItemComment = {
+      id: this.recipe.getHighestCommentId(),
+      author: this.userData.email,
+      content: this.newCommentForm.value.content,
+      likes: {quantity: 0, whoLiked: []},
+      date: new Date()
+    }
+    this.recipesService.onAddCommentToRecipe(this.recipe.id, newComment);
+    this.initForm()
+  }
+
+  public showEmojiPanel() {
+    this.isEmojiPickerVisible = !this.isEmojiPickerVisible
+  }
+  
+  public addEmoji(event: any){
+    const textArea = <FormControl>this.newCommentForm.get('content');
+    (<FormControl>this.newCommentForm.get('content')).setValue(`${textArea.value} ${event.emoji.native}`)
+  }
+
+  public onEnterKey(event: Event): void {
+    const EventKey = event as KeyboardEvent
+    if (EventKey.key === 'Enter' && !EventKey.shiftKey) {
+      EventKey.preventDefault(); 
+      this.onSubmit(); 
+    }
+  }
 
   private setFollow() {
     if (this.userDataService.getUserData(this.recipe.author)) {
@@ -88,4 +144,5 @@ export class RecipesDetailsComponent implements OnInit {
           .followers?.includes(this.userData.email) || false;
     }
   }
+
 }

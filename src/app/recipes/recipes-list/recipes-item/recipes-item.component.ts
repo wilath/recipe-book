@@ -27,6 +27,8 @@ export class RecipesItemComponent implements OnChanges  {
 
   @Input() public index: number = 0;
 
+  @Input() public isSimpleDisplay: boolean = false;
+
   public isLikedByCurrentUser : boolean = false;
 
   public isFollowedByCurrentUser: boolean = false;
