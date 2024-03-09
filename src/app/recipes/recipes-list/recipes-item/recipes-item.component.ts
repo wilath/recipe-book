@@ -25,8 +25,6 @@ export class RecipesItemComponent implements OnChanges  {
   
   @Input() public recipe!: Recipe;
 
-  @Input() public index: number = 0;
-
   @Input() public isSimpleDisplay: boolean = false;
 
   public isLikedByCurrentUser : boolean = false;
@@ -77,7 +75,7 @@ export class RecipesItemComponent implements OnChanges  {
  
 
   public onNavigateToRecipeDetails(){
-    this.router.navigate([`${this.recipe.id}`],  {relativeTo: this.route})
+    this.router.navigate([`recipes/${this.recipe.id}`])
 
   }
 

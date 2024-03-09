@@ -11,34 +11,46 @@
       border-bottom: 1px dotted $uno-grey-active;
     }
   }
-  .sage2-underline{
+  .sage2-underline {
     text-decoration: underline $sage2;
   }
- 
+
   .recipe-details {
     display: flex;
-    
+
     .recipe-info {
       position: relative;
     }
     .recipe-image {
-        position: relative;
-        height: auto;
-        .image-container{
-            position: absolute;
-            height: 100%;
-            width: 100%;
-            img {
-                position: relative;
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                object-position: 0;
-                border-radius: 0 1rem 0 0;
-              }
+      position: relative;
+      height: auto;
+      .image-container {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        img {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: 0;
+          border-radius: 0 1rem 0 0;
         }
-       
-      
+      }
     }
+  }
+}
+.users-recipes-display{
+  
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+    grid-column-gap: 1rem;
+    
+    
+  .users-recipe{
+    border-radius: 1rem;
+    border: 1px solid $uno-grey-active;
+    
   }
 }

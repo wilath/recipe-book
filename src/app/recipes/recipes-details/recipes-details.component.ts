@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Recipe } from '../../shared/models/recipe.model';
 import { RecipesService } from '../recipes.service';
@@ -20,6 +20,7 @@ export class RecipesDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router
   ) {}
+ 
 
   public id: number = 0;
 
@@ -51,15 +52,17 @@ export class RecipesDetailsComponent implements OnInit {
     this._rateByCurrentUser = value;
   }
 
-  ngOnInit() {
+
+
+  public ngOnInit() {
     this.route.params.subscribe((params: Params) => {
       this.id = +params['id'];
       this.recipe = this.recipesService.getRecipe(this.id);
+      this.usersRecipes = this.recipesService.getRecipes().filter(recipe => recipe.author ===  this.recipe.author).filter(recipe => recipe.id !== this.recipe.id);
     });
     this.userData = this.userDataService.getUserData(
       JSON.parse(localStorage.getItem('userData') || '{}').email
     );
-    this.usersRecipes = this.recipesService.getRecipes().filter(recipe => recipe.author ===  this.recipe.author)
     this.isFollowedByCurrentUser = this.userDataService.checkIfUserisFollowed(this.recipe.author, this.userData.email)
     this.isLikedByCurrentUser = this.recipe.isLikedByUser(this.userData.email);
     this._rateByCurrentUser = this.recipe.isRatedByUser(this.userData.email);
@@ -86,6 +89,11 @@ export class RecipesDetailsComponent implements OnInit {
   public onDeleteRecipe() {
     this.recipesService.deleteRecepie(this.id);
     this.router.navigate(['/recipes']);
+  }
+
+  public onLikeRecipe(){
+    this.recipesService.addLikeToRecipe(this.recipe.name,this.userData.email, !this.isLikedByCurrentUser);
+    this.isLikedByCurrentUser = !this.isLikedByCurrentUser
   }
 
   public onEditRecipe() {

@@ -39,8 +39,8 @@ export class RealTimeDatabaseService {
               new Date(recipe.date),
               recipe.comments ?  recipe.comments.map(comment => ({
                 ...comment,
+                likes: comment.likes.whoLiked ? comment.likes : { quantity: comment.likes.quantity? comment.likes.quantity : 0, whoLiked: [] }, 
                 date: new Date(comment.date),
-                likes: comment.likes
               })) : [],
               recipe.likes.whoLiked ? recipe.likes : { quantity: recipe.likes.quantity? recipe.likes.quantity : 0, whoLiked: [] },
               recipe.stars ? recipe.stars : []
