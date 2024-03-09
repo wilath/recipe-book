@@ -49,7 +49,7 @@ export class RecipesItemComponent implements OnChanges  {
     this.user = JSON.parse(localStorage.getItem('userData') || '{}');
     this.totalRatePercentage = (this.recipe.getAverageRating)*20;
     this.isLikedByCurrentUser = this.recipe.isLikedByUser(this.user.email);
-    this.rateByCurrentUser = this.recipe.isRatedByUser(this.user.email);
+    this._rateByCurrentUser = this.recipe.isRatedByUser(this.user.email);
     this.setFollow();
   }
 

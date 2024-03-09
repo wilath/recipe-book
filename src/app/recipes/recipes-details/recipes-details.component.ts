@@ -37,7 +37,7 @@ export class RecipesDetailsComponent implements OnInit {
     return this._rateByCurrentUser;
   }
   public set rateByCurrentUser(value: number) {
-    this.onRateRecipe(value);
+    this.onRateRecipe(value)
     this._rateByCurrentUser = value;
   }
 
@@ -57,6 +57,8 @@ export class RecipesDetailsComponent implements OnInit {
   }
 
   public onRateRecipe(value: number) {
+    console.log('rate details')
+
     this.recipesService.addRateToRecipe(
       this.recipe.name,
       this.userData.email,

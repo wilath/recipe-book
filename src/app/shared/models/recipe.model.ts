@@ -1,6 +1,7 @@
 import { FoodType } from "../enums/food-type-enum";
 import { FileAnchor } from "./file-upload.model";
 import { Ingredient } from "./ingredient.model";
+import { Comment } from "./microblog-comment.model";
 
 export interface Likes {
     quantity: number,
@@ -34,9 +35,10 @@ export class Recipe{
     public level: DifficultyLevel;
     public prepTimeMinutes: number;
     public date: Date;
+    public comments: Comment[];
     public likes: Likes;
     public stars: Rating[];
-    constructor(id: number, name:string, desc:Description, images:FileAnchor[], ingredients: Ingredient[], foodType: FoodType, author: string, level: DifficultyLevel, prepTimeMinutes: number, date: Date, likes?: Likes, stars?: Rating[] ){
+    constructor(id: number, name:string, desc:Description, images:FileAnchor[], ingredients: Ingredient[], foodType: FoodType, author: string, level: DifficultyLevel, prepTimeMinutes: number, date: Date, comments: Comment[], likes?: Likes, stars?: Rating[] ){
         this.id = id
         this.name = name;
         this.description = desc;
@@ -47,6 +49,7 @@ export class Recipe{
         this.level = level;
         this.prepTimeMinutes = prepTimeMinutes;
         this.date = date;
+        this.comments = comments || [];
         this.likes = likes || { quantity: 0, whoLiked: [] };
         this.stars = stars || [];
     }

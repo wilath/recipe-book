@@ -7,12 +7,17 @@ export interface SimpleUserdata {
   name: string;
   avatar?: FileAnchor;
 }
+export interface ShoppingItem {
+  recipeName : string,
+  recipeId: number,
+  ingredients: Ingredient[]
+}
 
 export interface UserData extends SimpleUserdata {
   email: string;
   name: string;
   notifications: NotificationModel[];
-  shoppingList: Ingredient[];
+  shoppingList: ShoppingItem[];
   followers: string[];
   userFollows: string[];
   avatar?: FileAnchor;

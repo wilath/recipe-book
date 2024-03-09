@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MicroblogPost } from '../shared/models/microblog-post.model';
 import { Observable, Subject, defaultIfEmpty, map, tap } from 'rxjs';
-import { MicroblogComment } from '../shared/models/microblog-comment.model';
+import { Comment } from '../shared/models/microblog-comment.model';
 import { RealTimeDatabaseService } from '../shared/real-time-database.service';
 import { UserDataService } from '../user-panel/user-data.service';
 import { UserNotification } from '../shared/enums/notifications.enum';
@@ -89,7 +89,7 @@ export class MicroblogService   {
     this.postsChange.next(this.posts.slice());
   }
 
-  public onAddCommentToPost(postId: number, comment: MicroblogComment) {
+  public onAddCommentToPost(postId: number, comment: Comment) {
     const newPosts = this.posts;
     const postIndex = newPosts.findIndex((el) => el.id === postId);
     if (postIndex !== -1) {
@@ -112,7 +112,7 @@ export class MicroblogService   {
     this.postsChange.next(this.posts.slice());
   }
 
-  public onEditComment(postId: number, comment: MicroblogComment) {
+  public onEditComment(postId: number, comment: Comment) {
     const newPosts = this.posts;
     const postIndex = newPosts.findIndex((el) => el.id === postId);
 

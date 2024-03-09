@@ -1,19 +1,19 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MicroblogComment } from '../../shared/models/microblog-comment.model';
+import { Comment } from '../../shared/models/microblog-comment.model';
 import { SimpleUserdata } from '../../shared/models/user-data.model';
 import { UserDataService } from '../../user-panel/user-data.service';
 import { MicroblogService } from '../microblog.service';
 
 @Component({
-  selector: 'app-microblog-comment',
+  selector: 'app-comment',
   templateUrl: './microblog-comment.component.html',
   styleUrl: './microblog-comment.component.scss',
 })
-export class MicroblogCommentComponent implements OnInit {
+export class CommentComponent implements OnInit {
 
   constructor(private userDataService: UserDataService, private microblogService: MicroblogService)  {}
 
-  @Input() public microblogComment: MicroblogComment = {id:0, author: '', content:'', likes:{quantity:0,whoLiked:[]}, date: new Date()};
+  @Input() public comment: Comment = {id:0, author: '', content:'', likes:{quantity:0,whoLiked:[]}, date: new Date()};
   
   @Input() public postId: number = 0;
 
@@ -28,26 +28,26 @@ export class MicroblogCommentComponent implements OnInit {
   public loggedUserEmail: string = '';
 
   public ngOnInit(): void {
-    const userData = this.userDataService.getUserData(this.microblogComment.author);
+    const userData = this.userDataService.getUserData(this.comment.author);
     this.commentAuthorData = {email: userData.email, name: userData.name, avatar: userData.avatar};
-    this.timeSincePosted = this.calculateTimeSincePost(this.microblogComment.date);
+    this.timeSincePosted = this.calculateTimeSincePost(this.comment.date);
     this.loggedUserEmail = JSON.parse(localStorage.getItem('userData') || '{}').email;
-    this.isLikedByCurrentUser = this.microblogComment.likes.whoLiked.includes(this.loggedUserEmail);
+    this.isLikedByCurrentUser = this.comment.likes.whoLiked.includes(this.loggedUserEmail);
     this.CheckIfFollowedByCurrentUser();
   }
 
   public onAddLike() { 
-    this.microblogService.onLikeComment(this.postId, this.microblogComment.id, this.loggedUserEmail, !this.isLikedByCurrentUser);
+    this.microblogService.onLikeComment(this.postId, this.comment.id, this.loggedUserEmail, !this.isLikedByCurrentUser);
     this.isLikedByCurrentUser = !this.isLikedByCurrentUser;
   }
 
   public onFollowUser() {
-    this.userDataService.addFollowToUser(this.microblogComment.author, this.loggedUserEmail, !this.isFollowedByCurrentUser);
+    this.userDataService.addFollowToUser(this.comment.author, this.loggedUserEmail, !this.isFollowedByCurrentUser);
     this.CheckIfFollowedByCurrentUser()
   }
 
   public onDeleteComment() {
-    this.microblogService.onDeleteComment(this.postId, this.microblogComment.id)
+    this.microblogService.onDeleteComment(this.postId, this.comment.id)
   }
 
   private calculateTimeSincePost(postDate: Date): string {
@@ -72,6 +72,6 @@ export class MicroblogCommentComponent implements OnInit {
   }
 
   private CheckIfFollowedByCurrentUser() {
-    this.isFollowedByCurrentUser = this.userDataService.checkIfUserisFollowed(this.microblogComment.author, this.loggedUserEmail);
+    this.isFollowedByCurrentUser = this.userDataService.checkIfUserisFollowed(this.comment.author, this.loggedUserEmail);
   }
 }

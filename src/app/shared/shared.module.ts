@@ -8,6 +8,7 @@ import {TextFieldModule} from '@angular/cdk/text-field';
 import { ClockComponent } from './components/clock/clock.component';
 import { LevelsComponent } from './components/levels/levels.component';
 import { StarsComponent } from './components/stars/stars.component';
+import { CommentComponent } from '../microblog/microblog-comment/microblog-comment.component';
 
 @NgModule({
   declarations: [
@@ -15,19 +16,22 @@ import { StarsComponent } from './components/stars/stars.component';
     LoadingSpinnerComponent,
     ClockComponent,
     LevelsComponent,
-    StarsComponent
+    StarsComponent,
+    CommentComponent,
+
   ],
   exports: [
     AlertComponent,
     LoadingSpinnerComponent,
     CommonModule,
+    FormsModule,
     ReactiveFormsModule,
     PickerComponent,
     TextFieldModule,
     ClockComponent,
     LevelsComponent,
-    StarsComponent
-
+    StarsComponent,
+    CommentComponent,
   ],
   imports: [
     CommonModule,

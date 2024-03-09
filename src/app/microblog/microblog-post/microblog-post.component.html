@@ -97,7 +97,7 @@
             </div>
           }
           @for (comment of microblogPost.comments | dateLikeSort: choosenSortType; track $index) {
-              <app-microblog-comment [microblogComment]="comment" [postId]="microblogPost.id"></app-microblog-comment>
+              <app-comment [comment]="comment" [postId]="microblogPost.id"></app-comment>
              
           }  
         </div>
@@ -107,7 +107,7 @@
             <button class="underline-button " (click)="openComments()" >See more Comments</button>
           </div>
           
-         <app-microblog-comment [microblogComment]="topComment" [postId]="microblogPost.id"></app-microblog-comment>
+         <app-comment [comment]="topComment" [postId]="microblogPost.id"></app-comment>
         </div>
       }
       

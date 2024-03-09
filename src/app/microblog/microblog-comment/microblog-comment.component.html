@@ -7,17 +7,17 @@
   <div class="content-wrap">
     
     <div class="comment-content">
-        <h4>{{ commentAuthorData.name }}  @if (microblogComment.likes.quantity > 0) {<span class="likes-quantity">{{microblogComment.likes.quantity}} <i class="fa-solid fa-heart"></i> </span> } </h4>
-      <p>{{ microblogComment.content }}</p>
+        <h4>{{ commentAuthorData.name }}  @if (comment.likes.quantity > 0) {<span class="likes-quantity">{{comment.likes.quantity}} <i class="fa-solid fa-heart"></i> </span> } </h4>
+      <p>{{ comment.content }}</p>
     </div>
     <div class="comment-meta">
-      {{microblogComment.date | date:'shortDate'}} 
+      {{comment.date | date:'shortDate'}} 
       <span>·</span> 
       {{ timeSincePosted }} 
       <span>·</span> 
       <button type="button" class="love-it" (click)="onAddLike()" > {{isLikedByCurrentUser? 'I dont love it' : 'I love it!'}}</button> 
       <span>·</span> 
-      @if (microblogComment.author !== loggedUserEmail) {
+      @if (comment.author !== loggedUserEmail) {
       <button type="button" class="love-it" (click)="onFollowUser()" > {{isFollowedByCurrentUser? 'Unfollow' : 'Follow'}}</button> 
       } @else {
         <button type="button" class="love-it" (click)="onDeleteComment()" > Delete</button>       

@@ -141,6 +141,7 @@ export class RecipeEditComponent implements OnInit {
       this.recipeForm.value.level,
       this.recipeForm.value.prepTime,
       this.recipe ? this.recipe.date : new Date(),
+      this.recipe ? this.recipe.comments : [],
       this.recipe ? this.recipe.likes :{ quantity: 0, whoLiked: [] },
       this.recipe ? this.recipe.stars : []
 
