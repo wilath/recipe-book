@@ -2,10 +2,12 @@ import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Recipe } from '../../shared/models/recipe.model';
 import { RecipesService } from '../recipes.service';
-import { UserData } from '../../shared/models/user-data.model';
+import { ShoppingItem, UserData } from '../../shared/models/user-data.model';
 import { UserDataService } from '../../user-panel/user-data.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ItemComment } from '../../shared/models/microblog-comment.model';
+import { User } from '../../shared/models/user.model';
+import { UserNotification } from '../../shared/enums/notifications.enum';
 
 @Component({
   selector: 'app-recipes-details',
@@ -76,7 +78,6 @@ export class RecipesDetailsComponent implements OnInit {
   }
 
   public onRateRecipe(value: number) {
-
     this.recipesService.addRateToRecipe(
       this.recipe.name,
       this.userData.email,
@@ -104,7 +105,16 @@ export class RecipesDetailsComponent implements OnInit {
     this.isCommentSectionVisible = !this.isCommentSectionVisible
   }
 
-  public onToShopList() {}
+  public onToShopList() {
+    const newShoppingItem: ShoppingItem = {recipeName: this.recipe.name, recipeId: this.recipe.id, ingredients: this.recipe.ingredients};
+    this.userDataService.addRecipeToShopList(this.userData.email, newShoppingItem);
+    this.userDataService.setNotificationToUser(this.recipe.author, UserNotification.addToShopList, this.userData.email, this.recipe.name)
+  }
+
+  public onFollowUser() {
+    this.userDataService.addFollowToUser(this.recipe.author, this.userData.email,  !this.isFollowedByCurrentUser);
+    this.isFollowedByCurrentUser = !this.isFollowedByCurrentUser;
+  }
 
   public initForm(){
     let content = new FormControl('', [

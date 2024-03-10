@@ -6,6 +6,7 @@ import { MicroblogResolverService } from './microblog/microblog-resolver.service
 
 
 const appRoutes: Routes = [
+
   {
     path: '',
     redirectTo: '/microblog',

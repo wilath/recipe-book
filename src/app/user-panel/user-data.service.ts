@@ -1,6 +1,6 @@
 import { Injectable} from '@angular/core';
 import { Observable, Subject, map, tap } from 'rxjs';
-import { UserData, emptyUserData } from '../shared/models/user-data.model';
+import { ShoppingItem, UserData, emptyUserData } from '../shared/models/user-data.model';
 import { UserNotification } from '../shared/enums/notifications.enum';
 import { NotificationModel } from '../shared/models/notification.model';
 import { RealTimeDatabaseService } from '../shared/real-time-database.service';
@@ -12,8 +12,6 @@ export class UserDataService  {
   public usersData: UserData[] = [];
 
   public userDataChange = new Subject<UserData[]>();
-
- 
 
   public setUsersData(): Observable<void> {
     return this.realTimeDatabaseService.fetchUsersData().pipe(
@@ -107,6 +105,45 @@ export class UserDataService  {
     return user.followers.includes(followerEmail)
   }
 
+  public addRecipeToShopList(userEmail:string, shopItem: ShoppingItem) {
+    const data: UserData[] = this.usersData;
+    const user = this.getUserByEmail(userEmail);
+    const existingItemIndex = data[user.index].shoppingList.findIndex(item => item.recipeId === shopItem.recipeId);
+
+    if (existingItemIndex === -1) {
+      data[user.index].shoppingList.push(shopItem);
+      this.usersData = data;
+      this.userDataChange.next(this.usersData.slice());
+    }
+    
+  }
+
+  public clearShopList(userEmail: string) {
+    const data: UserData[] = this.usersData;
+    const user = this.getUserByEmail(userEmail);
+    data[user.index].shoppingList = []
+    this.usersData = data;
+    this.userDataChange.next(this.usersData.slice())
+  }
+
+  public deleteItemFromShopList(userEmail:string, shopItemId: number, index?: number) {
+    const data: UserData[] = this.usersData;
+    const user = this.getUserByEmail(userEmail);
+    const shopIndex = data[user.index].shoppingList.findIndex(item => item.recipeId = shopItemId)
+
+    if(!index) {
+      data[user.index].shoppingList.splice(shopIndex, 1)
+    } else {
+      data[user.index].shoppingList[shopIndex].ingredients.splice(index, 1);
+
+      if (data[user.index].shoppingList[shopIndex].ingredients.length === 0) {
+        data[user.index].shoppingList.splice(shopIndex, 1); 
+      }
+    }
+    this.usersData = data;
+    this.userDataChange.next(this.usersData.slice())
+  }
+
   private getNotificationMessage(notification: UserNotification, eventUserEmail: string, eventName?: string, eventData?: string) {
     const user = this.getUserByEmail(eventUserEmail);
     let message = '';
@@ -142,8 +179,14 @@ export class UserDataService  {
       case UserNotification.commentedPost:
         message = `${user.user.name} commented your post `;
         break;
+      case UserNotification.commentRecipe:
+        message = `${user.user.name} commented your recipe ${eventName}`
+        break;
       case UserNotification.newPostByFollow:
         message = `${user.user.name} added new post - ${eventName}`;
+        break;
+      case UserNotification.addToShopList:
+        message = `${user.user.name} added your recipe to his shopping list`
         break;
     }
     return message;

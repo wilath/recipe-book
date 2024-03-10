@@ -42,6 +42,7 @@
           I love it!
         </button>
         <button
+          (click)="onFollowUser()"
           class="button-alpha hover-active-grey border-radius-hr padding-c1 font-size-12r"
         >
           <i
@@ -51,6 +52,7 @@
           >Follow
         </button>
         <button
+          (click)="onToShopList()"
           class="hover-i-sage2 button-alpha hover-active-grey border-radius-hr padding-c1 font-size-12r"
         >
           <i class="fa-solid fa-list mr-hrem"></i>To Shopping List
@@ -64,6 +66,7 @@
           <i class="fa-solid fa-xmark mr-hrem"></i>Delete Recipe
         </button>
         <button
+          (click)="onEditRecipe()"
           class="hover-i-sage2 button-alpha hover-active-grey border-radius-hr padding-c1 font-size-12r"
         >
           <i class="fa-solid fa-pen-to-square mr-hrem"></i>Edit Recipe
@@ -125,15 +128,15 @@
     ></i>
   </h2>
   @if (isCommentSectionVisible) {
-  
-    <div class="flex-row-cfs gap10 mt-1rem">
-      <img
-        class="avatar-image-25rem"
-        src="https://t3.ftcdn.net/jpg/05/53/79/60/360_F_553796090_XHrE6R9jwmBJUMo9HKl41hyHJ5gqt9oz.jpg"
-        alt="avatar"
-      />
-      <form class="flex-grow-1" [formGroup]="newCommentForm">
-        <div class="textarea-wrapper  flex-row-cfs">
+
+  <div class="flex-row-cfs gap10 mt-1rem">
+    <img
+      class="avatar-image-25rem"
+      src="https://t3.ftcdn.net/jpg/05/53/79/60/360_F_553796090_XHrE6R9jwmBJUMo9HKl41hyHJ5gqt9oz.jpg"
+      alt="avatar"
+    />
+    <form class="flex-grow-1" [formGroup]="newCommentForm">
+      <div class="textarea-wrapper flex-row-cfs">
         <textarea
           cdkTextareaAutosize
           placeholder="Add new comment..."
@@ -178,14 +181,17 @@
           </ng-container>
         </div>
       </div>
-        
-      </form>
-    </div>
-  
+    </form>
+  </div>
+
   @for (comment of recipe.comments; track $index) {
-    <div class=" mt-1rem">
-      <app-comment [isRecipeOpinion]="true" [comment]="comment" [postId]="recipe.id"></app-comment>
-    </div>
+  <div class="mt-1rem">
+    <app-comment
+      [isRecipeOpinion]="true"
+      [comment]="comment"
+      [postId]="recipe.id"
+    ></app-comment>
+  </div>
   } @empty {
   <h2 class="font-size-12r padding-1r">
     There are no opinions on this recipe, be the first one!
@@ -194,13 +200,19 @@
 </div>
 
 <div class="padding-1r backboard-uno-grey border-radius-1r mt-1rem">
-  <h2 class="font-size-15r ">Check other recipes from <span class="sage">{{recipe.author | authorname}}</span>:</h2>
+  <h2 class="font-size-15r">
+    Check other recipes from
+    <span class="sage">{{ recipe.author | authorname }}</span
+    >:
+  </h2>
   <div class="users-recipes-display mt-1rem">
     @for (usersRecipe of usersRecipes; track $index) {
-      <div class="users-recipe">
-        <app-recipes-item [recipe]="usersRecipe" [isSimpleDisplay]="true"></app-recipes-item>
-      </div>
+    <div class="users-recipe">
+      <app-recipes-item
+        [recipe]="usersRecipe"
+        [isSimpleDisplay]="true"
+      ></app-recipes-item>
+    </div>
     }
   </div>
-
 </div>

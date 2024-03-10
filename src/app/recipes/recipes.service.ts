@@ -130,7 +130,7 @@ export class RecipesService implements OnDestroy   {
     }
     this.recipes = newRecipes;
     this.recipesChanged.next(this.recipes.slice());
-    this.userDataService.setNotificationToUser(this.recipes[recIndex].author, UserNotification.commentedPost, comment.author)
+    this.userDataService.setNotificationToUser(this.recipes[recIndex].author, UserNotification.commentRecipe, comment.author, this.recipes[recIndex].name)
   }
 
   public onDeleteComment(recipeId: number, commentId: number) {

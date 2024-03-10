@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subject, Subscription, filter, switchMap, tap } from 'rxjs';
+import { Subject, Subscription, filter, map, of, switchMap, tap } from 'rxjs';
 import { AuthServcie } from '../auth/auth-supp/auth.servcie';
 import { RealTimeDatabaseService } from '../shared/real-time-database.service';
 import { UserDataService } from '../user-panel/user-data.service';
@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   constructor(
     private userDataService: UserDataService,
-    private dataStorageService: RealTimeDatabaseService,
+    private realTimeDataBase: RealTimeDatabaseService,
     private authService: AuthServcie,
     private router: Router
   ) {}
@@ -26,7 +26,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   public isNotificationMenuShown = false;
 
-  public userData: UserData = {email: '', name: '', notifications: [],shoppingList: [],userFollows:[],followers:[]}
+  public userData: UserData = {email: '', name: 'aaa', notifications: [],shoppingList: [],userFollows:[],followers:[]} 
 
   public notificationFilter : 'all' | 'new'  = 'new';
 
@@ -36,24 +36,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   private userData$ = this.userDataService.userDataChange;
 
-  public ngOnInit() {
-    this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => {
-      this.setMarkerClass();
-    });
+  test(){
+    console.log('user',this.userData)
+    console.log('auth', this.isAuth)
+  }
 
-    this.user$ = this.authService.user.pipe(
-        tap((user) => {
-          if (user) {
-            this.userData$.subscribe(users => {             
-              this.userData = users.filter(el => el.email === user.email)[0]})                        
-          }
-        }))
-        .subscribe((user) => {
-          this.isAuth = !user ? false : true;
-          if (this.isAuth) {
-            this.FetchData();
-           }
-      });
+  public ngOnInit() {
+    this.userSubscription()
+    this.navigationSubscription()
   }
 
   public ngOnDestroy() {
@@ -80,7 +70,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   this.notificationFilter = 'new'
 
   }
-
+  
   public setMarkerClass(): string {
     const currentUrl = this.router.url
     let classToReturn = ''
@@ -89,10 +79,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
       case currentUrl.includes('microblog'):
         classToReturn = 'marker-microblog';
         break;
-      case currentUrl.includes('recipes'):
-        classToReturn = 'marker-recipes';
-        break;
-      case currentUrl.includes('user-panel'):
+        case currentUrl.includes('recipes'):
+          classToReturn = 'marker-recipes';
+          break;
+          case currentUrl.includes('user-panel'):
         classToReturn = 'marker-shopping-list';
         break;
       default:
@@ -109,7 +99,34 @@ export class HeaderComponent implements OnInit, OnDestroy {
     return this.userData.notifications.filter(el => !el.shown).length;
   }
 
-  private FetchData() {
-    this.dataStorageService.fetchRecipes().subscribe();
+  private navigationSubscription(){
+    this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => {
+      this.setMarkerClass();
+    });
   }
+
+  private userSubscription(){
+  
+    this.authService.user.subscribe((user) => {
+      if (user) {
+        this.userDataService.setUsersData().subscribe(() => {
+          this.isAuth = true;
+          this.userData = this.userDataService.getUserData(user.email);
+        });
+    
+        this.userDataService.userDataChange.pipe(
+          map((users) => users.find((el) => el.email === user.email)),).
+          subscribe((userData) => {
+          if (userData) {
+            this.userData = userData;
+          }
+        });
+      } else {
+        this.userData = {email: '', name: 'aaa', notifications: [],shoppingList: [],userFollows:[],followers:[]} ;
+        this.isAuth = false;
+      }
+    });
+
+ 
+}
 }

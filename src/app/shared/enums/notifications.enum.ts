@@ -9,6 +9,8 @@ export enum UserNotification{
     likedPost,
     likedComment,
     commentedPost,
+    commentRecipe,
+    addToShopList,
     newPostByFollow,
     
 }
