@@ -80,7 +80,7 @@ export class MicroblogPostComponent implements OnInit {
     const diffInDays = diffInHours / 24; 
   
     if (diffInDays > 7) {
-      return '>7 days';
+      return 'more than 7 days ago';
     } else if (diffInDays >= 1) {
       return Math.floor(diffInDays) + ' days ago';
     } else if (diffInHours >= 1) {

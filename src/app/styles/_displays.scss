@@ -13,7 +13,7 @@
   align-items: flex-start;
   justify-content: center;
 }
-.flex-col-ss{
+.flex-col-ss {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -33,7 +33,7 @@
   align-items: center;
   justify-content: space-around;
 }
-.flex-row-csb{
+.flex-row-csb {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -46,14 +46,20 @@
   align-items: center;
   justify-content: flex-start;
 }
+.flex-row-ce {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
 
-.flex-row-ss{
+.flex-row-ss {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   justify-content: flex-start;
 }
- 
+
 .flex-row-fese {
   display: flex;
   flex-direction: row;
@@ -61,14 +67,18 @@
   justify-content: space-evenly;
 }
 
+.flex-row-reverse {
+  flex-direction: row-reverse;
+}
+
 .flex-grow-1 {
   flex-grow: 1;
 }
-.flex-wrap{
+.flex-wrap {
   flex-wrap: wrap;
 }
-.gap1{
-  gap: 1px
+.gap1 {
+  gap: 1px;
 }
 .gap5 {
   gap: 5px;
@@ -76,11 +86,14 @@
 .gap10 {
   gap: 10px;
 }
+.gap15 {
+  gap: 15px;
+}
 
 //positions
 
-.absolute-lb{
+.absolute-lb {
   position: absolute;
   left: 0;
-  bottom:0;
+  bottom: 0;
 }

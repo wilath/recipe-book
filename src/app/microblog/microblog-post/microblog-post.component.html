@@ -1,16 +1,16 @@
 
   <div class="backboard-uno-grey border-radius-1r mt-1rem post-wrapper">
-    <div class="top-section">
-      <img class="profile-image" src="https://t3.ftcdn.net/jpg/05/53/79/60/360_F_553796090_XHrE6R9jwmBJUMo9HKl41hyHJ5gqt9oz.jpg" alt="avatar">
-      <div class="author-data">
-          <h4>{{postAuthor.name}}</h4>
-          <h5>{{microblogPost.date | date:'shortDate'}} <span>·</span> {{timeSincePosted}} <span>·</span> <i class="fa-solid fa-earth-europe"></i></h5>      
+    <div class="top-section flex-row-ss padding-1r">
+      <img class="avatar-image-3rem" src="https://t3.ftcdn.net/jpg/05/53/79/60/360_F_553796090_XHrE6R9jwmBJUMo9HKl41hyHJ5gqt9oz.jpg" alt="avatar">
+      <div class="author-data ml-1rem flex-col-fsc">
+          <h4 class="font-size-15r">{{postAuthor.name}}</h4>
+          <h5 class="sage mt-5px post-meta-info ">{{microblogPost.date | date:'shortDate'}} <span>·</span> {{timeSincePosted}} <span>·</span> <i class="fa-solid fa-earth-europe"></i></h5>      
       </div>
     </div>
-    <div class="text-section">
+    <div class="text-section font-size-12r padding-1r">
       <p>{{microblogPost.content}}</p>
     </div>
-    <div class="image-section"
+    <div class="image-section width100"
     *ngIf="microblogPost.images.length > 0"
     [ngStyle]="{'aspect-ratio': microblogPost.images.length === 2 ? '3/4':'3/2'}"
     >
@@ -22,7 +22,7 @@
         'grid-big-left': microblogPost.images.length > 2}"> <!--kafelek pierwszy-->
         <a>
           <img
-          class="image-section-photo"  
+          class="image-section-photo width100 height100"  
           [src]="microblogPost.images[0].url" 
           [alt]="microblogPost.images[0].name">
         </a>
@@ -33,67 +33,76 @@
         'grid-small-top': microblogPost.images.length > 2}"> <!--kafelek drugi-->
         <a >
           <img 
-          class="image-section-photo"  
+          class="image-section-photo width100 height100"  
           [src]="microblogPost.images[1].url" 
           [alt]="microblogPost.images[1].name">
         </a>
         </div>
       <div class="grid-small-bottom" *ngIf="microblogPost.images[2] && microblogPost.images.length <= 3"> <!--kafelek trzeci-->
         <a>
-          <img class="image-section-photo" [src]="microblogPost.images[2].url" [alt]="microblogPost.images[2].name">
+          <img class="image-section-photo width100 height100" [src]="microblogPost.images[2].url" [alt]="microblogPost.images[2].name">
         </a>
       </div>
       <div class="grid-small-bottom" *ngIf="microblogPost.images.length > 3"> <!-- kafelek z plusem-->
         <a>
-          <div class="image-plus"> <p>+ {{microblogPost.images.length - 2 }}</p></div>
-          <img class="image-section-photo" [src]="microblogPost.images[2].url" [alt]="microblogPost.images[2].name">
+          <div class="image-plus width100 height100 font-size-25r flex-row-cc"> <p>+ {{microblogPost.images.length - 2 }}</p></div>
+          <img class="image-section-photo width100 height100" [src]="microblogPost.images[2].url" [alt]="microblogPost.images[2].name">
         </a>
       </div>
   
     </div>
-    <div class="likes-section">
-        <div class="likes-info">
-          <div>{{microblogPost.likes.quantity}} <i class="fa-solid fa-heart"></i>  </div>
-          <div>{{microblogPost.comments.length}} <i class="fa-solid fa-comments"></i> </div>
+    <div class="m-01 padding-050 bt-uga flex-row-csb flex-row-reverse likes-section">
+        <div class="likes-info flex-row-cfs gap15 font-size-12r">
+          <div>{{microblogPost.likes.quantity}} <i class="fa-solid fa-heart font-size-1r"></i>  </div>
+          <div>{{microblogPost.comments.length}} <i class="fa-solid fa-comments font-size-1r"></i> </div>
         </div>
-        <div class="likes-buttons">
-          <button (click)="onLikePost()"><i [ngStyle]="{'color': isLikedByCurrentUser ? 'tomato' : 'white'}" class="fa-solid fa-heart"></i> I love it!</button>
-          <button (click)="openComments()"><i [ngStyle]="{'color': isCommentSectionOpen ? 'rgb(66, 103, 178)' : 'white'}" class="fa-solid fa-comments"></i> Comments</button>
+        <div class="likes-buttons flex-row-cfs gap15">
+          <button class="button-alpha font-size-15r border-radius-hr hover-active-grey flex-row-cc gap5" (click)="onLikePost()"><i [ngStyle]="{'color': isLikedByCurrentUser ? 'tomato' : 'white'}" class="fa-solid fa-heart font-size-12r"></i> I love it!</button>
+          <button class="button-alpha font-size-15r border-radius-hr hover-active-grey flex-row-cc gap5" (click)="openComments()"><i [ngStyle]="{'color': isCommentSectionOpen ? 'rgb(66, 103, 178)' : 'white'}" class="fa-solid fa-comments font-size-12r"></i> Comments</button>
           @if (postAuthor.email !== loggedUserEmail) {
-            <button (click)="onFollowUser()"><i [ngStyle]="{'color': isFollowedByCurrentUser ? 'rgb(244,198,77)' : 'white'}" class="fa-solid fa-user-plus"></i> Follow </button>
+            <button class="button-alpha font-size-15r border-radius-hr hover-active-grey flex-row-cc gap5" (click)="onFollowUser()"><i [ngStyle]="{'color': isFollowedByCurrentUser ? 'rgb(244,198,77)' : 'white'}" class="fa-solid fa-user-plus font-size-12r"></i> Follow </button>
           } @else {
-            <button (click)="onDeletePost()"><i [ngStyle]="{'color': 'white'}" class="fa-solid fa-trash"></i> Delete </button>
+            <button class="button-alpha font-size-15r border-radius-hr hover-active-grey flex-row-cc gap5" (click)="onDeletePost()"><i [ngStyle]="{'color': 'white'}" class="fa-solid fa-trash font-size-12r"></i> Delete </button>
 
           }
         </div>
       </div>
       @if (isCommentSectionOpen) {
-        <div  class="comments-section">
-          <div class="add-comment">
-          <img class="profile-image2" src="https://t3.ftcdn.net/jpg/05/53/79/60/360_F_553796090_XHrE6R9jwmBJUMo9HKl41hyHJ5gqt9oz.jpg" alt="avatar">
-            <form [formGroup] = "newCommentForm" >
-              <textarea cdkTextareaAutosize placeholder="Add new comment..." formControlName='content' (keydown.enter)="onEnterKey($event)"></textarea>
-              <div class="add-comment-buttons">
-                <button  type="button" (click)="showEmojiPanel()" [ngClass]="{'emoji-active' : isEmojiPickerVisible}" >
+        <div  class="bt-uga m-01 pb-1r comments-section">
+          <div class="mt-1rem flex-row-ss add-comment">
+          <img class="avatar-image-25rem mr-hrem" src="https://t3.ftcdn.net/jpg/05/53/79/60/360_F_553796090_XHrE6R9jwmBJUMo9HKl41hyHJ5gqt9oz.jpg" alt="avatar">
+            <form class="flex-grow-1" [formGroup] = "newCommentForm" >
+              <div class="textarea-wrapper flex-grow-1 flex-row-cfs">
+                <textarea
+                cdkTextareaAutosize
+                placeholder="Add new comment..."
+                formControlName="content"
+                (keydown.enter)="onEnterKey($event)"
+              ></textarea>
+              <div class="flex-row-cfs gap5">
+                <button class="button-alpha font-size-12r hover-i-sage2"  type="button" (click)="showEmojiPanel()" [ngClass]="{'emoji-active' : isEmojiPickerVisible}" >
                   @if (isEmojiPickerVisible) {
                     <i class="active fa-regular fa-face-laugh-wink"></i> 
                 } @else {
                     <i class="fa-regular fa-face-smile-beam  "></i>
                 }
                 </button>
-                <button [disabled]="!newCommentForm.valid"  type="submit" (click)="onSubmit()" ><i class="fa-solid fa-share"></i></button>
+                <button class="button-alpha font-size-12r hover-i-sage2" [disabled]="!newCommentForm.valid"  type="submit" (click)="onSubmit()" ><i class="fa-solid fa-share"></i></button>
                 <ng-container *ngIf="isEmojiPickerVisible">
                   @defer (when isEmojiPickerVisible) {
                       <emoji-mart class="emoji-mart" set="twitter" color="#bfcc94d9" [showPreview]="false" [enableSearch]="false" [darkMode]=true [emojiSize]="20" [include]="['people','foods']" (emojiClick)="addEmoji($event)"></emoji-mart>
                   }
               </ng-container>
               </div>
+
+              </div>
+              
             </form>
           </div>
           @if (microblogPost.comments.length > 0) {
-            <div class="sorting-buttons">
-              <button class="underline-button" [ngStyle]="{'text-decoration': choosenSortType === sortType.sortByDate ? 'underline' : ''}" (click)="onChangeSortType(sortType.sortByDate)">Latest</button>
-              <button class="underline-button" [ngStyle]="{'text-decoration': choosenSortType === sortType.sortByLikes ? 'underline' : ''}" (click)="onChangeSortType(sortType.sortByLikes)">Popular</button>
+            <div class="flex-row-ce m-0250">
+              <button class="font-size-1r underline-button" [ngStyle]="{'text-decoration': choosenSortType === sortType.sortByDate ? 'underline' : ''}" (click)="onChangeSortType(sortType.sortByDate)">Latest</button>
+              <button class="font-size-1r underline-button" [ngStyle]="{'text-decoration': choosenSortType === sortType.sortByLikes ? 'underline' : ''}" (click)="onChangeSortType(sortType.sortByLikes)">Popular</button>
             </div>
           }
           @for (comment of microblogPost.comments | dateLikeSort: choosenSortType; track $index) {
@@ -102,9 +111,9 @@
           }  
         </div>
       } @else if (microblogPost.comments.length > 0) {
-        <div class="comments-section">
-          <div class="sorting-buttons">
-            <button class="underline-button " (click)="openComments()" >See more Comments</button>
+        <div class="bt-uga m-01 pb-1r comments-section">
+          <div class="flex-row-ce m-0250">
+            <button class=" font-size-1r underline-button " (click)="openComments()" >See more Comments</button>
           </div>
           
          <app-comment [comment]="topComment" [postId]="microblogPost.id"></app-comment>

@@ -1,65 +1,26 @@
 @import "../../styles/variables";
 
-.profile-image {
-  height: 3rem;
-  aspect-ratio: 1/1;
-  border-radius: 50%;
-}
-
-.profile-image2 {
-  height: 2.5rem;
-  aspect-ratio: 1/1;
-  border-radius: 50%;
-}
-
 .post-wrapper {
-  .top-section {
-    display: flex;
-    flex-direction: row;
-    justify-items: flex-start;
-    align-items: flex-start;
-    padding: 1rem;
-
-    .author-data {
-      margin-left: 1rem;
+  .post-meta-info {
+    span {
       color: $uno-white;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: center;
+      margin: 0 5px;
+      font-weight: 900;
+    }
 
-      h4 {
-        font-size: 1.5rem;
-      }
-
-      h5 {
-        margin-top: 5px;
-        color: $sage;
-
-        span {
-          color: $uno-white;
-          margin: 0 5px;
-          font-weight: 900;
-        }
-
-        i {
-          position: relative;
-          color: $uno-white;
-          font-size: 0.9rem;
-        }
-      }
+    i {
+      position: relative;
+      color: $uno-white;
+      font-size: 0.9rem;
     }
   }
 
   .text-section {
-    color: $uno-white;
-    padding: 0 1rem 1rem 1rem;
-    font-size: 1.2rem;
     line-height: 1.6rem;
+    padding-top: 0;
   }
 
   .image-section {
-    width: 100%;
     display: grid;
     grid-template-columns: 2fr 1fr;
     grid-template-rows: repeat(2, 1fr);
@@ -72,8 +33,6 @@
 
     .image-section-photo {
       object-fit: cover;
-      width: 100%;
-      height: 100%;
     }
 
     .grid-full {
@@ -109,156 +68,19 @@
 
     .image-plus {
       position: absolute;
-      width: 100%;
-      height: 100%;
       background-color: rgba(128, 128, 128, 0.597);
-      color: $uno-white;
-      font-size: 3rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
   }
 
-  .likes-section {
-    margin: 0 1rem;
-    padding: 0.5rem 0;
-    border-top: 1px solid $uno-grey-active;
+  .underline-button {
+    border: none;
+    background-color: transparent;
     color: $uno-white;
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: space-between;
-    align-items: center;
-
-    .likes-info {
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      gap: 15px;
-      font-size: 1.1rem;
-
-      i {
-        font-size: 0.95rem;
-      }
-    }
-
-    .likes-buttons {
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      gap: 15px;
-
-      button {
-        position: relative;
-        height: 2.3rem;
-        color: $uno-white;
-        border: none;
-        background-color: transparent;
-        font-size: 1.3rem;
-        border-radius: 1rem;
-        transition: all 0.2s linear;
-        padding: 0 15px;
-
-        &:hover {
-          background-color: $uno-grey-active;
-          color: $sage;
-        }
-
-        &:hover > .fa-heart {
-          color: tomato;
-        }
-
-        &:hover > .fa-comments {
-          color: rgb(66, 103, 178);
-        }
-      }
-    }
-  }
-
-  .comments-section {
-    border-top: 1px solid $uno-grey-active;
-    margin: 0 1rem;
-    padding-bottom: 1rem ;
-
-   
-
-    
-
-    .add-comment {
-      display: flex;
-      flex-direction: row;
-      margin-top: 1rem ;
-
-      form {
-        position: relative;
-        margin-left: 1rem;
-        flex-grow: 1;
-        border-radius: 1rem;
-        padding: 0.25rem;
-        background-color: $uno-grey-active;
-        border: none;
-        color: $uno-white;
-        display: flex;
-        flex-direction: row;
-        min-height: 2rem;
-
-        textarea {
-          background-color: transparent;
-          resize: none;
-          overflow-y: hidden;
-          flex-grow: 1;
-          color: $uno-white;
-          border: none;
-          margin-left: 0.25rem;
-          &:focus {
-            outline: none;
-            border: none;
-          }
-        }
-
-        .add-comment-buttons {
-          align-self: flex-end;
-          margin-bottom: 0.25rem;
-          .active {
-            color: $sage;
-          }
-
-          button {
-            border: none;
-            background-color: transparent;
-            font-size: 1.3rem;
-            color: $uno-white;
-            transition: color 0.2s linear;
-            &:hover {
-              color: $sage;
-            }
-            &:disabled {
-              opacity: 0.4;
-            }
-          }
-        }
-      }
-    }
-
-    .sorting-buttons {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      margin: 0.25rem 0 ;
-      .underline-button {
-        border: none;
-        background-color: transparent;
-        color: $uno-white;
-        font-size: 1rem;
-        &:hover {
-          text-decoration: underline;
-        }
-      }
-     
+    &:hover {
+      text-decoration: underline;
     }
   }
 }
-
 
 .emoji-mart {
   position: absolute;
