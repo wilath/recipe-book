@@ -1,10 +1,10 @@
 
-<div class="filters">
-<div class="filters-row">
+<div class=" border-radius-1r backboard-uno-grey padding-15r">
+<div class="filters-row flex-row-csb padding-15r">
   <div class="food-type-filters">
   <form>
     
-    <label for="option4">All
+    <label class="padding-c1 border-radius-hr mr-hrem no-input-visible backboard-uno-grey-active" for="option4">All
       <input
       [value]="null"
       id="option4"
@@ -14,7 +14,7 @@
     />
     </label>
     
-    <label for="option0">Breakfasts
+    <label class="backboard-uno-grey-active padding-c1 border-radius-hr mr-hrem no-input-visible" for="option0">Breakfasts
       <input
       [value]="foodCategory.breakfast"
       id="option0"
@@ -24,7 +24,7 @@
     />
     </label>
     
-    <label for="option1">Dinners
+    <label class="backboard-uno-grey-active padding-c1 border-radius-hr mr-hrem no-input-visible" for="option1">Dinners
       <input
       [value]="foodCategory.dinner"
       id="option1"
@@ -34,7 +34,7 @@
     />
     </label>
    
-    <label for="option2">Beverages
+    <label class="backboard-uno-grey-active padding-c1 border-radius-hr mr-hrem no-input-visible" for="option2">Beverages
       <input
       [value]="foodCategory.drink"
       id="option2"
@@ -44,7 +44,7 @@
     />
     </label>
     
-    <label for="option3">Deserts
+    <label class="backboard-uno-grey-active padding-c1 border-radius-hr mr-hrem no-input-visible" for="option3">Deserts
       <input
       [value]="foodCategory.desert"
       id="option3"
@@ -62,11 +62,11 @@
     <button (click)="onNewRecipe()"><i class="fa-solid fa-plus"></i> New Recipe</button>
   </div>
 </div>
-<div class="filters-row filter-row-bottom">
+<div class="filters-row filter-row-bottom flex-row-csb padding-15r">
   <div class="sort">
     <form>
       
-      <label  for="latest">Latest
+      <label class="backboard-uno-grey-active padding-c1 border-radius-hr mr-hrem no-input-visible"   for="latest">Latest
         <input
       [value]="foodSort.Latest" 
       type="radio"
@@ -75,7 +75,7 @@
       [(ngModel)]="chosenSortType">
       </label>
       
-      <label for="popular">Popular
+      <label class="backboard-uno-grey-active padding-c1 border-radius-hr mr-hrem no-input-visible" for="popular">Popular
         <input 
       [value]="foodSort.Popular" 
       type="radio"
@@ -84,7 +84,7 @@
       [(ngModel)]="chosenSortType">
       </label>
       
-      <label for="bestRating">Best rated
+      <label class="backboard-uno-grey-active padding-c1 border-radius-hr mr-hrem no-input-visible" for="bestRating">Best rated
         <input 
       [value]="foodSort.BestRating" 
       type="radio"
@@ -93,7 +93,7 @@
       [(ngModel)]="chosenSortType">
       </label>
       
-      <label for="quickest">Quickest
+      <label class="backboard-uno-grey-active padding-c1 border-radius-hr mr-hrem no-input-visible" for="quickest">Quickest
         <input 
       [value]="foodSort.Quickest" 
       type="radio"
@@ -104,7 +104,7 @@
     </form>
   </div>
   <div class="search">
-    <input placeholder="Search..." type="text" [(ngModel)]="foodSearch" />
+    <input class="border-radius-hr backboard-uno-grey-active font-size-1r padding-c1" placeholder="Search..." type="text" [(ngModel)]="foodSearch" />
   </div>
   
 

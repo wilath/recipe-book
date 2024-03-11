@@ -1,37 +1,14 @@
 @import "../../styles/variables";
 
-.filters {
-  background-color: $uno-grey;
-  border-radius: 1rem;
-  padding: 0.5rem;
-  color: $uno-white;
+
   .filters-row {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.5rem;
     .search {
       input {
-        padding: 0.25rem 0.5rem;
-        border-radius: 0.5rem;
-        background-color: $uno-grey-active;
-        font-size: 1rem;
         font-family: inherit;
-        color: $uno-white
       }
     }
     label {
-      cursor: pointer;
-      padding: 0.25rem 0.5rem;
-      background-color: $uno-grey-active;
-      border-radius: 0.5rem;
-      margin-right: 0.5rem;
-      transition: all 0.2s linear;
-      input {
-        position: absolute;
-        width: 0;
-      }
+      
       &:has(input:checked) {
         background-color: $sage;
         color: $uno-grey;
@@ -57,7 +34,7 @@
   .filter-row-bottom{
     padding-top: 0;
   }
-}
+
 
 .recipe-list-wrapper {
   margin: 1rem 0;
