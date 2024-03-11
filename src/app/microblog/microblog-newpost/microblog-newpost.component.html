@@ -1,31 +1,31 @@
-<div class="backboard-uno-grey border-radius-1r new-microblog-post">
+<div class="backboard-uno-grey border-radius-1r flex-row-ss padding-1r pb-hr">
 
-<img class="profile-image" src="https://t3.ftcdn.net/jpg/05/53/79/60/360_F_553796090_XHrE6R9jwmBJUMo9HKl41hyHJ5gqt9oz.jpg" alt="avatar">
+<img class="avatar-image-3rem" src="https://t3.ftcdn.net/jpg/05/53/79/60/360_F_553796090_XHrE6R9jwmBJUMo9HKl41hyHJ5gqt9oz.jpg" alt="avatar">
 
 
-<form [formGroup]="newPostForm" (ngSubmit)="onSubmit()">
-<div [ngClass]="{'no-lower-border-radius': isPhotoAddOption}"  class="content-form">
+<form class="flex-grow-1" [formGroup]="newPostForm" (ngSubmit)="onSubmit()">
+<div [ngClass]="{'no-lower-border-radius': isPhotoAddOption}"  class="content-form flex-grow-1 ml-1rem backboard-uno-grey-active border-radius-1r textarea-wrapper ">
     <textarea 
     cdkTextareaAutosize   
     [placeholder]="'Whats on your mind ' + userData.name + ' ?'" 
     name="content" id="content" formControlName="content" ></textarea>
 </div>
-    <div class="image-form" formArrayName="images">    
+    <div class="gap1 flex-row-ss image-form pl-1r" formArrayName="images">    
     @for (imageControl of newPostForm.value.images; track $index) {
         <ng-container [formGroupName]="$index">
-            <div [class]="'nt' + $index" class="label-wrapper">
-            <label  [for]="'image' + $index"><i class="fa-solid fa-file-import"></i>
+            <div [class]="'nt' + $index" class="label-wrapper backboard-uno-grey-active overflow-h font-size-25r">
+            <label class="flex-row-cc width100 height100"  [for]="'image' + $index"><i class="fa-solid fa-file-import"></i>
                 <input  type="file" accept="image/*" [id]="'image' + $index" [name]="'image' + $index" formControlName="input" (change)="onFileUpload($event, $index)" >
                 <div [ngStyle]="{ 'height': imageControl.percentages + '%'}"  class="image-loading"></div>
-                <img class="image-display" *ngIf="imageControl.imageData.url && imageControl.percentages === 100" [src]="imageControl.imageData.url" alt="XD" >
+                <img class="height100 width100 absolute-lb" *ngIf="imageControl.imageData.url && imageControl.percentages === 100" [src]="imageControl.imageData.url" alt="XD" >
             </label>                     
-            <a *ngIf="imageControl.imageData.url && imageControl.percentages === 100" (click)="onDeleteImageFromForm($index)"><div class="image-delete"><i class="fa-regular fa-trash-can"></i></div></a>
+            <a *ngIf="imageControl.imageData.url && imageControl.percentages === 100" (click)="onDeleteImageFromForm($index)"><div class="image-delete backboard-uno-grey-active flex-row-cc absolute-lb width100 height100"><i class="fa-regular fa-trash-can"></i></div></a>
         </div>                     
         </ng-container>
 }
 </div>
-<div class="form-buttons">
-    <button class="emoji-button" type="button" [ngClass]="{'emoji-active' : isEmojiPickerVisible}"  (click)="onShowEmojiPanel()">
+<div class="form-buttons flex-row-csb mt-hrem ml-1rem">
+    <button class=" button-alpha border-radius-hr font-size-12r padding-c1 hover-active-grey" type="button" [ngClass]="{'emoji-active' : isEmojiPickerVisible}"  (click)="onShowEmojiPanel()">
         @if (isEmojiPickerVisible) {
             <i class="fa-regular fa-face-laugh-wink"></i> 
         } @else {
@@ -39,8 +39,8 @@
         }
     </ng-container>
     
-    <button type="button" [disabled]="photoQuantity > 7" (click)="onAddImageInput()"><i class="fa-regular fa-images"></i>  Add image</button>
-    <button type="submit"><i class="fa-solid fa-share"></i>  Publish</button>
+    <button class="button-alpha border-radius-hr font-size-12r padding-c1 hover-active-grey" type="button" [disabled]="photoQuantity > 7" (click)="onAddImageInput()"><i class="fa-regular fa-images"></i>  Add image</button>
+    <button class="button-alpha border-radius-hr font-size-12r padding-c1 hover-active-grey" type="submit"><i class="fa-solid fa-share"></i>  Publish</button>
    
     
 </div>

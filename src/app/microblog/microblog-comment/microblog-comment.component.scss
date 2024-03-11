@@ -1,86 +1,58 @@
 @import "../../styles/variables";
-.comment-wrap {
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 0.2rem;
 
+.content-wrap {
+  min-width: 55%;
+  .comment-content {
+    min-height: 1rem;
 
-  .profile-image {
-    border-radius: 50%;
-    height: 2.5rem;
-    aspect-ratio: 1/1;
-    margin-right: 1rem;
-  }
-
-  .content-wrap {
-    min-width: 55%;
-    .comment-content {
-      position: relative;
-      padding: 0.6rem;
-     
-      background-color: $uno-grey-active;
+    .dot {
+      color: white;
+      margin: 0 0.5rem;
+    }
+    .likes-quantity {
+      position: absolute;
+      font-size: 0.85rem;
+      background-color: rgb(150, 150, 150);
+      padding: 0.2rem 0.3rem;
       color: $uno-white;
-      border-radius: 1rem;
-      min-height: 1rem;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: flex-start;
-      h4 {
-        font-weight: 500;
-        font-size: 1.1rem;
+      right: 1rem;
+      top: -0.5rem;
 
-        .dot {
-          color: white;
-          margin: 0 0.5rem;
-        }
-        .likes-quantity {
-          position: absolute;
-          font-size: 0.85rem;
-          background-color: rgb(150, 150, 150);
-          border-radius: 0.5rem;
-          padding: 0.2rem 0.3rem;
-          color: $uno-white;
-          right: 1rem;
-          top: -0.5rem;
-
-          i{
-            color: tomato;
-          }
-        }
-      }
-      p {
-        font-size: 1rem;
-        margin-top: 0.1rem;
+      i {
+        color: tomato;
       }
     }
-    .comment-meta {
-      color: $sage;
-      font-size: 0.9rem;
-      padding: 0 0.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: start;
-      text-align: center;
-      span {
-        color: white;
-        margin: 0 0.5rem;
+    p {
+      font-size: 1rem;
+      margin-top: 0.1rem;
+    }
+  }
+  .comment-meta {
+    color: $sage;
+    font-size: 0.9rem;
+    padding: 0 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    text-align: center;
+    span {
+      color: white;
+      margin: 0 0.5rem;
+    }
+    .love-it {
+      border: none;
+      background-color: transparent;
+      outline: none;
+      color: $uno-white;
+      font-size: 1rem;
+      padding: 0;
+      &:hover {
+        text-decoration: underline;
       }
-      .love-it {
-        border: none;
-        background-color: transparent;
-        outline: none;
-        color: $uno-white;
-        font-size: 1rem;
-        padding: 0;
-        &:hover {
-          text-decoration: underline;
-        }
-      }
-      .comment-likes {
-        margin-left: auto;
-        color: $uno-white;
-      }
+    }
+    .comment-likes {
+      margin-left: auto;
+      color: $uno-white;
     }
   }
 }

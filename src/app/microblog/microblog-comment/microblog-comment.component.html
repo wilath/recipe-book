@@ -1,13 +1,13 @@
-<div class="comment-wrap">
+<div class="mb-02 flex-row-ss">
   <img
     src="https://t3.ftcdn.net/jpg/05/53/79/60/360_F_553796090_XHrE6R9jwmBJUMo9HKl41hyHJ5gqt9oz.jpg"
     alt="avatar"
-    class="profile-image"
+    class="mr-1rem avatar-image-25rem"
   />
   <div class="content-wrap">
     
-    <div class="comment-content">
-        <h4>{{ commentAuthorData.name }}  @if (comment.likes.quantity > 0) {<span class="likes-quantity">{{comment.likes.quantity}} <i class="fa-solid fa-heart"></i> </span> } </h4>
+    <div class="padding-15r backboard-uno-grey-active border-radius-1r flex-col-ss comment-content">
+        <h4 class="font-size-12r">{{ commentAuthorData.name }}  @if (comment.likes.quantity > 0) {<span class="likes-quantity border-radius-hr">{{comment.likes.quantity}} <i class="fa-solid fa-heart"></i> </span> } </h4>
       <p>{{ comment.content }}</p>
     </div>
     <div class="comment-meta">
