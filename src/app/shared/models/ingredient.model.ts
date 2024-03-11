@@ -5,6 +5,7 @@ export enum IngredientUnits {
     Ounce = 'oz',
     Pound = 'lb',
     Gram = 'g',
+    Kilogram = 'kg',
     Milliliter = 'ml',
     Liter = 'l',
     FluidOunce = 'fl oz',

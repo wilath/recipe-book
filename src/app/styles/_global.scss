@@ -7,6 +7,9 @@
 .sage2{
   color: $sage2
 }
+.uno-white{
+  color: $uno-white
+}
 
 //backround rules
 
@@ -18,6 +21,17 @@
 .backboard-uno-grey-active{
   background-color: $uno-grey-active;
   color: $uno-white
+}
+.backboard-uno-dark{
+  background-color: $uno-dark;
+  color: $uno-white
+}
+.background-tran{
+  background-color: transparent;
+}
+
+.overflow-h{
+  overflow: hidden;
 }
 //border radius rules
 
@@ -37,6 +51,9 @@
 .bb-uga{
   border-bottom: 1px solid $uno-grey-active;
 }
+.b-uga{
+  border: 1px solid $uno-grey-active;
+}
 
 //font rules
 
@@ -46,23 +63,39 @@
 .font-size-12r{
   font-size: 1.2rem;
 }
+.font-size-14r{
+  font-size: 1.4rem;
+}
 
 .font-size-15r {
   font-size: 1.5rem;
 }
 
+.font-size-19r{
+  font-size: 1.9rem;
+}
+
 .font-size-2r {
   font-size: 2rem;
+}
+.font-size-4r{
+  font-size: 4rem;
 }
 
 .font-weight-400{
   font-weight: 400;
+}
+.text-underline-sage2{
+  text-decoration: 2px underline  $sage2;
 }
 
 // dimension rules
 
 .width100{
   width: 100%;
+}
+.height100{
+  height: 100%;
 }
 
 
@@ -75,5 +108,10 @@
 .avatar-image-25rem{
   border-radius: 50%;
   height: 2.5rem;
+  aspect-ratio: 1/1;
+}
+.avatar-image-2rem{
+  border-radius: 50%;
+  height: 2rem;
   aspect-ratio: 1/1;
 }

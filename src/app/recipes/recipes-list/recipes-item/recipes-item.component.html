@@ -3,39 +3,41 @@
 
 -->
 <div>
-  <div class="post">
-    <div class="image-wrap">
-    <a (click)="onNavigateToRecipeDetails()" ><img class="recipe-image" [src]="recipe.images[0].url" alt="recipe" /></a>
+  <div class="border-radius-1r backboard-uno-grey overflow-h">
+    <div class="overflow-h">
+    <a (click)="onNavigateToRecipeDetails()" ><img class="width100 recipe-image" [src]="recipe.images[0].url" alt="recipe" /></a>
     </div>
-    <div class="recipe-title">
+    <div class="recipe-title padding-050 m-01 font-size-14r">
       <a class="go-to-recipe" (click)="onNavigateToRecipeDetails()">{{ recipe.name }}</a>
       
     </div>
     @if (!isSimpleDisplay) {
-      <div class="recipe-info">
-        <div class="stars info-part">
+      <div class="flex-row-fese m-050">
+        <div class="flex-col-cc">
           <app-stars [(usersRate)]="rateByCurrentUser" [recipeName]="recipe.name" [perecentages]="totalRatePercentage"></app-stars>
           {{recipe.stars.length ? recipe.stars.length : 0}}
         </div>
-        <div class="info-part">
+        <div class="flex-col-cc">
           <app-levels [level]="recipe.level" class="mb-02rem"></app-levels>
           
           {{ recipe.level }}
         </div>
-        <div class="info-part">
+        <div class="flex-col-cc">
           <app-clock class="mb-02rem"></app-clock>
           {{ recipe.prepTimeMinutes }} min.
         </div>
       </div>
     
     
-    <div class="user-info">
-      <div class="user-data">
-        <img src="https://t3.ftcdn.net/jpg/05/53/79/60/360_F_553796090_XHrE6R9jwmBJUMo9HKl41hyHJ5gqt9oz.jpg" alt="avatar" />
+    <div class="m-01 padding-050 flex-row-csb bt-uga">
+      <div class="user-data flex-row-cc">
+        <img class="avatar-image-2rem mr-hrem" src="https://t3.ftcdn.net/jpg/05/53/79/60/360_F_553796090_XHrE6R9jwmBJUMo9HKl41hyHJ5gqt9oz.jpg" alt="avatar" />
         <h4>{{ recipe.author | authorname }}</h4>
       </div>
-      <div class="recipe-actions">
-        <button  (click)="onLike()">
+      <div >
+        <button
+          class="button-alpha font-size-1r hover-active-grey border-radius-hr padding-c1 mr-hrem"
+          (click)="onLike()">
           {{ recipe.likes.quantity }}
           <i
             [ngClass]="{ 'recipe-liked': isLikedByCurrentUser }"
@@ -43,7 +45,9 @@
           ></i>
         </button>
           @if (recipe.author !== user.email) {
-            <button (click)="onFollowUser()">
+            <button 
+            class="button-alpha font-size-1r hover-active-grey border-radius-hr padding-c1"
+            (click)="onFollowUser()">
               <i
                 [ngClass]="{ 'user-followed': isFollowedByCurrentUser }"
                 class="fa-solid fa-user-plus"

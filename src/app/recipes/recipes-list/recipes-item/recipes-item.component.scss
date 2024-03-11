@@ -1,18 +1,7 @@
 @import "../../../styles/variables";
 
 
-.post {
-  color: $uno-white;
-  border-radius: 1rem;
-  overflow: hidden;
-  background-color: $uno-grey;
-
- .image-wrap{
-  overflow: hidden;
-
- }
   .recipe-image {
-    width: 100%;
     aspect-ratio: 3/2;
     transition: all 0.2s linear;
     object-fit: cover;
@@ -23,11 +12,9 @@
       transform: scale(1.05);
     }
   }
+
   .recipe-title {
-    font-size: 1.4rem;
     font-weight: 500;
-    padding: 0.5rem 0;
-    margin: 0 1rem;
     min-height: 3rem;
     .go-to-recipe{
       
@@ -37,117 +24,5 @@
       }
     }
   }
-  .recipe-info {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-end;
-    justify-content: space-evenly;
-    margin: 0.5rem 0;
-    
-    .info-part{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    .stars {
-       
-      .stars-container {
-        display: inline-block;
-        unicode-bidi: bidi-override;
-        color: #888888;
-        height: 25px;
-        width: auto;
-        margin: 0;
-        position: relative;
-        padding: 0;
-        .rating-upper {
-          color: $uno-apricot;
-          padding: 0;
-          position: absolute;
-          z-index: 1;
-          display: flex;
-          top: 0;
-          left: 0;
-          overflow: hidden;     
-          font-size: 1rem;
+ 
 
-        }
-
-        .rating-lower {
-          padding: 0;
-          display: flex;
-          z-index: 0;     
-          font-size: 1rem;
-
-        }
-        .star-picker{
-          display: flex;
-          position: absolute;
-          top: 0;
-          left:0;
-          z-index: 2;
-
-          input{
-            width: 0;
-            position: absolute;
-
-           
-          }
-          label{
-            margin: 0;
-            padding: 0;
-            color: transparent;
-            cursor: pointer;
-            &:has(input:checked){
-             
-                -webkit-text-stroke: 1px white;  
-              
-            }
-          }
-      
-        }
-      }
-    }
-    
-  }
-  .user-info {
-    margin: 0 1rem;
-    padding: 0.5rem 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-top: 1px solid $uno-grey-active;
-    .user-data{
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      img{
-        width: 2rem;
-        aspect-ratio: 1/1;
-        border-radius: 50%;
-        margin-right: 0.5rem;
-      }
-    }
-    .recipe-actions{
-      button{
-        position: relative;
-        color: $uno-white;
-        border: none;
-        background-color: transparent;
-        font-size: 1rem;
-        border-radius: 1rem;
-        transition: all 0.2s linear;
-        padding: 0.2rem 0.5rem;
-        &:hover{
-          background-color: $uno-grey-active;
-        }
-      }
-      .recipe-liked{
-        color: tomato
-      }
-      .user-followed{
-        color: $uno-apricot
-      }
-    }
-  }
-}

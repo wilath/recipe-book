@@ -9,21 +9,27 @@
     position: absolute;
   }
 }
+
 .label-hover-active-grey {
     &:hover {
       background-color: $uno-grey-active;
       color: $sage;
     }
   }
+
 .checked-sage2{
     &:has(input:checked) {
         background-color: $uno-grey-active;
         color: $sage2;
       }
 }
+
 .checked-sage{
     &:has(input:checked) {
         background-color: $uno-grey-active;
         color: $sage;
       }
+}
+.cp{
+  cursor: pointer;
 }

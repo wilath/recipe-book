@@ -4,7 +4,6 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { SharedModule } from "../shared/shared.module";
 import { RecipeEditComponent } from "./recipe-edit/recipe-edit.component";
-import { RecipeStartComponent } from "./recipe-start/recipe-start.component";
 import { RecipesItemComponent } from "./recipes-list/recipes-item/recipes-item.component";
 import { RecipesListComponent } from "./recipes-list/recipes-list.component";
 import { RecepiesRoutingModule } from "./recipes-routing.module";
@@ -21,7 +20,6 @@ import { VarDirective } from "../shared/directives/ngvar-directive";
         RecipesListComponent,
         RecipesDetailsComponent,
         RecipesItemComponent,
-        RecipeStartComponent,
         RecipeEditComponent,
         FoodTypePipe,
         FoodSortPipe,

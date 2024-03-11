@@ -2,9 +2,9 @@
   
 
   <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
-    <div class="edit-header padding-1r">
+    <div class="flex-row-csb backboard-uno-grey-active padding-1r">
       <button type="button" class="button-alpha hover-grey hover-i-sage2 border-radius-1r padding-c1 font-size-15r" (click)="onCancel()"> <i id="mirror" class="fa-solid fa-share"></i> Cancel</button>
-        <h2>Add Recipe</h2>
+        <h2 class="font-size-19r text-underline-sage2">Add Recipe</h2>
       <button type="submit" class="button-alpha hover-grey hover-i-sage2 border-radius-1r padding-c1 font-size-15r"[disabled]="!recipeForm.valid">{{editMode? 'Save':'Add'}} <i class="fa-solid fa-share"></i> </button>
         
     </div>
@@ -12,7 +12,7 @@
 
     <div class="form-wraper">
 
-      <div class="padding-1r font-size-15r form-group">
+      <div class="padding-1r font-size-15r  flex-col-fsc bb-uga">
         <label for="name" class="font-weight-400 mb-1rem">Enter the name of the dish</label>
         <input
           type="text"
@@ -23,7 +23,7 @@
         />
       </div>
 
-      <div class="padding-1r font-size-15r form-group">
+      <div class="padding-1r font-size-15r flex-col-fsc bb-uga">
         <label class="font-weight-400 mb-1rem">Select the food category</label>
         <div class="food-types">
           <label class="no-input-visible padding-c1 border-radius-hr mr-hrem label-hover-active-grey checked-sage2" for="0"
@@ -72,10 +72,10 @@
         </div>
       </div>
 
-      <div class="padding-1r font-size-15r form-group">
+      <div class="padding-1r font-size-15r flex-col-fsc bb-uga">
         <label class="font-weight-400 mb-1rem">Select the level of difficulty </label>
         <div class="food-level-wrap width100 ">
-          <div class="bar">
+          <div class="bar flex-row-csb width100">
             <div
               [ngStyle]="{
                 width:
@@ -85,10 +85,10 @@
                     ? '50%'
                     : '100%'
               }"
-              class="progress-bar"
+              class="progress-bar width100 height100"
             ></div>
 
-            <label class="no-input-visible track-label" [for]="foodLevel.Easy"
+            <label class="no-input-visible track-label " [for]="foodLevel.Easy"
               ><span></span>
               <input
                 type="radio"
@@ -99,7 +99,7 @@
               />
             </label>
  
-            <label class="no-input-visible track-label" [for]="foodLevel.Medium"
+            <label class="no-input-visible track-label " [for]="foodLevel.Medium"
               ><span
                 [ngStyle]="{
                   backgroundColor:
@@ -117,7 +117,7 @@
               />
             </label>
 
-            <label class="no-input-visible track-label" [for]="foodLevel.Hard"
+            <label class="no-input-visible track-label " [for]="foodLevel.Hard"
               ><span></span>
               <input
                 type="radio"
@@ -128,24 +128,24 @@
               />
             </label>
           </div>
-          <div class="extra-labels">
-            <label [for]="foodLevel.Easy">Easy</label>
-            <label [for]="foodLevel.Medium">Medium</label>
-            <label [for]="foodLevel.Hard">Hard</label>
+          <div class="mt-hrem width100 flex-row-csb">
+            <label class="cp" [for]="foodLevel.Easy">Easy</label>
+            <label class="cp" [for]="foodLevel.Medium">Medium</label>
+            <label class="cp" [for]="foodLevel.Hard">Hard</label>
           </div>
         </div>
       </div>
-      <div class="padding-1r font-size-15r form-group">
+      <div class="padding-1r font-size-15r flex-col-fsc bb-uga">
         <label class="font-weight-400 mb-1rem" for="foodTime"
           >Select a preparation time
         </label>
         <div class="width100">
-          <div class="bar">
+          <div class="bar flex-row-csb width100">
             <div
               [ngStyle]="{
                 width: (recipeForm.value.prepTime | prepTimeToPercent) + '%'
               }"
-              class="progress-bar"
+              class="progress-bar width100 height100"
             ></div>
 
             @for (prepTime of prepTimes ; track $index) {
@@ -168,7 +168,7 @@
             </label>
             }
           </div>
-          <div class="extra-labels">
+          <div class="mt-hrem width100 flex-row-csb">
             @for (prepTime of prepTimes ; track $index) {
             <label class="lab" [for]="prepTime">{{ prepTime }}</label>
             }
@@ -176,7 +176,7 @@
         </div>
       </div>
 
-      <div class="padding-1r font-size-15r form-group" formGroupName="description">
+      <div class="padding-1r font-size-15r flex-col-fsc bb-uga" formGroupName="description">
         <label class="font-weight-400 mb-1rem" for="main"
           >Enter a description of the dish</label
         >
@@ -189,8 +189,8 @@
             formControlName="main"
           ></textarea>
         </div>
-        <div class=" font-size-15r form-group" id="description-steps" formArrayName="steps">
-          <div class="add-wrap  mt-1rem">
+        <div class=" font-size-15r flex-col-fsc bb-uga" id="description-steps" formArrayName="steps">
+          <div class="flex-row-cc  mt-1rem">
             <label class="font-weight-400">Add cooking steps </label>
             <button class="button-alpha hover-active-grey border-radius-hr padding-15r ml-hrem" type="button" (click)="onAddDescriptionStep()">
               <i class="fa-solid fa-plus"></i>
@@ -211,38 +211,39 @@
         </div>
       </div>
 
-      <div class="padding-1r font-size-15r form-group">
-        <div class="add-wrap">
+      <div class="padding-1r font-size-15r flex-col-fsc bb-uga">
+        <div class="flex-row-cc">
           <label class="font-weight-400">Add ingredients </label>
           <button class="button-alpha hover-active-grey border-radius-hr padding-15r ml-hrem" type="button" (click)="onAddIngredient()">
             <i class="fa-solid fa-plus"></i>
           </button>
         </div>
 
-        <div class="ingredients" formArrayName="ingredients">
+        <div class="flex-row-ss mt-hrem flex-wrap width100 gap5" formArrayName="ingredients">
 
           @for (ingredientControl of recipeForm.value.ingredients; track $index)
           {
           <ng-container *ngVar="$index as globalIndex">
-            <div class="ingredient-form" [formGroupName]="$index">
+            <div class="ingredient-form border-radius-hr backboard-uno-grey-active" [formGroupName]="$index">
               <input
+                class="pl-hr font-size-1r uno-white background-tran"
                 type="text"
                 placeholder="Ingredient"
                 formControlName="name"
               />
-              <input type="number" placeholder="1" formControlName="ammount" />
+              <input class="uno-white font-size-1r background-tran" type="number" placeholder="1" formControlName="ammount" />
 
               <div class="select-unit">
-                <button type="button" class="show-units">
+                <button type="button" class="show-units background-tran uno-white font-size-1r height100 padding-0">
                   {{
                     ingredientControl.unit
                       ? ingredientControl.unit
                       : "Select Unit"
                   }}
                   <i class="fa-solid fa-chevron-up"></i>
-                  <div class="units">
+                  <div class="units gap5 border-radius-hr overflow-h backboard-uno-dark" >
                     @for (unit of unitTypes | keyvalue; track unit) {
-                    <label [for]="globalIndex + unit.key">
+                    <label class="padding-c1" [for]="globalIndex + unit.key">
                       <input
                         type="radio"
                         name="unit"
@@ -256,7 +257,7 @@
                 </button>
               </div>
               <button
-                class="delete-ing"
+                class="delete-ing backboard-uno-dark font-size-12r hover-i-sage2"
                 type="button"
                 (click)="onDeleteIngredient($index)"
               >
@@ -268,10 +269,10 @@
         </div>
       </div>
 
-      <div class="font-size-15r form-group-images">
+      <div class="font-size-15r form-group-images flex-col-fsc font-size-15r pt-1r">
         <div
          
-          class="add-wrap mb-1rem"
+          class="flex-row-cc mb-1rem"
         >
           <label class="font-weight-400 ml-1rem">Add photos </label>
           <button
@@ -284,11 +285,11 @@
           </button>
         </div>
 
-        <div class="image-form" formArrayName="images">
+        <div class="image-form gap1 flex-row-ss width100" formArrayName="images">
           @for (imageControl of recipeForm.value.images; track $index) {
           <ng-container [formGroupName]="$index">
-            <div [class]="'nt' + $index" class="label-wrapper">
-              <label [for]="'image' + $index"
+            <div [class]="'nt' + $index" class="backboard-uno-grey-active label-wrapper font-size-4r overflow-h">
+              <label class="no-input-visible flex-row-cc width100 height100 hover-color-sage" [for]="'image' + $index"
                 ><i class="fa-solid fa-file-import"></i>
                 <input
                   type="file"
@@ -300,10 +301,10 @@
                 />
                 <div
                   [ngStyle]="{ height: imageControl.percentages + '%' }"
-                  class="image-loading"
+                  class="image-loading width100 absolute-lb"
                 ></div>
                 <img
-                  class="image-display"
+                  class="image-display width100 height100 absolute-lb"
                   *ngIf="
                     imageControl.imageData.url &&
                     imageControl.percentages === 100
@@ -317,7 +318,7 @@
                   imageControl.imageData.url && imageControl.percentages === 100
                 "
                 (click)="onDeleteImageInput($index)"
-                ><div class="image-delete">
+                ><div class="image-delete absolute-lb height100 width100 flex-row-cc backboard-uno-grey-active">
                   <i class="fa-regular fa-trash-can"></i></div
               ></a>
             </div>

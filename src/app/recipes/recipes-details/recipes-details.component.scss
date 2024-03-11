@@ -41,16 +41,8 @@
   }
 }
 .users-recipes-display{
-  
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: auto;
-    grid-column-gap: 1rem;
-    
-    
-  .users-recipe{
-    border-radius: 1rem;
-    border: 1px solid $uno-grey-active;
-    
-  }
+    grid-column-gap: 1rem;  
 }

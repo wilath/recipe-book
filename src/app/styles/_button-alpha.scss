@@ -22,18 +22,21 @@
     outline: none;
   }
 }
+
 .hover-active-grey {
   &:hover:enabled {
     background-color: $uno-grey-active;
     
   }
 }
+
 .hover-grey {
   &:hover:enabled {
     background-color: $uno-grey;
     color: $sage;
   }
 }
+
 .hover-i-sage2 {
   &:hover:enabled {
     i {
@@ -41,9 +44,11 @@
     }
   }
 }
+
 .hover-color-sage{
   &:hover{
     color: $sage;
+    cursor: pointer;
   }
 }
 
@@ -59,12 +64,15 @@
     }
   
 }
+
 .recipe-liked{
   color: $uno-tomato
 }
+
 .user-followed{
   color: $uno-apricot
 }
+
 .trans02linear{
   transition: all 0.2s linear;
 }
