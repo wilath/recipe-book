@@ -1,282 +1,131 @@
-@import '../styles/variables';
+@import "../styles/variables";
 
-header{
-    position: sticky;
-    top: 0;
-    z-index: 3;
-    padding: 0 1rem;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-    background-color: $uno-grey;
-    height: 3.5rem;
-    
+header {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  height: 3.5rem;
 
-    .panel{
-        height: 75%;
-        display: flex;
-        flex-direction: row;
-        
-        color: white;
-        gap: 10px;
-        flex: 1 0 0;
-    }
-    .right-panel{
-        justify-content: flex-end;
-        .notification-number{
-            position: absolute;
-            background-color: rgb(146, 170, 66);
-            height: 1.2rem;
-            aspect-ratio: 1/1;
-            font-size: 1rem;
-            border-radius: 50%;
-            color: $uno-white;
-            right:-3px;
-            top:-3px;
-            text-align: center;
-        }
-        .circle{
-            position: relative;
-            height: 100%;
-            aspect-ratio: 1/1;
-            font-size: 1.4rem;
-            border-radius: 50%;
-            background-color: $uno-grey-active;
-            border: none;
-            color: $uno-white;
-            &:hover{
-                color: $sage;
-                background-color: rgba(191, 204, 148, 0.1);;
-            }
-        }
-        .button-menu-active{
-            color: $sage ;
-            background-color: rgba(191, 204, 148, 0.1) ;
-        }
-        .user-logo{
-            display: flex;
-            align-items: center;
-            h3{
-                margin-right: 10px;
-                letter-spacing: 0.2rem;
-                font-size: 1.6rem;
-            }
-        }
-    }
-    .center-panel{
-        position: relative;
-        height: 80%;
-        justify-content: center;
-    
-        .nav-button{
-            position: relative;
-            background-color: transparent;
-            border-radius: 0.8rem;
-            border: none;
-            width: 5rem;
-            font-size: 1.4rem;
-            color: rgb(233, 230, 230);
-            transition: background 0.2s linear;
-            -webkit-tap-highlight-color: transparent;
-            &:hover{
-            background-color: $uno-grey-active
-            
-            }
-        }
-        .nav-button:hover > .nav-button-desc{
-            display: block;
-        }
-        .nav-button-desc{
-            position: absolute;
-            background-color: $uno-white;
-            color: $uno-grey-active;
-            left: 50%;
-            transform: translateX(-50%);
-            padding: 0.4rem;
-            bottom: -2.4rem;
-            font-size: 0.8rem;
-            border-radius: 0.5rem;
-            display: none;
-            text-wrap: nowrap;
-            opacity: 0;
-            animation: fadeIn 0.3s ease-in-out forwards;
-        }
-        @keyframes fadeIn {
-            0% {
-              display: none;
-              opacity: 0;
-            }
-            70% {
-              display: block;
-              opacity: 0;
-            }
-            100% {
-              opacity: 1;
-            }
-          }
+  .panel {
+    height: 75%;
+    flex: 1 0 0;
+  }
 
-        .marker{
-            position: absolute;
-            width: 5rem;
-            height: 3px;
-            background-color: $sage;
-            left:0;
-            bottom: -0.35rem;
-            transition: left 0.2s linear;
-        }
-        .marker-microblog{
-            left: calc(50% - 8rem - 2px);
-        }
-        .marker-recipes{
-            left: calc(50% - 2.5rem)
-        }
-        .marker-shopping-list{
-            left: calc(50% + 3rem + 2px)
-        }
-        .marker-default{
-            display: none;
-        }
-        
-        .nav-button-active{
-            color: $sage;
-        }
-    }
-    .left-panel{
-        justify-content: flex-start;
-        .logo{
-            height: 100%;
-            aspect-ratio: 1/1;
-            background-color: rgb(146, 170, 66);
-            border: none;
-            color: $uno-white;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            
-            span{
-                font-size: 3.1rem;
-                font-weight: 600;
-                transform: translate(1px,2px);
-                columns: white;
-                user-select: none
-            }
-        }
-    }
-    .notification-menu{
-        position: absolute;
-        width: 20rem;
-        min-height: 6rem;
-        background-color: $uno-grey;
-        right: 1rem;
-        top: 4.5rem;
-        border-radius: 1rem;
-        padding: 0.8rem;
-        a{
-            cursor: pointer;           
-            &:focus-visible> .notification-post{
-                outline: 1px solid $sage;
-                
-            }
-        }
-        .notification-label{
-            
-            h4{ 
-                margin-left: 5px;
-                color: $uno-white;
-                font-size: 1.8rem;
-            }
-            .notification-filter{
-                margin-top: 0.7rem;
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-                justify-content: flex-start;
-                 button{
-                    margin: 5px;
-                    position: relative;
-                    font-size: 1.3rem;
-                    color: $uno-white;
-                    padding: 3px 10px;
-                    border-radius: 1rem;
-                    user-select: none;
-                    text-align: center;
-                    cursor: pointer;
-                    background-color: transparent;
-                    border: none;
-                    margin-left: auto;
-                    transition: background-color 0.2s linear;
-                    &:hover:enabled{
-                        background-color: $uno-grey-active;
-                    }
-                    &:active{
-                        color: $sage;
-                        background-color: rgba(191, 204, 148, 0.1);;
-                    }
-                    &:disabled{
-                        opacity: 0.2;
-                        cursor: auto;
-                    }
-                    
-                    
-                }
-                label{
-                    margin: 5px;
-                    position: relative;
-                    font-size: 1.3rem;
-                    color: $uno-white;
-                    padding: 3px 10px;
-                    border-radius: 1rem;
-                    user-select: none;
-                    text-align: center;
-                    transition: all 0.2s linear;
-                    cursor: pointer;
-                    input{
-                        position: absolute;
-                        width: 0;
-                        
-                    }
-                    &:has(input:checked){
-                        color: $sage;
-                        background-color: rgba(191, 204, 148, 0.1);;
-                    }
-                    &:has(input:hover){
-                        background-color: $uno-grey-active;
-                    }
-                    
-                }
-            }
-        }
-        .notification-post{
-            position: relative;
-            border-radius: 1rem;
-            min-height: 3rem;
-            padding: 0.5rem;
-            transition: all 0.2s linear;
-            margin-top: 0.5rem;
-            color: $uno-white;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: flex-start;
-            &:hover{
-                background-color: $uno-grey-active;
-            }
-            .notification-image{
-                margin-right: 0.5rem;
-                height: 3rem;
-                aspect-ratio: 1/1;
-                border-radius: 50%;
-            }
-            .notification-message{
-                font-size: 1.1rem;
-            }
-            .notification-date{
-                color: $sage;
-            }
-        }
+  .notification-number {
+    position: absolute;
+    background-color: rgb(146, 170, 66);
+    height: 1.2rem;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    color: $uno-white;
+    right: -3px;
+    top: -3px;
+    text-align: center;
+  }
 
+  .circle {
+    position: relative;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    border: none;
+    &:hover {
+      color: $sage;
+      background-color: rgba(191, 204, 148, 0.1);
     }
+  }
+
+  .button-menu-active {
+    color: $sage;
+    background-color: rgba(191, 204, 148, 0.1);
+  }
+
+  .center-panel {
+    position: relative;
+
+    .nav-button {
+      position: relative;
+      background-color: transparent;
+      border-radius: 0.8rem;
+      border: none;
+      width: 5rem;
+      font-size: 1.4rem;
+      color: rgb(233, 230, 230);
+      transition: background 0.2s linear;
+      -webkit-tap-highlight-color: transparent;
+      &:hover {
+        background-color: $uno-grey-active;
+      }
+    }
+    .nav-button:hover > .nav-button-desc {
+      display: block;
+    }
+    .nav-button-desc {
+      position: absolute;
+      background-color: $uno-white;
+      color: $uno-grey-active;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 0.4rem;
+      bottom: -3rem;
+      font-size: 0.8rem;
+      border-radius: 0.5rem;
+      display: none;
+      text-wrap: nowrap;
+      opacity: 0;
+      animation: fadeIn 0.3s ease-in-out forwards;
+    }
+    @keyframes fadeIn {
+      0% {
+        display: none;
+        opacity: 0;
+      }
+      70% {
+        display: block;
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    .marker {
+      position: absolute;
+      width: 5rem;
+      height: 3px;
+      background-color: $sage;
+      left: 0;
+      bottom: -0.35rem;
+      transition: left 0.2s linear;
+    }
+    .marker-microblog {
+      left: calc(50% - 8rem - 2px);
+    }
+    .marker-recipes {
+      left: calc(50% - 2.5rem);
+    }
+    .marker-shopping-list {
+      left: calc(50% + 3rem + 2px);
+    }
+    .marker-default {
+      display: none;
+    }
+
+    .nav-button-active {
+      color: $sage;
+    }
+  }
+
+  .notification-menu {
+    position: absolute;
+    width: 20rem;
+    min-height: 6rem;
+    right: 1rem;
+    top: 4.5rem;
+    a {
+      cursor: pointer;
+      &:focus-visible > .notification-post {
+        outline: 1px solid $sage;
+      }
+    }
+  }
 }

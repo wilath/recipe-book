@@ -23,6 +23,7 @@
       }
 }
 
+
 .checked-sage{
     &:has(input:checked) {
         background-color: $uno-grey-active;

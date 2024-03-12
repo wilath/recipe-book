@@ -84,7 +84,9 @@
 .font-size-4r{
   font-size: 4rem;
 }
-
+.font-weight-300{
+  font-weight: 300;
+}
 .font-weight-400{
   font-weight: 400;
 }
@@ -93,6 +95,9 @@
 }
 .text-underline-sage2{
   text-decoration: 2px underline  $sage2;
+}
+.letter-spacing-02rem{
+  letter-spacing: 0.2rem;
 }
 
 // dimension rules
@@ -104,8 +109,7 @@
   height: 100%;
 }
 
-
-
+//avatars rules
 .avatar-image-3rem{
   border-radius: 50%;
   height: 3rem;
