@@ -10,21 +10,13 @@ import { RealTimeDatabaseService } from '../shared/real-time-database.service';
 import { ItemComment } from '../shared/models/microblog-comment.model';
 
 @Injectable()
-export class RecipesService implements OnDestroy   {
+export class RecipesService {
   constructor(private shoppingListService: ShoppingListService, private userDataService: UserDataService, private realTimeDatabasService: RealTimeDatabaseService) {}
   
   public recipesChanged = new Subject<Recipe[]>();
 
   private recipes: Recipe[] = [];
 
-  private storeRecipes$: Subscription = this.recipesChanged.subscribe(()=> {
-    this.realTimeDatabasService.storeRecipes(this.recipes)
-  })
-
- 
-   public ngOnDestroy(): void {
-    this.storeRecipes$.unsubscribe()
-  }
 
   public setRecepies(): Observable<void> {
     return this.realTimeDatabasService.fetchRecipes().pipe(
@@ -95,6 +87,10 @@ export class RecipesService implements OnDestroy   {
     return this.recipes[recipeIndex];
   }
 
+  public getNumberOfRecipesForUser(email: string){
+    return this.recipes.filter(recipe => recipe.author === email).length
+  }
+
   public addRecipeIng(ings: Ingredient[]) {
     this.shoppingListService.addRecipeIng2(ings);
   }
@@ -161,7 +157,6 @@ export class RecipesService implements OnDestroy   {
     this.recipes = newRecipes;
     this.recipesChanged.next(this.recipes.slice());
   }
-
 
   public onLikeComment(recipeId: number, commentId: number, userEmail: string, add: boolean) {
     const newRecipes = this.recipes;

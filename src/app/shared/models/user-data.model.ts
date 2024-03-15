@@ -15,6 +15,13 @@ export interface SimpleUserdata {
   avatar?: FileAnchor;
 }
 
+export interface UserExtraInfo {
+  city: string,
+  age: Date,
+  motto: string,
+  favRecipe: string,
+}
+
 
 export interface UserData extends SimpleUserdata {
   email: string;
@@ -24,6 +31,7 @@ export interface UserData extends SimpleUserdata {
   shoppingList: ShoppingItem[];
   followers: string[];
   userFollows: string[];
+  extraInfo?: UserExtraInfo;
   avatar?: FileAnchor;
 }
 

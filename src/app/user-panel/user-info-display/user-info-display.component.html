@@ -1,3 +1,30 @@
-<div class="backboard-uno-grey">
-    {{userInfo.id}}
+<div class="backboard-uno-grey padding-1r border-radius-1r ">
+
+    <div class="flex-row-cfs gap15 pb-1r  ">
+        @if (userInfo.avatar) {
+            <img class="avatar-image-9rem" [src]="userInfo.avatar.url" alt="">
+        }
+        <div class="ml-hrem">
+            <h2 class="font-size-25r">{{userInfo.name}}</h2>
+            <div>
+                <h3 class=" font-size-12r mt-hrem"><i class=" sage2 fa-solid fa-location-dot mr-hrem "></i> {{userInfo.extraInfo?.city}}</h3>
+                <h3 class=" font-size-12r mt-hrem"><i class="sage2 fa-regular fa-calendar-days mr-hrem "></i> {{age}} y/o</h3>
+                <h3 class=" font-size-12r mt-hrem"><i class="sage2 fa-regular fa-bookmark mr-hrem "></i> {{userInfo.extraInfo?.favRecipe}}</h3>
+            </div>
+        </div>
+    </div>
+    <div class="flex-row-cfs font-size-11r gap15 pt-1r  bt-uga">
+        
+        <h3>Recipes : <span class="font-weight-500 sage2">{{usersActivity.r}}</span> </h3>
+        <h3>Posts: <span class="font-weight-500 sage2 ">{{usersActivity.m}}</span> </h3>
+        <h3>Followers : <span class="font-weight-500 sage2">{{userInfo.followers.length}}</span> </h3>
+        <h3>Follows : <span class="font-weight-500 sage2">{{userInfo.userFollows.length}}</span> </h3>
+
+
+        <div class="profile-buttons">
+            <button class="button-alpha font-size-12r"> <i class="fa-solid fa-pen-to-square"></i> Edit Profile </button>
+            <button class="button-alpha font-size-12r"> <i class="fa-solid fa-user-plus"></i>  Follow</button>     
+        </div>
+    </div>
+   
 </div>

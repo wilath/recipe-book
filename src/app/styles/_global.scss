@@ -60,6 +60,9 @@
 .font-size-1r{
   font-size: 1rem;
 }
+.font-size-11r{
+  font-size: 1.1rem;
+}
 .font-size-12r{
   font-size: 1.2rem;
 }
@@ -110,6 +113,12 @@
 }
 
 //avatars rules
+
+.avatar-image-9rem{
+  border-radius: 50%;
+  height: 9rem;
+  aspect-ratio: 1/1;
+}
 .avatar-image-3rem{
   border-radius: 50%;
   height: 3rem;

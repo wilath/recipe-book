@@ -62,6 +62,10 @@ export class MicroblogService   {
     return this.posts.slice();
   }
 
+  public getNumberOfPostForUser(email: string) {
+    return this.posts.filter( post => post.author === email).length
+  }
+
   public onAddNewPost(post: MicroblogPost) {
     const newPosts = this.posts;
     newPosts.push(post);
