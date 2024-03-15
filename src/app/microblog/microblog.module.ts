@@ -29,6 +29,13 @@ import { MicroblogPhotosDisplayComponent } from './microblog-photos-display/micr
     SharedModule,
     HttpClientModule,
     FormsModule,  
+  ],
+  exports: [
+    MicroblogPostComponent,
+    MicroblogPostPlaceholderComponent,
+    DateLikePipe,
+    MicroblogPhotosDisplayComponent,
+
   ]
 })
 export class MicroblogModule { }

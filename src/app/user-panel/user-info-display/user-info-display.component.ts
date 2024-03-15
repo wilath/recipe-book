@@ -1,7 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { UserDataService } from '../user-data.service';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { UserData, emptyUserData } from '../../shared/models/user-data.model';
-import { ActivatedRoute, Params, Router } from '@angular/router';
 import { MicroblogService } from '../../microblog/microblog.service';
 import { RecipesService } from '../../recipes/recipes.service';
 import { Recipe } from '../../shared/models/recipe.model';
@@ -13,36 +11,29 @@ import { Recipe } from '../../shared/models/recipe.model';
 })
 export class UserInfoDisplayComponent implements OnInit {
   constructor(
-    private usersDataService: UserDataService,
     private microblogService: MicroblogService,
     private recipesService: RecipesService,
-    private route: ActivatedRoute,
   ) {}
 
-  public userInfo: UserData = emptyUserData;
+  @Input() public userInfo: UserData = emptyUserData;
+
+  @Output() public isEditMode: EventEmitter<boolean> = new EventEmitter<boolean>
 
   public age: number = 33;
 
   public usersActivity: { m: number; r: number } = { m: 0, r: 0 };
 
-  public usersRecipes: Recipe[]  = [];
-
-  public isEditModeActive: boolean = false
 
   public ngOnInit(): void {
-    this.route.params.subscribe((params: Params) => {
-      const id = params['id'];
-      this.userInfo = this.usersDataService.getUserDataById(id);
-      this.usersRecipes = this.recipesService.getRecipes().filter(recipe => recipe.author === this.userInfo.email)
-      if (this.userInfo.extraInfo?.age) {
-        this.age = this.getUsersAge(this.userInfo.extraInfo?.age);
-      }
-      this.usersActivity = {
-        m: this.microblogService.getNumberOfPostForUser(this.userInfo.email),
-        r: this.recipesService.getNumberOfRecipesForUser(this.userInfo.email),
-      };
-    });
+    if (this.userInfo.extraInfo?.age) {
+      this.age = this.getUsersAge(this.userInfo.extraInfo?.age);
+    }
+    this.usersActivity = {
+      m: this.microblogService.getNumberOfPostForUser(this.userInfo.email),
+      r: this.recipesService.getNumberOfRecipesForUser(this.userInfo.email),
+    };
   }
+
   private getUsersAge(date: Date): number {
     const pastDateTime: Date = new Date(date);
 
