@@ -28,15 +28,21 @@ export class UserDataService  {
     return this.usersData.slice();
   }
 
-  public getUserData(email: string): UserData {
+  public getUserDataByEmail(email: string): UserData {
     const index = this.usersData.findIndex((user) => user.email === email);
     return this.usersData[index];
   }
 
-  public addNewUser(email: string, name: string) {
+  public getUserDataById(id: string): UserData {
+    const index = this.usersData.findIndex((user) => user.id === id);
+    return this.usersData[index];
+  }
+
+  public addNewUser(email: string, userId: string, name: string) {
     const data = this.usersData
     const newUserData: UserData = {
       email: email,
+      id: userId,
       name: name,
       notifications: [{message:`Welcome ${name} I hope you will enjoy this site!`,shown: false, date: new Date()}],
       shoppingList: [],

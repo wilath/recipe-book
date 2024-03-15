@@ -117,7 +117,7 @@ export class MicroblogNewpostComponent implements OnInit, OnDestroy {
   }
 
   private loadUserData(){
-    const user = this.userDataService.getUserData(JSON.parse(localStorage.getItem('userData') || '{}').email);
+    const user = this.userDataService.getUserDataByEmail(JSON.parse(localStorage.getItem('userData') || '{}').email);
     this.userData = {email: user.email, name: user.name}
   }
 

@@ -42,7 +42,7 @@ export class MicroblogPostComponent implements OnInit {
   public topComment!: ItemComment;
 
   public ngOnInit(): void {
-    this.postAuthor = this.userDataService.getUserData(this.microblogPost.author);
+    this.postAuthor = this.userDataService.getUserDataByEmail(this.microblogPost.author);
     this.loggedUserEmail = JSON.parse(localStorage.getItem('userData') || '{}').email
     this.timeSincePosted = this.calculateTimeSincePost(this.microblogPost.date);
     this.isLikedByCurrentUser = this.microblogPost.likes.whoLiked.includes(this.loggedUserEmail);

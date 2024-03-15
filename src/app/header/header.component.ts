@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subject, Subscription, filter, map, of, switchMap, tap } from 'rxjs';
+import { Subject, Subscription, empty, filter, map, of, switchMap, tap } from 'rxjs';
 import { AuthServcie } from '../auth/auth-supp/auth.servcie';
 import { RealTimeDatabaseService } from '../shared/real-time-database.service';
 import { UserDataService } from '../user-panel/user-data.service';
-import { UserData } from '../shared/models/user-data.model';
+import { UserData, emptyUserData } from '../shared/models/user-data.model';
 import { NavigationEnd, Router } from '@angular/router';
 
 
@@ -26,7 +26,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   public isNotificationMenuShown = false;
 
-  public userData: UserData = {email: '', name: 'aaa', notifications: [],shoppingList: [],userFollows:[],followers:[]} 
+  public userData: UserData = emptyUserData;
 
   public notificationFilter : 'all' | 'new'  = 'new';
 
@@ -111,7 +111,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       if (user) {
         this.userDataService.setUsersData().subscribe(() => {
           this.isAuth = true;
-          this.userData = this.userDataService.getUserData(user.email);
+          this.userData = this.userDataService.getUserDataByEmail(user.email);
         });
     
         this.userDataService.userDataChange.pipe(
@@ -122,7 +122,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
           }
         });
       } else {
-        this.userData = {email: '', name: 'aaa', notifications: [],shoppingList: [],userFollows:[],followers:[]} ;
+        this.userData = emptyUserData
         this.isAuth = false;
       }
     });

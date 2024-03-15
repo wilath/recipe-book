@@ -31,8 +31,8 @@ export class CommentComponent implements OnInit {
   public loggedUserEmail: string = '';
 
   public ngOnInit(): void {
-    const userData = this.userDataService.getUserData(this.comment.author);
-    this.commentAuthorData = {email: userData.email, name: userData.name, avatar: userData.avatar};
+    const userData = this.userDataService.getUserDataByEmail(this.comment.author);
+    this.commentAuthorData = {email: userData.email,id: userData.id, name: userData.name, avatar: userData.avatar};
 
     this.timeSincePosted = this.calculateTimeSincePost(this.comment.date);
     this.loggedUserEmail = JSON.parse(localStorage.getItem('userData') || '{}').email;

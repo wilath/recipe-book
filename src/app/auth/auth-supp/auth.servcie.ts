@@ -134,7 +134,7 @@ export class AuthServcie {
     localStorage.setItem('userData', JSON.stringify(user));
 
     if (name) {
-      this.userDataService.addNewUser(email, name);
+      this.userDataService.addNewUser(email, userId, name);
     }
   }
 

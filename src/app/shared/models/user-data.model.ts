@@ -2,19 +2,23 @@ import { FileAnchor } from './file-upload.model';
 import { Ingredient } from './ingredient.model';
 import { NotificationModel } from './notification.model';
 
-export interface SimpleUserdata {
-  email: string;
-  name: string;
-  avatar?: FileAnchor;
-}
 export interface ShoppingItem {
   recipeName : string,
   recipeId: number,
   ingredients: Ingredient[]
 }
 
+export interface SimpleUserdata {
+  email: string;
+  id: string;
+  name: string;
+  avatar?: FileAnchor;
+}
+
+
 export interface UserData extends SimpleUserdata {
   email: string;
+  id: string;
   name: string;
   notifications: NotificationModel[];
   shoppingList: ShoppingItem[];
@@ -25,12 +29,13 @@ export interface UserData extends SimpleUserdata {
 
 export const emptyUserData = {
   email: 'Couldnt load users data',
+  id: 'Couldnt load users data',
   name: 'Couldnt load users data',
   notifications: [
     { message: 'Couldnt load users data', date: new Date(), shown: false },
   ],
   shoppingList: [
-    { name: 'Couldnt load users data', ammount: { number: 0, unit: 'pc' } },
+    { recipeName: 'Couldnt load users data', recipeId: 0, ingredients: [] },
   ],
   followers: ['Couldnt load users data'],
   userFollows: ['Couldnt load users data'],

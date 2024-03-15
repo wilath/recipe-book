@@ -80,8 +80,8 @@ export class RecipesItemComponent implements OnChanges  {
   }
 
   private setFollow() {  
-    if(this.usersDataServcie.getUserData(this.recipe.author)) {
-       this.isFollowedByCurrentUser = this.usersDataServcie.getUserData(this.recipe.author).followers?.includes(this.user.email) || false}
+    if(this.usersDataServcie.getUserDataByEmail(this.recipe.author)) {
+       this.isFollowedByCurrentUser = this.usersDataServcie.getUserDataByEmail(this.recipe.author).followers?.includes(this.user.email) || false}
     
   }
 }

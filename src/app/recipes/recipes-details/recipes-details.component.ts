@@ -62,7 +62,7 @@ export class RecipesDetailsComponent implements OnInit {
       this.recipe = this.recipesService.getRecipe(this.id);
       this.usersRecipes = this.recipesService.getRecipes().filter(recipe => recipe.author ===  this.recipe.author).filter(recipe => recipe.id !== this.recipe.id);
     });
-    this.userData = this.userDataService.getUserData(
+    this.userData = this.userDataService.getUserDataByEmail(
       JSON.parse(localStorage.getItem('userData') || '{}').email
     );
     this.isFollowedByCurrentUser = this.userDataService.checkIfUserisFollowed(this.recipe.author, this.userData.email)
@@ -155,10 +155,10 @@ export class RecipesDetailsComponent implements OnInit {
   }
 
   private setFollow() {
-    if (this.userDataService.getUserData(this.recipe.author)) {
+    if (this.userDataService.getUserDataByEmail(this.recipe.author)) {
       this.isFollowedByCurrentUser =
         this.userDataService
-          .getUserData(this.recipe.author)
+          .getUserDataByEmail(this.recipe.author)
           .followers?.includes(this.userData.email) || false;
     }
   }
