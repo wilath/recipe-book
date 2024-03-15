@@ -4,6 +4,7 @@ import { UserData, emptyUserData } from '../../shared/models/user-data.model';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { MicroblogService } from '../../microblog/microblog.service';
 import { RecipesService } from '../../recipes/recipes.service';
+import { Recipe } from '../../shared/models/recipe.model';
 
 @Component({
   selector: 'app-user-info-display',
@@ -16,7 +17,6 @@ export class UserInfoDisplayComponent implements OnInit {
     private microblogService: MicroblogService,
     private recipesService: RecipesService,
     private route: ActivatedRoute,
-    private router: Router
   ) {}
 
   public userInfo: UserData = emptyUserData;
@@ -25,10 +25,15 @@ export class UserInfoDisplayComponent implements OnInit {
 
   public usersActivity: { m: number; r: number } = { m: 0, r: 0 };
 
+  public usersRecipes: Recipe[]  = [];
+
+  public isEditModeActive: boolean = false
+
   public ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       const id = params['id'];
       this.userInfo = this.usersDataService.getUserDataById(id);
+      this.usersRecipes = this.recipesService.getRecipes().filter(recipe => recipe.author === this.userInfo.email)
       if (this.userInfo.extraInfo?.age) {
         this.age = this.getUsersAge(this.userInfo.extraInfo?.age);
       }

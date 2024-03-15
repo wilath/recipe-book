@@ -77,3 +77,9 @@
 .trans02linear{
   transition: all 0.2s linear;
 }
+.hover-underline{
+  transition: all 0.2s linear;
+  &:hover{
+    text-decoration: underline;
+  }
+}

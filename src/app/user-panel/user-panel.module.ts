@@ -4,6 +4,7 @@ import { UserPanelRoutingModule } from './user-panel-routing.module';
 import { UserPanelComponent } from './user-panel/user-panel.component';
 import { HttpClientModule } from '@angular/common/http';
 import { UserInfoDisplayComponent } from './user-info-display/user-info-display.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { UserInfoDisplayComponent } from './user-info-display/user-info-display.
   imports: [
     CommonModule,
     UserPanelRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    SharedModule
   ]
 })
 export class UserPanelModule { }

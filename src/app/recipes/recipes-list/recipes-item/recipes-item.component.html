@@ -30,10 +30,12 @@
     
     
     <div class="m-01 padding-050 flex-row-csb bt-uga">
+      <a class="uno-white font-size-12r hover-underline" [routerLink]="'/user-panel/' + recipeAuthorId" >
       <div class="user-data flex-row-cc">
+
         <img class="avatar-image-2rem mr-hrem" src="https://t3.ftcdn.net/jpg/05/53/79/60/360_F_553796090_XHrE6R9jwmBJUMo9HKl41hyHJ5gqt9oz.jpg" alt="avatar" />
         <h4>{{ recipe.author | authorname }}</h4>
-      </div>
+      </div></a>
       <div >
         <button
           class="button-alpha font-size-1r hover-active-grey border-radius-hr padding-c1 mr-hrem"

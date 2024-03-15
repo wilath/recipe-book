@@ -9,6 +9,9 @@ import { ClockComponent } from './components/clock/clock.component';
 import { LevelsComponent } from './components/levels/levels.component';
 import { StarsComponent } from './components/stars/stars.component';
 import { CommentComponent } from '../microblog/microblog-comment/microblog-comment.component';
+import { RecipesItemComponent } from '../recipes/recipes-list/recipes-item/recipes-item.component';
+import { AuthorNamePipe } from './pipes/author-name.pipe';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -18,6 +21,8 @@ import { CommentComponent } from '../microblog/microblog-comment/microblog-comme
     LevelsComponent,
     StarsComponent,
     CommentComponent,
+    RecipesItemComponent,
+    AuthorNamePipe
 
   ],
   exports: [
@@ -32,13 +37,16 @@ import { CommentComponent } from '../microblog/microblog-comment/microblog-comme
     LevelsComponent,
     StarsComponent,
     CommentComponent,
+    RecipesItemComponent,
+    AuthorNamePipe
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     PickerComponent,
-    TextFieldModule
+    TextFieldModule,
+    RouterModule
     
   ],
 })

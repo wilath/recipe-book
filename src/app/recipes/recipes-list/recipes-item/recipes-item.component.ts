@@ -18,7 +18,6 @@ export class RecipesItemComponent implements OnChanges  {
     private recipesService: RecipesService,
     private usersDataServcie: UserDataService,
     private router: Router,
-    private route: ActivatedRoute
   ) {
   
   }
@@ -26,6 +25,8 @@ export class RecipesItemComponent implements OnChanges  {
   @Input() public recipe!: Recipe;
 
   @Input() public isSimpleDisplay: boolean = false;
+
+  public recipeAuthorId: string = ''
 
   public isLikedByCurrentUser : boolean = false;
 
@@ -50,6 +51,7 @@ export class RecipesItemComponent implements OnChanges  {
     this.totalRatePercentage = (this.recipe.getAverageRating)*20;
     this.isLikedByCurrentUser = this.recipe.isLikedByUser(this.user.email);
     this._rateByCurrentUser = this.recipe.isRatedByUser(this.user.email);
+    this.recipeAuthorId = this.usersDataServcie.getUserDataByEmail(this.recipe.author).id
     this.setFollow();
   }
 

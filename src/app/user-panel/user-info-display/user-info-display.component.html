@@ -20,11 +20,19 @@
         <h3>Followers : <span class="font-weight-500 sage2">{{userInfo.followers.length}}</span> </h3>
         <h3>Follows : <span class="font-weight-500 sage2">{{userInfo.userFollows.length}}</span> </h3>
 
-
         <div class="profile-buttons">
             <button class="button-alpha font-size-12r"> <i class="fa-solid fa-pen-to-square"></i> Edit Profile </button>
             <button class="button-alpha font-size-12r"> <i class="fa-solid fa-user-plus"></i>  Follow</button>     
         </div>
     </div>
-   
+</div>
+
+<div class="backboard-uno-grey padding-1r border-radius-1r mt-1rem">
+    <h3 class="font-size-12r">Check Recipes From <span class="sage">{{userInfo.name}}</span>:</h3>
+    <div class="mt-1rem users-recipes-display">
+
+        @for (recipe of usersRecipes; track $index) {
+            <app-recipes-item class="b-uga border-radius-1r" [recipe]="recipe" [isSimpleDisplay]="true"></app-recipes-item>
+        }
+    </div>
 </div>
