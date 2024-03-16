@@ -1,4 +1,4 @@
-import { Injectable, OnDestroy, OnInit } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { Observable, Subject, Subscription, map, tap } from 'rxjs';
 
 import { Ingredient } from '../shared/models/ingredient.model';
@@ -10,13 +10,20 @@ import { RealTimeDatabaseService } from '../shared/real-time-database.service';
 import { ItemComment } from '../shared/models/microblog-comment.model';
 
 @Injectable()
-export class RecipesService {
+export class RecipesService implements OnDestroy {
   constructor(private shoppingListService: ShoppingListService, private userDataService: UserDataService, private realTimeDatabasService: RealTimeDatabaseService) {}
   
   public recipesChanged = new Subject<Recipe[]>();
 
   private recipes: Recipe[] = [];
 
+  private storeRecipes$: Subscription = this.recipesChanged.subscribe(()=> {
+    this.realTimeDatabasService.storeRecipes(this.recipes)
+  })
+
+  public ngOnDestroy(): void {
+    this.storeRecipes$.unsubscribe()
+  }
 
   public setRecepies(): Observable<void> {
     return this.realTimeDatabasService.fetchRecipes().pipe(
@@ -179,6 +186,5 @@ export class RecipesService {
     this.recipesChanged.next(this.recipes.slice());
     this.userDataService.setNotificationToUser(this.recipes[recipeIndex].comments[newCommentIndex].author, UserNotification.likedComment, userEmail)
   }
-
   
 }

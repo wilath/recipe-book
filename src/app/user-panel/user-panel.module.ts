@@ -5,6 +5,7 @@ import { UserPanelComponent } from './user-panel/user-panel.component';
 import { HttpClientModule } from '@angular/common/http';
 import { UserInfoDisplayComponent } from './user-info-display/user-info-display.component';
 import { SharedModule } from '../shared/shared.module';
+import { MicroblogModule } from '../microblog/microblog.module';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { SharedModule } from '../shared/shared.module';
     CommonModule,
     UserPanelRoutingModule,
     HttpClientModule,
-    SharedModule
+    SharedModule,
+    MicroblogModule
   ]
 })
 export class UserPanelModule { }

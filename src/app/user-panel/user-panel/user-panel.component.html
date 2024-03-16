@@ -1,17 +1,29 @@
 <app-user-info-display [userInfo]="userInfo"></app-user-info-display>
 
-<div class="">
+<div class="users-activity flex-row-ss gap15">
+
+  <div class="users-recipes">
     <div class="backboard-uno-grey padding-1r border-radius-1r mt-1rem">
-        <h3 class="font-size-12r">Check Recipes From <span class="sage">{{userInfo.name}}</span>:</h3>
-        <div class="mt-1rem users-recipes-display">
-    
-            @for (recipe of usersRecipes; track $index) {
-                <app-recipes-item class="b-uga border-radius-1r" [recipe]="recipe" [isSimpleDisplay]="true"></app-recipes-item>
-            }
-        </div>
+      <h3 class="font-size-12r bb-uga pb-hr">
+        Check Recipes From <span class="sage">{{ userInfo.name }}</span
+        >:
+      </h3>
+      <div class="mt-hrem users-recipes-display">
+        @for (recipe of usersRecipes; track $index) {
+        <app-recipes-item
+          class="border-radius-1r b-uga"
+          [recipe]="recipe"
+          [isSimpleDisplay]="true"
+        ></app-recipes-item>
+        }
+      </div>
     </div>
-    <div class="posts">
-        
-    </div>
+  </div>
+
+  <div class="users-posts">
+    @for (post of usersPosts; track $index) {
+    <app-microblog-post [microblogPost]="post"></app-microblog-post>
+    }
+  </div>
 
 </div>
