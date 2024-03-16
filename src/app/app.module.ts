@@ -17,6 +17,7 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { StorageService } from './shared/storage.service';
 import { AngularFireModule } from '@angular/fire/compat';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { AngularFireModule } from '@angular/fire/compat';
     FormsModule,
     CommonModule,
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
     SharedModule,

@@ -21,8 +21,11 @@
         <h3>Follows : <span class="font-weight-500 sage2">{{userInfo.userFollows.length}}</span> </h3>
 
         <div class="profile-buttons">
-            <button class="button-alpha font-size-12r"> <i class="fa-solid fa-pen-to-square"></i> Edit Profile </button>
-            <button class="button-alpha font-size-12r"> <i class="fa-solid fa-user-plus"></i>  Follow</button>     
+            @if (userInfo.email === currentUserEmail) {
+                <button class="button-alpha font-size-12r border-radius-hr hover-active-grey padding-c1"> <i class="fa-solid fa-pen-to-square "></i> Edit Profile </button>
+            } @else {
+                <button (click)="onFollowUser()" class="button-alpha font-size-12r border-radius-hr hover-active-grey padding-c1"> <i [ngClass]="{'user-followed': isFollowedByCurretnUser}" class="fa-solid fa-user-plus"></i> {{isFollowedByCurretnUser? 'Unfollow' : 'Follow'}}</button>     
+            }
         </div>
     </div>
 </div>

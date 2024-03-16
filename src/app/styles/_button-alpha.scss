@@ -24,7 +24,7 @@
 }
 
 .hover-active-grey {
-  transition: backgroundColor 0.2s linear;
+  transition: all 0.2s linear;
   &:hover {
     background-color: $uno-grey-active;
     
