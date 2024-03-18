@@ -106,9 +106,11 @@ export class RecipesDetailsComponent implements OnInit {
   }
 
   public onToShopList() {
-    const newShoppingItem: ShoppingItem = {recipeName: this.recipe.name, recipeId: this.recipe.id, ingredients: this.recipe.ingredients};
-    this.userDataService.addRecipeToShopList(this.userData.email, newShoppingItem);
-    this.userDataService.setNotificationToUser(this.recipe.author, UserNotification.addToShopList, this.userData.email, this.recipe.name)
+    if(!this.userData.shoppingList.some( item => item.recipeId === this.recipe.id)){
+      const newShoppingItem: ShoppingItem = {recipeName: this.recipe.name, recipeId: this.recipe.id, ingredients: this.recipe.ingredients};
+      this.userDataService.addRecipeToShopList(this.userData.email, newShoppingItem);
+      this.userDataService.setNotificationToUser(this.recipe.author, UserNotification.addToShopList, this.userData.email, this.recipe.name);
+    }
   }
 
   public onFollowUser() {

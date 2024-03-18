@@ -63,6 +63,7 @@ export class RealTimeDatabaseService {
             ...user,
             notifications: user.notifications ? user.notifications : [],
             userFollows: user.userFollows ? user.userFollows : [],
+            shoppingList:  user.shoppingList? user.shoppingList : [],
             followers: user.followers ? user.followers : []
           }
         })
