@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { RecipesService } from '../../recipes/recipes.service';
 import { MicroblogService } from '../../microblog/microblog.service';
 import { MicroblogPost } from '../../shared/models/microblog-post.model';
@@ -20,8 +20,9 @@ export class UserPanelComponent implements OnInit, OnDestroy {
     private microblogService: MicroblogService,
     private usersDataService: UserDataService) {}
 
+  public userInfo: UserData = emptyUserData;
 
-  public userInfo: UserData = emptyUserData
+  public currentUserEmail: string = '';
 
   public usersRecipes: Recipe[] = [];
 
@@ -33,19 +34,26 @@ export class UserPanelComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
+    this.setData()
+    this.microblogSub = this.microblogService.postsChange.subscribe(() => {
+      this.microblogService.storeDatainDatabase()
+    });
+    this.currentUserEmail = JSON.parse(localStorage.getItem('userData') || '{}').email
+  }
+
+
+  
+  ngOnDestroy(): void {
+    this.microblogSub.unsubscribe()
+  }
+
+  private setData() {
     this.route.params.subscribe((params: Params)=>{
       const id = params['id'];
       this.userInfo = this.usersDataService.getUserDataById(id);
       this.usersRecipes = this.recipesService.getRecipes().filter(recipe => recipe.author === this.userInfo.email);
       this.usersPosts = this.microblogService.getMicroblogData().filter( post => post.author === this.userInfo.email)
     })
-    this.microblogSub = this.microblogService.postsChange.subscribe(() => {
-      this.microblogService.storeDatainDatabase()
-    });
-  }
-  
-  ngOnDestroy(): void {
-    this.microblogSub.unsubscribe()
   }
   
 }

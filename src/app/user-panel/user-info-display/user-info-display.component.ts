@@ -18,6 +18,8 @@ export class UserInfoDisplayComponent implements OnInit {
   ) {}
 
   @Input() public userInfo: UserData = emptyUserData;
+  
+  @Input() public currentUserEmail: string = '';
 
   @Output() public isEditMode: EventEmitter<boolean> = new EventEmitter<boolean>
 
@@ -27,10 +29,8 @@ export class UserInfoDisplayComponent implements OnInit {
 
   public isFollowedByCurretnUser: boolean = false;
 
-  public currentUserEmail: string = ''
 
   public ngOnInit(): void {
-    this.currentUserEmail = JSON.parse(localStorage.getItem('userData') || '{}').email
     if (this.userInfo.extraInfo?.age) {
       this.age = this.getUsersAge(this.userInfo.extraInfo?.age);
     }

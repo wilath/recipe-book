@@ -6,12 +6,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { UserInfoDisplayComponent } from './user-info-display/user-info-display.component';
 import { SharedModule } from '../shared/shared.module';
 import { MicroblogModule } from '../microblog/microblog.module';
+import { UserShoppingListComponent } from './user-shopping-list/user-shopping-list.component';
 
 
 @NgModule({
   declarations: [
     UserPanelComponent,
-    UserInfoDisplayComponent
+    UserInfoDisplayComponent,
+    UserShoppingListComponent
 
   ],
   imports: [

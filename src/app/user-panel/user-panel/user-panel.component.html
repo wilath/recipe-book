@@ -1,4 +1,7 @@
-<app-user-info-display [userInfo]="userInfo"></app-user-info-display>
+<app-user-info-display [currentUserEmail]="currentUserEmail" [userInfo]="userInfo"></app-user-info-display>
+@if (userInfo.email === currentUserEmail) {
+  <app-user-shopping-list [userEmail]="userInfo.email" [shoppingList]="userInfo.shoppingList"></app-user-shopping-list>
+}
 
 <div class="users-activity flex-row-ss gap15">
 
