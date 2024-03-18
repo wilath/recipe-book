@@ -1,12 +1,12 @@
-import { Injectable} from '@angular/core';
-import { Observable, Subject, map, tap } from 'rxjs';
+import { Injectable, OnDestroy} from '@angular/core';
+import { Observable, Subject, Subscription, map, tap } from 'rxjs';
 import { ShoppingItem, UserData, emptyUserData } from '../shared/models/user-data.model';
 import { UserNotification } from '../shared/enums/notifications.enum';
 import { NotificationModel } from '../shared/models/notification.model';
 import { RealTimeDatabaseService } from '../shared/real-time-database.service';
 
 @Injectable()
-export class UserDataService  {
+export class UserDataService implements OnDestroy {
   constructor(private realTimeDatabaseService: RealTimeDatabaseService) {}
 
   public usersData: UserData[] = [];
@@ -26,6 +26,14 @@ export class UserDataService  {
 
   public getUsersData(): UserData[] {
     return this.usersData.slice();
+  }
+
+  private storeData$: Subscription = this.userDataChange.subscribe(()=> {
+    this.realTimeDatabaseService.storeUsersData(this.usersData)
+  })
+
+  public ngOnDestroy(): void {
+    this.storeData$.unsubscribe()
   }
 
   public getUserDataByEmail(email: string): UserData {
@@ -52,7 +60,6 @@ export class UserDataService  {
     data.push(newUserData);
     this.usersData = data;
     this.userDataChange.next(this.usersData.slice());
-    this.realTimeDatabaseService.storeUsersData(this.usersData)
   }
 
   public addFollowToUser(userEmail: string,followerEmail: string, add: boolean) {
@@ -79,7 +86,6 @@ export class UserDataService  {
       data[follower.index] = follower.user;
       this.setNotificationToUser(user.user.email,UserNotification.gotUnfollowed,follower.user.email)
     }
-    this.realTimeDatabaseService.storeUsersData(this.usersData)
   }
 
   public editUser(editedUser: UserData) {
@@ -103,7 +109,6 @@ export class UserDataService  {
     data[user.index] = user.user;
     this.usersData = data;
     this.userDataChange.next(this.usersData.slice())
-    this.realTimeDatabaseService.storeUsersData(this.usersData)
   }
 
   public checkIfUserisFollowed(userEmailToCheck: string, followerEmail: string): boolean{
@@ -135,9 +140,9 @@ export class UserDataService  {
   public deleteItemFromShopList(userEmail:string, shopItemId: number, index?: number) {
     const data: UserData[] = this.usersData;
     const user = this.getUserByEmail(userEmail);
-    const shopIndex = data[user.index].shoppingList.findIndex(item => item.recipeId = shopItemId)
+    const shopIndex = data[user.index].shoppingList.findIndex(item => item.recipeId === shopItemId)
 
-    if(!index) {
+    if(index === undefined) {
       data[user.index].shoppingList.splice(shopIndex, 1)
     } else {
       data[user.index].shoppingList[shopIndex].ingredients.splice(index, 1);

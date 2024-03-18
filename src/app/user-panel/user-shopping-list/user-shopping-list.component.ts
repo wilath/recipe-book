@@ -16,9 +16,18 @@ export class UserShoppingListComponent  {
 
   @Input({required: true}) shoppingList: ShoppingItem[] = [];
 
-  public onDeleteIngredient(recipeId: number, ingredientIndex: number){}
+  public onDeleteIngredientFromShopList(recipeId: number, ingredientIndex: number){
+    this.userDataService.deleteItemFromShopList(this.userEmail, recipeId, ingredientIndex)
+  }
 
-  public onDeleteRecipe(recipeId:number){}
+  public onDeleteRecipeFromShoplist(recipeId:number){
+    this.userDataService.deleteItemFromShopList(this.userEmail,recipeId)
+  }
+  
+  public onClearShopList(){
+    this.userDataService.clearShopList(this.userEmail)
+    
+  }
 
   public goToRecipe(id: number){
     this.router.navigate(['recipes/' + id])
