@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { AlertComponent } from './components/alert/alert.component';
 import { LoadingSpinnerComponent } from './components/loadingspinner/loading-spinner.component';
@@ -26,6 +26,7 @@ import { RouterModule } from '@angular/router';
 
   ],
   exports: [
+    NgOptimizedImage,
     AlertComponent,
     LoadingSpinnerComponent,
     CommonModule,
@@ -41,6 +42,7 @@ import { RouterModule } from '@angular/router';
     AuthorNamePipe
   ],
   imports: [
+    NgOptimizedImage,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,

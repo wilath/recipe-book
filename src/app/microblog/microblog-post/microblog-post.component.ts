@@ -11,6 +11,7 @@ import { SortType } from '../../shared/pipes/date-like-sort.pipe';
   selector: 'app-microblog-post',
   templateUrl: './microblog-post.component.html',
   styleUrl: './microblog-post.component.scss',
+  
 })
 export class MicroblogPostComponent implements OnInit {
 
