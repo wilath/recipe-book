@@ -119,7 +119,7 @@
             </form>
           </div>
           @if (microblogPost.comments.length > 0) {
-            <div class="flex-row-ce m-0250">
+            <div class="flex-row-ce m-0250 mb-hrem">
               <button class="font-size-1r underline-button" [ngStyle]="{'text-decoration': choosenSortType === sortType.sortByDate ? 'underline' : ''}" (click)="onChangeSortType(sortType.sortByDate)">Latest</button>
               <button class="font-size-1r underline-button" [ngStyle]="{'text-decoration': choosenSortType === sortType.sortByLikes ? 'underline' : ''}" (click)="onChangeSortType(sortType.sortByLikes)">Popular</button>
             </div>
@@ -131,7 +131,7 @@
         </div>
       } @else if (microblogPost.comments.length > 0) {
         <div class="bt-uga m-01 pb-1r comments-section">
-          <div class="flex-row-ce m-0250">
+          <div class="flex-row-ce m-0250 mb-hrem">
             <button class=" font-size-1r underline-button " (click)="openComments()" >See more Comments</button>
           </div>
           

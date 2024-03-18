@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ItemComment } from '../../shared/models/microblog-comment.model';
 import { MicroblogPost } from '../../shared/models/microblog-post.model';
@@ -13,7 +13,7 @@ import { SortType } from '../../shared/pipes/date-like-sort.pipe';
   styleUrl: './microblog-post.component.scss',
   
 })
-export class MicroblogPostComponent implements OnInit {
+export class MicroblogPostComponent implements OnChanges {
 
   constructor(private userDataService: UserDataService, private microblogService: MicroblogService, private formBuilder: FormBuilder) {}
 
@@ -42,7 +42,7 @@ export class MicroblogPostComponent implements OnInit {
 
   public topComment!: ItemComment;
 
-  public ngOnInit(): void {
+  public ngOnChanges(): void {
     this.postAuthor = this.userDataService.getUserDataByEmail(this.microblogPost.author);
     this.loggedUserEmail = JSON.parse(localStorage.getItem('userData') || '{}').email
     this.timeSincePosted = this.calculateTimeSincePost(this.microblogPost.date);
