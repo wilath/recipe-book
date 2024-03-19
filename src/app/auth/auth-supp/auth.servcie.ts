@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
-import { catchError, filter, map, tap } from 'rxjs/operators';
+import { catchError, filter, map, take, tap } from 'rxjs/operators';
 import { BehaviorSubject, Subject, throwError } from 'rxjs';
 import { User } from '../../shared/models/user.model';
 import { Router } from '@angular/router';
@@ -86,13 +86,7 @@ export class AuthServcie {
       .pipe(
         catchError(this.handleError),
         tap((resData) => {
-          this.handleAuth(
-            resData.email,
-            resData.localId,
-            resData.idToken,
-            +resData.expiresIn,
-            name
-          );
+          this.handleAuth(resData.email,resData.localId,resData.idToken, +resData.expiresIn,name);
         })
       );
   }
@@ -132,10 +126,6 @@ export class AuthServcie {
     this.user.next(user);
     this.autoLogout(expiresIn * 1000);
     localStorage.setItem('userData', JSON.stringify(user));
-
-    if (name) {
-      this.userDataService.addNewUser(email, userId, name);
-    }
   }
 
   private handleError(errorRes: HttpErrorResponse) {

@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable, take } from 'rxjs';
+import { Observable, concatMap, of, switchMap, take, tap } from 'rxjs';
 import { AuthResponseData, AuthServcie } from './auth-supp/auth.servcie';
+import { UserDataService } from '../user-panel/user-data.service';
 
 @Component({
   selector: 'app-auth',
@@ -10,11 +11,19 @@ import { AuthResponseData, AuthServcie } from './auth-supp/auth.servcie';
   styleUrls: ['./auth.component.scss'],
 })
 export class AuthComponent {
+  constructor(
+    private authService: AuthServcie,
+    private userDataService: UserDataService,
+    private router: Router
+  ) {}
+
   public isLoginMode = true;
+
   public isLoading = false;
+
   public error: string = '';
 
-  constructor(private authService: AuthServcie, private router: Router) {}
+  private auth$!: Observable<AuthResponseData>;
 
   public onSwitchMode() {
     this.isLoginMode = !this.isLoginMode;
@@ -26,25 +35,35 @@ export class AuthComponent {
     const name = form.value.name;
     this.isLoading = true;
 
-    let auth$: Observable<AuthResponseData>;
-
     if (this.isLoginMode) {
-      auth$ = this.authService.logIn(email, password);
+      this.auth$ = this.authService.logIn(email, password);
     } else {
-      auth$ = this.authService.signUp(email,name, password);
-    
+      this.auth$ = this.authService.signUp(email, name, password);
     }
 
-    auth$.subscribe(
-      (resData) => {
-        this.isLoading = false;
-        this.router.navigate(['/microblog']);
+    this.auth$.subscribe({
+      next: (resData) => {
+        this.userDataService.setUsersData().pipe(
+          take(1),
+          switchMap(() => {
+            if (name !== undefined) {
+              return this.userDataService.addNewUser(resData.email, resData.localId, name);
+            } else {
+              return of(void 0);
+            }
+          }),
+          tap(() => {
+            this.isLoading = false;
+            this.router.navigate(['/microblog']);
+          })
+        ).subscribe();
       },
-      (errorMsg) => {
+
+      error: (errorMsg) => {
         this.isLoading = false;
         this.error = errorMsg;
-      }
-    );
+      },
+    });
 
     form.reset();
   }
@@ -52,5 +71,4 @@ export class AuthComponent {
   public onHandleError() {
     this.error = '';
   }
-  
 }

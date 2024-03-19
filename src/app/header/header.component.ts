@@ -26,7 +26,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   public isNotificationMenuShown = false;
 
-  public userData: UserData = emptyUserData;
+  public usersData: UserData = emptyUserData;
 
   public notificationFilter : 'all' | 'new'  = 'new';
 
@@ -37,7 +37,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private userData$ = this.userDataService.userDataChange;
 
   test(){
-    console.log('user',this.userData)
+    console.log('user',this.usersData)
     console.log('auth', this.isAuth)
   }
 
@@ -56,7 +56,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   public clearNotifications(index?: Date) {
-    const newUserData = this.userData;
+    const newUserData = this.usersData;
     if(index === undefined){
       for(let i = 0; i < newUserData.notifications.length ; i++){
         newUserData.notifications[i].shown = true;
@@ -93,10 +93,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   public getUnshownNotificationsCount(): number {
-    if (!this.userData || !this.userData.notifications) {
+    if (!this.usersData || !this.usersData.notifications) {
       return 0;
     }
-    return this.userData.notifications.filter(el => !el.shown).length;
+    return this.usersData.notifications.filter(el => !el.shown).length;
   }
 
   private navigationSubscription(){
@@ -109,20 +109,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
   
     this.authService.user.subscribe((user) => {
       if (user) {
-        this.userDataService.setUsersData().subscribe(() => {
-          this.isAuth = true;
-          this.userData = this.userDataService.getUserDataByEmail(user.email);
-        });
-    
+        this.isAuth = true;
         this.userDataService.userDataChange.pipe(
           map((users) => users.find((el) => el.email === user.email)),).
           subscribe((userData) => {
           if (userData) {
-            this.userData = userData;
+            this.usersData = userData;
           }
         });
       } else {
-        this.userData = emptyUserData
+        this.usersData = emptyUserData
         this.isAuth = false;
       }
     });

@@ -1,5 +1,5 @@
 import { Injectable, OnDestroy} from '@angular/core';
-import { Observable, Subject, Subscription, map, tap } from 'rxjs';
+import { Observable, Subject, Subscription, map, of, tap } from 'rxjs';
 import { ShoppingItem, UserData, emptyUserData } from '../shared/models/user-data.model';
 import { UserNotification } from '../shared/enums/notifications.enum';
 import { NotificationModel } from '../shared/models/notification.model';
@@ -14,11 +14,13 @@ export class UserDataService implements OnDestroy {
   public userDataChange = new Subject<UserData[]>();
 
   public setUsersData(): Observable<void> {
+    
     return this.realTimeDatabaseService.fetchUsersData().pipe(
       tap((usersToSet: UserData[]) => {
         if(usersToSet){
           this.usersData = usersToSet;
           this.userDataChange.next(this.usersData.slice());
+          
           }
         }
       ),map(()=>{}))
@@ -46,7 +48,7 @@ export class UserDataService implements OnDestroy {
     return this.usersData[index];
   }
 
-  public addNewUser(email: string, userId: string, name: string) {
+  public addNewUser(email: string, userId: string, name: string): Observable<void> {
     const data = this.usersData
     const newUserData: UserData = {
       email: email,
@@ -60,6 +62,7 @@ export class UserDataService implements OnDestroy {
     data.push(newUserData);
     this.usersData = data;
     this.userDataChange.next(this.usersData.slice());
+    return of(void 0)
   }
 
   public addFollowToUser(userEmail: string,followerEmail: string, add: boolean) {

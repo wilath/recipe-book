@@ -3,6 +3,7 @@ import { UserData, emptyUserData } from '../../shared/models/user-data.model';
 import { FormControl, FormGroup } from '@angular/forms';
 import { StorageService } from '../../shared/storage.service';
 import { FileUpload } from '../../shared/models/file-upload.model';
+import { UserDataService } from '../user-data.service';
 
 @Component({
   selector: 'app-user-edit',
@@ -12,11 +13,12 @@ import { FileUpload } from '../../shared/models/file-upload.model';
 export class UserEditComponent implements OnInit {
 
 
-  constructor(private storage: StorageService){}
+  constructor(private storage: StorageService, private userDataService: UserDataService){}
  
 
   @Input() public userInfo: UserData = emptyUserData;
 
+ 
   public userEditForm!: FormGroup;
 
   public ngOnInit(): void {
@@ -49,7 +51,19 @@ export class UserEditComponent implements OnInit {
     });
     }
 
-  public onSubmit(){}
+  public onSubmit(){
+    const userData = this.userInfo
+    const userForm = this.userEditForm.value;
+
+    userData.extraInfo = {city: userForm.city, age: userForm.age, motto: userForm.motto, favRecipe: userForm.favRecipe}
+    userData.name = userForm.name
+    if(userForm.value.avatar){
+      userData.avatar = {name: userForm.avatar.imageData.name , url: userForm.avatar.imageData.url}
+    }
+
+    this.userDataService.editUser(userData);
+    this.userInfo = userData
+  }
 
   private initForm(){
     let name : string = '';
