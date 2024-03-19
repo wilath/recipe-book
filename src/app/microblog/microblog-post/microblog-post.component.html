@@ -70,8 +70,8 @@
       </div>
   
     </div>
-    <div class="m-01 padding-050 bt-uga flex-row-csb flex-row-reverse likes-section">
-        <div class="likes-info flex-row-cfs gap15 font-size-12r">
+    <div class="padding-05-1 bt-uga flex-row-csb flex-row-reverse likes-section">
+        <div class="likes-info padding-05-0 flex-row-cfs gap15 font-size-12r">
           <div>{{microblogPost.likes.quantity}} <i class="fa-solid fa-heart font-size-1r"></i>  </div>
           <div>{{microblogPost.comments.length}} <i class="fa-solid fa-comments font-size-1r"></i> </div>
         </div>
@@ -87,7 +87,7 @@
         </div>
       </div>
       @if (isCommentSectionOpen) {
-        <div  class="bt-uga m-01 pb-1r comments-section">
+        <div  class="bt-uga  padding-1r pt-0 comments-section">
           <div class="mt-1rem flex-row-ss add-comment">
           <img class="avatar-image-25rem mr-hrem" src="https://t3.ftcdn.net/jpg/05/53/79/60/360_F_553796090_XHrE6R9jwmBJUMo9HKl41hyHJ5gqt9oz.jpg" alt="avatar">
             <form class="flex-grow-1" [formGroup] = "newCommentForm" >
@@ -119,7 +119,7 @@
             </form>
           </div>
           @if (microblogPost.comments.length > 0) {
-            <div class="flex-row-ce m-0250 mb-hrem">
+            <div class="flex-row-ce m-0250 mb-hrem ">
               <button class="font-size-1r underline-button" [ngStyle]="{'text-decoration': choosenSortType === sortType.sortByDate ? 'underline' : ''}" (click)="onChangeSortType(sortType.sortByDate)">Latest</button>
               <button class="font-size-1r underline-button" [ngStyle]="{'text-decoration': choosenSortType === sortType.sortByLikes ? 'underline' : ''}" (click)="onChangeSortType(sortType.sortByLikes)">Popular</button>
             </div>
@@ -130,7 +130,7 @@
           }  
         </div>
       } @else if (microblogPost.comments.length > 0) {
-        <div class="bt-uga m-01 pb-1r comments-section">
+        <div class="bt-uga padding-1r pt-0 comments-section">
           <div class="flex-row-ce m-0250 mb-hrem">
             <button class=" font-size-1r underline-button " (click)="openComments()" >See more Comments</button>
           </div>

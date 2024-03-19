@@ -6,12 +6,12 @@
 <div class="users-activity flex-row-ss gap15">
 
   <div class="users-recipes">
-    <div class="backboard-uno-grey padding-1r border-radius-1r mt-1rem">
-      <h3 class="font-size-12r bb-uga pb-hr">
+    <div class="backboard-uno-grey  border-radius-1r mt-1rem">
+      <h3 class="font-size-12r bb-uga pb-hr padding-1r">
         Check Recipes From <span class="sage">{{ userInfo.name }}</span
         >:
       </h3>
-      <div class="mt-hrem users-recipes-display">
+      <div class="users-recipes-display padding-1r">
         @for (recipe of usersRecipes; track $index) {
         <app-recipes-item
           class="border-radius-1r b-uga"
