@@ -1,0 +1,51 @@
+@import '../../styles/_variables.scss';
+
+.image-loading {
+    background-color: rgba(164, 185, 93, 0.5);
+  }
+
+.bottom-sage{
+  border-bottom: 1px solid $sage;
+  animation: pulse 1s infinite alternate
+}
+
+@keyframes pulse {
+  0% {
+    border-color: transparent; 
+  }
+  100% {
+    border-color: $sage; 
+  }
+}
+
+
+.input-text {
+    font-family: inherit;
+    background-color: transparent;
+    padding: 0;
+    max-width: 139px;
+    box-sizing: border-box;
+    line-height: 1em;
+    height: 1em;
+}
+  .image-delete {
+    font-size: 3rem;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s linear;
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+.motto {
+  textarea{
+      width: 300px;
+      background: transparent;
+      resize: none;
+      font-style: italic;
+      outline: none;
+      border: none;
+      border-bottom: 1px solid $sage;
+      font-size: 1.2rem;
+    }
+  }

@@ -11,6 +11,7 @@ import { UserDataService } from '../user-data.service';
   styleUrl: './user-info-display.component.scss',
 })
 export class UserInfoDisplayComponent implements OnInit {
+
   constructor(
     private usersDataService: UserDataService,
     private microblogService: MicroblogService,
@@ -21,7 +22,7 @@ export class UserInfoDisplayComponent implements OnInit {
   
   @Input() public currentUserEmail: string = '';
 
-  @Output() public isEditMode: EventEmitter<boolean> = new EventEmitter<boolean>
+  public isEditMode: boolean = false;
 
   public age: number = 33;
 
@@ -48,6 +49,17 @@ export class UserInfoDisplayComponent implements OnInit {
 
   }
 
+  public onEdit(){
+    this.isEditMode = true;
+  }
+
+  public onCancelEdit() {
+    this.isEditMode = false;
+  }
+  
+  public onSubmit() {
+  }
+
   private getUsersAge(date: Date): number {
     const pastDateTime: Date = new Date(date);
 
@@ -59,4 +71,6 @@ export class UserInfoDisplayComponent implements OnInit {
 
     return Math.floor(years);
   }
+
+  
 }

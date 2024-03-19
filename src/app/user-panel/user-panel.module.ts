@@ -7,17 +7,21 @@ import { UserInfoDisplayComponent } from './user-info-display/user-info-display.
 import { SharedModule } from '../shared/shared.module';
 import { MicroblogModule } from '../microblog/microblog.module';
 import { UserShoppingListComponent } from './user-shopping-list/user-shopping-list.component';
+import { UserEditComponent } from './user-edit/user-edit.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [
     UserPanelComponent,
     UserInfoDisplayComponent,
-    UserShoppingListComponent
+    UserShoppingListComponent,
+    UserEditComponent
 
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     UserPanelRoutingModule,
     HttpClientModule,
     SharedModule,

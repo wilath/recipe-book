@@ -18,6 +18,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { StorageService } from './shared/storage.service';
 import { AngularFireModule } from '@angular/fire/compat';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 
 
@@ -43,7 +44,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   ],
   providers:[
     RealTimeDatabaseService,
-    StorageService
+    StorageService,
+    provideAnimationsAsync()
   ],
   bootstrap: [AppComponent],
 })

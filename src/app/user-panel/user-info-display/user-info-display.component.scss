@@ -1,4 +1,13 @@
-.profile-buttons{
-    margin-left: auto;
-    align-self: flex-end;
+.profile-buttons {
+  margin-left: auto;
+  align-self: flex-end;
+}
+.border-replacer{
+    border: 2px solid transparent;
+}
+
+.motto {
+  font-style: italic;
+  font-size: 1.2rem;
+  inline-size: 250px;
 }
