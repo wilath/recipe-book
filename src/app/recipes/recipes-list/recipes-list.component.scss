@@ -7,29 +7,8 @@
         font-family: inherit;
       }
     }
-    label {
-      
-      &:has(input:checked) {
-        background-color: $sage;
-        color: $uno-grey;
-      }
-    }
-    button {
-      background-color: transparent;
-      border: none;
-      font-size: 1rem;
-      padding: 0.25rem 0.5rem;
-      border-radius: 0.5rem;
-      color: $uno-white;
-      font-family: inherit;
-      transition: all 0.2s linear;
-      &:hover {
-        background-color: $uno-grey-active;
-        i {
-          color: $sage;
-        }
-      }
-    }
+    
+  
   }
   .filter-row-bottom{
     padding-top: 0;

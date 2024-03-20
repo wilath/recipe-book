@@ -23,10 +23,12 @@
             }
         </div>
         <button #notiMenu [ngClass]="{'button-menu-active' : isNotificationMenuShown}" *ngIf="isAuth" class="circle backboard-uno-grey-active height100 font-size-14r notification" (click)="isNotificationMenuShown = !isNotificationMenuShown" >
+            <div class="nav-button-desc">Notifications</div>
             <i class="fa-solid fa-bell"></i>
             <div *ngIf="usersData && usersData.notifications && getNotificationsCount() > 0" class=" font-size-1r notification-number">{{getNotificationsCount()}}</div>
         </button>
         <button *ngIf="isAuth" (click)="onLogout()" class="circle height100 backboard-uno-grey-active font-size-14r logout">
+            <div class="nav-button-desc">Logout</div>
             <i class="fa-solid fa-right-from-bracket"></i>
         </button>
     </div>

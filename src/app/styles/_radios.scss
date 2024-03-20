@@ -22,6 +22,17 @@
         color: $sage2;
       }
 }
+.checked-ug{
+  &:has(input:checked) {
+    background-color: $sage;
+    color: $uno-grey;
+  }
+  &:has(input:focus-visible){
+    
+    outline: 1px solid $sage2;
+  }
+
+}
 
 
 .checked-sage{

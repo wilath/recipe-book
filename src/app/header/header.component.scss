@@ -10,6 +10,21 @@ header {
     height: 75%;
     flex: 1 0 0;
   }
+  .nav-button-desc {
+    position: absolute;
+    background-color: $uno-white;
+    color: $uno-grey-active;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.4rem;
+    bottom: -3rem;
+    font-size: 0.8rem;
+    border-radius: 0.5rem;
+    display: none;
+    text-wrap: nowrap;
+    opacity: 0;
+    animation: fadeIn 0.3s ease-in-out forwards;
+  }
 
   .notification-number {
     position: absolute;
@@ -31,6 +46,16 @@ header {
     &:hover {
       color: $sage;
       background-color: rgba(191, 204, 148, 0.1);
+    }
+    &:focus-visible {
+      color: $sage;
+      background-color: rgba(191, 204, 148, 0.1);
+    }
+    &:focus-visible > .nav-button-desc {
+      display: block;
+    }
+    &:hover > .nav-button-desc {
+      display: block;
     }
   }
 
@@ -55,25 +80,17 @@ header {
       &:hover {
         background-color: $uno-grey-active;
       }
+      &:focus-visible{
+        background-color: $uno-grey-active;
+      }
+    }
+    .nav-button:focus-visible > .nav-button-desc {
+      display: block;
     }
     .nav-button:hover > .nav-button-desc {
       display: block;
     }
-    .nav-button-desc {
-      position: absolute;
-      background-color: $uno-white;
-      color: $uno-grey-active;
-      left: 50%;
-      transform: translateX(-50%);
-      padding: 0.4rem;
-      bottom: -3rem;
-      font-size: 0.8rem;
-      border-radius: 0.5rem;
-      display: none;
-      text-wrap: nowrap;
-      opacity: 0;
-      animation: fadeIn 0.3s ease-in-out forwards;
-    }
+   
     @keyframes fadeIn {
       0% {
         display: none;

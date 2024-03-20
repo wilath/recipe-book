@@ -85,6 +85,9 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
             &:has(input:checked) {
               -webkit-text-stroke: 1px white;
             }
+            &:has(input:focus-visible) {
+              -webkit-text-stroke: 2px $sage2
+            }
           }
         }
       }

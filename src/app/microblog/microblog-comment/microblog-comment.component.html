@@ -9,7 +9,7 @@
   <div class="content-wrap">
     
     <div class="padding-15r backboard-uno-grey-active border-radius-1r flex-col-ss comment-content">
-        <h4 class="font-size-1r font-weight-500"> <a class="hover-underline" (click)="goToUserProfile()" >{{ commentAuthorData.name }}</a>   @if (comment.likes.quantity > 0) {<span class="likes-quantity border-radius-hr">{{comment.likes.quantity}} <i class="fa-solid fa-heart"></i> </span> } </h4>
+        <h4 class="font-size-1r font-weight-500"> <a href="#" class="hover-underline uno-white" (click)="goToUserProfile()" >{{ commentAuthorData.name }}</a>   @if (comment.likes.quantity > 0) {<span class="likes-quantity border-radius-hr">{{comment.likes.quantity}} <i class="fa-solid fa-heart"></i> </span> } </h4>
       <p>{{ comment.content }}</p>
     </div>
     <div class="comment-meta">
@@ -17,12 +17,12 @@
       <span>·</span> 
       {{ timeSincePosted }} 
       <span>·</span> 
-      <button type="button" class="love-it" (click)="onAddLike()" > {{isLikedByCurrentUser? 'I dont love it' : 'I love it!'}}</button> 
+      <button type="button" class="love-it hover-underline" (click)="onAddLike()" > {{isLikedByCurrentUser? 'I dont love it' : 'I love it!'}}</button> 
       <span>·</span> 
       @if (comment.author !== loggedUserEmail) {
-      <button type="button" class="love-it" (click)="onFollowUser()" > {{isFollowedByCurrentUser? 'Unfollow' : 'Follow'}}</button> 
+      <button type="button" class="love-it hover-underline" (click)="onFollowUser()" > {{isFollowedByCurrentUser? 'Unfollow' : 'Follow'}}</button> 
       } @else {
-        <button type="button" class="love-it" (click)="onDeleteComment()" > Delete</button>       
+        <button type="button" class="love-it hover-underline" (click)="onDeleteComment()" > Delete</button>       
       }
 
     </div>

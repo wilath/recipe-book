@@ -1,7 +1,7 @@
 
   <div class="backboard-uno-grey border-radius-1r mt-1rem post-wrapper">
     <div class="top-section flex-row-ss padding-1r">
-      <a (click)="goToUserProfile()">
+      <a  (click)="goToUserProfile()">
       @if(postAuthor.avatar){
         <img class="avatar-image-3rem" [src]="postAuthor.avatar.url" [alt]="postAuthor.avatar.name">
       } @else {
@@ -9,7 +9,7 @@
       }
       </a>
       <div class="author-data ml-1rem flex-col-fsc">
-          <a (click)="goToUserProfile()" class="hover-underline"><h4 class="font-size-15r">{{postAuthor.name}}</h4></a>
+          <a href="#" (click)="goToUserProfile()" class="hover-underline uno-white"><h4 class="font-size-15r">{{postAuthor.name}}</h4></a>
           <h5 class="sage mt-5px post-meta-info ">{{microblogPost.date | date:'shortDate'}} <span>·</span> {{timeSincePosted}} <span>·</span> <i class="fa-solid fa-earth-europe"></i></h5>      
       </div>
     </div>
@@ -130,8 +130,8 @@
           </div>
           @if (microblogPost.comments.length > 0) {
             <div class="flex-row-ce m-0250 mb-hrem ">
-              <button class="font-size-1r underline-button" [ngStyle]="{'text-decoration': choosenSortType === sortType.sortByDate ? 'underline' : ''}" (click)="onChangeSortType(sortType.sortByDate)">Latest</button>
-              <button class="font-size-1r underline-button" [ngStyle]="{'text-decoration': choosenSortType === sortType.sortByLikes ? 'underline' : ''}" (click)="onChangeSortType(sortType.sortByLikes)">Popular</button>
+              <button class="font-size-1r underline-button hover-underline" [ngStyle]="{'text-decoration': choosenSortType === sortType.sortByDate ? 'underline' : ''}" (click)="onChangeSortType(sortType.sortByDate)">Latest</button>
+              <button class="font-size-1r underline-button hover-underline" [ngStyle]="{'text-decoration': choosenSortType === sortType.sortByLikes ? 'underline' : ''}" (click)="onChangeSortType(sortType.sortByLikes)">Popular</button>
             </div>
           }
           @for (comment of microblogPost.comments | dateLikeSort: choosenSortType; track $index) {
@@ -142,7 +142,7 @@
       } @else if (microblogPost.comments.length > 0) {
         <div class="bt-uga padding-1r pt-0 comments-section">
           <div class="flex-row-ce m-0250 mb-hrem">
-            <button class=" font-size-1r underline-button " (click)="openComments()" >See more Comments</button>
+            <button class="font-size-1r underline-button hover-underline" (click)="openComments()" >See more Comments</button>
           </div>
           
          <app-comment [comment]="topComment" [postId]="microblogPost.id"></app-comment>
