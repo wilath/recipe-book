@@ -11,6 +11,7 @@ import { UserData } from '../../shared/models/user-data.model';
 import { UserDataService } from '../../user-panel/user-data.service';
 import { MicroblogService } from '../microblog.service';
 import { SortType } from '../../shared/pipes/date-like-sort.pipe';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-microblog-post',
@@ -19,6 +20,7 @@ import { SortType } from '../../shared/pipes/date-like-sort.pipe';
 })
 export class MicroblogPostComponent implements OnChanges {
   constructor(
+    private router: Router,
     private userDataService: UserDataService,
     private microblogService: MicroblogService,
     private formBuilder: FormBuilder
@@ -124,6 +126,10 @@ export class MicroblogPostComponent implements OnChanges {
       !this.isFollowedByCurrentUser
     );
     this.CheckIfFollowedByCurrentUser();
+  }
+
+  public goToUserProfile() {
+    this.router.navigate(['user-panel/' + this.postAuthor.id])
   }
 
   public onDeletePost() {

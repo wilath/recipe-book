@@ -1,9 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ItemComment } from '../../shared/models/microblog-comment.model';
-import { SimpleUserdata } from '../../shared/models/user-data.model';
+import { UserData, emptyUserData } from '../../shared/models/user-data.model';
 import { UserDataService } from '../../user-panel/user-data.service';
 import { MicroblogService } from '../microblog.service';
 import { RecipesService } from '../../recipes/recipes.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-comment',
@@ -12,7 +13,8 @@ import { RecipesService } from '../../recipes/recipes.service';
 })
 export class CommentComponent implements OnInit {
 
-  constructor(private userDataService: UserDataService, private microblogService: MicroblogService, private recipesService: RecipesService)  {}
+
+  constructor(private router: Router, private userDataService: UserDataService, private microblogService: MicroblogService, private recipesService: RecipesService)  {}
 
   @Input() public comment: ItemComment = {id:0, author: '', content:'', likes:{quantity:0,whoLiked:[]}, date: new Date()};
   
@@ -20,7 +22,7 @@ export class CommentComponent implements OnInit {
 
   @Input() public isRecipeOpinion = false;
 
-  public commentAuthorData!: SimpleUserdata;
+  public commentAuthorData: UserData = emptyUserData;
 
   public timeSincePosted: string = '';
 
@@ -31,14 +33,16 @@ export class CommentComponent implements OnInit {
   public loggedUserEmail: string = '';
 
   public ngOnInit(): void {
-    const userData = this.userDataService.getUserDataByEmail(this.comment.author);
-    this.commentAuthorData = {email: userData.email,id: userData.id, name: userData.name, avatar: userData.avatar};
-
+    this.commentAuthorData =  this.userDataService.getUserDataByEmail(this.comment.author);
     this.timeSincePosted = this.calculateTimeSincePost(this.comment.date);
     this.loggedUserEmail = JSON.parse(localStorage.getItem('userData') || '{}').email;
     this.isLikedByCurrentUser = this.comment.likes.whoLiked.includes(this.loggedUserEmail);
     this.CheckIfFollowedByCurrentUser();
     
+  }
+
+  public goToUserProfile() {
+    this.router.navigate(['user-panel/' + this.commentAuthorData.id])
   }
 
   public onAddLike() { 

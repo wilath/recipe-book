@@ -1,13 +1,15 @@
 <div class="comment-wrap mb-02rem flex-row-ss">
-  <img
-    src="https://t3.ftcdn.net/jpg/05/53/79/60/360_F_553796090_XHrE6R9jwmBJUMo9HKl41hyHJ5gqt9oz.jpg"
-    alt="avatar"
-    class="mr-hrem avatar-image-25rem"
-  />
+  <a (click)="goToUserProfile()" >
+  @if(commentAuthorData.avatar){
+    <img [src]="commentAuthorData.avatar.url" [alt]="commentAuthorData.avatar.name" class="mr-hrem avatar-image-25rem"/>
+  } @else {
+    <img src="https://t3.ftcdn.net/jpg/05/53/79/60/360_F_553796090_XHrE6R9jwmBJUMo9HKl41hyHJ5gqt9oz.jpg" alt="avatar" class="mr-hrem avatar-image-25rem"/>
+  }
+  </a>
   <div class="content-wrap">
     
     <div class="padding-15r backboard-uno-grey-active border-radius-1r flex-col-ss comment-content">
-        <h4 class="font-size-1r font-weight-500">{{ commentAuthorData.name }}  @if (comment.likes.quantity > 0) {<span class="likes-quantity border-radius-hr">{{comment.likes.quantity}} <i class="fa-solid fa-heart"></i> </span> } </h4>
+        <h4 class="font-size-1r font-weight-500"> <a class="hover-underline" (click)="goToUserProfile()" >{{ commentAuthorData.name }}</a>   @if (comment.likes.quantity > 0) {<span class="likes-quantity border-radius-hr">{{comment.likes.quantity}} <i class="fa-solid fa-heart"></i> </span> } </h4>
       <p>{{ comment.content }}</p>
     </div>
     <div class="comment-meta">

@@ -7,6 +7,7 @@ import { UserDataService } from '../../user-panel/user-data.service';
 import { MicroblogService } from '../microblog.service';
 import { finalize, take } from 'rxjs';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
+import { UserData, emptyUserData } from '../../shared/models/user-data.model';
 
 @Component({
   selector: 'app-microblog-newpost',
@@ -23,7 +24,7 @@ export class MicroblogNewpostComponent implements OnInit, OnDestroy {
 
   public newPostForm!: FormGroup;
 
-  public userData = {email:'', name:''}
+  public userData: UserData = emptyUserData
 
   public isEmojiPickerVisible: boolean = false;
 
@@ -86,7 +87,6 @@ export class MicroblogNewpostComponent implements OnInit, OnDestroy {
   }
 
   public onSubmit() {
-
     const images = (<{input: string, percentages: number, imageData: FileAnchor}[]>this.newPostForm.value.images)
     .map( (el) => {return el.imageData})
     .filter( el => el.url);
@@ -117,8 +117,7 @@ export class MicroblogNewpostComponent implements OnInit, OnDestroy {
   }
 
   private loadUserData(){
-    const user = this.userDataService.getUserDataByEmail(JSON.parse(localStorage.getItem('userData') || '{}').email);
-    this.userData = {email: user.email, name: user.name}
+    this.userData = this.userDataService.getUserDataByEmail(JSON.parse(localStorage.getItem('userData') || '{}').email);
   }
 
   private initForm() {

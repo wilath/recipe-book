@@ -4,6 +4,7 @@ import { RecipesService } from '../../recipes.service';
 import { UserDataService } from '../../../user-panel/user-data.service';
 import { User } from '../../../shared/models/user.model';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UserData, emptyUserData } from '../../../shared/models/user-data.model';
 
 
 
@@ -26,7 +27,7 @@ export class RecipesItemComponent implements OnChanges  {
 
   @Input() public isSimpleDisplay: boolean = false;
 
-  public recipeAuthorId: string = ''
+  public recipeAuthorData: UserData = emptyUserData
 
   public isLikedByCurrentUser : boolean = false;
 
@@ -34,7 +35,7 @@ export class RecipesItemComponent implements OnChanges  {
 
   public totalRatePercentage: number = 0
   
-  public user!: User;
+  public currentUser!: User;
 
   public _rateByCurrentUser!: number;
 
@@ -47,27 +48,27 @@ export class RecipesItemComponent implements OnChanges  {
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
-    this.user = JSON.parse(localStorage.getItem('userData') || '{}');
+    this.currentUser = JSON.parse(localStorage.getItem('userData') || '{}');
     this.totalRatePercentage = (this.recipe.getAverageRating)*20;
-    this.isLikedByCurrentUser = this.recipe.isLikedByUser(this.user.email);
-    this._rateByCurrentUser = this.recipe.isRatedByUser(this.user.email);
-    this.recipeAuthorId = this.usersDataServcie.getUserDataByEmail(this.recipe.author).id
+    this.isLikedByCurrentUser = this.recipe.isLikedByUser(this.currentUser.email);
+    this._rateByCurrentUser = this.recipe.isRatedByUser(this.currentUser.email);
+    this.recipeAuthorData = this.usersDataServcie.getUserDataByEmail(this.recipe.author)
     this.setFollow();
   }
 
   public onRateRecipe(value: number) {
-    this.recipesService.addRateToRecipe(this.recipe.name, this.user.email,value);
+    this.recipesService.addRateToRecipe(this.recipe.name, this.currentUser.email,value);
     this.totalRatePercentage = (this.recipe.getAverageRating)*20;
   }
  
 
   public onLike() {
-    this.recipesService.addLikeToRecipe(this.recipe.name,this.user.email, !this.isLikedByCurrentUser);
+    this.recipesService.addLikeToRecipe(this.recipe.name,this.currentUser.email, !this.isLikedByCurrentUser);
     this.isLikedByCurrentUser = !this.isLikedByCurrentUser
   }
 
   public onFollowUser() {
-    this.usersDataServcie.addFollowToUser(this.recipe.author, this.user.email,  !this.isFollowedByCurrentUser);
+    this.usersDataServcie.addFollowToUser(this.recipe.author, this.currentUser.email,  !this.isFollowedByCurrentUser);
     this.isFollowedByCurrentUser = !this.isFollowedByCurrentUser;
   }
 
@@ -83,7 +84,7 @@ export class RecipesItemComponent implements OnChanges  {
 
   private setFollow() {  
     if(this.usersDataServcie.getUserDataByEmail(this.recipe.author)) {
-       this.isFollowedByCurrentUser = this.usersDataServcie.getUserDataByEmail(this.recipe.author).followers?.includes(this.user.email) || false}
+       this.isFollowedByCurrentUser = this.usersDataServcie.getUserDataByEmail(this.recipe.author).followers?.includes(this.currentUser.email) || false}
     
   }
 }
