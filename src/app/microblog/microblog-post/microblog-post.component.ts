@@ -1,5 +1,10 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { ItemComment } from '../../shared/models/microblog-comment.model';
 import { MicroblogPost } from '../../shared/models/microblog-post.model';
 import { UserData } from '../../shared/models/user-data.model';
@@ -11,18 +16,19 @@ import { SortType } from '../../shared/pipes/date-like-sort.pipe';
   selector: 'app-microblog-post',
   templateUrl: './microblog-post.component.html',
   styleUrl: './microblog-post.component.scss',
-  
 })
 export class MicroblogPostComponent implements OnChanges {
+  constructor(
+    private userDataService: UserDataService,
+    private microblogService: MicroblogService,
+    private formBuilder: FormBuilder
+  ) {}
 
-  constructor(private userDataService: UserDataService, private microblogService: MicroblogService, private formBuilder: FormBuilder) {}
-
-
-  @Input() public microblogPost!: MicroblogPost
+  @Input() public microblogPost!: MicroblogPost;
 
   public postAuthor!: UserData;
 
-  public loggedUserEmail: string = ''
+  public loggedUserEmail: string = '';
 
   public timeSincePosted: string = '';
 
@@ -33,7 +39,7 @@ export class MicroblogPostComponent implements OnChanges {
   public isEmojiPickerVisible: boolean = false;
 
   public isFollowedByCurrentUser: boolean = false;
-  
+
   public newCommentForm!: FormGroup;
 
   public sortType = SortType;
@@ -43,21 +49,25 @@ export class MicroblogPostComponent implements OnChanges {
   public topComment!: ItemComment;
 
   public ngOnChanges(): void {
-    this.postAuthor = this.userDataService.getUserDataByEmail(this.microblogPost.author);
-    this.loggedUserEmail = JSON.parse(localStorage.getItem('userData') || '{}').email
+    this.postAuthor = this.userDataService.getUserDataByEmail(
+      this.microblogPost.author
+    );
+    this.loggedUserEmail = JSON.parse(
+      localStorage.getItem('userData') || '{}'
+    ).email;
     this.timeSincePosted = this.calculateTimeSincePost(this.microblogPost.date);
-    this.isLikedByCurrentUser = this.microblogPost.likes.whoLiked.includes(this.loggedUserEmail);
+    this.isLikedByCurrentUser = this.microblogPost.likes.whoLiked.includes(
+      this.loggedUserEmail
+    );
     this.CheckIfFollowedByCurrentUser();
-    this.microblogPost.comments.length > 0 ? this.setTopComment() : undefined
+    this.setTopComment();
   }
 
-  public initForm(){
-    let content = new FormControl('', [
-      Validators.required]);
+  public initForm() {
+    let content = new FormControl('', [Validators.required]);
     this.newCommentForm = this.formBuilder.group({
-      content: content
-    })
-
+      content: content,
+    });
   }
 
   public onSubmit() {
@@ -65,21 +75,21 @@ export class MicroblogPostComponent implements OnChanges {
       id: this.microblogPost.getHighestCommentId(),
       author: this.loggedUserEmail,
       content: this.newCommentForm.value.content,
-      likes: {quantity: 0, whoLiked: []},
-      date: new Date()
-    }
+      likes: { quantity: 0, whoLiked: [] },
+      date: new Date(),
+    };
     this.microblogService.onAddCommentToPost(this.microblogPost.id, newComment);
-    this.initForm()
+    this.initForm();
   }
-  
+
   public calculateTimeSincePost(postDate: Date): string {
     const now = new Date();
     const diffInMilliseconds = now.getTime() - postDate.getTime();
-    const diffInSeconds = diffInMilliseconds / 1000; 
-    const diffInMinutes = diffInSeconds / 60; 
-    const diffInHours = diffInMinutes / 60; 
-    const diffInDays = diffInHours / 24; 
-  
+    const diffInSeconds = diffInMilliseconds / 1000;
+    const diffInMinutes = diffInSeconds / 60;
+    const diffInHours = diffInMinutes / 60;
+    const diffInDays = diffInHours / 24;
+
     if (diffInDays > 7) {
       return 'more than 7 days ago';
     } else if (diffInDays >= 1) {
@@ -93,58 +103,72 @@ export class MicroblogPostComponent implements OnChanges {
     }
   }
 
-  public onLikePost(){
-    this.microblogService.onLikePost(this.microblogPost.id, this.loggedUserEmail, !this.isLikedByCurrentUser);
+  public onLikePost() {
+    this.microblogService.onLikePost(
+      this.microblogPost.id,
+      this.loggedUserEmail,
+      !this.isLikedByCurrentUser
+    );
     this.isLikedByCurrentUser = !this.isLikedByCurrentUser;
   }
 
-  public openComments(){
+  public openComments() {
     this.isCommentSectionOpen = !this.isCommentSectionOpen;
     this.initForm();
   }
 
   public onFollowUser() {
-    this.userDataService.addFollowToUser(this.postAuthor.email, this.loggedUserEmail, !this.isFollowedByCurrentUser);
-    this.CheckIfFollowedByCurrentUser()
+    this.userDataService.addFollowToUser(
+      this.postAuthor.email,
+      this.loggedUserEmail,
+      !this.isFollowedByCurrentUser
+    );
+    this.CheckIfFollowedByCurrentUser();
   }
 
-  public onDeletePost(){
-    this.microblogService.onDeletePost(this.microblogPost.id)
+  public onDeletePost() {
+    this.microblogService.onDeletePost(this.microblogPost.id);
   }
 
   public showEmojiPanel() {
-    this.isEmojiPickerVisible = !this.isEmojiPickerVisible
+    this.isEmojiPickerVisible = !this.isEmojiPickerVisible;
   }
-  
-  public addEmoji(event: any){
+
+  public addEmoji(event: any) {
     const textArea = <FormControl>this.newCommentForm.get('content');
-    (<FormControl>this.newCommentForm.get('content')).setValue(`${textArea.value} ${event.emoji.native}`)
+    (<FormControl>this.newCommentForm.get('content')).setValue(
+      `${textArea.value} ${event.emoji.native}`
+    );
   }
 
   public onEnterKey(event: Event): void {
-    const EventKey = event as KeyboardEvent
+    const EventKey = event as KeyboardEvent;
     if (EventKey.key === 'Enter' && !EventKey.shiftKey) {
-      EventKey.preventDefault(); 
-      this.onSubmit(); 
+      EventKey.preventDefault();
+      this.onSubmit();
     }
   }
 
-  public onChangeSortType(sort: SortType){
+  public onChangeSortType(sort: SortType) {
     this.choosenSortType = sort;
   }
-  
+
   private CheckIfFollowedByCurrentUser() {
-    this.isFollowedByCurrentUser = this.userDataService.checkIfUserisFollowed(this.postAuthor.email, this.loggedUserEmail);
+    this.isFollowedByCurrentUser = this.userDataService.checkIfUserisFollowed(
+      this.postAuthor.email,
+      this.loggedUserEmail
+    );
   }
 
   private setTopComment() {
-    this.topComment = this.microblogPost.comments.reduce((acc, curr) => {
-      if (curr.likes.quantity > acc.likes.quantity) {
-        return curr;
-      } else {
-        return acc;
-      }
-    }, this.microblogPost.comments[0]);
+    if (this.microblogPost.comments.length > 0) {
+      this.topComment = this.microblogPost.comments.reduce((acc, curr) => {
+        if (curr.likes.quantity > acc.likes.quantity) {
+          return curr;
+        } else {
+          return acc;
+        }
+      }, this.microblogPost.comments[0]);
+    }
   }
-
 }

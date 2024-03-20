@@ -1,3 +1,5 @@
+@import '../../../styles/variables';
+
 .lds-hourglass {
     display: inline-block;
     position: relative;
@@ -13,7 +15,7 @@
     margin: 8px;
     box-sizing: border-box;
     border: 32px solid rgba(20, 20, 20, 0.486);
-    border-color: rgba(156, 156, 156, 0.267) transparent #fff transparent;
+    border-color: rgba(156, 156, 156, 0.267) transparent $sage transparent;
     animation: lds-hourglass 1.2s infinite;
   }
   @keyframes lds-hourglass {

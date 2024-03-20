@@ -1,16 +1,17 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild } from '@angular/core';
 import { UserData, emptyUserData } from '../../shared/models/user-data.model';
 import { MicroblogService } from '../../microblog/microblog.service';
 import { RecipesService } from '../../recipes/recipes.service';
 import { Recipe } from '../../shared/models/recipe.model';
 import { UserDataService } from '../user-data.service';
+import { UserEditComponent } from '../user-edit/user-edit.component';
 
 @Component({
   selector: 'app-user-info-display',
   templateUrl: './user-info-display.component.html',
   styleUrl: './user-info-display.component.scss',
 })
-export class UserInfoDisplayComponent implements OnInit {
+export class UserInfoDisplayComponent implements OnChanges {
 
   constructor(
     private usersDataService: UserDataService,
@@ -22,6 +23,8 @@ export class UserInfoDisplayComponent implements OnInit {
   
   @Input() public currentUserEmail: string = '';
 
+  @ViewChild(UserEditComponent) UserEdit!: UserEditComponent
+
   public isEditMode: boolean = false;
 
   public age: number = 33;
@@ -31,7 +34,7 @@ export class UserInfoDisplayComponent implements OnInit {
   public isFollowedByCurretnUser: boolean = false;
 
 
-  public ngOnInit(): void {
+  public ngOnChanges(): void {
     if (this.userInfo.extraInfo?.age) {
       this.age = this.getUsersAge(this.userInfo.extraInfo?.age);
     }
@@ -53,14 +56,19 @@ export class UserInfoDisplayComponent implements OnInit {
     this.isEditMode = true;
   }
 
+  
+
   public onCancelEdit() {
     this.isEditMode = false;
   }
   
   public onSubmit() {
+    this.UserEdit.onSubmit()
+    this.isEditMode = false
   }
 
-  private getUsersAge(date: Date): number {
+  private getUsersAge(date: string): number {
+    console.log(date)
     const pastDateTime: Date = new Date(date);
 
     const today: Date = new Date();

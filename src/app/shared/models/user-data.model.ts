@@ -17,7 +17,7 @@ export interface SimpleUserdata {
 
 export interface UserExtraInfo {
   city: string,
-  age: Date,
+  age: string,
   motto: string,
   favRecipe: string,
 }

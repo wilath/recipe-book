@@ -55,9 +55,10 @@ export class UserEditComponent implements OnInit {
     const userData = this.userInfo
     const userForm = this.userEditForm.value;
 
-    userData.extraInfo = {city: userForm.city, age: userForm.age, motto: userForm.motto, favRecipe: userForm.favRecipe}
-    userData.name = userForm.name
-    if(userForm.value.avatar){
+    userData.extraInfo = {city: userForm.city, age: userForm.birthDate, motto: userForm.motto, favRecipe: userForm.favRecipe}
+    userData.name = userForm.name;
+   
+    if(userForm.avatar){
       userData.avatar = {name: userForm.avatar.imageData.name , url: userForm.avatar.imageData.url}
     }
 
@@ -66,20 +67,26 @@ export class UserEditComponent implements OnInit {
   }
 
   private initForm(){
-    let name : string = '';
-    let avatar: FormGroup = new FormGroup({});
+    let name = this.userInfo.name;
+    let avatar: FormGroup = new FormGroup({
+      input: new FormControl(null),
+      percentages: new FormControl(0),
+      imageData: new FormControl({name: '', url:''})
+    })
     let city: string = '';
-    let age: Date = new Date();
+    let age: string = '';
     let favRecipe: string = '';
     let motto: string = '';
 
+    
+
     if(this.userInfo.extraInfo){
-      name = this.userInfo.name;
-      city = this.userInfo.extraInfo.city;
-      age = new Date(this.userInfo.extraInfo.age)
-      favRecipe = this.userInfo.extraInfo.favRecipe;
-      motto = this.userInfo.extraInfo.motto;
+      city = this.userInfo.extraInfo.city ?? '';
+      age = this.userInfo.extraInfo.age ?? '';
+      favRecipe = this.userInfo.extraInfo.favRecipe ?? '';
+      motto = this.userInfo.extraInfo.motto?? '';
     }
+
     if(this.userInfo.avatar) {
       avatar = new FormGroup({
         input: new FormControl(null),
