@@ -16,11 +16,15 @@
     <div  class="panel flex-row-ce gap10 right-panel">
         <div *ngIf="isAuth" class="letter-spacing-02rem flex-row-cc ">
             <h3 class="font-size-14r mr-1rem">{{usersData.name}}</h3>
-            <button class="font-size-14r height100 backboard-uno-grey-active circle"></button>
+            @if(usersData.avatar) {
+                <img class="avatar-image-25rem mr-hrem" [src]="usersData.avatar.url" [alt]="usersData.avatar.name">
+            } @else {
+              <img class="avatar-image-25rem mr-hrem" src="https://t3.ftcdn.net/jpg/05/53/79/60/360_F_553796090_XHrE6R9jwmBJUMo9HKl41hyHJ5gqt9oz.jpg" alt="avatar">
+            }
         </div>
         <button [ngClass]="{'button-menu-active' : isNotificationMenuShown}" *ngIf="isAuth" class="circle backboard-uno-grey-active height100 font-size-14r notification" (click)="isNotificationMenuShown = !isNotificationMenuShown" >
             <i class="fa-solid fa-bell"></i>
-            <div *ngIf="usersData && usersData.notifications && getUnshownNotificationsCount() > 0" class=" font-size-1r notification-number">{{getUnshownNotificationsCount()}}</div>
+            <div *ngIf="usersData && usersData.notifications && getNotificationsCount() > 0" class=" font-size-1r notification-number">{{getNotificationsCount()}}</div>
         </button>
         <button *ngIf="isAuth" (click)="onLogout()" class="circle height100 backboard-uno-grey-active font-size-14r logout">
             <i class="fa-solid fa-right-from-bracket"></i>
@@ -39,7 +43,7 @@
                         All
                         <input type="radio" name="read" id="read" value="all" [(ngModel)]="notificationFilter">
                     </label>
-                    <button class="button-alpha font-size-12r font-weight-300 hover-active-grey padding-c1 border-radius-hr ml-auto" [disabled]="getUnshownNotificationsCount() === 0 " type="button" (click)="clearNotifications()">Clear</button>         
+                    <button class="button-alpha font-size-12r font-weight-300 hover-active-grey padding-c1 border-radius-hr ml-auto" [disabled]="getNotificationsCount() === 0 " type="button" (click)="clearNotifications()">Clear</button>         
             </div>
         </div>
             @for (item of usersData.notifications  | filterShown : notificationFilter : notificationFilterFire ; track $index) {
@@ -53,9 +57,9 @@
                 </div>
             </a>
             } @empty {
-                <div  class="notification-post">
-                    <img src="https://www.clipartmax.com/png/middle/149-1491874_question-mark-comments-number-5-in-circle.png" class="notification-image" alt="?">
-                    <div>
+                <div  class="notification-post pt-1r flex-row-cfs">
+                    <img src="https://www.clipartmax.com/png/middle/149-1491874_question-mark-comments-number-5-in-circle.png" class="avatar-image-25rem" alt="?">
+                    <div class="ml-hrem">
                         <p class="notifaction-message">You dont have any notfications</p>         
                     </div>  
                 </div>

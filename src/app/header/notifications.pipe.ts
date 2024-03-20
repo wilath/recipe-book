@@ -7,15 +7,18 @@ import { NotificationModel } from '../shared/models/notification.model';
   pure: false
 })
 export class NotificationShownPipe implements PipeTransform {
-  transform(notifications: NotificationModel[], filter: string, fire:boolean ): NotificationModel[] {
-
+  transform(notifications: NotificationModel[], filter: string, fire: boolean): NotificationModel[] {
     if (!notifications) {
       return [];
     }
+
     if (filter === 'new') {
-      
-      return notifications.filter(notification => !notification.shown);
-      
+      const currentDate = new Date();
+      const twoDaysAgo = new Date(currentDate.getTime() - 2 * 24 * 60 * 60 * 1000); 
+      return notifications.filter(notification => {
+        const notificationDate = new Date(notification.date);
+        return !notification.shown && notificationDate >= twoDaysAgo; 
+      });
     } else {
       return notifications;
     }

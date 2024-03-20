@@ -68,7 +68,6 @@ export class UserInfoDisplayComponent implements OnChanges {
   }
 
   private getUsersAge(date: string): number {
-    console.log(date)
     const pastDateTime: Date = new Date(date);
 
     const today: Date = new Date();

@@ -58,16 +58,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
   public clearNotifications(index?: Date) {
     const newUserData = this.usersData;
     if(index === undefined){
-      for(let i = 0; i < newUserData.notifications.length ; i++){
-        newUserData.notifications[i].shown = true;
-      }
+      newUserData.notifications = [];
     } else {
       const notificationIndex = newUserData.notifications.findIndex( el=> el.date === index);
-      newUserData.notifications[notificationIndex].shown = true;
+      newUserData.notifications.splice(notificationIndex, 1);
     }
   this.userDataService.editUser(newUserData)
   this.notificationFilterFire = !this.notificationFilterFire
-  this.notificationFilter = 'new'
 
   }
   
@@ -92,11 +89,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     return classToReturn
   }
 
-  public getUnshownNotificationsCount(): number {
-    if (!this.usersData || !this.usersData.notifications) {
-      return 0;
-    }
-    return this.usersData.notifications.filter(el => !el.shown).length;
+  public getNotificationsCount(): number {
+    
+    return this.usersData.notifications.length;
   }
 
   private navigationSubscription(){

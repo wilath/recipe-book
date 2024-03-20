@@ -5,6 +5,7 @@
 
 <div class="users-activity flex-row-ss gap15">
 
+  @if(usersRecipes.length > 0) {
   <div class="users-recipes">
     <div class="backboard-uno-grey  border-radius-1r mt-1rem">
       <h3 class="font-size-12r bb-uga pb-hr padding-1r">
@@ -22,7 +23,7 @@
       </div>
     </div>
   </div>
-
+}
   <div class="users-posts">
     @for (post of usersPosts; track $index) {
     <app-microblog-post [microblogPost]="post"></app-microblog-post>
