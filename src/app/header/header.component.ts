@@ -1,26 +1,26 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subject, Subscription, empty, filter, map, of, switchMap, tap } from 'rxjs';
-import { AuthServcie } from '../auth/auth-supp/auth.servcie';
-import { RealTimeDatabaseService } from '../shared/real-time-database.service';
-import { UserDataService } from '../user-panel/user-data.service';
-import { UserData, emptyUserData } from '../shared/models/user-data.model';
+import {Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChildren} from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-
-
+import { Subscription, filter, map } from 'rxjs';
+import { AuthServcie } from '../auth/auth-supp/auth.servcie';
+import { UserData, emptyUserData } from '../shared/models/user-data.model';
+import { UserDataService } from '../user-panel/user-data.service';
 
 @Component({
+  host: {
+    '(document:click)': 'onClickOutsideNotificationMenu($event)',
+  },
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss', './header.component.media.scss'],
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-
   constructor(
     private userDataService: UserDataService,
-    private realTimeDataBase: RealTimeDatabaseService,
     private authService: AuthServcie,
     private router: Router
   ) {}
+
+  @ViewChildren('notiMenu') notiMenu!: QueryList<ElementRef>;
 
   public isAuth = false;
 
@@ -28,7 +28,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   public usersData: UserData = emptyUserData;
 
-  public notificationFilter : 'all' | 'new'  = 'new';
+  public notificationFilter: 'all' | 'new' = 'new';
 
   public notificationFilterFire = false;
 
@@ -36,14 +36,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   private userData$ = this.userDataService.userDataChange;
 
-  test(){
-    console.log('user',this.usersData)
-    console.log('auth', this.isAuth)
-  }
-
   public ngOnInit() {
-    this.userSubscription()
-    this.navigationSubscription()
+    this.userSubscription();
+    this.navigationSubscription();
   }
 
   public ngOnDestroy() {
@@ -57,67 +52,81 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   public clearNotifications(index?: Date) {
     const newUserData = this.usersData;
-    if(index === undefined){
+    if (index === undefined) {
       newUserData.notifications = [];
     } else {
-      const notificationIndex = newUserData.notifications.findIndex( el=> el.date === index);
+      const notificationIndex = newUserData.notifications.findIndex(
+        (el) => el.date === index
+      );
       newUserData.notifications.splice(notificationIndex, 1);
     }
-  this.userDataService.editUser(newUserData)
-  this.notificationFilterFire = !this.notificationFilterFire
-
+    this.userDataService.editUser(newUserData);
+    this.notificationFilterFire = !this.notificationFilterFire;
   }
-  
+
   public setMarkerClass(): string {
-    const currentUrl = this.router.url
-    let classToReturn = ''
-    
+    const currentUrl = this.router.url;
+    let classToReturn = '';
+
     switch (true) {
       case currentUrl.includes('microblog'):
         classToReturn = 'marker-microblog';
         break;
-        case currentUrl.includes('recipes'):
-          classToReturn = 'marker-recipes';
-          break;
-          case currentUrl.includes('user-panel'):
+      case currentUrl.includes('recipes'):
+        classToReturn = 'marker-recipes';
+        break;
+      case currentUrl.includes('user-panel'):
         classToReturn = 'marker-shopping-list';
         break;
       default:
         classToReturn = 'marker-default';
     }
 
-    return classToReturn
+    return classToReturn;
   }
 
   public getNotificationsCount(): number {
-    
     return this.usersData.notifications.length;
   }
 
-  private navigationSubscription(){
-    this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => {
-      this.setMarkerClass();
-    });
+  private navigationSubscription() {
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe(() => {
+        this.setMarkerClass();
+      });
   }
 
-  private userSubscription(){
-  
+  private userSubscription() {
     this.authService.user.subscribe((user) => {
       if (user) {
         this.isAuth = true;
-        this.userDataService.userDataChange.pipe(
-          map((users) => users.find((el) => el.email === user.email)),).
-          subscribe((userData) => {
-          if (userData) {
-            this.usersData = userData;
-          }
-        });
+        this.userDataService.userDataChange
+          .pipe(map((users) => users.find((el) => el.email === user.email)))
+          .subscribe((userData) => {
+            if (userData) {
+              this.usersData = userData;
+            }
+          });
       } else {
-        this.usersData = emptyUserData
+        this.usersData = emptyUserData;
         this.isAuth = false;
       }
     });
+  }
 
- 
-}
+  private onClickOutsideNotificationMenu(event: Event) {
+    if (this.isNotificationMenuShown && this.notiMenu.length === 2) {
+      const firstMenu = this.notiMenu.first.nativeElement;
+      const secondMenu = this.notiMenu.last.nativeElement;
+
+      if (
+        !firstMenu.contains(event.target) &&
+        !secondMenu.contains(event.target)
+      ) {
+        this.isNotificationMenuShown = false;
+      }
+    }
+  }
+  
 }
