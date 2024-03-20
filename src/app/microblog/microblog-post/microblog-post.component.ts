@@ -12,6 +12,7 @@ import { UserDataService } from '../../user-panel/user-data.service';
 import { MicroblogService } from '../microblog.service';
 import { SortType } from '../../shared/pipes/date-like-sort.pipe';
 import { Router } from '@angular/router';
+import { FileAnchor } from '../../shared/models/file-upload.model';
 
 @Component({
   selector: 'app-microblog-post',
@@ -31,6 +32,8 @@ export class MicroblogPostComponent implements OnChanges {
   public postAuthor!: UserData;
 
   public loggedUserEmail: string = '';
+
+  public loggedUserAvatar: FileAnchor | undefined = undefined
 
   public timeSincePosted: string = '';
 
@@ -57,6 +60,7 @@ export class MicroblogPostComponent implements OnChanges {
     this.loggedUserEmail = JSON.parse(
       localStorage.getItem('userData') || '{}'
     ).email;
+    this.loggedUserAvatar = this.userDataService.getUserDataByEmail(this.loggedUserEmail).avatar
     this.timeSincePosted = this.calculateTimeSincePost(this.microblogPost.date);
     this.isLikedByCurrentUser = this.microblogPost.likes.whoLiked.includes(
       this.loggedUserEmail

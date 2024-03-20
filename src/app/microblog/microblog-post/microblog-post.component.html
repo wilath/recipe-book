@@ -95,7 +95,11 @@
       @if (isCommentSectionOpen) {
         <div  class="bt-uga  padding-1r pt-0 comments-section">
           <div class="mt-1rem flex-row-ss add-comment">
-          <img class="avatar-image-25rem mr-hrem" src="https://t3.ftcdn.net/jpg/05/53/79/60/360_F_553796090_XHrE6R9jwmBJUMo9HKl41hyHJ5gqt9oz.jpg" alt="avatar">
+            @if(loggedUserAvatar) { 
+              <img class="avatar-image-25rem mr-hrem" [src]="loggedUserAvatar.url" [alt]="loggedUserAvatar.name">
+            } @else {
+              <img class="avatar-image-25rem mr-hrem" src="https://t3.ftcdn.net/jpg/05/53/79/60/360_F_553796090_XHrE6R9jwmBJUMo9HKl41hyHJ5gqt9oz.jpg" alt="avatar">
+            }
             <form class="flex-grow-1" [formGroup] = "newCommentForm" >
               <div class="textarea-wrapper flex-grow-1 flex-row-cfs">
                 <textarea
