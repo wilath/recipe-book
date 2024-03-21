@@ -1,8 +1,11 @@
-<div class="backboard-uno-grey padding-1r border-radius-1r ">
+<div class="backboard-uno-grey border-radius-1r ">
     @if(!isEditMode) {
-        <div  class="flex-row-cfs gap15 pb-1r ">
+        <div  class="flex-row-cfs gap15 padding-1r  ">
             @if (userInfo.avatar) {
-                <img class="avatar-image-9rem border-replacer" [src]="userInfo.avatar.url" alt="">
+                <img class="avatar-image-9rem border-replacer" [src]="userInfo.avatar.url" [alt]="userInfo.avatar.name">
+            } @else {
+                <img class="avatar-image-9rem border-replacer" src="https://t3.ftcdn.net/jpg/05/53/79/60/360_F_553796090_XHrE6R9jwmBJUMo9HKl41hyHJ5gqt9oz.jpg" alt="placeholdavatar">
+
             }
             <div class="ml-hrem">
                 <h2 class="font-size-25r">{{userInfo.name}}</h2>
@@ -26,7 +29,7 @@
     }
     
 
-    <div class="flex-row-cfs font-size-11r gap15 pt-1r  bt-uga">
+    <div class="flex-row-cfs font-size-11r gap15 padding-1r bt-uga">
         
         <h3>Recipes : <span class="font-weight-500 sage2">{{usersActivity.r}}</span> </h3>
         <h3>Posts: <span class="font-weight-500 sage2 ">{{usersActivity.m}}</span> </h3>

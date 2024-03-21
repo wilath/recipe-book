@@ -16,6 +16,7 @@
         <label for="name" class="font-weight-400 mb-1rem">Enter the name of the dish</label>
         <input
           type="text"
+          spellcheck="false"
           maxlength="36"
           id="name"
           formControlName="name"
@@ -184,6 +185,7 @@
           <textarea
             cdkTextareaAutosize
             cdkAutosizeMinRows="3"
+            spellcheck="false"
             type="text"
             id="description"
             formControlName="main"
@@ -203,7 +205,7 @@
                 <button type="button" class="button-bravo-delete ml-hrem border-radius-hr" (click)="onDeleteDescriptionStep($index)"><i class="fa-solid fa-xmark"></i></button>
               </div>
               <div class="textarea-wrapper width100">
-                <textarea cdkTextareaAutosize cdkAutosizeMinRows="1" [name]="$index" [id]="$index" [formControlName]="$index"></textarea>
+                <textarea spellcheck="false" cdkTextareaAutosize cdkAutosizeMinRows="1" [name]="$index" [id]="$index" [formControlName]="$index"></textarea>
               </div>
           </div>
           }
@@ -228,6 +230,7 @@
               <input
                 class="pl-hr font-size-1r uno-white background-tran"
                 type="text"
+                spellcheck="false"
                 placeholder="Ingredient"
                 formControlName="name"
               />

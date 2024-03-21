@@ -16,6 +16,9 @@ export class UserShoppingListComponent  {
 
   @Input({required: true}) shoppingList: ShoppingItem[] = [];
 
+  public isVisible: boolean = false;
+
+
   public onDeleteIngredientFromShopList(recipeId: number, ingredientIndex: number){
     this.userDataService.deleteItemFromShopList(this.userEmail, recipeId, ingredientIndex)
   }
@@ -31,7 +34,9 @@ export class UserShoppingListComponent  {
 
   public goToRecipe(id: number){
     this.router.navigate(['recipes/' + id])
-
   }
+  public showList() {
+    this.isVisible = !this.isVisible
+    }
 
 }

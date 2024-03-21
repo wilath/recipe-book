@@ -28,7 +28,7 @@
           <p class="passowrds-not-same padding-c1 sage2 border-radius-hr"  >Passwords are not the same!</p>
         }
         @if (!isLoginMode) {
-          <re-captcha (resolved)="resolved($event)" ></re-captcha>
+          <re-captcha (resolved)="captchaResolved($event)" (errored)="captchaError($event)" ></re-captcha>
         }
 
             <!-- bot protection -->

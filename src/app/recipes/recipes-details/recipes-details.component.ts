@@ -15,6 +15,7 @@ import { UserNotification } from '../../shared/enums/notifications.enum';
   styleUrls: ['./recipes-details.component.scss'],
 })
 export class RecipesDetailsComponent implements OnInit {
+
  
   constructor(
     private recipesService: RecipesService,
@@ -54,8 +55,6 @@ export class RecipesDetailsComponent implements OnInit {
     this._rateByCurrentUser = value;
   }
 
-
-
   public ngOnInit() {
     this.route.params.subscribe((params: Params) => {
       this.id = +params['id'];
@@ -75,6 +74,9 @@ export class RecipesDetailsComponent implements OnInit {
 
   public onGoBack() {
     this.router.navigate(['/recipes']);
+  }
+  public goToProfile() {
+    this.router.navigate(['user-panel/' + this.userDataService.getUserDataByEmail(this.recipe.author).id ])
   }
 
   public onRateRecipe(value: number) {

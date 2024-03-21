@@ -63,8 +63,14 @@ export class MicroblogService   {
   }
 
   public getNumberOfPostForUser(email: string) {
-    return this.posts.filter( post => post.author === email).length
-  }
+    const userPosts = this.posts.filter(post => post.author === email);
+    
+    const userComments = this.posts.reduce((total, post) => {
+        return total + post.comments.filter(comment => comment.author === email).length;
+    }, 0);
+    
+    return userPosts.length + userComments;
+}
 
   public onAddNewPost(post: MicroblogPost) {
     const newPosts = this.posts;
@@ -152,7 +158,6 @@ export class MicroblogService   {
     this.posts = newPosts;
     this.postsChange.next(this.posts.slice());
   }
-
 
   public onLikeComment(postId: number, commentId: number, userEmail: string, add: boolean) {
     const newPosts = this.posts;

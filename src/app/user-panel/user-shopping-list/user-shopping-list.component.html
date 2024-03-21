@@ -1,45 +1,52 @@
 <div class="border-radius-1r backboard-uno-grey mt-1rem  shopping-list-wrapper">
-    <div class="flex-row-cfs pb-hr bb-uga padding-15r">
-        <h3 class="font-size-14r ml-hrem">Your Shopping List:</h3>
-        <button class="border-radius-hr hover-active-grey font-size-14r ml-auto button-alpha" (click)="onClearShopList()" >Clear</button>
+    <div class="flex-row-cfs pb-hr  padding-15r">
+        <h3 class="font-size-14r ml-hrem padding-c1"> <a (click)="showList()" tabindex="0" class="hover-underline">Your Shopping List: </a>
+          <i [ngStyle]="{transform: !isVisible ? 'rotate(180deg)' : ''}" class="trans02linear sage fa-solid fa-chevron-up ml-hrem font-size-1r"></i>
+        </h3>
+        @if (isVisible) {
+          <button [disabled]="this.shoppingList.length === 0" class="border-radius-hr padding-c1 hover-active-grey-enabled font-size-14r ml-auto button-alpha" (click)="onClearShopList()" >Clear</button>
+        }
     </div>
 
-  <div class="flex-row-ss mt-hrem padding-15r width100  flex-wrap gap15">
-    @for (shoppingItem of shoppingList; track $index) {
-    <div class="shopping-item b-uga border-radius-1r  overflow-h font-size-12r">
-      <div class="flex-row-cfs bb-uga padding-15r">
-        <h4>
-          Ingredients for
-          <a class="hover-underline" (click)="goToRecipe(shoppingItem.recipeId)">
-            <span class="sage2">{{ shoppingItem.recipeName }}</span>
-        </a>
-          :
-        </h4>
-        <button
-          class="ml-auto button-alpha hover-i-sage2 font-size-1r border-radius-hr"
-          (click)="onDeleteRecipeFromShoplist(shoppingItem.recipeId)"
-        >
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-      </div>
-      <div class="padding-15r">
-        @for (ingredient of shoppingItem.ingredients; track $index) {
-        <div class="flex-row-fese mt-hrem">
-          
-          <p>{{ ingredient.name }}</p>
-          <div class="flex-grow-1 dotted"></div>
-          <p>{{ ingredient.ammount }}</p>
-          <p class="ml-02rem sage">{{ ingredient.unit }}</p>
-          <button class="button-alpha hover-i-sage2 font-size-1r border-radius-hr"(click)="onDeleteIngredientFromShopList(shoppingItem.recipeId, $index)">
-            <i class="fa-solid fa-xmark"></i>
-          </button>
+    @if(isVisible){
+      <div class="flex-row-ss mt-hrem padding-15r   bt-uga flex-wrap gap15">
+        @for (shoppingItem of shoppingList; track $index) {
+        <div class="shopping-item b-uga border-radius-1r  overflow-h font-size-12r">
+          <div class="flex-row-cfs bb-uga padding-15r">
+            <h4>
+              Ingredients for
+              <a class="hover-underline" (click)="goToRecipe(shoppingItem.recipeId)">
+                <span class="sage2">{{ shoppingItem.recipeName }}</span>
+            </a>
+              :
+            </h4>
+            <button
+              class="ml-auto button-alpha hover-i-sage2 font-size-1r border-radius-hr"
+              (click)="onDeleteRecipeFromShoplist(shoppingItem.recipeId)"
+            >
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+          <div class="padding-15r">
+            @for (ingredient of shoppingItem.ingredients; track $index) {
+            <div class="flex-row-fese mt-hrem">
+              
+              <p>{{ ingredient.name }}</p>
+              <div class="flex-grow-1 dotted"></div>
+              <p>{{ ingredient.ammount }}</p>
+              <p class="ml-02rem sage">{{ ingredient.unit }}</p>
+              <button class="button-alpha hover-i-sage2 font-size-1r border-radius-hr"(click)="onDeleteIngredientFromShopList(shoppingItem.recipeId, $index)">
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+            </div>
+            }
+          </div>
         </div>
+        
+        } @empty {
+            <h3 class="font-size-11r padding-1r">Your Shopping List is Empty... </h3>
         }
       </div>
-    </div>
-    
-    } @empty {
-        <h3 class="font-size-11r padding-1r">Your Shopping List is Empty... </h3>
     }
-  </div>
+  
 </div>

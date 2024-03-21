@@ -11,8 +11,7 @@ import { UserDataService } from '../user-panel/user-data.service';
   styleUrls: ['./auth.component.scss'],
 })
 export class AuthComponent {
- 
-
+  
   constructor(
     private authService: AuthServcie,
     private userDataService: UserDataService,
@@ -35,8 +34,11 @@ export class AuthComponent {
     this.isLoginMode = !this.isLoginMode;
   }
 
-  public resolved(captchaResponse: string | null) {
+  public captchaResolved(captchaResponse: string | null) {
     this._token = captchaResponse
+  }
+  public captchaError(captchaResponse: any) {
+    console.log(captchaResponse)
   }
 
 
