@@ -11,11 +11,15 @@ import { UserDataService } from '../user-panel/user-data.service';
   styleUrls: ['./auth.component.scss'],
 })
 export class AuthComponent {
+ 
+
   constructor(
     private authService: AuthServcie,
     private userDataService: UserDataService,
     private router: Router
-  ) {}
+  ) { 
+    this._token = null
+  }
 
   public isLoginMode = true;
 
@@ -25,11 +29,23 @@ export class AuthComponent {
 
   private auth$!: Observable<AuthResponseData>;
 
+  public _token: string | null;
+
   public onSwitchMode() {
     this.isLoginMode = !this.isLoginMode;
   }
 
+  public resolved(captchaResponse: string | null) {
+    this._token = captchaResponse
+  }
+
+
   public onSubmit(form: NgForm) {
+    
+    if(form.value.checkbox) {
+      console.error('Anit-Bot detected')
+      return;
+    }
     const email = form.value.email;
     const password = form.value.password;
     const name = form.value.name;

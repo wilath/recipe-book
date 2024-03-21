@@ -65,6 +65,10 @@ footer{
     a:hover{
         color: $sage;
     }
+    a:focus-visible{
+        color:$sage;
+        outline: none;
+    }
 }
 .padd1{
     padding: 1rem;

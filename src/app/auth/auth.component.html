@@ -1,103 +1,57 @@
-<div class="auth-wrap">
-  <app-alert
-    [message]="error"
-    *ngIf="error"
-    (close)="onHandleError()"
-  ></app-alert>
-  <div *ngIf="isLoading" style="text-align: center">
+<div class="border-radius-1r backboard-uno-grey padding-1r flex-col-cc">
+  @if (error) {
+    <app-alert [message]="error" (close)="onHandleError()"></app-alert>
+  }
+  @if (isLoading) {
     <app-loading-spinner></app-loading-spinner>
-  </div>
-  <form
-    #authForm="ngForm"
-    class="auth-form"
-    (ngSubmit)="onSubmit(authForm)"
-    *ngIf="!isLoading"
-  >
-    <div class="auth-form-group">
-      <label for="email">E-mail</label>
-      <input
-        autocomplete="off"
-        type="email"
-        id="email"
-        class="auth-input"
-        ngModel
-        name="email"
-        required
-        email
-      />
-    </div>
-    <div *ngIf="!isLoginMode" class="auth-form-group">
-      <label for="email">Name</label>
-      <input
-        autocomplete="off"
-        id="name"
-        class="auth-input"
-        ngModel
-        name="name"
-        required
-      />
-    </div>
-    <div class="auth-form-group">
-      <label for="password">Password</label>
-      <input
-        type="password"
-        id="password"
-        class="auth-input"
-        ngModel
-        name="password"
-        required
-        minlength="6"
-      />
-    </div>
-    <div *ngIf="!isLoginMode" class=" auth-form-group">
-      <label for="password2">Confirm password</label>
-      <input
-        type="password"
-        id="password2"
-        class="auth-input"
-        ngModel
-        name="password2"
-        required
-        minlength="6"
+  } @else {
+    <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
+      <div class="flex-col-cc font-size-14r gap10">
+        
+        <label for="email">E-mail</label>
+        <input autocomplete="off" type="email" id="email" class="font-size-14r auth-input uno-white font-weight-300 padding-c1 border-radius-hr" ngModel name="email" required email/>
+       
+        @if (!isLoginMode) {
+          <label for="email">Name</label>
+          <input autocomplete="off" id="name" class="font-size-14r auth-input uno-white font-weight-300 padding-c1 border-radius-hr" ngModel name="name" required/>
+        }
 
-      />
-      
-    </div>
-    <div *ngIf="(authForm.value.password !== authForm.value.password2) && !isLoginMode" class="auth-form-alert">
-        <p>Passwords are not the same!</p>
+        <label for="password">Password</label>
+        <input type="password" id="password" class="font-size-14r auth-input uno-white font-weight-300 padding-c1 border-radius-hr" ngModel name="password" required minlength="6"/>
+        
+        @if (!isLoginMode) {
+          <label for="password2">Confirm password</label>
+          <input type="password" id="password2" class="font-size-14r auth-input uno-white font-weight-300 padding-c1 border-radius-hr" ngModel name="password2" required minlength="6"/>
+        }
+          
+        @if ((authForm.value.password !== authForm.value.password2) && !isLoginMode && authForm.value.password2) {
+          <p class="passowrds-not-same padding-c1 sage2 border-radius-hr"  >Passwords are not the same!</p>
+        }
+        @if (!isLoginMode) {
+          <re-captcha (resolved)="resolved($event)" ></re-captcha>
+        }
+
+            <!-- bot protection -->
+          <input type="checkbox" class="bot-prot" id="checkbox" ngModel name="checkbox"/>
+        
+        @if(isLoginMode) {
+          <button class="button-alpha border-radius-hr padding-c1 hover-active-grey-enabled font-size-14r" 
+          [disabled]="!authForm.valid">
+          Login
+          </button>
+        } @else {
+          <button class="button-alpha border-radius-hr padding-c1 hover-active-grey-enabled font-size-14r" 
+          [disabled]="(authForm.value.password !== authForm.value.password2 || !authForm.valid || !_token)">
+          Sign Up
+          </button>
+        }
+          
+          <button type="button" class="font-size-14r button-alpha hover-underline" (click)="onSwitchMode()">
+            {{ isLoginMode ? "Not registered yet? Sign up" : "Back to Login" }}
+          </button>
+        
       </div>
-
-    <div *ngIf="!isLoginMode" class="auth-form-group">
-      <label for="terms" style="margin-bottom: 10px"
-        >Accept the Terms and Conditions</label
-      >
-      <input
-        type="checkbox"
-        class="auth-input-checkbox"
-        id="checkbox"
-        ngModel
-        name="checkbox"
-        required
-      />
-    </div>
-
-    <div class="login-buttons">
-      <button
-        class="button-alpha"
-        [disabled]="
-          isLoginMode
-            ? !authForm.valid
-            : authForm.value.password !== authForm.value.password2 ||
-              !authForm.valid
-        "
-        style="margin-right: 10px"
-      >
-        {{ isLoginMode ? "Login" : "Sign Up" }}
-      </button>
-
-      <button type="button" class="button-alpha" (click)="onSwitchMode()">
-        {{ isLoginMode ? "Switch to SignUp" : "Switch to Login" }}
-      </button>
-    </div>
-  </form>
+    </form>
+  }
+ 
 </div>

@@ -1,24 +1,24 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { SharedModule } from './shared/shared.module';
-import { CoreModule } from './core.module';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { RealTimeDatabaseService } from './shared/real-time-database.service';
-import { NotificationShownPipe } from './header/notifications.pipe';
-import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
-import { getStorage, provideStorage } from '@angular/fire/storage';
-import { environment } from '../environments/environment';
-import { AngularFireStorageModule } from '@angular/fire/compat/storage';
-import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
-import { StorageService } from './shared/storage.service';
+import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { getStorage, provideStorage } from '@angular/fire/storage';
+import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { environment } from '../environments/environment';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { CoreModule } from './core.module';
+import { HeaderComponent } from './header/header.component';
+import { NotificationShownPipe } from './header/notifications.pipe';
+import { RealTimeDatabaseService } from './shared/real-time-database.service';
+import { SharedModule } from './shared/shared.module';
+import { StorageService } from './shared/storage.service';
 
 
 
@@ -45,7 +45,8 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
   providers:[
     RealTimeDatabaseService,
     StorageService,
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    
   ],
   bootstrap: [AppComponent],
 })

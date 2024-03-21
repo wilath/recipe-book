@@ -13,7 +13,10 @@ export const environment = {
     messagingSenderId: "259788094646",
     appId: "1:259788094646:web:09961e5501fc9adc3afa17",
     measurementId: "G-DFN619CNZ8"
-  }
+  },
+  recaptcha: {
+    siteKey: '6LffWaApAAAAAIoiPxX7Nx_Ez1SwB0ZBTg6kg-3Z',
+  },
 }
 /*
  * For easier debugging in development mode, you can import the following file
