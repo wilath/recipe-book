@@ -9,4 +9,5 @@ export const fadeIn = trigger('fadeInOutAnimation', [
     style({ opacity: 1 }),
     animate('0.45s linear', style({ opacity: 0 })),
   ]),
+ 
 ]);

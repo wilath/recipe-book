@@ -9,7 +9,7 @@
     </div>
 
     @if(isVisible){
-      <div [@inOutAnimation] class="flex-row-ss mt-hrem padding-15r   bt-uga flex-wrap gap15">
+      <div [@inOutAnimation] class="flex-row-ss mt-hrem padding-15r overflow-h bt-uga flex-wrap gap15">
         @for (shoppingItem of shoppingList; track $index) {
         <div class="shopping-item b-uga border-radius-1r  overflow-h font-size-12r">
           <div class="flex-row-cfs bb-uga padding-15r">
