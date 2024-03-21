@@ -5,6 +5,8 @@ import { UserDataService } from '../../../user-panel/user-data.service';
 import { User } from '../../../shared/models/user.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserData, emptyUserData } from '../../../shared/models/user-data.model';
+import { fadeIn } from '../../../shared/animations/fade-in.animation';
+import { slideIn } from '../../../shared/animations/slide-in.animation';
 
 
 
@@ -12,6 +14,10 @@ import { UserData, emptyUserData } from '../../../shared/models/user-data.model'
   selector: 'app-recipes-item',
   templateUrl: './recipes-item.component.html',
   styleUrls: ['./recipes-item.component.scss'],
+  animations: [
+    fadeIn,
+    slideIn
+  ]
 })
 
 export class RecipesItemComponent implements OnChanges  {

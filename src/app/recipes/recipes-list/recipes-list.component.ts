@@ -7,11 +7,15 @@ import { RecipesDetailsComponent } from '../recipes-details/recipes-details.comp
 import { RecipesService } from '../recipes.service';
 import { FoodType } from '../../shared/enums/food-type-enum';
 import { FoodSort } from '../../shared/enums/food-sort.enum';
+import { fadeIn } from '../../shared/animations/fade-in.animation';
 
 @Component({
   selector: 'app-recipes-list',
   templateUrl: './recipes-list.component.html',
   styleUrls: ['./recipes-list.component.scss'],
+  animations: [
+    fadeIn
+  ]
 
 })
 

@@ -126,7 +126,11 @@
     chosenSortType
     ;track $index) {
 
-  <app-recipes-item [recipe]="recipe"></app-recipes-item>
+      @defer ( on viewport) {
+        <app-recipes-item [@fadeInOutAnimation] [recipe]="recipe"></app-recipes-item>
+      } @placeholder { 
+        <div></div>
+      }
 }
 
 </div>

@@ -5,7 +5,7 @@
 <div>
   <div class="border-radius-1r backboard-uno-grey overflow-h">
     <div class="overflow-h">
-    <a  (click)="onNavigateToRecipeDetails()"  ><img class="width100 recipe-image" [src]="recipe.images[0].url" alt="recipe" /></a>
+    <a  (click)="onNavigateToRecipeDetails()"  ><img [@fadeInOutAnimation] class="width100 recipe-image" [src]="recipe.images[0].url" alt="recipe" /></a>
     </div>
     <div class="recipe-title padding-050 m-01 font-size-14r">
       <a tabindex="0" class="hover-underline uno-white" (click)="onNavigateToRecipeDetails()">{{ recipe.name }}</a>

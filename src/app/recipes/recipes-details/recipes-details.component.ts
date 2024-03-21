@@ -8,11 +8,15 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ItemComment } from '../../shared/models/microblog-comment.model';
 import { User } from '../../shared/models/user.model';
 import { UserNotification } from '../../shared/enums/notifications.enum';
+import { slideIn } from '../../shared/animations/slide-in.animation';
 
 @Component({
   selector: 'app-recipes-details',
   templateUrl: './recipes-details.component.html',
   styleUrls: ['./recipes-details.component.scss'],
+  animations: [
+    slideIn
+  ]
 })
 export class RecipesDetailsComponent implements OnInit {
 

@@ -3,9 +3,9 @@
 
   @for (post of (posts | dateLikeSort: SortType.sortByDate) ; track $index) {
       @defer (on viewport) {
-      <app-microblog-post [microblogPost]="post"></app-microblog-post>
+      <app-microblog-post [@fadeInOutAnimation] [microblogPost]="post"></app-microblog-post>
       } @placeholder() {
-      <app-microblog-post-placeholder></app-microblog-post-placeholder>
+      <app-microblog-post-placeholder ></app-microblog-post-placeholder>
       } 
   }
 </div>

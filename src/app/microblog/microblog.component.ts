@@ -3,11 +3,16 @@ import { MicroblogService } from './microblog.service';
 import { Subscription } from 'rxjs';
 import { MicroblogPost } from '../shared/models/microblog-post.model';
 import { SortType } from '../shared/pipes/date-like-sort.pipe';
+import { slideIn } from '../shared/animations/slide-in.animation';
+import { fadeIn } from '../shared/animations/fade-in.animation';
 
 @Component({
   selector: 'app-microblog',
   templateUrl: './microblog.component.html',
   styleUrl: './microblog.component.scss',
+  animations: [
+    fadeIn
+  ]
 })
 export class MicroblogComponent implements OnInit, OnDestroy {
   constructor(private microblogService: MicroblogService) {}

@@ -135,7 +135,7 @@
   </h2>
   @if (isCommentSectionVisible) {
 
-  <div class="flex-row-cfs gap10 mt-1rem">
+  <div [@inOutAnimation] class="flex-row-cfs gap10 mt-1rem">
     @if(userData.avatar){
       <img class="avatar-image-25rem" [src]="userData.avatar.url" [alt]="userData.avatar.name"/>
     } @else{

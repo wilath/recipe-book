@@ -13,11 +13,17 @@ import { MicroblogService } from '../microblog.service';
 import { SortType } from '../../shared/pipes/date-like-sort.pipe';
 import { Router } from '@angular/router';
 import { FileAnchor } from '../../shared/models/file-upload.model';
+import { slideIn } from '../../shared/animations/slide-in.animation';
+import { fadeIn } from '../../shared/animations/fade-in.animation';
 
 @Component({
   selector: 'app-microblog-post',
   templateUrl: './microblog-post.component.html',
   styleUrl: './microblog-post.component.scss',
+  animations: [
+    slideIn,
+    fadeIn
+  ]
 })
 export class MicroblogPostComponent implements OnChanges {
   constructor(

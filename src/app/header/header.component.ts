@@ -4,6 +4,8 @@ import { Subscription, filter, map } from 'rxjs';
 import { AuthServcie } from '../auth/auth-supp/auth.servcie';
 import { UserData, emptyUserData } from '../shared/models/user-data.model';
 import { UserDataService } from '../user-panel/user-data.service';
+import { slideIn } from '../shared/animations/slide-in.animation';
+import { fadeIn } from '../shared/animations/fade-in.animation';
 
 @Component({
   host: {
@@ -12,6 +14,10 @@ import { UserDataService } from '../user-panel/user-data.service';
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss', './header.component.media.scss'],
+  animations: [
+    slideIn,
+    fadeIn
+  ]
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   constructor(

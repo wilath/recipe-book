@@ -1,12 +1,16 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
+import { slideIn } from '../../shared/animations/slide-in.animation';
 import { ShoppingItem } from '../../shared/models/user-data.model';
 import { UserDataService } from '../user-data.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-shopping-list',
   templateUrl: './user-shopping-list.component.html',
-  styleUrl: './user-shopping-list.component.scss'
+  styleUrl: './user-shopping-list.component.scss',
+  animations: [
+    slideIn
+  ]
 })
 export class UserShoppingListComponent  {
 

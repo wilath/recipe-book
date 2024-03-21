@@ -29,6 +29,7 @@
         <a>
           <div class=" image-section-photo-container width100 height100">
             <img
+            [@fadeInOutAnimation]
             class="image-section-photo"  
             [ngSrc]="microblogPost.images[0].url"
             fill
@@ -44,7 +45,8 @@
         'grid-small-top': microblogPost.images.length > 2}"> <!--kafelek drugi-->
         <a >
           <div class=" image-section-photo-container width100 height100">
-            <img 
+            <img
+            [@fadeInOutAnimation]
             class="image-section-photo "  
             [ngSrc]="microblogPost.images[1].url"
             fill
@@ -59,6 +61,7 @@
             <img class="image-section-photo" 
             fill
             placeholder
+            [@fadeInOutAnimation]
             [ngSrc]="microblogPost.images[2].url" [alt]="microblogPost.images[2].name">
           </div>
         </a>
@@ -70,6 +73,7 @@
             <img class="image-section-photo" 
             fill
             placeholder
+            [@fadeInOutAnimation]
             [ngSrc]="microblogPost.images[2].url" [alt]="microblogPost.images[2].name">
           </div>
         </a>
@@ -93,7 +97,7 @@
         </div>
       </div>
       @if (isCommentSectionOpen) {
-        <div  class="bt-uga  padding-1r pt-0 comments-section">
+        <div class="bt-uga  padding-1r pt-0 comments-section">
           <div class="mt-1rem flex-row-ss add-comment">
             @if(loggedUserAvatar) { 
               <img class="avatar-image-25rem mr-hrem" [src]="loggedUserAvatar.url" [alt]="loggedUserAvatar.name">
