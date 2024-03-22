@@ -19,6 +19,7 @@ import { NotificationShownPipe } from './header/notifications.pipe';
 import { RealTimeDatabaseService } from './shared/real-time-database.service';
 import { SharedModule } from './shared/shared.module';
 import { StorageService } from './shared/storage.service';
+import {LayoutModule} from '@angular/cdk/layout';
 
 
 
@@ -28,6 +29,7 @@ import { StorageService } from './shared/storage.service';
     HeaderComponent,
     NotificationShownPipe],
   imports: [
+    LayoutModule,
     FormsModule,
     CommonModule,
     BrowserModule,

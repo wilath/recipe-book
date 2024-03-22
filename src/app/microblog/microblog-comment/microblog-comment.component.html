@@ -17,7 +17,7 @@
       <span>·</span> 
       {{ timeSincePosted }} 
       <span>·</span> 
-      <button type="button" class="love-it hover-underline" (click)="onAddLike()" > {{isLikedByCurrentUser? 'I dont love it' : 'I love it!'}}</button> 
+      <button type="button" class="love-it hover-underline" (click)="onAddLike()" > {{isLikedByCurrentUser? 'Unlove it' : 'I love it!'}}</button> 
       <span>·</span> 
       @if (comment.author !== loggedUserEmail) {
       <button type="button" class="love-it hover-underline" (click)="onFollowUser()" > {{isFollowedByCurrentUser? 'Unfollow' : 'Follow'}}</button> 

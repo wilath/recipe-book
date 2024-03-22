@@ -5,6 +5,7 @@ import { MicroblogPost } from '../shared/models/microblog-post.model';
 import { SortType } from '../shared/pipes/date-like-sort.pipe';
 import { slideIn } from '../shared/animations/slide-in.animation';
 import { fadeIn } from '../shared/animations/fade-in.animation';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-microblog',
@@ -15,7 +16,9 @@ import { fadeIn } from '../shared/animations/fade-in.animation';
   ]
 })
 export class MicroblogComponent implements OnInit, OnDestroy {
-  constructor(private microblogService: MicroblogService) {}
+  constructor(private microblogService: MicroblogService, private responsive: BreakpointObserver) {}
+
+  public isButtonTextVisible: boolean = false;
 
   public posts: MicroblogPost[] = [];
 
@@ -26,15 +29,25 @@ export class MicroblogComponent implements OnInit, OnDestroy {
   public isPhotoDisplayOn: boolean = true;
 
   public ngOnInit(): void {
+    this.setMicroblogSub();
+    this.setResponsiveSub();
+  }
+
+  public ngOnDestroy(): void {
+    this.microblogSub.unsubscribe();
+  }
+
+  private setMicroblogSub() {
     this.microblogSub = this.microblogService.postsChange.subscribe(posts => {
       this.posts = posts;
       this.microblogService.storeDatainDatabase()
     });
     this.posts = this.microblogService.getMicroblogData()
-    
   }
 
-  public ngOnDestroy(): void {
-    this.microblogSub.unsubscribe();
+  private setResponsiveSub(){
+    this.responsive.observe(['(min-width: 555px)']).subscribe((res)=>{
+      this.isButtonTextVisible = res.matches
+    })
   }
 }

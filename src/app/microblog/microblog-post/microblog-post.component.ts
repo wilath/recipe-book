@@ -30,10 +30,15 @@ export class MicroblogPostComponent implements OnChanges {
     private router: Router,
     private userDataService: UserDataService,
     private microblogService: MicroblogService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
   ) {}
+ 
 
   @Input() public microblogPost!: MicroblogPost;
+
+  @Input() public isButtonTextVisible: boolean = true;
+
+
 
   public postAuthor!: UserData;
 
@@ -103,7 +108,7 @@ export class MicroblogPostComponent implements OnChanges {
     const diffInDays = diffInHours / 24;
 
     if (diffInDays > 7) {
-      return 'more than 7 days ago';
+      return 'over 7 days ago';
     } else if (diffInDays >= 1) {
       return Math.floor(diffInDays) + ' days ago';
     } else if (diffInHours >= 1) {

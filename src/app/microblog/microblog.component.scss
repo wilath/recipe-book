@@ -1,3 +1,7 @@
 .microblog-wrap{
-    padding: 0 15%
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 600px;
+    padding: 0 16px;
 }

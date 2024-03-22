@@ -1,10 +1,9 @@
-<header class="padding-01 flex-row-csa backboard-uno-grey">
-    <div class="panel flex-row-cfs gap10 gap10">
-        <div >
-           
-        </div>
-    </div>
-    <div class="panel flex-row-cc gap10 center-panel">
+<header  class="padding-01 flex-row-cc backboard-uno-grey">
+
+    @if (!_isSmallScreen) {
+        <div  class="panel"></div>
+    }
+    <div  class="panel flex-row-cc gap10 center-panel">
         @if (isAuth) {
             <button class="nav-button padding-050"  routerLink="/microblog" routerLinkActive="nav-button-active"><div class="nav-button-desc">Microblog</div><i class="fa-solid fa-blog"></i></button>
             <button class="nav-button padding-050"  routerLink="/recipes" routerLinkActive="nav-button-active"><div class="nav-button-desc">Recipes</div><i class="fa-solid fa-book-open"></i></button>       
@@ -17,11 +16,13 @@
    
     <div  class="panel flex-row-ce gap10 right-panel">
         <div *ngIf="isAuth" class="letter-spacing-02rem flex-row-cc ">
-            <h3 class="font-size-14r mr-1rem">{{usersData.name}}</h3>
+            @if (!_isSmallScreen) {
+                <h3 class="font-size-14r mr-1rem">{{usersData.name}}</h3>
+            }
             @if(usersData.avatar) {
-                <img class="avatar-image-25rem mr-hrem" [src]="usersData.avatar.url" [alt]="usersData.avatar.name">
+                <img class="avatar-image-25rem" [src]="usersData.avatar.url" [alt]="usersData.avatar.name">
             } @else {
-              <img class="avatar-image-25rem mr-hrem" src="https://t3.ftcdn.net/jpg/05/53/79/60/360_F_553796090_XHrE6R9jwmBJUMo9HKl41hyHJ5gqt9oz.jpg" alt="avatar">
+              <img class="avatar-image-25rem" src="https://t3.ftcdn.net/jpg/05/53/79/60/360_F_553796090_XHrE6R9jwmBJUMo9HKl41hyHJ5gqt9oz.jpg" alt="avatar">
             }
         </div>
         <button #notiMenu [ngClass]="{'button-menu-active' : isNotificationMenuShown}" *ngIf="isAuth" class="circle backboard-uno-grey-active height100 font-size-14r notification" (click)="isNotificationMenuShown = !isNotificationMenuShown" >
@@ -51,7 +52,7 @@
                 </div>
             </div>
                 @for (item of notifiactionsToDisplay  | filterShown : notificationFilter ; track $index) {
-                    <button class=" uno-white fv-outline-sage clear-button border-radius-1r padding-15r mt-hrem flex-row-cfs hover-active-grey " (click)="clearNotifications(item.date)">
+                    <button class=" uno-white clear-button border-radius-1r padding-15r mt-hrem flex-row-cfs hover-active-grey " (click)="clearNotifications(item.date)">
                    
                         @if (item.eventUserAvatar) {
                             <img class="avatar-image-25rem mr-hrem" [src]="item.eventUserAvatar.url" [alt]="item.eventUserAvatar">

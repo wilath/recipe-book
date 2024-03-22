@@ -1,9 +1,9 @@
-<div class="microblog-wrap">
+<div class=" microblog-wrap">
   <app-microblog-newpost> </app-microblog-newpost>
 
   @for (post of (posts | dateLikeSort: SortType.sortByDate) ; track $index) {
       @defer (on viewport) {
-      <app-microblog-post [@fadeInOutAnimation] [microblogPost]="post"></app-microblog-post>
+      <app-microblog-post [@fadeInOutAnimation] [isButtonTextVisible]="isButtonTextVisible" [microblogPost]="post"></app-microblog-post>
       } @placeholder() {
       <app-microblog-post-placeholder ></app-microblog-post-placeholder>
       } 

@@ -7,6 +7,7 @@ import { UserDataService } from '../user-panel/user-data.service';
 import { slideIn } from '../shared/animations/slide-in.animation';
 import { fadeIn } from '../shared/animations/fade-in.animation';
 import { NotificationModel } from '../shared/models/notification.model';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 export enum NotifactionFilterEnum{
   all,
@@ -29,11 +30,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
   constructor(
     private userDataService: UserDataService,
     private authService: AuthServcie,
-    private router: Router
+    private router: Router,
+    private responsive: BreakpointObserver
   ) {}
   
 
   @ViewChildren('notiMenu') notiMenu!: QueryList<ElementRef>;
+
+  public _isSmallScreen: boolean = false;
 
   public isAuth = false;
 
@@ -54,6 +58,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
   public ngOnInit() {
     this.userSubscription();
     this.navigationSubscription();
+    this.responsive.observe(['(min-width: 983px)']).subscribe( (res) => {
+      this._isSmallScreen = !res.matches
+    })
+    
   }
 
   public ngOnDestroy() {

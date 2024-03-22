@@ -85,13 +85,26 @@
           <div>{{microblogPost.likes.quantity}} <i class="fa-solid fa-heart font-size-1r"></i>  </div>
           <div>{{microblogPost.comments.length}} <i class="fa-solid fa-comments font-size-1r"></i> </div>
         </div>
-        <div class="likes-buttons flex-row-cfs gap15">
-          <button class="button-alpha font-size-15r border-radius-hr hover-active-grey flex-row-cc gap5" (click)="onLikePost()"><i [ngStyle]="{'color': isLikedByCurrentUser ? 'tomato' : 'white'}" class="fa-solid fa-heart font-size-12r"></i> I love it!</button>
-          <button class="button-alpha font-size-15r border-radius-hr hover-active-grey flex-row-cc gap5" (click)="openComments()"><i [ngStyle]="{'color': isCommentSectionOpen ? 'rgb(66, 103, 178)' : 'white'}" class="fa-solid fa-comments font-size-12r"></i> Comments</button>
+        <div [ngClass]="{'font-size-1r': !isButtonTextVisible }" class="likes-buttons flex-row-cfs gap15">
+          
+          <button class="button-alpha font-size-15r border-radius-hr hover-active-grey padding-02r flex-row-cc gap5" (click)="onLikePost()">
+            <i [ngStyle]="{'color': isLikedByCurrentUser ? 'tomato' : 'white'}" class="fa-solid fa-heart font-size-12r"></i> 
+            <ng-container *ngIf="isButtonTextVisible">I love it!</ng-container>
+          </button>
+          <button class="button-alpha font-size-15r border-radius-hr hover-active-grey padding-02r flex-row-cc gap5" (click)="openComments()">
+            <i [ngStyle]="{'color': isCommentSectionOpen ? 'rgb(66, 103, 178)' : 'white'}" class="fa-solid fa-comments font-size-12r"></i>
+            <ng-container *ngIf="isButtonTextVisible">Comments</ng-container>
+            </button>
           @if (postAuthor.email !== loggedUserEmail) {
-            <button class="button-alpha font-size-15r border-radius-hr hover-active-grey flex-row-cc gap5" (click)="onFollowUser()"><i [ngStyle]="{'color': isFollowedByCurrentUser ? 'rgb(244,198,77)' : 'white'}" class="fa-solid fa-user-plus font-size-12r"></i> Follow </button>
+            <button class="button-alpha font-size-15r border-radius-hr hover-active-grey padding-02r flex-row-cc gap5" (click)="onFollowUser()">
+              <i [ngStyle]="{'color': isFollowedByCurrentUser ? 'rgb(244,198,77)' : 'white'}" class="fa-solid fa-user-plus font-size-12r"></i>
+              <ng-container *ngIf="isButtonTextVisible">Follow</ng-container>
+              </button>
           } @else {
-            <button class="button-alpha font-size-15r border-radius-hr hover-active-grey flex-row-cc gap5" (click)="onDeletePost()"><i [ngStyle]="{'color': 'white'}" class="fa-solid fa-trash font-size-12r"></i> Delete </button>
+            <button class="button-alpha font-size-15r border-radius-hr hover-active-grey padding-02r flex-row-cc gap5" (click)="onDeletePost()">
+              <i [ngStyle]="{'color': 'white'}" class="fa-solid fa-trash font-size-12r"></i> 
+              <ng-container *ngIf="isButtonTextVisible">Delete</ng-container>
+            </button>
 
           }
         </div>

@@ -77,7 +77,7 @@ export class CommentComponent implements OnInit {
     const diffInDays = diffInHours / 24; 
   
     if (diffInDays > 7) {
-      return 'more than 7 days ago';
+      return 'over 7 days ago';
     } else if (diffInDays >= 1) {
       return Math.floor(diffInDays) + ' days ago';
     } else if (diffInHours >= 1) {
