@@ -74,9 +74,13 @@ export class MicroblogService   {
 
   public onAddNewPost(post: MicroblogPost) {
     const newPosts = this.posts;
+    const authorsFollowers = this.userDataService.getUserDataByEmail(post.author).followers
     newPosts.push(post);
     this.posts = newPosts;
     this.postsChange.next(this.posts.slice());
+    for(let follower in authorsFollowers){
+      this.userDataService.setNotificationToUser(follower, UserNotification.newPostByFollow, post.author)
+    }
   }
 
   public onDeletePost(postId: number) {

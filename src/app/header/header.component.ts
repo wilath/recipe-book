@@ -62,6 +62,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   public onLogout() {
+    this.isNotificationMenuShown = false;
     this.authService.logout();
   }
 

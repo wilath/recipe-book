@@ -103,8 +103,12 @@ export class RecipesService implements OnDestroy {
   }
 
   public addRecipe(recipe: Recipe) {
+    const authorsFollowers = this.userDataService.getUserDataByEmail(recipe.author).followers
     this.recipes.push(recipe);
     this.recipesChanged.next(this.recipes.slice());
+    for(let follower in authorsFollowers){
+      this.userDataService.setNotificationToUser(follower, UserNotification.newRecipeByFollow, recipe.author, recipe.name)
+    }
   }
 
   public updateRecipe(newRecipe: Recipe) {

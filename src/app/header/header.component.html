@@ -53,7 +53,11 @@
                 @for (item of notifiactionsToDisplay  | filterShown : notificationFilter ; track $index) {
                     <a tabindex="0" class="fv-outline-sage" (click)="clearNotifications(item.date)">
                     <div class="border-radius-1r padding-15r mt-hrem flex-row-cfs hover-active-grey notification-post">
-                        <img class="avatar-image-25rem mr-hrem" src="https://t3.ftcdn.net/jpg/05/53/79/60/360_F_553796090_XHrE6R9jwmBJUMo9HKl41hyHJ5gqt9oz.jpg" alt="!">
+                        @if (item.eventUserAvatar) {
+                            <img class="avatar-image-25rem mr-hrem" [src]="item.eventUserAvatar.url" [alt]="item.eventUserAvatar.name">
+                        } @else {
+                            <img class="avatar-image-25rem mr-hrem" src="https://t3.ftcdn.net/jpg/05/53/79/60/360_F_553796090_XHrE6R9jwmBJUMo9HKl41hyHJ5gqt9oz.jpg" alt="!">
+                        }
                         <div>
                             <p class="font-size-12r">{{item.message}}</p>
                             <p class="sage">{{item.date | date:'short'}}</p>
@@ -64,7 +68,9 @@
                     <div  class="notification-post pt-1r flex-row-cfs">
                         <img src="https://www.clipartmax.com/png/middle/149-1491874_question-mark-comments-number-5-in-circle.png" class="avatar-image-25rem" alt="?">
                         <div class="ml-hrem">
-                            <p class="notifaction-message">You dont have any notfications</p>         
+                            <p class="notifaction-message">
+                                {{notificationFilter === notificationFilterEnum.all ? 'You dont have any notfications': 'You dont have any new notfications'}}
+                            </p>         
                         </div>  
                     </div>
                 }

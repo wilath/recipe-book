@@ -2,7 +2,7 @@ import { Injectable, OnDestroy} from '@angular/core';
 import { Observable, Subject, Subscription, map, of, tap } from 'rxjs';
 import { ShoppingItem, UserData, emptyUserData } from '../shared/models/user-data.model';
 import { UserNotification } from '../shared/enums/notifications.enum';
-import { NotificationModel } from '../shared/models/notification.model';
+import {  NotificationModel } from '../shared/models/notification.model';
 import { RealTimeDatabaseService } from '../shared/real-time-database.service';
 
 @Injectable()
@@ -62,6 +62,10 @@ export class UserDataService implements OnDestroy {
     data.push(newUserData);
     this.usersData = data;
     this.userDataChange.next(this.usersData.slice());
+    for(let user of this.usersData){
+      this.setNotificationToUser(user.email, UserNotification.newUserJoined, newUserData.email);
+    }
+    
     return of(void 0)
   }
 
@@ -107,11 +111,66 @@ export class UserDataService implements OnDestroy {
     if (!user.user.notifications) {
       user.user.notifications = [];
     }
-    const newNotification: NotificationModel = {message: message, date: new Date(),shown: false, eventUser: eventUser.user.email}
+    if (notification === UserNotification.newUserJoined && userToNotifiy === eventUserEmail) {
+      console.log('canceled for: ', userToNotifiy)
+       return;
+    }
+
+   
+    
+    const newNotification: NotificationModel = {message: message, date: new Date(),shown: false, eventUserAvatar: eventUser.user.avatar};
     user.user.notifications.push(newNotification);
     data[user.index] = user.user;
     this.usersData = data;
     this.userDataChange.next(this.usersData.slice())
+  }
+
+  private getNotificationMessage(notification: UserNotification, eventUserEmail: string, eventName?: string, eventData?: string) {
+    const user = this.getUserByEmail(eventUserEmail);
+    let message = '';
+
+    switch (notification) {
+      case UserNotification.welcome:
+        message = `Welcome ${user.user.name} I hope you will enjoy this site!`;
+        break;
+      case UserNotification.recipeLiked:
+        message = `${user.user.name} liked your recipe - ${eventName}`;
+        break;
+      case UserNotification.recipeRated:
+        message = `${user.user.name} rated your recipe - ${eventName} at ${eventData} stars!`;
+        break;
+      case UserNotification.gotFollowed:
+        message = `${user.user.name} is now following You`;
+        break;
+      case UserNotification.gotUnfollowed:
+        message = `${user.user.name} stopped following You`;
+        break;
+      case UserNotification.newRecipeByFollow:
+        message = `${user.user.name} added new Recipe - ${eventName}`;
+        break;
+      case UserNotification.newUserJoined:
+        message = `${user.user.name} joined the Page!`;
+        break;
+      case UserNotification.likedPost:
+        message = `${user.user.name} liked your post` ;
+        break;
+      case UserNotification.likedComment:
+        message = `${user.user.name} liked your comment`;
+        break;
+      case UserNotification.commentedPost:
+        message = `${user.user.name} commented your post `;
+        break;
+      case UserNotification.commentRecipe:
+        message = `${user.user.name} commented your recipe ${eventName}`
+        break;
+      case UserNotification.newPostByFollow:
+        message = `${user.user.name} added new post `;
+        break;
+      case UserNotification.addToShopList:
+        message = `${user.user.name} added your recipe to his shopping list`
+        break;
+    }
+    return message;
   }
 
   public checkIfUserisFollowed(userEmailToCheck: string, followerEmail: string): boolean{
@@ -156,54 +215,6 @@ export class UserDataService implements OnDestroy {
     }
     this.usersData = data;
     this.userDataChange.next(this.usersData.slice())
-  }
-
-  private getNotificationMessage(notification: UserNotification, eventUserEmail: string, eventName?: string, eventData?: string) {
-    const user = this.getUserByEmail(eventUserEmail);
-    let message = '';
-
-    switch (notification) {
-      case UserNotification.welcome:
-        message = `Welcome ${user.user.name} I hope you will enjoy this site!`;
-        break;
-      case UserNotification.recipeLiked:
-        message = `${user.user.name} liked your recipe - ${eventName}`;
-        break;
-      case UserNotification.recipeRated:
-        message = `${user.user.name} rated your recipe - ${eventName} at ${eventData} stars!`;
-        break;
-      case UserNotification.gotFollowed:
-        message = `${user.user.name} is now following You`;
-        break;
-      case UserNotification.gotUnfollowed:
-        message = `${user.user.name} stopped following You`;
-        break;
-      case UserNotification.newRecipeByFollow:
-        message = `${user.user.name} added new Recipe - ${eventName}`;
-        break;
-      case UserNotification.newUserJoined:
-        message = `${user.user.name} joined the Page!`;
-        break;
-      case UserNotification.likedPost:
-        message = `${user.user.name} liked your post` ;
-        break;
-      case UserNotification.likedComment:
-        message = `${user.user.name} liked your comment`;
-        break;
-      case UserNotification.commentedPost:
-        message = `${user.user.name} commented your post `;
-        break;
-      case UserNotification.commentRecipe:
-        message = `${user.user.name} commented your recipe ${eventName}`
-        break;
-      case UserNotification.newPostByFollow:
-        message = `${user.user.name} added new post - ${eventName}`;
-        break;
-      case UserNotification.addToShopList:
-        message = `${user.user.name} added your recipe to his shopping list`
-        break;
-    }
-    return message;
   }
 
   private getUserByEmail(email: string) {

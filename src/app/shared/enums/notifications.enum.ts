@@ -4,7 +4,6 @@ export enum UserNotification{
     recipeRated,
     gotFollowed,
     gotUnfollowed,
-    newRecipeByFollow,
     newUserJoined,
     likedPost,
     likedComment,
@@ -12,5 +11,5 @@ export enum UserNotification{
     commentRecipe,
     addToShopList,
     newPostByFollow,
-    
+    newRecipeByFollow,
 }
