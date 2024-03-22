@@ -96,7 +96,7 @@
     </form>
  
 </div>
-<div [ngClass]="{'rcc': isScreenSmall}" class="filters-row filter-row-bottom gap5 flex-col-fec padding-15r">
+<div [ngStyle]="isScreenSmall? {'padding-top': '0'} : {'padding-top': '1rem'}" [ngClass]="{'rcc': isScreenSmall}" class="filters-row filter-row-bottom gap5 flex-col-fec padding-15r">
   
   <div>
     <button class="button-alpha font-size-12r border-radius-hr hover-i-sage2 hover-active-grey padding-c1" (click)="onNewRecipe()"><i class="fa-solid fa-plus"></i> New Recipe</button>

@@ -7,8 +7,8 @@
     <div class="overflow-h">
     <a  (click)="onNavigateToRecipeDetails()"  ><img [@fadeInOutAnimation] class="width100 recipe-image" [src]="recipe.images[0].url" alt="recipe" /></a>
     </div>
-    <div class="recipe-title padding-050 m-01 font-size-14r">
-      <a tabindex="0" class="hover-underline uno-white" (click)="onNavigateToRecipeDetails()">{{ recipe.name }}</a>
+    <div class="recipe-title pt-hr m-01 font-size-14r">
+      <button style="text-align: start;" tabindex="0" class="font-size-14r buton-underline uno-white" (click)="onNavigateToRecipeDetails()">{{ recipe.name }}</button>
       
     </div>
     @if (!isSimpleDisplay) {
