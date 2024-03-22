@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChildren} from '@angular/core';
+import {Component, ElementRef, OnChanges, OnDestroy, OnInit, QueryList, SimpleChanges, ViewChildren} from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { Subscription, filter, map } from 'rxjs';
 import { AuthServcie } from '../auth/auth-supp/auth.servcie';
@@ -6,6 +6,12 @@ import { UserData, emptyUserData } from '../shared/models/user-data.model';
 import { UserDataService } from '../user-panel/user-data.service';
 import { slideIn } from '../shared/animations/slide-in.animation';
 import { fadeIn } from '../shared/animations/fade-in.animation';
+import { NotificationModel } from '../shared/models/notification.model';
+
+export enum NotifactionFilterEnum{
+  all,
+  new
+}
 
 @Component({
   host: {
@@ -25,6 +31,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private authService: AuthServcie,
     private router: Router
   ) {}
+  
 
   @ViewChildren('notiMenu') notiMenu!: QueryList<ElementRef>;
 
@@ -34,9 +41,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   public usersData: UserData = emptyUserData;
 
-  public notificationFilter: 'all' | 'new' = 'new';
+  public notificationFilterEnum = NotifactionFilterEnum;
 
-  public notificationFilterFire = false;
+  public notifiactionsToDisplay: NotificationModel[] = [];
+
+  public notificationFilter: NotifactionFilterEnum = NotifactionFilterEnum.new
 
   private user$!: Subscription;
 
@@ -67,7 +76,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       newUserData.notifications.splice(notificationIndex, 1);
     }
     this.userDataService.editUser(newUserData);
-    this.notificationFilterFire = !this.notificationFilterFire;
+    this.setNotificationsToDisplay()
   }
 
   public setMarkerClass(): string {
@@ -112,6 +121,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
           .subscribe((userData) => {
             if (userData) {
               this.usersData = userData;
+              this.notifiactionsToDisplay = [...userData.notifications].slice(0,10)
             }
           });
       } else {
@@ -134,5 +144,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
       }
     }
   }
-  
+
+  private setNotificationsToDisplay(){
+    this.notifiactionsToDisplay = this.usersData.notifications.slice(0,10)
+  }
+
 }

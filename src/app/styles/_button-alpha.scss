@@ -51,6 +51,9 @@
       color: $sage2;
     }
   }
+  &:focus-visible:enabled{
+    color: $sage2
+  }
 }
 
 .hover-color-sage{
@@ -84,6 +87,7 @@
 .trans02linear{
   transition: all 0.2s linear;
 }
+
 .hover-underline{
   transition: all 0.2s linear;
   &:hover{
@@ -93,5 +97,11 @@
     text-decoration: underline;
     outline: none;
 
+  }
+}
+
+.fv-outline-sage{
+  &:focus-visible{
+    outline: 1px solid $sage;
   }
 }

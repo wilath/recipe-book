@@ -5,9 +5,11 @@
         </div>
     </div>
     <div class="panel flex-row-cc gap10 center-panel">
-        <button class="nav-button padding-050" *ngIf="isAuth" routerLink="/microblog" routerLinkActive="nav-button-active"><div class="nav-button-desc">Microblog</div><i class="fa-solid fa-blog"></i></button>
-        <button class="nav-button padding-050" *ngIf="isAuth" routerLink="/recipes" routerLinkActive="nav-button-active"><div class="nav-button-desc">Recipes</div><i class="fa-solid fa-book-open"></i></button>       
-        <button class="nav-button padding-050" *ngIf="isAuth" [routerLink]="'user-panel/' + usersData.id " routerLinkActive="nav-button-active"><div class="nav-button-desc">User Panel</div><i class="fa-solid fa-list-check"></i></button>
+        @if (isAuth) {
+            <button class="nav-button padding-050"  routerLink="/microblog" routerLinkActive="nav-button-active"><div class="nav-button-desc">Microblog</div><i class="fa-solid fa-blog"></i></button>
+            <button class="nav-button padding-050"  routerLink="/recipes" routerLinkActive="nav-button-active"><div class="nav-button-desc">Recipes</div><i class="fa-solid fa-book-open"></i></button>       
+            <button class="nav-button padding-050"  [routerLink]="'user-panel/' + usersData.id " routerLinkActive="nav-button-active"><div class="nav-button-desc">User Panel</div><i class="fa-solid fa-list-check"></i></button>
+        }
         <span class="marker" [ngClass]="setMarkerClass()"></span>
     </div>
   
@@ -39,17 +41,17 @@
                 <div class="notification-filter flex-row-cfs gap10 mt-hrem ">           
                         <label class="button-alpha font-size-12r no-input-visible font-weight-300 hover-active-grey padding-c1 border-radius-hr checked-sage" for="no-read">
                             New
-                            <input type="radio" name="read" id="no-read" value="new" [(ngModel)]="notificationFilter" >
+                            <input type="radio" name="read" id="no-read" [value]="notificationFilterEnum.new" [(ngModel)]="notificationFilter" >
                         </label>
-                        <label class="button-alpha font-size-12r no-input-visible font-weight-300 hover-active-grey padding-c1 border-radius-hr checked-sage" for="read">
+                        <label class="button-alpha font-size-12r no-input-visible   font-weight-300 hover-active-grey padding-c1 border-radius-hr checked-sage" for="read">
                             All
-                            <input type="radio" name="read" id="read" value="all" [(ngModel)]="notificationFilter">
+                            <input type="radio" name="read" id="read" [value]="notificationFilterEnum.all" [(ngModel)]="notificationFilter">
                         </label>
                         <button class="button-alpha font-size-12r font-weight-300 hover-active-grey-enabled padding-c1 border-radius-hr ml-auto" [disabled]="getNotificationsCount() === 0 " type="button" (click)="clearNotifications()">Clear</button>         
                 </div>
             </div>
-                @for (item of usersData.notifications  | filterShown : notificationFilter : notificationFilterFire ; track $index) {
-                    <a (click)="clearNotifications(item.date)">
+                @for (item of notifiactionsToDisplay  | filterShown : notificationFilter ; track $index) {
+                    <a tabindex="0" class="fv-outline-sage" (click)="clearNotifications(item.date)">
                     <div class="border-radius-1r padding-15r mt-hrem flex-row-cfs hover-active-grey notification-post">
                         <img class="avatar-image-25rem mr-hrem" src="https://t3.ftcdn.net/jpg/05/53/79/60/360_F_553796090_XHrE6R9jwmBJUMo9HKl41hyHJ5gqt9oz.jpg" alt="!">
                         <div>
@@ -64,6 +66,13 @@
                         <div class="ml-hrem">
                             <p class="notifaction-message">You dont have any notfications</p>         
                         </div>  
+                    </div>
+                }
+                @if (usersData.notifications.length > 10) {
+                    <div class="border-radius-1r padding-15r mt-hrem flex-row-cfs notification-post">
+                        <div>
+                            <p class="font-size-12r"> And more...</p>
+                        </div>              
                     </div>
                 }
                
