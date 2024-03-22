@@ -1,10 +1,10 @@
 
-<div class=" border-radius-1r backboard-uno-grey padding-15r">
-<div class="filters-row flex-row-csb padding-15r">
-  <div class="food-type-filters">
-  <form>
+<div [ngClass]="{'fcf' : isScreenSmall}" class="border-radius-1r font-size-12r backboard-uno-grey flex-row-cc ">
+<div class="filters-row flex-col-ss padding-15r flex-grow-1 ">
+
+  <form class="flex-row-cfs width100 gap5" [ngClass]="{'child-grow-1' : isScreenSmall}">
     
-    <label class="padding-c1 border-radius-hr mr-hrem no-input-visible backboard-uno-grey-active checked-ug" for="option4">All
+    <label  class="padding-c1 border-radius-hr  no-input-visible backboard-uno-grey-active checked-ug" for="option4">All
       <input
       [value]="null"
       id="option4"
@@ -14,7 +14,7 @@
     />
     </label>
     
-    <label class="backboard-uno-grey-active padding-c1 border-radius-hr mr-hrem no-input-visible checked-ug" for="option0">Breakfasts
+    <label class="backboard-uno-grey-active padding-c1 border-radius-hr no-input-visible checked-ug" for="option0">Breakfasts
       <input
       [value]="foodCategory.breakfast"
       id="option0"
@@ -24,7 +24,7 @@
     />
     </label>
     
-    <label class="backboard-uno-grey-active padding-c1 border-radius-hr mr-hrem no-input-visible checked-ug" for="option1">Dinners
+    <label class="backboard-uno-grey-active padding-c1 border-radius-hr  no-input-visible checked-ug" for="option1">Dinners
       <input
       [value]="foodCategory.dinner"
       id="option1"
@@ -34,7 +34,7 @@
     />
     </label>
    
-    <label class="backboard-uno-grey-active padding-c1 border-radius-hr mr-hrem no-input-visible checked-ug" for="option2">Beverages
+    <label class="backboard-uno-grey-active padding-c1 border-radius-hr  no-input-visible checked-ug" for="option2">Beverages
       <input
       [value]="foodCategory.drink"
       id="option2"
@@ -44,7 +44,7 @@
     />
     </label>
     
-    <label class="backboard-uno-grey-active padding-c1 border-radius-hr mr-hrem no-input-visible checked-ug" for="option3">Deserts
+    <label class="backboard-uno-grey-active padding-c1 border-radius-hr no-input-visible checked-ug" for="option3">Deserts
       <input
       [value]="foodCategory.desert"
       id="option3"
@@ -53,20 +53,12 @@
       [(ngModel)]="chosenFoodCategory"
     />
     </label>
-    <span></span>
+    
   </form>
 
-  
-  </div>
-  <div >
-    <button class="button-alpha font-size-1r border-radius-hr hover-active-grey padding-c1" (click)="onNewRecipe()"><i class="fa-solid fa-plus"></i> New Recipe</button>
-  </div>
-</div>
-<div class="filters-row filter-row-bottom flex-row-csb padding-15r">
-  <div class="sort">
-    <form>
+    <form class="mt-hrem flex-row-cfs width100 gap5" [ngClass]="{'child-grow-1' : isScreenSmall}">
       
-      <label class="backboard-uno-grey-active padding-c1 border-radius-hr mr-hrem no-input-visible checked-ug"   for="latest">Latest
+      <label class="backboard-uno-grey-active padding-c1 border-radius-hr  no-input-visible checked-ug"   for="latest">Latest
         <input
       [value]="foodSort.Latest" 
       type="radio"
@@ -75,7 +67,7 @@
       [(ngModel)]="chosenSortType">
       </label>
       
-      <label class="backboard-uno-grey-active padding-c1 border-radius-hr mr-hrem no-input-visible checked-ug" for="popular">Popular
+      <label class="backboard-uno-grey-active padding-c1 border-radius-hr  no-input-visible checked-ug" for="popular">Popular
         <input 
       [value]="foodSort.Popular" 
       type="radio"
@@ -84,7 +76,7 @@
       [(ngModel)]="chosenSortType">
       </label>
       
-      <label class="backboard-uno-grey-active padding-c1 border-radius-hr mr-hrem no-input-visible checked-ug" for="bestRating">Best rated
+      <label class="backboard-uno-grey-active padding-c1 border-radius-hr  no-input-visible checked-ug" for="bestRating">Best rated
         <input 
       [value]="foodSort.BestRating" 
       type="radio"
@@ -93,7 +85,7 @@
       [(ngModel)]="chosenSortType">
       </label>
       
-      <label class="backboard-uno-grey-active padding-c1 border-radius-hr mr-hrem no-input-visible checked-ug" for="quickest">Quickest
+      <label class="backboard-uno-grey-active padding-c1 border-radius-hr  no-input-visible checked-ug" for="quickest">Quickest
         <input 
       [value]="foodSort.Quickest" 
       type="radio"
@@ -102,9 +94,16 @@
       [(ngModel)]="chosenSortType">
       </label>
     </form>
+ 
+</div>
+<div [ngClass]="{'rcc': isScreenSmall}" class="filters-row filter-row-bottom gap5 flex-col-fec padding-15r">
+  
+  <div>
+    <button class="button-alpha font-size-12r border-radius-hr hover-i-sage2 hover-active-grey padding-c1" (click)="onNewRecipe()"><i class="fa-solid fa-plus"></i> New Recipe</button>
   </div>
-  <div class="search">
-    <input class="border-radius-hr backboard-uno-grey-active font-size-1r padding-c1" placeholder="Search..." type="text" [(ngModel)]="foodSearch" />
+
+  <div class="search ">
+    <input class="border-radius-hr backboard-uno-grey-active font-size-12r padding-c1" placeholder="Search..." type="text" [(ngModel)]="foodSearch" />
   </div>
   
 

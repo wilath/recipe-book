@@ -74,7 +74,7 @@ header {
       background-color: transparent;
       border-radius: 0.8rem;
       border: none;
-      width: 5rem;
+      width: 4rem;
       font-size: 1.4rem;
       color: rgb(233, 230, 230);
       transition: background 0.2s linear;
@@ -109,7 +109,7 @@ header {
 
     .marker {
       position: absolute;
-      width: 5rem;
+      width: 4rem;
       height: 3px;
       background-color: $sage;
       left: 0;
@@ -117,13 +117,13 @@ header {
       transition: left 0.2s linear;
     }
     .marker-microblog {
-      left: calc(50% - 8rem - 2px);
+      left: calc(50% - 6.5rem - 2px);
     }
     .marker-recipes {
-      left: calc(50% - 2.5rem);
+      left: calc(50% - 2rem);
     }
     .marker-shopping-list {
-      left: calc(50% + 3rem + 2px);
+      left: calc(50% + 2.5rem + 2px);
     }
     .marker-default {
       display: none;

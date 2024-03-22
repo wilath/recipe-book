@@ -1,5 +1,5 @@
 
-import { Component, Injectable, OnDestroy, OnInit  } from '@angular/core';
+import { Component, OnDestroy, OnInit  } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Recipe } from '../../shared/models/recipe.model';
@@ -8,6 +8,7 @@ import { RecipesService } from '../recipes.service';
 import { FoodType } from '../../shared/enums/food-type-enum';
 import { FoodSort } from '../../shared/enums/food-sort.enum';
 import { fadeIn } from '../../shared/animations/fade-in.animation';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-recipes-list',
@@ -26,8 +27,10 @@ export class RecipesListComponent implements OnInit, OnDestroy {
     private recipeService: RecipesService,
     private router: Router,
     private route: ActivatedRoute,
-    private recipeDetailsComponent: RecipesDetailsComponent
+    private responsive: BreakpointObserver
     ) {}
+
+  public isScreenSmall: boolean = false;
 
   public recipes:Array<Recipe> = [];
 
@@ -43,32 +46,36 @@ export class RecipesListComponent implements OnInit, OnDestroy {
 
   public foodSearch: string = '';
 
-  private subscription!: Subscription;
+  private recipeSub!: Subscription;
  
   ngOnInit() {
-    this.subscription = this.recipeService.recipesChanged.subscribe(
+   this.setRecipeSub()
+   this.setResponsiveSub()
+
+  }
+  ngOnDestroy(){
+    this.recipeSub.unsubscribe();
+  }
+
+  
+  public onNewRecipe() {
+    this.router.navigate(['new'],  {relativeTo: this.route})
+  }
+
+  private setRecipeSub(){
+    this.recipeSub = this.recipeService.recipesChanged.subscribe(
       (recipes:Recipe[]) => {
         this.recipes = recipes;
       }
     )
     this.recipes = this.recipeService.getRecipes();
   }
-  ngOnDestroy(){
-    this.subscription.unsubscribe();
-  }
 
-  
-  onNewRecipe() {
-    this.router.navigate(['new'],  {relativeTo: this.route})
-  }
-  DeleteRecipe(){
-    this.recipeDetailsComponent.onDeleteRecipe()
-  }
-  EditRecipe(){
-    this.recipeDetailsComponent.onEditRecipe()
-  }
-  ToShoplist(){
-    this.recipeDetailsComponent.onToShopList()
+  private setResponsiveSub(){
+    this.responsive.observe(['(min-width:600px)']).subscribe( res => {
+      this.isScreenSmall = !res.matches
+      console.log(this.isScreenSmall)
+    })
   }
   
 

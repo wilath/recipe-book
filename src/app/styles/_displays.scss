@@ -20,6 +20,13 @@
   justify-content: flex-start;
 }
 
+.flex-col-fec {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+}
+
 .flex-row-cc {
   display: flex;
   flex-direction: row;
