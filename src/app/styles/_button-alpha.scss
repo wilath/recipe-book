@@ -22,6 +22,31 @@
     outline: none;
   }
 }
+.clear-button{
+  display: block;
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.buton-underline{
+  background-color: transparent;
+  color: $uno-white;
+  border: none;
+  margin: 0;
+  padding: 0;
+  transition: all 0.2s linear;
+  &:hover{
+    text-decoration: underline;
+  }
+  &:focus-visible{
+    text-decoration: underline;
+    outline: none;
+
+  }
+}
 
 .hover-active-grey {
   transition: all 0.2s linear;

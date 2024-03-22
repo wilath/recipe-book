@@ -138,11 +138,6 @@ header {
     min-height: 6rem;
     right: 1rem;
     top: 4.5rem;
-    a {
-      cursor: pointer;
-      &:focus-visible > .notification-post {
-        outline: 1px solid $sage;
-      }
-    }
+   
   }
 }

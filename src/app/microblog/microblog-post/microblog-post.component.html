@@ -9,7 +9,7 @@
       }
       </a>
       <div class="author-data ml-1rem flex-col-fsc">
-          <a tabindex="0" (click)="goToUserProfile()" class="hover-underline uno-white"><h4 class="font-size-15r">{{postAuthor.name}}</h4></a>
+          <button  (click)="goToUserProfile()" class="buton-underline"><h4 class="font-size-15r">{{postAuthor.name}}</h4></button>
           <h5 class="sage mt-5px post-meta-info ">{{microblogPost.date | date:'shortDate'}} <span>·</span> {{timeSincePosted}} <span>·</span> <i class="fa-solid fa-earth-europe"></i></h5>      
       </div>
     </div>

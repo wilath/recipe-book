@@ -9,7 +9,7 @@
   <div class="content-wrap">
     
     <div class="padding-15r backboard-uno-grey-active border-radius-1r flex-col-ss comment-content">
-        <h4 class="font-size-1r font-weight-500"> <a tabindex="0" class="hover-underline uno-white" (click)="goToUserProfile()" >{{ commentAuthorData.name }}</a>   @if (comment.likes.quantity > 0) {<span class="likes-quantity border-radius-hr">{{comment.likes.quantity}} <i class="fa-solid fa-heart"></i> </span> } </h4>
+        <h4 class="font-size-12r font-weight-500"> <button  class=" font-size-11r buton-underline" (click)="goToUserProfile()" >{{ commentAuthorData.name }}</button>   @if (comment.likes.quantity > 0) {<span class="likes-quantity border-radius-hr">{{comment.likes.quantity}} <i class="fa-solid fa-heart"></i> </span> } </h4>
       <p>{{ comment.content }}</p>
     </div>
     <div class="comment-meta">

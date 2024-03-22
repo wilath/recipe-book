@@ -1,5 +1,4 @@
 import { FileAnchor } from "./file-upload.model";
-import { UserData } from "./user-data.model";
 
 
 export interface NotificationModel {
