@@ -3,7 +3,6 @@ import { Component, OnDestroy, OnInit  } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Recipe } from '../../shared/models/recipe.model';
-import { RecipesDetailsComponent } from '../recipes-details/recipes-details.component';
 import { RecipesService } from '../recipes.service';
 import { FoodType } from '../../shared/enums/food-type-enum';
 import { FoodSort } from '../../shared/enums/food-sort.enum';
@@ -21,7 +20,6 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 })
 
 export class RecipesListComponent implements OnInit, OnDestroy {
-
 
   constructor(
     private recipeService: RecipesService,
@@ -47,17 +45,19 @@ export class RecipesListComponent implements OnInit, OnDestroy {
   public foodSearch: string = '';
 
   private recipeSub!: Subscription;
+  
+  private responsiveSub! : Subscription;
  
-  ngOnInit() {
+  public ngOnInit() {
    this.setRecipeSub()
    this.setResponsiveSub()
-
   }
-  ngOnDestroy(){
+
+  public ngOnDestroy(){
     this.recipeSub.unsubscribe();
+    this.responsiveSub.unsubscribe();
   }
 
-  
   public onNewRecipe() {
     this.router.navigate(['new'],  {relativeTo: this.route})
   }
@@ -72,13 +72,9 @@ export class RecipesListComponent implements OnInit, OnDestroy {
   }
 
   private setResponsiveSub(){
-    this.responsive.observe(['(min-width:600px)']).subscribe( res => {
-      this.isScreenSmall = !res.matches
-      console.log(this.isScreenSmall)
+    this.responsiveSub = this.responsive.observe(['(min-width:600px)']).subscribe( res => {
+      this.isScreenSmall = !res.matches;
     })
   }
-  
-
-
 
 }
