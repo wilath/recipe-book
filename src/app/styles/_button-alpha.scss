@@ -86,6 +86,21 @@
     color: $sage;
     cursor: pointer;
   }
+  &:focus-visible{
+    color: $sage;
+
+  }
+}
+
+.hover-color-sage2{
+  &:hover{
+    color: $sage2;
+    cursor: pointer;
+  }
+  &:focus-visible{
+    color: $sage2;
+
+  }
 }
 
 .button-bravo-delete{

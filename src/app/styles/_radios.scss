@@ -25,7 +25,7 @@
 .checked-ug{
   &:has(input:checked) {
     background-color: $sage;
-    color: $uno-grey;
+    color: black
   }
   &:has(input:focus-visible){
     

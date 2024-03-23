@@ -1,11 +1,10 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Injectable, OnInit } from '@angular/core';
-import { catchError, filter, map, take, tap } from 'rxjs/operators';
-import { BehaviorSubject, Subject, throwError } from 'rxjs';
-import { User } from '../../shared/models/user.model';
+import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { BehaviorSubject, throwError } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
-import { UserDataService } from '../../user-panel/user-data.service';
+import { User } from '../../shared/models/user.model';
 
 export interface AuthResponseData {
   kind: string;
@@ -27,7 +26,6 @@ export class AuthServcie {
   constructor(
     private http: HttpClient,
     private route: Router,
-    private userDataService: UserDataService,
   ) {}
  
   public logout() {
@@ -90,6 +88,7 @@ export class AuthServcie {
         })
       );
   }
+
   public logIn(email: string, password: string) {
     return this.http
       .post<AuthResponseData>(
@@ -135,7 +134,7 @@ export class AuthServcie {
     } else {
       switch (errorRes.error.error.message) {
         case 'EMAIL_EXISTS':
-          errorMsg = 'This email exists already';
+          errorMsg = 'Account with this email exists already';
           break;
         case 'EMAIL_NOT_FOUND':
           errorMsg = 'Account with this email doesnt exist';
@@ -151,7 +150,6 @@ export class AuthServcie {
           break;
       }
     }
-    this.userDataService.setUsersData()
     return throwError(errorMsg);
   }
 }

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable, concatMap, of, switchMap, take, tap } from 'rxjs';
+import { Observable, catchError, concatMap, of, switchMap, take, tap } from 'rxjs';
 import { AuthResponseData, AuthServcie } from './auth-supp/auth.servcie';
 import { UserDataService } from '../user-panel/user-data.service';
 
@@ -37,6 +37,7 @@ export class AuthComponent {
   public captchaResolved(captchaResponse: string | null) {
     this._token = captchaResponse
   }
+
   public captchaError(captchaResponse: any) {
     console.log(captchaResponse)
   }
@@ -80,6 +81,7 @@ export class AuthComponent {
       error: (errorMsg) => {
         this.isLoading = false;
         this.error = errorMsg;
+        
       },
     });
 

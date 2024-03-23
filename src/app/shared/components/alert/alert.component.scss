@@ -1,35 +1,30 @@
+@import '../../../styles/variables';
 
 .backdrop{
     position: fixed;
-    top:0;
+    z-index: 5;
     left:0;
+    top:0;
     width: 100vw;
     height: 100vh;
-    background: rgba(72, 40, 40, 0);
-    z-index: 50;
+    background: rgba(0, 0, 0, 0.452);
 }
 .alert-box{
     position: fixed;
+    z-index: 6;
     top: 25%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 30vw;
     padding: 16px;
-    z-index: 100;
-    background: rgba(48, 12, 12, 0.699);
+    background: $uno-dark;
     box-shadow: 0px 2px 15px rgba(2, 2, 2, 0.582);
-    color: white;
-    border-radius: 8px;
+    color: $uno-white;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
    
     
-}
-.alert-box-actions{
-    text-align: right;
-}
-.btn-mybutton{
-    background: rgb(44, 20, 20);
-    color: white;
-}
-.btn-mybutton:hover{
-    background: rgb(97, 44, 44);
 }

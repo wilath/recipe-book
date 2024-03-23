@@ -210,22 +210,25 @@
     </h2>
     } }
   </div>
-
-  <div class="padding-1r backboard-uno-grey border-radius-1r mt-1rem">
-    <h2 class="font-size-15r">
-      Check other recipes from
-      <span class="sage">{{ recipe.author | authorname }}</span
-      >:
-    </h2>
-    <div class="users-recipes-display mt-1rem">
-      @for (usersRecipe of usersRecipes; track $index) {
-      <div class="border-radius-1r b-uga">
-        <app-recipes-item
-          [recipe]="usersRecipe"
-          [isSimpleDisplay]="true"
-        ></app-recipes-item>
+ 
+  @if (usersRecipes.length > 0) {
+    <div class="padding-1r backboard-uno-grey border-radius-1r mt-1rem">
+      <h2 class="font-size-15r">
+        Check other recipes from
+        <span class="sage">{{ recipe.author | authorname }}</span
+        >:
+      </h2>
+      <div class="users-recipes-display mt-1rem">
+        @for (usersRecipe of usersRecipes; track $index) {
+        <div class="border-radius-1r b-uga">
+          <app-recipes-item
+            [recipe]="usersRecipe"
+            [isSimpleDisplay]="true"
+          ></app-recipes-item>
+        </div>
+        }
       </div>
-      }
     </div>
-  </div>
+  }
+ 
 </div>
