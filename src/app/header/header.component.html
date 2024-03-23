@@ -1,4 +1,4 @@
-<header  class="padding-01 flex-row-cc backboard-uno-grey">
+<header [ngStyle]="_isSmallScreen? {'padding': '0 8px'} : {'padding': '0 16px'}"  class="flex-row-cc backboard-uno-grey">
 
     @if (!_isSmallScreen) {
         <div  class="panel"></div>

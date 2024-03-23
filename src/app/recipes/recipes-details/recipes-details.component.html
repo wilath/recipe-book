@@ -1,3 +1,4 @@
+<div class="m-1rem ">
 <div class="details-wrap backboard-uno-grey border-radius-1r">
   <div class="recipe-details bb-uga">
     <div class="recipe-info half">
@@ -123,9 +124,7 @@
     <span class="mr-1rem">
       <i class="fa-solid fa-comments"></i> {{ recipe.comments.length }}</span
     >
-    <a class="hover-color-sage" (click)="showHideComments()"
-      >Opinions on the recipe</a
-    >
+    <button class="hover-color-sage font-size-15r buton-underline" (click)="showHideComments()">Opinions on the recipe</button>
     <i
       [ngStyle]="{
         transform: !isCommentSectionVisible ? 'rotate(180deg)' : ''
@@ -222,4 +221,5 @@
     </div>
     }
   </div>
+</div>
 </div>
