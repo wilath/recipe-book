@@ -83,13 +83,13 @@
 
 .hover-color-sage{
   &:hover{
-    color: $sage;
+    color: $sage2;
     cursor: pointer;
   }
-  &:focus-visible{
-    color: $sage;
-
+  &:has(input:focus-visible){
+    color: $sage2;
   }
+  
 }
 
 .hover-color-sage2{
@@ -112,6 +112,9 @@
     border: none;
     &:hover:enabled {
       color: $sage2;
+    }
+    &:focus-visible:enabled{
+      color: $sage2
     }
   
 }

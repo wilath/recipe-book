@@ -21,6 +21,11 @@
         background-color: $uno-grey-active;
         color: $sage2;
       }
+      &:has(input:focus-visible){
+        background-color: $uno-grey-active;
+        color: $sage2;
+        outline: 1px solid $sage2;
+      }
 }
 .checked-ug{
   &:has(input:checked) {
@@ -48,4 +53,5 @@
 }
 .cp{
   cursor: pointer;
+  
 }

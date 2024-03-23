@@ -130,7 +130,7 @@ export class AuthServcie {
   private handleError(errorRes: HttpErrorResponse) {
     let errorMsg = 'An unknown error occurred!';
     if (!errorRes.error || !errorRes.error.error) {
-      return throwError(errorMsg);
+      return throwError( () => new Error (errorMsg));
     } else {
       switch (errorRes.error.error.message) {
         case 'EMAIL_EXISTS':
@@ -150,6 +150,6 @@ export class AuthServcie {
           break;
       }
     }
-    return throwError(errorMsg);
+    return throwError( () => new Error (errorMsg));
   }
 }

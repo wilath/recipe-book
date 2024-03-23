@@ -13,6 +13,9 @@
   width: calc(100% - 24px);
   padding: 6px 12px;
   font-weight: 300;
+  &:focus-visible{
+    outline: 1px solid $sage2;
+  }
 }
 
 .textarea-width {
@@ -49,6 +52,10 @@
   &:has(input:checked) > span {
     background-color: $sage2;
   }
+  &:has(input:focus-visible) > span {
+    background-color: $sage2;
+    outline: 2px solid tomato;
+  }
 }
 
 .lab {
@@ -66,6 +73,9 @@
   input[type="text"] {
     width: 6rem;
   }
+  &:has(input:focus-visible){
+    outline: 1px solid $sage2;
+  }
   input[type="number"] {
     width: 2rem;
     text-align: end;
@@ -78,27 +88,33 @@
   input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
+  
   }
   .select-unit {
+    position: relative;
     .show-units {
-      display: block;
-      position: relative;
-      text-align: center;
-      border: none;
-      outline: none;
       i {
         transition: all 0.1s linear;
-        opacity: 0.5;
-        color: $sage;
+        opacity: 0.8;
+        color: $sage2;
       }
 
-      &:hover > .units {
+      &:focus-visible{
+        color: $sage2
+      }
+      &:focus-visible + .units {
         display: flex;
       }
-      &:hover > i {
+
+      &:hover + .units {
+        display: flex;
+
+      }
+      &:hover:focus > i {
         transform: rotate(180deg);
       }
-      &:has(> .units:hover) > i {
+      
+      &:has(+ .units:hover:focus) > i {
         transform: rotate(180deg);
       }
     }
@@ -107,8 +123,18 @@
       display: none;
       flex-direction: column;
       bottom: 100%;
+      
       &:hover {
         display: flex;
+      }
+      &:has(label){
+        &:has(input:focus){
+          display: flex;
+        }
+        &:has(input:focus-visible){
+          display: flex;
+        }
+       
       }
       label {
         cursor: pointer;
@@ -120,6 +146,10 @@
           background-color: $uno-grey-active;
         }
         &:hover {
+          color: $sage;
+          background-color: $uno-grey-active;
+        }
+        &:has(input:focus-visible){
           color: $sage;
           background-color: $uno-grey-active;
         }

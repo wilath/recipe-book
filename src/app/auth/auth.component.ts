@@ -77,11 +77,9 @@ export class AuthComponent {
           })
         ).subscribe();
       },
-
       error: (errorMsg) => {
         this.isLoading = false;
         this.error = errorMsg;
-        
       },
     });
 

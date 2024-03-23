@@ -1,18 +1,22 @@
-<div class="recipe-edit-wraper backboard-uno-grey border-radius-1r  pt-1r">
+<div class="recipe-edit-wraper backboard-uno-grey border-radius-1r m-1rem  pt-1r">
   
-
+  
   <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
     <div class="flex-row-csb backboard-uno-grey-active padding-1r">
-      <button type="button" class="button-alpha hover-grey hover-i-sage2 border-radius-1r padding-c1 font-size-15r" (click)="onCancel()"> <i id="mirror" class="fa-solid fa-share"></i> Cancel</button>
+      <button type="button" class="button-alpha hover-grey hover-i-sage2 border-radius-1r padding-c1 font-size-15r" (click)="onCancel()">
+         <i id="mirror" class="fa-solid fa-share"></i> 
+         <ng-container *ngIf="!isSmallSreen"> Cancel</ng-container>
+      </button>
         <h2 class="font-size-19r text-underline-sage2">Add Recipe</h2>
-      <button type="submit" class="button-alpha hover-grey hover-i-sage2 border-radius-1r padding-c1 font-size-15r"[disabled]="!recipeForm.valid">{{editMode? 'Save':'Add'}} <i class="fa-solid fa-share"></i> </button>
-        
+      <button type="submit" class="button-alpha hover-grey hover-i-sage2 border-radius-1r padding-c1 font-size-15r"[disabled]="!recipeForm.valid">
+        <ng-container *ngIf="!isSmallSreen" >{{editMode? 'Save':'Add'}} </ng-container>
+        <i class="fa-solid fa-share"></i> 
+      </button>
     </div>
     
-
     <div class="form-wraper">
 
-      <div class="padding-1r font-size-15r  flex-col-fsc bb-uga">
+      <div class="padding-1r font-size-15r flex-col-fsc bb-uga">
         <label for="name" class="font-weight-400 mb-1rem">Enter the name of the dish</label>
         <input
           type="text"
@@ -26,8 +30,8 @@
 
       <div class="padding-1r font-size-15r flex-col-fsc bb-uga">
         <label class="font-weight-400 mb-1rem">Select the food category</label>
-        <div class="food-types">
-          <label class="no-input-visible padding-c1 border-radius-hr mr-hrem label-hover-active-grey checked-sage2" for="0"
+        <div class="food-types flex-row-ss flex-wrap ">
+          <label class="no-input-visible padding-c1 border-radius-hr  label-hover-active-grey checked-sage2" for="0"
             >Desert
             <input
               type="radio"
@@ -38,7 +42,7 @@
             />
           </label>
 
-          <label class="no-input-visible padding-c1 border-radius-hr mr-hrem label-hover-active-grey checked-sage2" for="1"
+          <label class="no-input-visible padding-c1 border-radius-hr  label-hover-active-grey checked-sage2" for="1"
             >Dinner
             <input
               type="radio"
@@ -49,8 +53,8 @@
             />
           </label>
 
-          <label class="no-input-visible padding-c1 border-radius-hr mr-hrem label-hover-active-grey checked-sage2" for="2"
-            >Beverage
+          <label class="no-input-visible padding-c1 border-radius-hr  label-hover-active-grey checked-sage2" for="2"
+            >Drink
             <input
               type="radio"
               formControlName="type"
@@ -60,7 +64,7 @@
             />
           </label>
 
-          <label class="no-input-visible padding-c1 border-radius-hr mr-hrem label-hover-active-grey checked-sage2" for="3"
+          <label class="no-input-visible padding-c1 border-radius-hr  label-hover-active-grey checked-sage2" for="3"
             >Breakfast
             <input
               type="radio"
@@ -130,7 +134,7 @@
             </label>
           </div>
           <div class="mt-hrem width100 flex-row-csb">
-            <label class="cp" [for]="foodLevel.Easy">Easy</label>
+            <label  class="cp" [for]="foodLevel.Easy">Easy</label>
             <label class="cp" [for]="foodLevel.Medium">Medium</label>
             <label class="cp" [for]="foodLevel.Hard">Hard</label>
           </div>
@@ -236,34 +240,36 @@
               />
               <input class="uno-white font-size-1r background-tran" type="number" placeholder="1" formControlName="ammount" />
 
-              <div class="select-unit">
-                <button type="button" class="show-units background-tran uno-white font-size-1r height100 padding-0">
+              <div  class="select-unit">
+               
+                <button  type="button" class="show-units clear-button uno-white font-size-1r height100 padding-0">
                   {{
                     ingredientControl.unit
                       ? ingredientControl.unit
                       : "Select Unit"
                   }}
                   <i class="fa-solid fa-chevron-up"></i>
-                  <div class="units gap5 border-radius-hr overflow-h backboard-uno-dark" >
+                </button>
+
+                  <div class="units gap5 border-radius-hr overflow-h font-size-1r backboard-uno-dark" >
                     @for (unit of unitTypes | keyvalue; track unit) {
                     <label class="padding-c1" [for]="globalIndex + unit.key">
                       <input
                         type="radio"
                         name="unit"
                         formControlName="unit"
+                        #{{unit.key}}
                         [id]="globalIndex + unit.key"
                         [value]="unit.value"
                       />{{ unit.key }}
                     </label>
                     }
                   </div>
-                </button>
               </div>
               <button
                 class="delete-ing backboard-uno-dark font-size-12r hover-i-sage2"
                 type="button"
-                (click)="onDeleteIngredient($index)"
-              >
+                (click)="onDeleteIngredient($index)">
                 <i class="fa-solid fa-xmark"></i>
               </button>
             </div>

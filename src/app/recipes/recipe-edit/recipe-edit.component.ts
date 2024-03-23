@@ -1,26 +1,29 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { RecipesService } from '../recipes.service';
 import { FoodType } from '../../shared/enums/food-type-enum';
 import { DifficultyLevel, Recipe } from '../../shared/models/recipe.model';
 import { FileAnchor, FileUpload } from '../../shared/models/file-upload.model';
-import { finalize } from 'rxjs';
+import { Subscription, finalize } from 'rxjs';
 import { StorageService } from '../../shared/storage.service';
 import { IngredientUnits } from '../../shared/models/ingredient.model';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-recipe-edit',
   templateUrl: './recipe-edit.component.html',
   styleUrls: ['./recipe-edit.component.scss'],
 })
-export class RecipeEditComponent implements OnInit {
+export class RecipeEditComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private recipeService: RecipesService,
     private router: Router,
-    private storage: StorageService, 
+    private storage: StorageService,
+    private responsive: BreakpointObserver
   ) {}
+  
 
   public recipe: Recipe | null = null
 
@@ -42,16 +45,17 @@ export class RecipeEditComponent implements OnInit {
 
   public loggedUser!: string;
 
+  private responsiveSub!: Subscription;
+
+  public isSmallSreen: boolean = false;
+
   public ngOnInit() {
-    this.route.params.subscribe((params: Params) => {
-      this.editMode = params['id'] != null;
-      if(this.editMode){
-        this.recipe = this.recipeService.getRecipe(params['id']);
-      }
-      this.loggedUser = JSON.parse(localStorage.getItem('userData') || '{}').email;
-      this.initForm();
-    });
-    
+    this.setRecipeData()
+    this.setResponsiveSub()
+  }
+
+  public ngOnDestroy(): void {
+    this.responsiveSub.unsubscribe()
   }
 
   public onCancel() {
@@ -220,4 +224,23 @@ export class RecipeEditComponent implements OnInit {
     });
   }
  
+  private setResponsiveSub() {
+    this.responsiveSub = this.responsive.observe(['(max-width: 430px)']).subscribe( res => {
+      this.isSmallSreen = res.matches
+    })
+  }
+
+  private setRecipeData(){
+    this.route.params.subscribe((params: Params) => {
+      this.editMode = params['id'] != null;
+      if(this.editMode){
+        this.recipe = this.recipeService.getRecipe(params['id']);
+      }
+      this.loggedUser = JSON.parse(localStorage.getItem('userData') || '{}').email;
+      this.initForm();
+    });
+    
+  }
+
+
 }
