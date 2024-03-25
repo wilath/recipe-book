@@ -7,7 +7,6 @@ export const UserDataRedirectGuard: CanActivateFn = (route, state) => {
   const id = JSON.parse(localStorage.getItem('userData') || '{}').id
   router.navigate(['/user-panel', id])
 
-  
 
   return true;
 };

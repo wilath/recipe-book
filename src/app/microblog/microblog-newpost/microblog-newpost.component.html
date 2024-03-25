@@ -1,4 +1,4 @@
-<div class="backboard-uno-grey border-radius-1r flex-row-ss mt-1rem padding-1r pb-hr">
+<div [ngClass]="{'padding-15r': !isSmallScreen}" class="backboard-uno-grey border-radius-1r flex-row-ss mt-hrem padding-1r pb-hr">
 @if (userData.avatar) {
     <img class="avatar-image-3rem" [src]="userData.avatar.url" [alt]="userData.avatar.name">
 } @else {
@@ -34,7 +34,8 @@
         } @else {
             <i class="fa-regular fa-face-smile-beam"></i>
         }
-         Emojis</button>
+        <ng-container *ngIf="isSmallScreen"> Emojis</ng-container>
+        </button>
 
     <ng-container *ngIf="isEmojiPickerVisible">
         @defer (when isEmojiPickerVisible) {

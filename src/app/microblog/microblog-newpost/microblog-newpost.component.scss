@@ -60,7 +60,8 @@
   .emoji-mart {
     position: absolute;
     background-color: transparent;
-    left: 8rem;
+    left: 0;
+    top: calc(100% + 16px);
     z-index: 4;
 
     scrollbar-width: thin;

@@ -63,7 +63,6 @@ export class AuthComponent {
     this.auth$.subscribe({
       next: (resData) => {
         this.userDataService.setUsersData().pipe(
-          take(1),
           switchMap(() => {
             if (name !== undefined) {
               return this.userDataService.addNewUser(resData.email, resData.localId, name);
@@ -81,6 +80,7 @@ export class AuthComponent {
         this.isLoading = false;
         this.error = errorMsg;
       },
+
     });
 
     form.reset();

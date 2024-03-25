@@ -11,9 +11,9 @@ export class UserDataResolverService {
   subject = new ReplaySubject<void>();
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+ 
     if (!this.requested) {
       this.requested = true;
-
       this.userDataService
         .setUsersData()
         .subscribe((nr) => this.subject.next(nr));

@@ -6,7 +6,7 @@ import {  NotificationModel } from '../shared/models/notification.model';
 import { RealTimeDatabaseService } from '../shared/real-time-database.service';
 
 @Injectable()
-export class UserDataService implements OnDestroy {
+export class UserDataService {
   constructor(private realTimeDatabaseService: RealTimeDatabaseService) {}
 
   public usersData: UserData[] = [];
@@ -28,14 +28,6 @@ export class UserDataService implements OnDestroy {
 
   public getUsersData(): UserData[] {
     return this.usersData.slice();
-  }
-
-  private storeData$: Subscription = this.userDataChange.subscribe(()=> {
-    this.realTimeDatabaseService.storeUsersData(this.usersData)
-  })
-
-  public ngOnDestroy(): void {
-    this.storeData$.unsubscribe()
   }
 
   public getUserDataByEmail(email: string): UserData {
@@ -62,9 +54,10 @@ export class UserDataService implements OnDestroy {
     data.push(newUserData);
     this.usersData = data;
     this.userDataChange.next(this.usersData.slice());
-    for(let user of this.usersData){
-      this.setNotificationToUser(user.email, UserNotification.newUserJoined, newUserData.email);
-    }
+    //for(let user of this.usersData){
+     // this.setNotificationToUser(user.email, UserNotification.newUserJoined, newUserData.email);
+    // }
+    this.realTimeDatabaseService.storeUsersData(this.usersData)
     
     return of(void 0)
   }
@@ -92,6 +85,7 @@ export class UserDataService implements OnDestroy {
       data[user.index] = user.user;
       data[follower.index] = follower.user;
       this.setNotificationToUser(user.user.email,UserNotification.gotUnfollowed,follower.user.email)
+
     }
   }
 
@@ -101,6 +95,8 @@ export class UserDataService implements OnDestroy {
     data[user.index] = editedUser;
     this.usersData = data;
     this.userDataChange.next(this.usersData.slice());
+    this.realTimeDatabaseService.storeUsersData(this.usersData)
+
   }
 
   public setNotificationToUser(userToNotifiy: string, notification: UserNotification,eventUserEmail: string, recipeName?: string, eventData?: string) {
@@ -123,6 +119,8 @@ export class UserDataService implements OnDestroy {
     data[user.index] = user.user;
     this.usersData = data;
     this.userDataChange.next(this.usersData.slice())
+    this.realTimeDatabaseService.storeUsersData(this.usersData)
+
   }
 
   private getNotificationMessage(notification: UserNotification, eventUserEmail: string, eventName?: string, eventData?: string) {
@@ -188,6 +186,7 @@ export class UserDataService implements OnDestroy {
       this.usersData = data;
       this.userDataChange.next(this.usersData.slice());
     }
+    this.realTimeDatabaseService.storeUsersData(this.usersData)
     
   }
 
@@ -197,6 +196,7 @@ export class UserDataService implements OnDestroy {
     data[user.index].shoppingList = []
     this.usersData = data;
     this.userDataChange.next(this.usersData.slice())
+    this.realTimeDatabaseService.storeUsersData(this.usersData)
   }
 
   public deleteItemFromShopList(userEmail:string, shopItemId: number, index?: number) {
@@ -215,6 +215,8 @@ export class UserDataService implements OnDestroy {
     }
     this.usersData = data;
     this.userDataChange.next(this.usersData.slice())
+    this.realTimeDatabaseService.storeUsersData(this.usersData)
+
   }
 
   private getUserByEmail(email: string) {
@@ -222,4 +224,8 @@ export class UserDataService implements OnDestroy {
     const index = data.findIndex((user) => user.email === email);
     return { user: data[index], index: index };
   }
+
+  private storeData(){
+    this.realTimeDatabaseService.storeUsersData(this.usersData)
+    }
 }

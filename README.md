@@ -5,8 +5,8 @@ The aim of the project was to create a usable app that allows users to exchange 
 
 ## Table of contents:
 * [What this application does](#What-it-does)
-* [Technologies](#technologies)
-* [Challanges](#challanges)
+* [Technologies](#Technologies)
+* [Challanges](#Challanges)
 * [Features to implement or improve in the future](#improve)
 
 # What it does 
@@ -152,4 +152,16 @@ Images are loaded from Forms to Storage with Live-loading percentage indicator. 
 
 ## RealTimeDatabase
 
-**Firebase DataBase** is used to store all necessary data(users Data, microblog Data, recipes Data). Each main module communicates with service to either load or store data. real-time-database.service.ts is responsible for communication with Firebase. Proper interceptor requires a logged-in user to allow data traffic to Firebase. On start of the application data loading process is initiated via resolvers.
+**Firebase DataBase** is used to store all necessary data(users Data, microblog Data, recipes Data). Each main module communicates with service to either load or store data. real-time-database.service.ts is responsible for communication with Firebase. Proper interceptor requires a logged-in user to allow data traffic to Firebase.
+
+## Data flow
+
+Each data flow is reactive and managed by the relevant services. To handle the data, the services use the RxJS library.
+
+Starting from registartion, AuthService fires data flow through UserData.service.ts and loeads users data from DataBase, which is needed if new user is being added to the App. Microblog/Recipes data is loaded respectivly on route via resolvers. Resolvers are firing data load only once, when app is initliazed. Upon taking an action, new data is immedietaly saved to DataBase.
+
+# Challanges
+
+While building this app, i encouraged many minor and major obstacles. I've learned from everyone of it and managed to improve on many fields. Here are some of them:
+
+- For the most of the time, I've struggled with proper data loading from Firebase RealTimeDatabase. DB does'nt save empty arrays, so I've faced many 'undefined' problems when trying to display data. I've solved that problems by mapping through data when receving from HTTP client and insertting empty arrays, this solution was quicker than consideration of 'undefined' type in many components. 

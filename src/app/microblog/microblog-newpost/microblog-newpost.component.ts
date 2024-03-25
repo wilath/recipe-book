@@ -1,4 +1,4 @@
-import { Component, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { FileAnchor, FileUpload } from '../../shared/models/file-upload.model';
 import { MicroblogPost } from '../../shared/models/microblog-post.model';
@@ -21,6 +21,8 @@ export class MicroblogNewpostComponent implements OnInit, OnDestroy {
     private userDataService: UserDataService, 
     private microblogService: MicroblogService
   ) {}
+
+  @Input() public isSmallScreen: boolean = false;
 
   public newPostForm!: FormGroup;
 

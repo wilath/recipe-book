@@ -20,16 +20,12 @@ export class AppComponent implements OnInit {
 
   public isLogged$: boolean = false;
 
-
-
-  
   public ngOnInit() {
     this.authService.autoLogin();
     this.authService.user.subscribe((user) => {
       user !== null ? (this.isLogged$ = true) : (this.isLogged$ = false);
       if (user) {
         this.isLogged$ = true;
-        this.userDataService.setUsersData()
       } else {
         this.isLogged$ = false;
       }

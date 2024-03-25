@@ -1,5 +1,5 @@
 <div class=" microblog-wrap">
-  <app-microblog-newpost> </app-microblog-newpost>
+  <app-microblog-newpost [isSmallScreen]="isButtonTextVisible"> </app-microblog-newpost>
 
   @for (post of (posts | dateLikeSort: SortType.sortByDate) ; track $index) {
       @defer (on viewport) {
