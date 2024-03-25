@@ -1,48 +1,59 @@
 <div class="backboard-uno-grey border-radius-1r ">
     @if(!isEditMode) {
-        <div  class="flex-row-cfs gap15 padding-1r  ">
-            @if (userInfo.avatar) {
-                <img class="avatar-image-9rem border-replacer" [src]="userInfo.avatar.url" [alt]="userInfo.avatar.name">
-            } @else {
-                <img class="avatar-image-9rem border-replacer" src="https://t3.ftcdn.net/jpg/05/53/79/60/360_F_553796090_XHrE6R9jwmBJUMo9HKl41hyHJ5gqt9oz.jpg" alt="placeholdavatar">
+        
+            <div [ngClass]="{'padding-15r': !isSmallScreen, 'motto-flex-col': !isSmallScreen }"  class="flex-row-cfs  padding-1r  ">
+                <div class="flex-row-cfs">
+                    @if (userInfo.avatar) {
+                        <img class="avatar-image-9rem border-replacer" [src]="userInfo.avatar.url" [alt]="userInfo.avatar.name">
+                    } @else {
+                        <img class="avatar-image-9rem border-replacer" src="https://t3.ftcdn.net/jpg/05/53/79/60/360_F_553796090_XHrE6R9jwmBJUMo9HKl41hyHJ5gqt9oz.jpg" alt="placeholdavatar">
 
-            }
-            <div class="ml-hrem">
-                <h2 class="font-size-25r">{{userInfo.name}}</h2>
-                <div>
-                    <h3 class=" font-size-12r mt-hrem"><i class=" sage2 fa-solid fa-location-dot mr-hrem "></i>{{userInfo.extraInfo?.city}}</h3>
-                    <h3 class=" font-size-12r mt-hrem"><i class="sage2 fa-regular fa-calendar-days mr-hrem "></i>{{age}} y/o</h3>
-                    <h3 class=" font-size-12r mt-hrem"><i class="sage2 fa-regular fa-bookmark mr-hrem "></i>{{userInfo.extraInfo?.favRecipe}}</h3>
+                    }
+                    <div class="ml-hrem">
+                        <h2 class="font-size-25r">{{userInfo.name}}</h2>
+                        <div>
+                            <h3 class=" font-size-12r mt-hrem"><i class="sage2 fa-solid fa-location-dot mr-hrem "></i>{{userInfo.extraInfo?.city}}</h3>
+                            <h3 class=" font-size-12r mt-hrem"><i class="sage2 fa-regular fa-calendar-days mr-hrem "></i>{{age}} y/o</h3>
+                            <h3 class=" font-size-12r mt-hrem"><i class="sage2 fa-regular fa-bookmark mr-hrem "></i>{{userInfo.extraInfo?.favRecipe}}</h3>
+                        </div>
+                    </div>
                 </div>
+                @if (userInfo.extraInfo?.motto) {
+                    <div class="ml-auto motto">
+                        <p>{{userInfo.extraInfo?.motto}}</p>
+                    </div>
+        
+                }
+
             </div>
-
-            @if (userInfo.extraInfo?.motto) {
-                <div class="ml-auto motto">
-                    <p>{{userInfo.extraInfo?.motto}}</p>
-                </div>
-    
-            }
-        </div>
-    
+        
     } @else {
-        <app-user-edit [userInfo]="userInfo"></app-user-edit>
+        <app-user-edit  [userInfo]="userInfo"></app-user-edit>
     }
     
 
-    <div class="flex-row-cfs font-size-11r gap15 padding-1r bt-uga">
-        
-        <h3>Recipes : <span class="font-weight-500 sage2">{{usersActivity.r}}</span> </h3>
-        <h3>Posts: <span class="font-weight-500 sage2 ">{{usersActivity.m}}</span> </h3>
-        <h3>Followers : <span class="font-weight-500 sage2">{{userInfo.followers.length}}</span> </h3>
-        <h3>Follows : <span class="font-weight-500 sage2">{{userInfo.userFollows.length}}</span> </h3>
+    <div style="text-align: center;" [ngClass]="{'padding-15r': !isSmallScreen, 'font-size-1r': !isSmallScreen}" class="flex-row-cfs font-size-11r gap10 padding-1r bt-uga">
+        @if (!isEditMode) {
+            <h3>Recipes: <span class="font-weight-500 sage2">{{usersActivity.r}}</span> </h3>
+            <h3>Posts: <span class="font-weight-500 sage2 ">{{usersActivity.m}}</span> </h3>
+            <h3>Followers: <span class="font-weight-500 sage2">{{userInfo.followers.length}}</span> </h3>
+            <h3>Follows: <span class="font-weight-500 sage2">{{userInfo.userFollows.length}}</span> </h3>
 
-        <div class="profile-buttons">
+        }
+       
+
+        <div class="profile-buttons flex-row-cfs">
             @if(!isEditMode) {
-
                 @if (userInfo.email === currentUserEmail) {
-                    <button (click)="onEdit()"  class="button-alpha font-size-12r border-radius-hr hover-active-grey padding-c1"> <i class="fa-solid fa-pen-to-square "></i> Edit Profile </button>
+                    <button (click)="onEdit()"  class="button-alpha font-size-12r border-radius-hr hover-active-grey padding-c1"> 
+                        <i class="fa-solid fa-pen-to-square "></i> 
+                        <ng-container *ngIf="isSmallScreen"> Edit Profile</ng-container>
+                    </button>
                 } @else {
-                    <button (click)="onFollowUser()" class="button-alpha font-size-12r border-radius-hr hover-active-grey padding-c1"> <i [ngClass]="{'user-followed': isFollowedByCurretnUser}" class="fa-solid fa-user-plus"></i> {{isFollowedByCurretnUser? 'Unfollow' : 'Follow'}}</button>     
+                    <button (click)="onFollowUser()" class="button-alpha font-size-12r border-radius-hr hover-active-grey padding-c1">
+                        <i [ngClass]="{'user-followed': isFollowedByCurretnUser}" class="fa-solid fa-user-plus"></i>
+                        <ng-container *ngIf="isSmallScreen" >{{isFollowedByCurretnUser? ' Unfollow' : ' Follow'}}</ng-container>
+                    </button>     
                 }
             } 
             @else {

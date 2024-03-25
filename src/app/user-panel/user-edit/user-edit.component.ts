@@ -1,28 +1,41 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { UserData, emptyUserData } from '../../shared/models/user-data.model';
 import { FormControl, FormGroup } from '@angular/forms';
 import { StorageService } from '../../shared/storage.service';
 import { FileUpload } from '../../shared/models/file-upload.model';
 import { UserDataService } from '../user-data.service';
+import { Subscription } from 'rxjs';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-user-edit',
   templateUrl: './user-edit.component.html',
-  styleUrl: './user-edit.component.scss'
+  styleUrls: ['./user-edit.component.scss', '../user-info-display/user-info-display.component.scss']
 })
-export class UserEditComponent implements OnInit {
+export class UserEditComponent implements OnInit, OnDestroy {
 
+  constructor(
+    private storage: StorageService, 
+    private userDataService: UserDataService,
+    private responsive: BreakpointObserver
+    ){}
 
-  constructor(private storage: StorageService, private userDataService: UserDataService){}
  
-
   @Input() public userInfo: UserData = emptyUserData;
 
- 
+  public isSmallScreen: boolean = false;
+
   public userEditForm!: FormGroup;
+
+  private responsiveSub!: Subscription;
 
   public ngOnInit(): void {
     this.initForm()
+    this.setResponsiveSub();
+  }
+
+  public ngOnDestroy(): void {
+    this.responsiveSub.unsubscribe()
   }
 
   public onFileUpload(event: any){
@@ -66,6 +79,8 @@ export class UserEditComponent implements OnInit {
     this.userInfo = userData
   }
 
+  
+
   private initForm(){
     let name = this.userInfo.name;
     let avatar: FormGroup = new FormGroup({
@@ -102,6 +117,12 @@ export class UserEditComponent implements OnInit {
       birthDate: new FormControl(age),
       favRecipe: new FormControl(favRecipe),
       motto: new FormControl(motto),
+    })
+  }
+
+  private setResponsiveSub(){
+    this.responsiveSub = this.responsive.observe(['(max-width: 555px)']).subscribe( res => {
+      this.isSmallScreen = res.matches
     })
   }
 }

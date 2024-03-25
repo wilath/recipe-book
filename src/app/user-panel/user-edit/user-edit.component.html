@@ -1,8 +1,8 @@
 
 <form [formGroup]="userEditForm">
-    <div class="flex-row-cfs gap15 padding-1r">
-        
-            <ng-container formGroupName="avatar">
+    <div [ngClass]="{'padding-15r': isSmallScreen, 'motto-flex-col': isSmallScreen }" class="flex-row-cfs padding-1r">
+      <div class="flex-row-cfs">
+          <ng-container formGroupName="avatar">
                 <div class="avatar-image-9rem relative overflow-h b-sage">
                   <label class="no-input-visible flex-row-cc width100 height100 hover-color-sage" for="image"
                     ><i class="font-size-3r fa-solid fa-file-import "></i>
@@ -37,18 +37,17 @@
                       <i class="fa-regular fa-trash-can"></i></div
                   ></a>
                 </div>
-              </ng-container>
+          </ng-container>
 
-        
-        <div class="ml-hrem">
+          <div class="ml-hrem">
             <input class="bottom-sage input-text font-size-25r uno-white " type="text" placeholder="Name" formControlName="name">
             <div>
                 <h3 class=" font-size-12r mt-hrem"><i class=" sage2 fa-solid fa-location-dot mr-hrem "></i> <input spellcheck="false" maxlength="12" class="bottom-sage font-size-12r uno-white input-text" formControlName="city" placeholder="City" type="text"></h3>
                 <h3 class=" font-size-12r mt-hrem"><i class="sage2 fa-regular fa-calendar-days mr-hrem "></i> <input spellcheck="false" class="bottom-sage font-size-12r uno-white input-text" formControlName="birthDate" type="date"></h3>
                 <h3 class=" font-size-12r mt-hrem"><i class="sage2 fa-regular fa-bookmark mr-hrem "></i> <input spellcheck="false" maxlength="12"class="bottom-sage font-size-12r uno-white input-text" formControlName="favRecipe" placeholder="Favourite dish" type="text"></h3>
             </div>
-       
-        </div>
+          </div>
+      </div>
         
             <div class="ml-auto motto">
                 <textarea formControlName="motto" spellcheck="false" class="uno-white bottom-sage" maxlength="85"  rows="3"></textarea>

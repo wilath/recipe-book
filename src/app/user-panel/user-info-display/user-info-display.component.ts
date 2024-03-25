@@ -23,8 +23,10 @@ export class UserInfoDisplayComponent implements OnChanges {
   
   @Input() public currentUserEmail: string = '';
 
-  @ViewChild(UserEditComponent) UserEdit!: UserEditComponent
+  @Input() public isSmallScreen: boolean = false;
 
+  @ViewChild(UserEditComponent) UserEdit!: UserEditComponent
+  
   public isEditMode: boolean = false;
 
   public age: number = 33;

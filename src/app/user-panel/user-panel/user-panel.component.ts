@@ -7,6 +7,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { UserData, emptyUserData } from '../../shared/models/user-data.model';
 import { UserDataService } from '../user-data.service';
 import { Subscription } from 'rxjs';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-user-panel',
@@ -18,9 +19,12 @@ export class UserPanelComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private recipesService: RecipesService,
     private microblogService: MicroblogService,
-    private usersDataService: UserDataService) {}
+    private usersDataService: UserDataService,
+    private responsive: BreakpointObserver) {}
 
   public userInfo: UserData = emptyUserData;
+
+  public isSmallScreen: boolean = false;
 
   public currentUserEmail: string = '';
 
@@ -32,13 +36,14 @@ export class UserPanelComponent implements OnInit, OnDestroy {
 
   private microblogSub!: Subscription;
 
+  private responsiveSub!: Subscription;
+
 
   ngOnInit(): void {
     this.setData()
-    this.microblogSub = this.microblogService.postsChange.subscribe(() => {
-      this.microblogService.storeDatainDatabase()
-    });
-    this.currentUserEmail = JSON.parse(localStorage.getItem('userData') || '{}').email
+    this.setMicroblogData()
+    this.setResponsiveSub()
+    
   }
 
 
@@ -48,11 +53,24 @@ export class UserPanelComponent implements OnInit, OnDestroy {
   }
 
   private setData() {
+    this.currentUserEmail = JSON.parse(localStorage.getItem('userData') || '{}').email
     this.route.params.subscribe((params: Params)=>{
       const id = params['id'];
       this.userInfo = this.usersDataService.getUserDataById(id);
       this.usersRecipes = this.recipesService.getRecipes().filter(recipe => recipe.author === this.userInfo.email);
       this.usersPosts = this.microblogService.getMicroblogData().filter( post => post.author === this.userInfo.email)
+    })
+  }
+
+  private setMicroblogData(){
+    this.microblogSub = this.microblogService.postsChange.subscribe(() => {
+      this.microblogService.storeDatainDatabase()
+    });
+
+  }
+  private setResponsiveSub(){
+    this.responsive.observe(['(min-width: 555px)']).subscribe((res)=>{
+      this.isSmallScreen = res.matches
     })
   }
   

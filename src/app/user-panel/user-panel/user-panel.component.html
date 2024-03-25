@@ -1,4 +1,5 @@
-<app-user-info-display [currentUserEmail]="currentUserEmail" [userInfo]="userInfo"></app-user-info-display>
+<div class="m-1rem">
+<app-user-info-display [isSmallScreen]="isSmallScreen" [currentUserEmail]="currentUserEmail" [userInfo]="userInfo"></app-user-info-display>
 @if (userInfo.email === currentUserEmail) {
   <app-user-shopping-list [userEmail]="userInfo.email" [shoppingList]="userInfo.shoppingList"></app-user-shopping-list>
 }
@@ -26,8 +27,9 @@
 }
   <div class="users-posts">
     @for (post of usersPosts; track $index) {
-    <app-microblog-post [microblogPost]="post"></app-microblog-post>
+    <app-microblog-post [isButtonTextVisible]="isSmallScreen" [microblogPost]="post"></app-microblog-post>
     }
   </div>
 
+</div>
 </div>

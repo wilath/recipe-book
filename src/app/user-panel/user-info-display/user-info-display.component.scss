@@ -8,7 +8,15 @@
 }
 
 .motto {
+  min-width: 250px;
+  max-width: 390px;
   font-style: italic;
   font-size: 1.2rem;
-  inline-size: 250px;
+  align-self: flex-end;
+  display: flex;
+}
+.motto-flex-col{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
