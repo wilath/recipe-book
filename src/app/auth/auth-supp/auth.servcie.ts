@@ -21,6 +21,7 @@ export class AuthServcie {
 
   public user = new BehaviorSubject<User | null>(null);
   
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private tokenExpirationTimer: any;
 
   constructor(
@@ -84,7 +85,7 @@ export class AuthServcie {
       .pipe(
         catchError(this.handleError),
         tap((resData) => {
-          this.handleAuth(resData.email,resData.localId,resData.idToken, +resData.expiresIn,name);
+          this.handleAuth(resData.email,resData.localId,resData.idToken, +resData.expiresIn);
         })
       );
   }
@@ -118,7 +119,7 @@ export class AuthServcie {
     userId: string,
     token: string,
     expiresIn: number,
-    name?: string
+   
   ) {
     const expirationDate = new Date(new Date().getTime() + expiresIn * 3600);
     const user = new User(email, userId, token, expirationDate);

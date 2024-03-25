@@ -1,8 +1,5 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Observable, Subject, Subscription, map, tap } from 'rxjs';
-
-import { Ingredient } from '../shared/models/ingredient.model';
-import { ShoppingListService } from '../shopping-list/shopping-list.service';
 import { Recipe } from '../shared/models/recipe.model';
 import { UserDataService } from '../user-panel/user-data.service';
 import { UserNotification } from '../shared/enums/notifications.enum';
@@ -11,7 +8,7 @@ import { ItemComment } from '../shared/models/microblog-comment.model';
 
 @Injectable()
 export class RecipesService implements OnDestroy {
-  constructor(private shoppingListService: ShoppingListService, private userDataService: UserDataService, private realTimeDatabasService: RealTimeDatabaseService) {}
+  constructor( private userDataService: UserDataService, private realTimeDatabasService: RealTimeDatabaseService) {}
   
   public recipesChanged = new Subject<Recipe[]>();
 
@@ -98,15 +95,11 @@ export class RecipesService implements OnDestroy {
     return this.recipes.filter(recipe => recipe.author === email).length
   }
 
-  public addRecipeIng(ings: Ingredient[]) {
-    this.shoppingListService.addRecipeIng2(ings);
-  }
-
   public addRecipe(recipe: Recipe) {
     const authorsFollowers = this.userDataService.getUserDataByEmail(recipe.author).followers
     this.recipes.push(recipe);
     this.recipesChanged.next(this.recipes.slice());
-    for(let follower in authorsFollowers){
+    for(const follower in authorsFollowers){
       this.userDataService.setNotificationToUser(follower, UserNotification.newRecipeByFollow, recipe.author, recipe.name)
     }
   }

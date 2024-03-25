@@ -1,14 +1,13 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { slideIn } from '../../shared/animations/slide-in.animation';
+import { UserNotification } from '../../shared/enums/notifications.enum';
+import { ItemComment } from '../../shared/models/microblog-comment.model';
 import { Recipe } from '../../shared/models/recipe.model';
-import { RecipesService } from '../recipes.service';
 import { ShoppingItem, UserData } from '../../shared/models/user-data.model';
 import { UserDataService } from '../../user-panel/user-data.service';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ItemComment } from '../../shared/models/microblog-comment.model';
-import { User } from '../../shared/models/user.model';
-import { UserNotification } from '../../shared/enums/notifications.enum';
-import { slideIn } from '../../shared/animations/slide-in.animation';
+import { RecipesService } from '../recipes.service';
 
 @Component({
   selector: 'app-recipes-details',
@@ -125,7 +124,7 @@ export class RecipesDetailsComponent implements OnInit {
   }
 
   public initForm(){
-    let content = new FormControl('', [
+    const content = new FormControl('', [
       Validators.required]);
     this.newCommentForm = new FormGroup({
       content: content
@@ -149,6 +148,7 @@ export class RecipesDetailsComponent implements OnInit {
     this.isEmojiPickerVisible = !this.isEmojiPickerVisible
   }
   
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public addEmoji(event: any){
     const textArea = <FormControl>this.newCommentForm.get('content');
     (<FormControl>this.newCommentForm.get('content')).setValue(`${textArea.value} ${event.emoji.native}`)

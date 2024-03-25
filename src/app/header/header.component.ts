@@ -1,13 +1,13 @@
-import {Component, ElementRef, OnChanges, OnDestroy, OnInit, QueryList, SimpleChanges, ViewChildren} from '@angular/core';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { Component, ElementRef, HostListener, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { Subscription, filter, map } from 'rxjs';
 import { AuthServcie } from '../auth/auth-supp/auth.servcie';
+import { fadeIn } from '../shared/animations/fade-in.animation';
+import { slideIn } from '../shared/animations/slide-in.animation';
+import { NotificationModel } from '../shared/models/notification.model';
 import { UserData, emptyUserData } from '../shared/models/user-data.model';
 import { UserDataService } from '../user-panel/user-data.service';
-import { slideIn } from '../shared/animations/slide-in.animation';
-import { fadeIn } from '../shared/animations/fade-in.animation';
-import { NotificationModel } from '../shared/models/notification.model';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 export enum NotifactionFilterEnum{
   all,
@@ -15,9 +15,6 @@ export enum NotifactionFilterEnum{
 }
 
 @Component({
-  host: {
-    '(document:click)': 'onClickOutsideNotificationMenu($event)',
-  },
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss', './header.component.media.scss'],
@@ -34,6 +31,20 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private responsive: BreakpointObserver
   ) {}
   
+  @HostListener('click', ['$event'])
+   onClickOutsideNotificationMenu(event: Event) {
+    if (this.isNotificationMenuShown && this.notiMenu.length === 2) {
+      const firstMenu = this.notiMenu.first.nativeElement;
+      const secondMenu = this.notiMenu.last.nativeElement;
+
+      if (
+        !firstMenu.contains(event.target) &&
+        !secondMenu.contains(event.target)
+      ) {
+        this.isNotificationMenuShown = false;
+      }
+    }
+  }
 
   @ViewChildren('notiMenu') notiMenu!: QueryList<ElementRef>;
 
@@ -140,19 +151,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     });
   }
 
-  private onClickOutsideNotificationMenu(event: Event) {
-    if (this.isNotificationMenuShown && this.notiMenu.length === 2) {
-      const firstMenu = this.notiMenu.first.nativeElement;
-      const secondMenu = this.notiMenu.last.nativeElement;
-
-      if (
-        !firstMenu.contains(event.target) &&
-        !secondMenu.contains(event.target)
-      ) {
-        this.isNotificationMenuShown = false;
-      }
-    }
-  }
+  
 
   private setNotificationsToDisplay(){
     this.notifiactionsToDisplay = this.usersData.notifications.slice(0,10)

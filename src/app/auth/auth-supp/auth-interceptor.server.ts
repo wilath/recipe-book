@@ -12,6 +12,7 @@ import { AuthServcie } from './auth.servcie';
 export class AuthInterceptorService implements HttpInterceptor {
   constructor(private authService: AuthServcie) {}
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   intercept(req: HttpRequest<any>, next: HttpHandler) {
     return this.authService.user.pipe(
       take(1),

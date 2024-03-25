@@ -1,20 +1,16 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Component, Input, OnChanges } from '@angular/core';
+import {FormBuilder, FormControl, FormGroup,Validators,} from '@angular/forms';
+import { Router } from '@angular/router';
+import { fadeIn } from '../../shared/animations/fade-in.animation';
+import { slideIn } from '../../shared/animations/slide-in.animation';
+import { FileAnchor } from '../../shared/models/file-upload.model';
 import { ItemComment } from '../../shared/models/microblog-comment.model';
 import { MicroblogPost } from '../../shared/models/microblog-post.model';
 import { UserData } from '../../shared/models/user-data.model';
+import { SortType } from '../../shared/pipes/date-like-sort.pipe';
 import { UserDataService } from '../../user-panel/user-data.service';
 import { MicroblogService } from '../microblog.service';
-import { SortType } from '../../shared/pipes/date-like-sort.pipe';
-import { Router } from '@angular/router';
-import { FileAnchor } from '../../shared/models/file-upload.model';
-import { slideIn } from '../../shared/animations/slide-in.animation';
-import { fadeIn } from '../../shared/animations/fade-in.animation';
 
 @Component({
   selector: 'app-microblog-post',
@@ -37,7 +33,6 @@ export class MicroblogPostComponent implements OnChanges {
   @Input() public microblogPost!: MicroblogPost;
 
   @Input() public isButtonTextVisible: boolean = true;
-
 
 
   public postAuthor!: UserData;
@@ -81,7 +76,7 @@ export class MicroblogPostComponent implements OnChanges {
   }
 
   public initForm() {
-    let content = new FormControl('', [Validators.required]);
+    const content = new FormControl('', [Validators.required]);
     this.newCommentForm = this.formBuilder.group({
       content: content,
     });

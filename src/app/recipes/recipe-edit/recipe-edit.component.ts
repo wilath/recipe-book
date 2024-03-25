@@ -1,14 +1,14 @@
-import { Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { RecipesService } from '../recipes.service';
-import { FoodType } from '../../shared/enums/food-type-enum';
-import { DifficultyLevel, Recipe } from '../../shared/models/recipe.model';
-import { FileAnchor, FileUpload } from '../../shared/models/file-upload.model';
 import { Subscription, finalize } from 'rxjs';
-import { StorageService } from '../../shared/storage.service';
+import { FoodType } from '../../shared/enums/food-type-enum';
+import { FileAnchor, FileUpload } from '../../shared/models/file-upload.model';
 import { IngredientUnits } from '../../shared/models/ingredient.model';
-import { BreakpointObserver } from '@angular/cdk/layout';
+import { DifficultyLevel, Recipe } from '../../shared/models/recipe.model';
+import { StorageService } from '../../shared/storage.service';
+import { RecipesService } from '../recipes.service';
 
 @Component({
   selector: 'app-recipe-edit',
@@ -106,6 +106,7 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
     (<FormArray>this.recipeForm.get('description')?.get('steps')).removeAt(index)
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public onFileUpload(event: any ,index : number){
 
     const file: File = event.target.files[0];
@@ -163,12 +164,12 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
     let recipeFoodType = FoodType.dinner
     let recipeLevel = DifficultyLevel.Easy;
     let recipePrepTime = 45;
-    let recipeDescription = new FormGroup({
+    const recipeDescription = new FormGroup({
       main: new FormControl('', [Validators.required]),
       steps: new FormArray<FormControl>([])
     });
-    let recipeIngredients = new FormArray<FormGroup>([]);
-    let recipeImages = new FormArray<FormGroup>([]);
+    const recipeIngredients = new FormArray<FormGroup>([]);
+    const recipeImages = new FormArray<FormGroup>([]);
 
     if (this.editMode && this.recipe) {
       
@@ -183,13 +184,13 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
           main: this.recipe.description.main
         });
         const stepsArray = recipeDescription.get('steps') as FormArray
-        for(let step of this.recipe.description.steps){
+        for(const step of this.recipe.description.steps){
           stepsArray.push(new FormControl(step))
         }
       }
 
       if (this.recipe['ingredients']) {
-        for (let ingredient of this.recipe.ingredients) {
+        for (const ingredient of this.recipe.ingredients) {
           recipeIngredients.push(
             new FormGroup({
               name: new FormControl(ingredient.name, [Validators.required]),
@@ -200,7 +201,7 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
         }
       }
       if (this.recipe['images']) {
-        for (let image of this.recipe.images) {
+        for (const image of this.recipe.images) {
           recipeImages.push(
             new FormGroup({
               input: new FormControl(null),

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable, catchError, concatMap, of, switchMap, take, tap } from 'rxjs';
-import { AuthResponseData, AuthServcie } from './auth-supp/auth.servcie';
+import { Observable, of, switchMap, tap } from 'rxjs';
 import { UserDataService } from '../user-panel/user-data.service';
+import { AuthResponseData, AuthServcie } from './auth-supp/auth.servcie';
 
 @Component({
   selector: 'app-auth',
@@ -38,6 +38,7 @@ export class AuthComponent {
     this._token = captchaResponse
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public captchaError(captchaResponse: any) {
     console.log(captchaResponse)
   }
@@ -64,7 +65,7 @@ export class AuthComponent {
       next: (resData) => {
         this.userDataService.setUsersData().pipe(
           switchMap(() => {
-            if (name !== undefined) {
+            if (!this.userDataService.getUserDataById(resData.localId)) {
               return this.userDataService.addNewUser(resData.email, resData.localId, name);
             } else {
               return of(void 0);

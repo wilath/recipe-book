@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MicroblogPost } from '../shared/models/microblog-post.model';
-import { Observable, Subject, defaultIfEmpty, map, tap } from 'rxjs';
+import { Observable, Subject, map, tap } from 'rxjs';
 import { ItemComment } from '../shared/models/microblog-comment.model';
 import { RealTimeDatabaseService } from '../shared/real-time-database.service';
 import { UserDataService } from '../user-panel/user-data.service';
@@ -26,10 +26,9 @@ export class MicroblogService   {
     return highestId + 1;
   }
 
-  public setMicroblog():Observable<void> {
+  public setMicroblog (): Observable<void> {
     return this.realTimeDatabaseService.fetchMicroblogData().pipe(
       map(postsToSet => {
-        if(postsToSet){
       return postsToSet.map(
         post => {
           return new MicroblogPost(
@@ -37,7 +36,7 @@ export class MicroblogService   {
             post.author,
             new Date(post.date),
             post.content,
-            post.images ? post.images : new Array(),
+            post.images ? post.images : [],
             post.likes && post.likes.whoLiked ? post.likes : { quantity: post.likes.quantity? post.likes.quantity : 0, whoLiked: [] },
             post.comments ? post.comments.map(comment => {
               return {
@@ -45,24 +44,24 @@ export class MicroblogService   {
                 likes: comment.likes && comment.likes.whoLiked ? comment.likes : { quantity: comment.likes.quantity? comment.likes.quantity : 0, whoLiked: [] },
                 date: new Date(comment.date)
               };
-            }) : new Array()
+            }) : []
           );
-        })} else { return []};
-    }),tap(
+        })
+    }), tap(
       (postsToSet: MicroblogPost[]) => {
         if(postsToSet){
           this.posts = postsToSet;
           this.postsChange.next(this.posts.slice());
          }       
       },
-    ),map(()=>{}));
+    ), map(() => {}));
   }
 
-  public getMicroblogData(): MicroblogPost[]{
-    return this.posts.slice();
+  public getMicroblogData (): MicroblogPost[] {
+    return this.posts.slice()
   }
 
-  public getNumberOfPostForUser(email: string) {
+  public getNumberOfPostForUser (email: string): number {
     const userPosts = this.posts.filter(post => post.author === email);
     
     const userComments = this.posts.reduce((total, post) => {
@@ -70,20 +69,20 @@ export class MicroblogService   {
     }, 0);
     
     return userPosts.length + userComments;
-}
+  }
 
-  public onAddNewPost(post: MicroblogPost) {
+  public onAddNewPost (post: MicroblogPost): void {
     const newPosts = this.posts;
     const authorsFollowers = this.userDataService.getUserDataByEmail(post.author).followers
     newPosts.push(post);
     this.posts = newPosts;
     this.postsChange.next(this.posts.slice());
-    for(let follower in authorsFollowers){
+    for(const follower in authorsFollowers){
       this.userDataService.setNotificationToUser(follower, UserNotification.newPostByFollow, post.author)
     }
   }
 
-  public onDeletePost(postId: number) {
+  public onDeletePost (postId: number): void {
     const newPosts = this.posts.filter((el) => {
       return el.id !== postId;
     });
@@ -91,7 +90,7 @@ export class MicroblogService   {
     this.postsChange.next(this.posts.slice());
   }
 
-  public onEditPost(post: MicroblogPost) {
+  public onEditPost (post: MicroblogPost): void {
     const newPosts = this.posts.map((el) => {
       if (el.id === post.id) {
         return (el = post);
@@ -103,7 +102,7 @@ export class MicroblogService   {
     this.postsChange.next(this.posts.slice());
   }
 
-  public onLikePost(postId: number, userEmail: string, add: boolean) {
+  public onLikePost (postId: number, userEmail: string, add: boolean): void {
     const newPosts = this.posts;
     const postIndex = newPosts.findIndex((el) => el.id === postId);
     if(postIndex !== -1) {
@@ -123,7 +122,7 @@ export class MicroblogService   {
     this.userDataService.setNotificationToUser(this.posts[postIndex].author, UserNotification.likedPost, userEmail)
 }
 
-  public onAddCommentToPost(postId: number, comment: ItemComment) {
+  public onAddCommentToPost (postId: number, comment: ItemComment): void {
     const newPosts = this.posts;
     const postIndex = newPosts.findIndex((el) => el.id === postId);
     if (postIndex !== -1) {
@@ -134,7 +133,7 @@ export class MicroblogService   {
     this.userDataService.setNotificationToUser(this.posts[postIndex].author, UserNotification.commentedPost, comment.author)
   }
 
-  public onDeleteComment(postId: number, commentId: number) {
+  public onDeleteComment (postId: number, commentId: number): void {
     const newPosts = this.posts;
     const postIndex = newPosts.findIndex((el) => el.id === postId);
     if (postIndex !== -1) {
@@ -146,7 +145,7 @@ export class MicroblogService   {
     this.postsChange.next(this.posts.slice());
   }
 
-  public onEditComment(postId: number, comment: ItemComment) {
+  public onEditComment (postId: number, comment: ItemComment): void {
     const newPosts = this.posts;
     const postIndex = newPosts.findIndex((el) => el.id === postId);
 
@@ -163,7 +162,7 @@ export class MicroblogService   {
     this.postsChange.next(this.posts.slice());
   }
 
-  public onLikeComment(postId: number, commentId: number, userEmail: string, add: boolean) {
+  public onLikeComment (postId: number, commentId: number, userEmail: string, add: boolean): void {
     const newPosts = this.posts;
     const postIndex = newPosts.findIndex((el) => el.id === postId);
     const newCommentIndex = newPosts[postIndex].comments.findIndex( el => el.id === commentId)
@@ -185,7 +184,7 @@ export class MicroblogService   {
     this.userDataService.setNotificationToUser(this.posts[postIndex].comments[newCommentIndex].author, UserNotification.likedComment, userEmail)
   }
 
-  public storeDatainDatabase(){
+  public storeDatainDatabase (): void {
     this.realTimeDatabaseService.storeMicroblogData(this.posts)
   }
 }

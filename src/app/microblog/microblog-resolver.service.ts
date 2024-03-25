@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { MicroblogService } from './microblog.service';
 import { ReplaySubject, first } from 'rxjs';
 
@@ -9,7 +8,7 @@ export class MicroblogResolverService {
   requested = false;
   subject = new ReplaySubject<void>();
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+  resolve() {
     if (!this.requested) {
       this.requested = true;
 

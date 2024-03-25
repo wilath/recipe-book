@@ -1,12 +1,11 @@
-import { Component, Input, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { FileAnchor, FileUpload } from '../../shared/models/file-upload.model';
 import { MicroblogPost } from '../../shared/models/microblog-post.model';
 import { StorageService } from '../../shared/storage.service';
 import { UserDataService } from '../../user-panel/user-data.service';
 import { MicroblogService } from '../microblog.service';
-import { finalize, take } from 'rxjs';
-import { CdkTextareaAutosize } from '@angular/cdk/text-field';
+import { finalize } from 'rxjs';
 import { UserData, emptyUserData } from '../../shared/models/user-data.model';
 
 @Component({
@@ -39,7 +38,7 @@ export class MicroblogNewpostComponent implements OnInit, OnDestroy {
     this.loadUserData()
   }
 
-  public ngOnDestroy(): void {
+  public ngOnDestroy():void {
     const images = (<{input: string, percentages: number, imageData: FileAnchor}[]>this.newPostForm.value.images)
     .map( (el) => {return el.imageData})
     .filter( el => el.url)
@@ -49,7 +48,8 @@ export class MicroblogNewpostComponent implements OnInit, OnDestroy {
     }
   }
  
-  public onFileUpload(event: any ,index : number){
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  public onFileUpload(event: any, index: number){
 
     const file: File = event.target.files[0];
     if(file) {
@@ -113,6 +113,7 @@ export class MicroblogNewpostComponent implements OnInit, OnDestroy {
      this.isEmojiPickerVisible = !this.isEmojiPickerVisible
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public addEmoji(event: any) {
     const textArea = <FormControl>this.newPostForm.get('content');
     (<FormControl>this.newPostForm.get('content')).setValue(`${textArea.value} ${event.emoji.native}`)
@@ -123,9 +124,9 @@ export class MicroblogNewpostComponent implements OnInit, OnDestroy {
   }
 
   private initForm() {
-    let content = new FormControl('', [
+    const content = new FormControl('', [
       Validators.required] );
-    let images = new FormArray<FormGroup>([]);
+    const images = new FormArray<FormGroup>([]);
 
     this.newPostForm! = this.formBuilder.group({
       content: content, 

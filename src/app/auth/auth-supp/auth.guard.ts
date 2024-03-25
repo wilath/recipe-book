@@ -1,10 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  ActivatedRouteSnapshot,
-  RouterStateSnapshot,
-  UrlTree,
-  Router,
-} from '@angular/router';
+import { Router, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { AuthServcie } from './auth.servcie';
@@ -14,8 +9,6 @@ export class AuthGuard {
   constructor(private aService: AuthServcie, private router: Router) {}
 
   canActivate(
-    route: ActivatedRouteSnapshot,
-    router: RouterStateSnapshot
   ):
     | boolean
     | UrlTree
