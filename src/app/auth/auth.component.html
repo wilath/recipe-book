@@ -18,6 +18,10 @@
 
         <label for="password">Password</label>
         <input type="password" id="password" class="font-size-14r auth-input uno-white font-weight-300 padding-c1 border-radius-hr" ngModel name="password" required minlength="6"/>
+
+        @if (authForm.value.password && !isLoginMode && authForm.value.password.length < 6) {
+          <p class="passowrds-not-same padding-c1 sage2 border-radius-hr"  >Passwords should be at least 6 characters long!</p>
+        }
         
         @if (!isLoginMode) {
           <label for="password2">Confirm password</label>

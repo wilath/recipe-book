@@ -120,7 +120,7 @@ export class AuthServcie {
     expiresIn: number,
     name?: string
   ) {
-    const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
+    const expirationDate = new Date(new Date().getTime() + expiresIn * 3600);
     const user = new User(email, userId, token, expirationDate);
     this.user.next(user);
     this.autoLogout(expiresIn * 1000);
