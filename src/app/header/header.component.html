@@ -36,7 +36,7 @@
         </button>
     </div>
     @if (isNotificationMenuShown) {
-        <div #notiMenu  class="notification-menu font-size-1rem backboard-uno-grey border-radius-1r padding-08r">
+        <div #notiMenu [ngClass]="{'not-menu-small-screen': _isSmallScreen}"  class="notification-menu font-size-1rem backboard-uno-grey border-radius-1r padding-08r">
             <div class="notification-label font-size-19r">
                 <h4>Notifications</h4>
                 <div class="notification-filter flex-row-cfs gap10 mt-hrem ">           
