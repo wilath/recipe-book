@@ -38,7 +38,7 @@ Once user is followed, follower will receive notifications once the user of inte
 
 Microblog posts are loadead lazy based on viewport apperance, with :enter animation.
 
-[post-item](https://firebasestorage.googleapis.com/v0/b/recipesproject-fc6f3.appspot.com/o/readme%2Fmicroblog-item.png?alt=media&token=d6d6f6e0-b80e-4d52-a944-3c2379e39a50)
+![post-item](https://firebasestorage.googleapis.com/v0/b/recipesproject-fc6f3.appspot.com/o/readme%2Fmicroblog-item.png?alt=media&token=d6d6f6e0-b80e-4d52-a944-3c2379e39a50)
 
 
 ## Recipes
@@ -55,9 +55,7 @@ User can take actions on Recipe:
 
 - **Like recipe**,
 
-- **Rate recipe**, on 1-5 star scale. Recipe-Item component displays the current Rate given by logged user( white circuit around the star), and the averege rating 
-
-of recipe based on all rates.
+- **Rate recipe**, on 1-5 star scale. Recipe-Item component displays the current Rate given by logged user( white circuit around the star), and the averege rating of recipe based on all rates.
 
 - **Follow author** of the recipe, to get informed upon his activities on the page.
 
@@ -67,34 +65,34 @@ of recipe based on all rates.
 
 component.
 
-[recipe-item](https://firebasestorage.googleapis.com/v0/b/recipesproject-fc6f3.appspot.com/o/readme%2Frecipe-item.png?alt=media&token=bc97aa91-0579-426c-bde1-a83b40c50589)
+![recipe-item](https://firebasestorage.googleapis.com/v0/b/recipesproject-fc6f3.appspot.com/o/readme%2Frecipe-item.png?alt=media&token=bc97aa91-0579-426c-bde1-a83b40c50589)
 
 
 ## User-Panel
 
-This module allows user to take a peak on other users data and, acitvity- see his posts and recipes. Once user is displaying his own profile, he can see his actuall 
+This module allows user to take a peak on other users data and acitvity- see his posts and recipes. Once user is displaying his own profile, he can see his actuall 
 
 shopping list. 
 
 ### User can take actions on shopping list:
 
-- Clear whole shopping list
+- Clear whole shopping list,
 
-- Delete recipe from shopping list
+- Delete recipe from shopping list,
 
-- Delete precise ingredient from shopping
+- Delete precise ingredient from shopping list.
 
-[shoplist](https://firebasestorage.googleapis.com/v0/b/recipesproject-fc6f3.appspot.com/o/readme%2Fshoplist.png?alt=media&token=229f69b5-aa47-45f7-afc5-3ee4d0c3a5a3)
+![shoplist](https://firebasestorage.googleapis.com/v0/b/recipesproject-fc6f3.appspot.com/o/readme%2Fshoplist.png?alt=media&token=229f69b5-aa47-45f7-afc5-3ee4d0c3a5a3)
 
 ### User can edit his/her own profile, data available for changes:
 
--Avatar
+-Avatar,
 
--Name
+-Name,
 
--Extra Info(City, Age, Favourite dish, motto)
+-Extra Info(City, Age, Favourite dish, motto).
 
-[user-info](https://firebasestorage.googleapis.com/v0/b/recipesproject-fc6f3.appspot.com/o/readme%2Fprofile.png?alt=media&token=bc64ea6c-c4bd-4285-8ba9-bc265de857c6)
+![user-info](https://firebasestorage.googleapis.com/v0/b/recipesproject-fc6f3.appspot.com/o/readme%2Fprofile.png?alt=media&token=bc64ea6c-c4bd-4285-8ba9-bc265de857c6)
 
 ### User Notifications
 
@@ -110,13 +108,13 @@ User will receive notifications when:
 
 - New user joined the site,
 
-- His post got liked
+- His post got liked,
 
-- His post got commented
+- His post got commented,
 
-- His recipe got commented
+- His recipe got commented,
 
-- Someone added his recipe to shopping list
+- Someone added his recipe to shopping list,
 
-- Followed user added post/recipe
+- Followed user added post/recipe.
 
