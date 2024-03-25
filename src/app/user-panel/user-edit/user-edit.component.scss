@@ -8,17 +8,7 @@
   border-bottom: 1px solid  rgba(164, 185, 93, 0.3);;
 }
 
-@keyframes pulse {
-  0% {
-    border-color: transparent; 
-  }
-  100% {
-    border-color: $sage; 
-  }
-}
-.date-input {
-  color-scheme: $sage2;
-}
+
 .input-text {
     font-family: inherit;
     background-color: transparent;
@@ -47,7 +37,7 @@
       font-style: italic;
       outline: none;
       border: none;
-      border-bottom: 1px solid $sage;
+      border-bottom: 1px solid  rgba(164, 185, 93, 0.3);;
       font-size: 1.2rem;
     }
   }
