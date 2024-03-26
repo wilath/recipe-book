@@ -53,5 +53,6 @@ export const emptyUserData = {
 export const emptySimpleUserdata = {
   email: 'Couldnt load users data',
   name: 'Couldnt load users data',
+  id: 'Couldnt load users data',
   avatar: { name: 'Couldnt load users data', url: 'Couldnt load users data' },
 };

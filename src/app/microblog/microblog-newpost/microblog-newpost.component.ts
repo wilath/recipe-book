@@ -6,7 +6,7 @@ import { StorageService } from '../../shared/storage.service';
 import { UserDataService } from '../../user-panel/user-data.service';
 import { MicroblogService } from '../microblog.service';
 import { finalize } from 'rxjs';
-import { UserData, emptyUserData } from '../../shared/models/user-data.model';
+import { UserData } from '../../shared/models/user-data.model';
 
 @Component({
   selector: 'app-microblog-newpost',
@@ -25,7 +25,7 @@ export class MicroblogNewpostComponent implements OnInit, OnDestroy {
 
   public newPostForm!: FormGroup;
 
-  public userData: UserData = emptyUserData
+  public userData!: UserData
 
   public isEmojiPickerVisible: boolean = false;
 

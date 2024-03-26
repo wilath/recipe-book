@@ -1,12 +1,12 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { Recipe } from '../../../shared/models/recipe.model';
-import { RecipesService } from '../../recipes.service';
-import { UserDataService } from '../../../user-panel/user-data.service';
-import { User } from '../../../shared/models/user.model';
-import { ActivatedRoute, Router } from '@angular/router';
-import { UserData, emptyUserData } from '../../../shared/models/user-data.model';
+import { Component, Input, OnChanges } from '@angular/core';
+import { Router } from '@angular/router';
 import { fadeIn } from '../../../shared/animations/fade-in.animation';
 import { slideIn } from '../../../shared/animations/slide-in.animation';
+import { Recipe } from '../../../shared/models/recipe.model';
+import { UserData, emptyUserData } from '../../../shared/models/user-data.model';
+import { User } from '../../../shared/models/user.model';
+import { UserDataService } from '../../../user-panel/user-data.service';
+import { RecipesService } from '../../recipes.service';
 
 
 
@@ -53,7 +53,7 @@ export class RecipesItemComponent implements OnChanges  {
     this._rateByCurrentUser = value;
   }
 
-  public ngOnChanges(changes: SimpleChanges): void {
+  public ngOnChanges(): void {
     this.currentUser = JSON.parse(localStorage.getItem('userData') || '{}');
     this.totalRatePercentage = (this.recipe.getAverageRating)*20;
     this.isLikedByCurrentUser = this.recipe.isLikedByUser(this.currentUser.email);

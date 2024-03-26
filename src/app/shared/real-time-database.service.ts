@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Recipe } from './models/recipe.model';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { UserData } from './models/user-data.model';
 import { MicroblogPost } from './models/microblog-post.model';
 import { Observable } from 'rxjs';
@@ -55,7 +55,7 @@ export class RealTimeDatabaseService {
   }
 
   public fetchUsersData(): Observable<UserData[]> {
-
+    
     return this.http.get<UserData[]>(this.urlUsers).pipe(
       map((users) => {
         return users.map((user) => {

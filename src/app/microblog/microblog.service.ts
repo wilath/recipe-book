@@ -37,11 +37,11 @@ export class MicroblogService   {
             new Date(post.date),
             post.content,
             post.images ? post.images : [],
-            post.likes && post.likes.whoLiked ? post.likes : { quantity: post.likes.quantity? post.likes.quantity : 0, whoLiked: [] },
+            post.likes.whoLiked ? post.likes : { quantity: post.likes.quantity? post.likes.quantity : 0, whoLiked: [] },
             post.comments ? post.comments.map(comment => {
               return {
                 ...comment,
-                likes: comment.likes && comment.likes.whoLiked ? comment.likes : { quantity: comment.likes.quantity? comment.likes.quantity : 0, whoLiked: [] },
+                likes: comment.likes.whoLiked ? comment.likes : { quantity: comment.likes.quantity? comment.likes.quantity : 0, whoLiked: [] },
                 date: new Date(comment.date)
               };
             }) : []

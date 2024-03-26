@@ -1,8 +1,8 @@
-import { Injectable, OnDestroy} from '@angular/core';
-import { Observable, Subject, Subscription, map, of, tap } from 'rxjs';
-import { ShoppingItem, UserData, emptyUserData } from '../shared/models/user-data.model';
+import { Injectable } from '@angular/core';
+import { Observable, Subject, map, tap } from 'rxjs';
 import { UserNotification } from '../shared/enums/notifications.enum';
-import {  NotificationModel } from '../shared/models/notification.model';
+import { NotificationModel } from '../shared/models/notification.model';
+import { ShoppingItem, SimpleUserdata, UserData, emptyUserData } from '../shared/models/user-data.model';
 import { RealTimeDatabaseService } from '../shared/real-time-database.service';
 
 @Injectable()
@@ -13,17 +13,34 @@ export class UserDataService {
 
   public userDataChange = new Subject<UserData[]>();
 
+  public newUserToAdd: SimpleUserdata | null = null;
+
   public setUsersData(): Observable<void> {
     
     return this.realTimeDatabaseService.fetchUsersData().pipe(
       tap((usersToSet: UserData[]) => {
         if(usersToSet){
-          this.usersData = usersToSet;
-          this.userDataChange.next(this.usersData.slice());
           
+          if(this.newUserToAdd) { 
+            usersToSet.push({
+              ...this.newUserToAdd,
+              notifications: [{message:`Welcome ${this.newUserToAdd.name} I hope you will enjoy this site!`,shown: false, date: new Date()}],
+              shoppingList: [],
+              followers: [],
+              userFollows: [],
+            });
+            this.realTimeDatabaseService.storeUsersData(usersToSet);
+            this.newUserToAdd = null;
+          } 
+            this.usersData = usersToSet;
+            this.userDataChange.next(this.usersData.slice());
           }
         }
       ),map(()=>{}))
+  }
+
+  public setNewUserToAdd(user: SimpleUserdata): void {
+    this.newUserToAdd = user
   }
 
   public getUsersData(): UserData[] {
@@ -38,28 +55,6 @@ export class UserDataService {
   public getUserDataById(id: string): UserData {
     const index = this.usersData.findIndex((user) => user.id === id);
     return this.usersData[index];
-  }
-
-  public addNewUser(email: string, userId: string, name: string): Observable<void> {
-    const data = this.usersData
-    const newUserData: UserData = {
-      email: email,
-      id: userId,
-      name: name,
-      notifications: [{message:`Welcome ${name} I hope you will enjoy this site!`,shown: false, date: new Date()}],
-      shoppingList: [],
-      followers: [],
-      userFollows: [],
-    };
-    data.push(newUserData);
-    this.usersData = data;
-    this.userDataChange.next(this.usersData.slice());
-    //for(let user of this.usersData){
-     // this.setNotificationToUser(user.email, UserNotification.newUserJoined, newUserData.email);
-    // }
-    this.realTimeDatabaseService.storeUsersData(this.usersData)
-    
-    return of(void 0)
   }
 
   public addFollowToUser(userEmail: string,followerEmail: string, add: boolean) {

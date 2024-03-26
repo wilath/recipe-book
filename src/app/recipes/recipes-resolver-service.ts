@@ -10,6 +10,8 @@ export class RecipeResolverService {
   subject = new ReplaySubject<void>();
 
   resolve() {
+    console.log('res fired recipes')
+
     if (!this.requested) {
       this.requested = true;
 

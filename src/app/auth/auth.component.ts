@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable, of, switchMap, tap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { UserDataService } from '../user-panel/user-data.service';
 import { AuthResponseData, AuthServcie } from './auth-supp/auth.servcie';
 
@@ -63,20 +63,15 @@ export class AuthComponent {
 
     this.auth$.subscribe({
       next: (resData) => {
-        this.userDataService.setUsersData().pipe(
-          switchMap(() => {
-            if (!this.userDataService.getUserDataById(resData.localId)) {
-              return this.userDataService.addNewUser(resData.email, resData.localId, name);
-            } else {
-              return of(void 0);
-            }
-          }),
-          tap(() => {
-            this.isLoading = false;
-            this.router.navigate(['/microblog']);
-          })
-        ).subscribe();
+        if(name){
+          this.userDataService.setNewUserToAdd({email: resData.email, id: resData.localId, name: name})
+        }
       },
+      complete:( () => {
+        this.isLoading = false;
+        this.router.navigate(['/microblog']);
+
+      }),
       error: (errorMsg) => {
         this.isLoading = false;
         this.error = errorMsg;

@@ -23,6 +23,8 @@ export class MicroblogComponent implements OnInit, OnDestroy {
 
   private microblogSub!: Subscription;
 
+  private responsiveSub!: Subscription;
+
   public SortType = SortType;
 
   public isPhotoDisplayOn: boolean = true;
@@ -34,6 +36,7 @@ export class MicroblogComponent implements OnInit, OnDestroy {
 
   public ngOnDestroy(): void {
     this.microblogSub.unsubscribe();
+    this.responsiveSub.unsubscribe();
   }
 
   private setMicroblogSub() {
@@ -45,7 +48,7 @@ export class MicroblogComponent implements OnInit, OnDestroy {
   }
 
   private setResponsiveSub(){
-    this.responsive.observe(['(min-width: 555px)']).subscribe((res)=>{
+    this.responsiveSub = this.responsive.observe(['(min-width: 555px)']).subscribe((res)=>{
       this.isButtonTextVisible = res.matches
     })
   }
