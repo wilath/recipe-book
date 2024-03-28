@@ -57,7 +57,7 @@
       },
       {
         "file": ".firebase/hosting.ZGlzdFxyZWNpcGVzLXByb2plY3RcYnJvd3Nlcg.cache",
-        "hash": "14493558793251788596"
+        "hash": "13774727471057438015"
       },
       {
         "file": ".firebaserc",
@@ -113,7 +113,7 @@
       },
       {
         "file": "src/app/app.component.ts",
-        "hash": "1062247940063649703"
+        "hash": "17564458359055018193"
       },
       {
         "file": "src/app/app.module.ts",
@@ -121,19 +121,19 @@
       },
       {
         "file": "src/app/auth/auth-supp/auth-interceptor.server.ts",
-        "hash": "2803250337312898741"
+        "hash": "5385476988314341525"
       },
       {
         "file": "src/app/auth/auth-supp/auth.guard.ts",
-        "hash": "403649365911925078"
+        "hash": "8158224676563759792"
       },
       {
         "file": "src/app/auth/auth-supp/auth.servcie.ts",
-        "hash": "14179909176025125647"
+        "hash": "6381707226034700920"
       },
       {
         "file": "src/app/auth/auth.component.html",
-        "hash": "17099460005787456741"
+        "hash": "15831984905420562407"
       },
       {
         "file": "src/app/auth/auth.component.scss",
@@ -141,7 +141,7 @@
       },
       {
         "file": "src/app/auth/auth.component.ts",
-        "hash": "10124484563185504866"
+        "hash": "6681750022218204081"
       },
       {
         "file": "src/app/auth/auth.module.ts",
@@ -149,7 +149,7 @@
       },
       {
         "file": "src/app/core.module.ts",
-        "hash": "9256693159949388894"
+        "hash": "13829748210651160363"
       },
       {
         "file": "src/app/header/header.component.html",
@@ -165,7 +165,7 @@
       },
       {
         "file": "src/app/header/header.component.ts",
-        "hash": "11616827904528102456"
+        "hash": "7825198124668350224"
       },
       {
         "file": "src/app/header/notifications.pipe.ts",
@@ -185,7 +185,7 @@
       },
       {
         "file": "src/app/microblog/microblog-newpost/microblog-newpost.component.html",
-        "hash": "916434579432109685"
+        "hash": "6360617316056605233"
       },
       {
         "file": "src/app/microblog/microblog-newpost/microblog-newpost.component.scss",
@@ -193,7 +193,7 @@
       },
       {
         "file": "src/app/microblog/microblog-newpost/microblog-newpost.component.ts",
-        "hash": "1454360925386339705"
+        "hash": "3308546091143111061"
       },
       {
         "file": "src/app/microblog/microblog-photos-display/microblog-photos-display.component.html",
@@ -229,11 +229,11 @@
       },
       {
         "file": "src/app/microblog/microblog-post/microblog-post.component.ts",
-        "hash": "8981490796734956854"
+        "hash": "4661120039313384944"
       },
       {
         "file": "src/app/microblog/microblog-resolver.service.ts",
-        "hash": "2175738330093211672"
+        "hash": "807819861872415532"
       },
       {
         "file": "src/app/microblog/microblog-routing.module.ts",
@@ -249,7 +249,7 @@
       },
       {
         "file": "src/app/microblog/microblog.component.ts",
-        "hash": "6973035060238984653"
+        "hash": "14240765728187332258"
       },
       {
         "file": "src/app/microblog/microblog.module.ts",
@@ -257,7 +257,7 @@
       },
       {
         "file": "src/app/microblog/microblog.service.ts",
-        "hash": "2183845805869889931"
+        "hash": "8454087888130232964"
       },
       {
         "file": "src/app/recipes/recipe-edit/recipe-edit.component.html",
@@ -269,7 +269,7 @@
       },
       {
         "file": "src/app/recipes/recipe-edit/recipe-edit.component.ts",
-        "hash": "12222008450208831625"
+        "hash": "1480961992607102492"
       },
       {
         "file": "src/app/recipes/recipes-details/recipes-details.component.html",
@@ -281,19 +281,19 @@
       },
       {
         "file": "src/app/recipes/recipes-details/recipes-details.component.ts",
-        "hash": "1148747830630817613"
+        "hash": "13951023427061034457"
       },
       {
         "file": "src/app/recipes/recipes-list/recipes-item/recipes-item.component.html",
-        "hash": "8075214525393665633"
+        "hash": "13228202412029109267"
       },
       {
         "file": "src/app/recipes/recipes-list/recipes-item/recipes-item.component.scss",
-        "hash": "2863273465911019547"
+        "hash": "3871438477781970144"
       },
       {
         "file": "src/app/recipes/recipes-list/recipes-item/recipes-item.component.ts",
-        "hash": "9379254809907500138"
+        "hash": "16073930258830962399"
       },
       {
         "file": "src/app/recipes/recipes-list/recipes-list.component.html",
@@ -309,7 +309,7 @@
       },
       {
         "file": "src/app/recipes/recipes-resolver-service.ts",
-        "hash": "13226749570059437520"
+        "hash": "8618032889065096034"
       },
       {
         "file": "src/app/recipes/recipes-routing.module.ts",
@@ -325,7 +325,7 @@
       },
       {
         "file": "src/app/recipes/recipes.component.ts",
-        "hash": "9702847713923033123"
+        "hash": "5605256287127184250"
       },
       {
         "file": "src/app/recipes/recipes.module.ts",
@@ -333,7 +333,7 @@
       },
       {
         "file": "src/app/recipes/recipes.service.ts",
-        "hash": "14381477484345024949"
+        "hash": "9020279010386761444"
       },
       {
         "file": "src/app/shared/animations/fade-in.animation.ts",
@@ -417,7 +417,7 @@
       },
       {
         "file": "src/app/shared/models/user-data.model.ts",
-        "hash": "586426936906765145"
+        "hash": "7355050554840606784"
       },
       {
         "file": "src/app/shared/models/user.model.ts",
@@ -441,7 +441,7 @@
       },
       {
         "file": "src/app/shared/real-time-database.service.ts",
-        "hash": "6566744305435116083"
+        "hash": "4857643523484787007"
       },
       {
         "file": "src/app/shared/shared.module.ts",
@@ -450,26 +450,6 @@
       {
         "file": "src/app/shared/storage.service.ts",
         "hash": "10006397164997977067"
-      },
-      {
-        "file": "src/app/shopping-list/shopping-list.component.html",
-        "hash": "3244421341483603138"
-      },
-      {
-        "file": "src/app/shopping-list/shopping-list.component.scss",
-        "hash": "3244421341483603138"
-      },
-      {
-        "file": "src/app/shopping-list/shopping-list.component.ts",
-        "hash": "5866372148145438223"
-      },
-      {
-        "file": "src/app/shopping-list/shopping-list.module.ts",
-        "hash": "14758762131654302397"
-      },
-      {
-        "file": "src/app/shopping-list/shopping-list.service.ts",
-        "hash": "10684638222197379521"
       },
       {
         "file": "src/app/styles/_breakpoints.scss",
@@ -521,7 +501,7 @@
       },
       {
         "file": "src/app/user-panel/user-data.service.ts",
-        "hash": "2228903956537760229"
+        "hash": "5617202384772380951"
       },
       {
         "file": "src/app/user-panel/user-edit/user-edit.component.html",

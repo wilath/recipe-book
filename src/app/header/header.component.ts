@@ -31,11 +31,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private responsive: BreakpointObserver
   ) {}
   
-  @HostListener('click', ['$event'])
+  @HostListener('document:click', ['$event'])
    onClickOutsideNotificationMenu(event: Event) {
     if (this.isNotificationMenuShown && this.notiMenu.length === 2) {
       const firstMenu = this.notiMenu.first.nativeElement;
       const secondMenu = this.notiMenu.last.nativeElement;
+      console.log('triggered')
 
       if (
         !firstMenu.contains(event.target) &&
@@ -69,10 +70,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   public ngOnInit() {
     this.userSubscription();
     this.navigationSubscription();
-    this.responsive.observe(['(min-width: 983px)']).subscribe( (res) => {
-      this._isSmallScreen = !res.matches
-    })
-    
+    this.setResponsiveSub();
   }
 
   public ngOnDestroy() {
@@ -151,10 +149,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
     });
   }
 
-  
-
   private setNotificationsToDisplay(){
     this.notifiactionsToDisplay = this.usersData.notifications.slice(0,10)
+  }
+
+  private setResponsiveSub() {
+    this.responsive.observe(['(min-width: 983px)']).subscribe( (res) => {
+      this._isSmallScreen = !res.matches
+    })
   }
 
 }

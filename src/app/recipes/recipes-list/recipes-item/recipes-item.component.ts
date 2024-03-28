@@ -78,11 +78,6 @@ export class RecipesItemComponent implements OnChanges  {
     this.isFollowedByCurrentUser = !this.isFollowedByCurrentUser;
   }
 
-  public onOpenRecipe() {
-  }
-
- 
-
   public onNavigateToRecipeDetails(){
     this.router.navigate([`recipes/${this.recipe.id}`])
 
