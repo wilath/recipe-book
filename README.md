@@ -2,6 +2,8 @@
 
 The aim of the project was to create a usable app that allows users to exchange culinary knowledge and experience. 
 
+[Live View](https://recipesproject-fc6f3.web.app/auth)
+
 
 ## Table of contents:
 * [What this application does](#What-it-does)
